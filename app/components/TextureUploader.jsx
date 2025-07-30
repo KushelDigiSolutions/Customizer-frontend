@@ -12,7 +12,7 @@ const TextureUploader = ({ setTexture }) => {
     setFile(selected);
     const reader = new FileReader();
     reader.onload = () => {
-      setPreviewUrl(reader.result); // for preview
+      setPreviewUrl(reader.result); 
     };
     reader.readAsDataURL(selected);
   };
@@ -26,6 +26,7 @@ const TextureUploader = ({ setTexture }) => {
 
   return (
     <div className="bg-white p-3 rounded shadow-md mt-2">
+      
       <label className="block mb-2 font-semibold">Upload Design:</label>
       <input type="file" accept="image/*" onChange={handleFileChange} />
       

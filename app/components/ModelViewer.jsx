@@ -5,24 +5,6 @@ import * as THREE from 'three';
 const ModelViewer = ({ color, texture, selectedPart, zoom, offsetX, offsetY }) => {
     const { scene } = useGLTF('/models/brand1.glb');
 
-    // useEffect(() => {
-    //     scene.traverse((child) => {
-    //         if (child.isMesh) {
-    //             if (child.name === selectedPart) {
-    //                 child.material.color.set(color);
-
-    //                 if (texture) {
-    //                     child.material.map = texture;
-    //                 } else {
-    //                     child.material.map = null;
-    //                 }
-
-    //                 child.material.needsUpdate = true;
-    //             }
-    //         }
-    //     });
-    // }, [color, texture, selectedPart]);
-
     useEffect(() => {
         scene.traverse((child) => {
             if (child.isMesh && child.name === selectedPart) {
@@ -36,6 +18,8 @@ const ModelViewer = ({ color, texture, selectedPart, zoom, offsetX, offsetY }) =
                     texture.needsUpdate = true;
 
                     child.material.map = texture;
+                    child.material.transparent = false;
+                    child.material.needsUpdate = true;
                 } else {
                     child.material.map = null;
                 }
