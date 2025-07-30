@@ -5,9 +5,11 @@ import { OrbitControls, Environment } from '@react-three/drei';
 import ModelViewer from './components/ModelViewer';
 import TextureUploader from './components/TextureUploader';
 import ControlsPanel from './components/ControlsPanel';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import TextureControlsPanel from './components/TextureControlsPanel';
 import { createTextTexture } from './utility/createTextTexture';
+import ScreenshotManager from './components/ScreenshotManage';
+import ScreenshotGallery from './components/ScreenshotGallery';
 
 export default function Home() {
   const [color, setColor] = useState('#ffffff');
@@ -19,11 +21,16 @@ export default function Home() {
   const [offsetY, setOffsetY] = useState(0);
 
   // -------- text-----------------
-
   const [text, setText] = useState('');
   const [textTexture, setTextTexture] = useState(null);
   const [textColor, setTextColor] = useState('#000000');
   const [outlineColor, setOutlineColor] = useState('#ffffff');
+
+  // -------- screenshots---------
+  const [screenshots, setScreenshots] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const screenshotRef = useRef();
 
   useEffect(() => {
     if (text.trim()) {
@@ -31,7 +38,7 @@ export default function Home() {
         text,
         fill: textColor,
         stroke: outlineColor,
-        baseColor: color, 
+        baseColor: color,
       });
       setTextTexture(texture);
     } else {
@@ -39,24 +46,43 @@ export default function Home() {
     }
   }, [text, textColor, outlineColor, color]);
 
+  const handleScreenshot = async () => {
+    if (screenshotRef.current) {
+      setLoading(true);
+
+      try {
+        const capturedImages = await screenshotRef.current.captureAll();
+        setScreenshots(capturedImages);
+      } catch (error) {
+        console.error("Error capturing screenshots:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
 
   return (
     <main className="h-screen w-screen flex justify-center items-center">
       <div className='h-[100vh] w-[60%]'>
-        <Canvas gl={{ preserveDrawingBuffer: true }} camera={{ position: [0, 0.5, 2.5], fov: 80 }}>
+        <Canvas
+          gl={{ preserveDrawingBuffer: true }}
+          camera={{ position: [0, 0.5, 2.5], fov: 80 }}
+        >
           <ambientLight intensity={1} />
           <Environment preset="city" />
-          <OrbitControls />
-          {/* <ModelViewer color={color} texture={texture} selectedPart={selectedPart} /> */}
+
           <ModelViewer
             texture={texture || textTexture}
             color={color}
-            // texture={texture}
             selectedPart={selectedPart}
             zoom={zoom}
             offsetX={offsetX}
             offsetY={offsetY}
           />
+
+          <ScreenshotManager ref={screenshotRef} />
+          <OrbitControls />
         </Canvas>
       </div>
 
@@ -66,39 +92,48 @@ export default function Home() {
           setColor={setColor}
           selectedPart={selectedPart}
           setSelectedPart={setSelectedPart}
+          text={text}
+          setText={setText}
+          textColor={textColor}
+          setTextColor={setTextColor}
+          outlineColor={outlineColor}
+          setOutlineColor={setOutlineColor}
+          onScreenshot={handleScreenshot}
         />
-        <TextureUploader setTexture={setTexture} />
+
+        <TextureUploader
+          setTexture={setTexture}
+          text={text}
+          textColor={textColor}
+          outlineColor={outlineColor}
+          baseColor={color}
+        />
+
         <TextureControlsPanel
           zoom={zoom} setZoom={setZoom}
           offsetX={offsetX} setOffsetX={setOffsetX}
           offsetY={offsetY} setOffsetY={setOffsetY}
         />
 
-        <div className="bg-white p-3 rounded shadow-md space-y-2">
-          <label className="block font-semibold">Add Text:</label>
-          <input
-            type="text"
-            placeholder="Enter text"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            className="border px-2 py-1 w-full"
-          />
+        {loading && (
+          <div className="fixed inset-0 z-50 bg-[rgba(0,0,0,0.9)] bg-opacity-60 flex items-center justify-center">
+            <div className="flex flex-col items-center">
+              <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin mb-4"></div>
+              <div className="text-white text-lg font-medium">Capturing screenshots...</div>
+            </div>
+          </div>
+        )}
 
-          <label className="block mt-2">Text Color:</label>
-          <input
-            type="color"
-            value={textColor}
-            onChange={(e) => setTextColor(e.target.value)}
+        {screenshots.length > 0 && (
+          <ScreenshotGallery
+            screenshots={screenshots}
+            onClose={() => setScreenshots([])}
+            onDownloadAll={() => console.log('All downloaded')}
           />
-
-          <label className="block mt-2">Outline Color:</label>
-          <input
-            type="color"
-            value={outlineColor}
-            onChange={(e) => setOutlineColor(e.target.value)}
-          />
-        </div>
+        )}
       </div>
-    </main >
+
+
+    </main>
   );
 }
