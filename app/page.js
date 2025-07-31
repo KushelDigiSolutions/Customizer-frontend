@@ -5,11 +5,12 @@ import { OrbitControls, Environment } from '@react-three/drei';
 import ModelViewer from './components/ModelViewer';
 import TextureUploader from './components/TextureUploader';
 import ControlsPanel from './components/ControlsPanel';
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import TextureControlsPanel from './components/TextureControlsPanel';
 import { createTextTexture } from './utility/createTextTexture';
 import ScreenshotManager from './components/ScreenshotManage';
 import ScreenshotGallery from './components/ScreenshotGallery';
+import TextControlsPanel from './components/TextControlsPanel';
 
 export default function Home() {
   const [color, setColor] = useState('#ffffff');
@@ -26,9 +27,19 @@ export default function Home() {
   const [textColor, setTextColor] = useState('#000000');
   const [outlineColor, setOutlineColor] = useState('#ffffff');
 
+  // Independent text position and scale
+  const [textScale, setTextScale] = useState(1);
+  const [textPosX, setTextPosX] = useState(0.5);
+  const [textPosY, setTextPosY] = useState(0.85);
+
   // -------- screenshots---------
   const [screenshots, setScreenshots] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const [textureMode, setTextureMode] = useState('full');
+  const [logoScale, setLogoScale] = useState(0.5); // 0.1 to 1
+  const [logoPosX, setLogoPosX] = useState(0.5);   // 0 to 1 (canvas %)
+  const [logoPosY, setLogoPosY] = useState(0.5);   // 0 to 1
 
   const screenshotRef = useRef();
 
@@ -38,13 +49,16 @@ export default function Home() {
         text,
         fill: textColor,
         stroke: outlineColor,
-        baseColor: color,
+        baseColor: 'transparent',
+        textScale,
+        textPosX,
+        textPosY,
       });
       setTextTexture(texture);
     } else {
       setTextTexture(null);
     }
-  }, [text, textColor, outlineColor, color]);
+  }, [text, textColor, outlineColor, textScale, textPosX, textPosY]);
 
   const handleScreenshot = async () => {
     if (screenshotRef.current) {
@@ -70,11 +84,15 @@ export default function Home() {
           camera={{ position: [0, 0.5, 2.5], fov: 80 }}
         >
           <ambientLight intensity={1} />
-          <Environment preset="city" />
+          {/* <Environment preset="city" /> */}
+          <Suspense fallback={null}>
+            <Environment preset="city" />
+          </Suspense>
 
           <ModelViewer
-            texture={texture || textTexture}
             color={color}
+            texture={texture}
+            textTexture={textTexture}
             selectedPart={selectedPart}
             zoom={zoom}
             offsetX={offsetX}
@@ -101,12 +119,26 @@ export default function Home() {
           onScreenshot={handleScreenshot}
         />
 
+        <TextControlsPanel
+          textScale={textScale} setTextScale={setTextScale}
+          textPosX={textPosX} setTextPosX={setTextPosX}
+          textPosY={textPosY} setTextPosY={setTextPosY}
+        />
+
         <TextureUploader
           setTexture={setTexture}
           text={text}
           textColor={textColor}
           outlineColor={outlineColor}
           baseColor={color}
+          textureMode={textureMode}
+          setTextureMode={setTextureMode}
+          logoScale={logoScale}
+          setLogoScale={setLogoScale}
+          logoPosX={logoPosX}
+          setLogoPosX={setLogoPosX}
+          logoPosY={logoPosY}
+          setLogoPosY={setLogoPosY}
         />
 
         <TextureControlsPanel
