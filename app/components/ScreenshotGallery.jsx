@@ -38,12 +38,12 @@ const ScreenshotGallery = ({ screenshots, onClose, onDownloadAll }) => {
         <div className="mb-6 flex justify-center">
           <div className="relative">
             <img
-              src={selected?.dataUrl}
-              alt={`${selected?.view} view`}
+              src={selected?.image}
+              alt={`${selected?.angle} view`}
               className="w-96 h-96 object-contain border rounded-lg shadow-lg bg-gray-50"
             />
             <div className="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-sm capitalize">
-              {selected?.view} view
+              {selected?.angle} view
             </div>
           </div>
         </div>
@@ -59,12 +59,12 @@ const ScreenshotGallery = ({ screenshots, onClose, onDownloadAll }) => {
               }`}
             >
               <img
-                src={screenshot.dataUrl}
-                alt={`${screenshot.view} view`}
+                src={screenshot?.image}
+                alt={`${screenshot.angle} view`}
                 className="w-24 h-24 object-contain bg-gray-50 rounded-md"
               />
               <div className="absolute bottom-1 left-1 bg-black bg-opacity-60 text-white text-xs px-1 py-0.5 rounded capitalize">
-                {screenshot.view}
+                {screenshot.angle}
               </div>
             </div>
           ))}

@@ -2,7 +2,7 @@ import { Center, useGLTF } from '@react-three/drei';
 import { useEffect } from 'react';
 import * as THREE from 'three';
 
-const ModelViewer = ({ color, texture, textTexture, selectedPart, zoom, offsetX, offsetY }) => {
+const ModelViewer = ({setCustomizationData, color, texture, textTexture, selectedPart, zoom, offsetX, offsetY }) => {
     const { scene } = useGLTF('/models/brand1.glb');
 
     useEffect(() => {
@@ -50,10 +50,24 @@ const ModelViewer = ({ color, texture, textTexture, selectedPart, zoom, offsetX,
         });
     }, [color, texture, textTexture, selectedPart, zoom, offsetX, offsetY, scene]);
 
+    useEffect(() => {
+        setCustomizationData(prev => ({
+            ...prev,
+            parts: {
+                ...prev.parts,
+                [selectedPart]: {
+                    ...prev.parts[selectedPart],
+                    color
+                }
+            }
+        }));
+    }, [color, selectedPart]);
+
+
 
     return (
         <Center>
-            <primitive object={scene} scale={0.04} position={[0, 0, 0]}/>
+            <primitive object={scene} scale={0.04} position={[0, 0, 0]} />
         </Center>
     );
 };

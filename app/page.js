@@ -41,6 +41,11 @@ export default function Home() {
   const [logoPosX, setLogoPosX] = useState(0.5);   // 0 to 1 (canvas %)
   const [logoPosY, setLogoPosY] = useState(0.5);   // 0 to 1
 
+  const [customizationData, setCustomizationData] = useState({
+    parts: {}, // each part will hold customization info
+    screenshots: []
+  });
+
   const screenshotRef = useRef();
 
   useEffect(() => {
@@ -55,6 +60,23 @@ export default function Home() {
         textPosY,
       });
       setTextTexture(texture);
+
+      setCustomizationData(prev => ({
+        ...prev,
+        parts: {
+          ...prev.parts,
+          [selectedPart]: {
+            ...prev.parts[selectedPart],
+            text: {
+              content: text,
+              color: textColor,
+              outline: outlineColor,
+              scale: textScale,
+              position: { x: textPosX, y: textPosY }
+            }
+          }
+        }
+      }));
     } else {
       setTextTexture(null);
     }
@@ -67,6 +89,14 @@ export default function Home() {
       try {
         const capturedImages = await screenshotRef.current.captureAll();
         setScreenshots(capturedImages);
+
+        setCustomizationData(prev => ({
+          ...prev,
+          screenshots: capturedImages.map(img => ({
+            angle: img.angle,
+            image: img.image
+          }))
+        }));
       } catch (error) {
         console.error("Error capturing screenshots:", error);
       } finally {
@@ -97,6 +127,7 @@ export default function Home() {
             zoom={zoom}
             offsetX={offsetX}
             offsetY={offsetY}
+            setCustomizationData={setCustomizationData}
           />
 
           <ScreenshotManager ref={screenshotRef} />
@@ -128,6 +159,7 @@ export default function Home() {
         <TextureUploader
           setTexture={setTexture}
           text={text}
+          texture={texture}
           textColor={textColor}
           outlineColor={outlineColor}
           baseColor={color}
@@ -139,6 +171,8 @@ export default function Home() {
           setLogoPosX={setLogoPosX}
           logoPosY={logoPosY}
           setLogoPosY={setLogoPosY}
+          setCustomizationData={setCustomizationData}
+          selectedPart={selectedPart}
         />
 
         <TextureControlsPanel
@@ -146,6 +180,15 @@ export default function Home() {
           offsetX={offsetX} setOffsetX={setOffsetX}
           offsetY={offsetY} setOffsetY={setOffsetY}
         />
+
+        {Object.keys(customizationData.parts).length > 0 && (
+          <button
+            className="mt-4 bg-blue-600 text-white px-4 py-2 rounded"
+            onClick={() => console.log('Customization Data:', customizationData)}
+          >
+            Save Customization
+          </button>
+        )}
 
         {loading && (
           <div className="fixed inset-0 z-50 bg-[rgba(0,0,0,0.9)] bg-opacity-60 flex items-center justify-center">

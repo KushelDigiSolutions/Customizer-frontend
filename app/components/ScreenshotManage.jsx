@@ -29,7 +29,7 @@ const ScreenshotManager = forwardRef((props, ref) => {
           
           // Capture the screenshot
           const dataUrl = gl.domElement.toDataURL('image/png');
-          capturedImages.push({ view: view.name, dataUrl });
+          capturedImages.push({ angle: view.name, image: dataUrl });
           
           // Store the screenshot data
           // We'll handle downloading in the UI component

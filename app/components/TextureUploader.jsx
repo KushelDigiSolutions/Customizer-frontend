@@ -3,6 +3,7 @@ import * as THREE from 'three';
 
 const TextureUploader = ({
   setTexture,
+  texture,
   text,
   textColor,
   outlineColor,
@@ -13,8 +14,10 @@ const TextureUploader = ({
   setLogoScale,
   logoPosX,
   setLogoPosX,
+  selectedPart,
   logoPosY,
   setLogoPosY,
+  setCustomizationData
 }) => {
   const [previewUrl, setPreviewUrl] = useState(null);
   const [file, setFile] = useState(null);
@@ -71,6 +74,22 @@ const TextureUploader = ({
       const finalTexture = new THREE.CanvasTexture(canvas);
       finalTexture.needsUpdate = true;
       setTexture(finalTexture);
+
+      setCustomizationData(prev => ({
+        ...prev,
+        parts: {
+          ...prev.parts,
+          [selectedPart]: {
+            ...prev.parts[selectedPart],
+            image: {
+              mode: textureMode, // 'full' or 'logo'
+              url: texture?.image?.src || null,
+              position: { x: logoPosX, y: logoPosY },
+              scale: logoScale
+            }
+          }
+        }
+      }));
     };
   }, [
     previewUrl,
