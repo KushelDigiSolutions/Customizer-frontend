@@ -15,7 +15,7 @@ const ScreenshotGallery = ({ screenshots, onClose, onDownloadAll }) => {
   const downloadAll = () => {
     screenshots.forEach((screenshot, index) => {
       setTimeout(() => {
-        downloadImage(screenshot.dataUrl, `${screenshot.view}-view.png`);
+        downloadImage(screenshot.image, `${screenshot.angle}-view.png`);
       }, index * 100);
     });
     if (onDownloadAll) onDownloadAll();
