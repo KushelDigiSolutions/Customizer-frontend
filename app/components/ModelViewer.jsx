@@ -11,18 +11,19 @@ const ModelViewer = ({setCustomizationData, color, texture, textTexture, selecte
                 const originalColor = child.material.color;
                 const currentColorHex = `#${originalColor.getHexString()}`;
 
-                if (color && color !== currentColorHex) {
+                // Check if the color is default white, then retain the original color
+                if (color && color !== '#ffffff') {
                     child.material.color.set(color);
+                } else {
+                    child.material.color.set(currentColorHex);
                 }
-
-                const fillColor = (color && color !== currentColorHex) ? color : currentColorHex;
 
                 if (texture || textTexture) {
                     const canvas = document.createElement('canvas');
                     canvas.width = canvas.height = 1024;
                     const ctx = canvas.getContext('2d');
 
-                    ctx.fillStyle = fillColor;
+                    ctx.fillStyle = color && color !== '#ffffff' ? color : currentColorHex;
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
                     if (texture?.image) {
