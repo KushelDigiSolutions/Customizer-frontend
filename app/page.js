@@ -27,10 +27,10 @@ export default function Home() {
   const [textColor, setTextColor] = useState('#000000');
   const [outlineColor, setOutlineColor] = useState('#ffffff');
 
-  // Independent text position and scale
+  // Independent text position and scale - START CENTERED
   const [textScale, setTextScale] = useState(1);
-  const [textPosX, setTextPosX] = useState(0.5);
-  const [textPosY, setTextPosY] = useState(0.85);
+  const [textPosX, setTextPosX] = useState(0.5); // Center X
+  const [textPosY, setTextPosY] = useState(0.5); // Center Y (changed from 0.85)
 
   // -------- screenshots---------
   const [screenshots, setScreenshots] = useState([]);
@@ -47,6 +47,16 @@ export default function Home() {
   });
 
   const screenshotRef = useRef();
+
+  // Reset text position to center when text changes or part changes
+  const handleTextChange = (newText) => {
+    setText(newText);
+    if (newText.trim() && !text.trim()) {
+      // Reset to center when adding text for the first time
+      setTextPosX(0.5);
+      setTextPosY(0.5);
+    }
+  };
 
   useEffect(() => {
     if (text.trim()) {
@@ -143,7 +153,7 @@ export default function Home() {
           selectedPart={selectedPart}
           setSelectedPart={setSelectedPart}
           text={text}
-          setText={setText}
+          setText={handleTextChange}
           textColor={textColor}
           setTextColor={setTextColor}
           outlineColor={outlineColor}
