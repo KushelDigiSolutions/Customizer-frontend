@@ -49,7 +49,7 @@ const TextureUploader = ({
       ctx.fillStyle = baseColor;
       ctx.fillRect(0, 0, size, size);
 
-      // Apply image
+      // Apply image based on mode
       if (textureMode === 'full') {
         ctx.drawImage(image, 0, 0, size, size);
       } else if (textureMode === 'logo') {
@@ -59,17 +59,8 @@ const TextureUploader = ({
         ctx.drawImage(image, x, y, logoSize, logoSize);
       }
 
-      // Draw text
-      if (text.trim()) {
-        ctx.font = 'bold 64px Arial';
-        ctx.fillStyle = textColor;
-        ctx.strokeStyle = outlineColor;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-
-        ctx.fillText(text, size / 2, size * 0.85);
-        ctx.strokeText(text, size / 2, size * 0.85);
-      }
+      // DO NOT draw text here - let text be handled independently
+      // The text will be composited separately in ModelViewer
 
       const finalTexture = new THREE.CanvasTexture(canvas);
       finalTexture.needsUpdate = true;
@@ -83,7 +74,7 @@ const TextureUploader = ({
             ...prev.parts[selectedPart],
             image: {
               mode: textureMode, // 'full' or 'logo'
-              url: texture?.image?.src || null,
+              url: previewUrl,
               position: { x: logoPosX, y: logoPosY },
               scale: logoScale
             }
@@ -97,11 +88,10 @@ const TextureUploader = ({
     logoScale,
     logoPosX,
     logoPosY,
-    text,
-    textColor,
-    outlineColor,
     baseColor,
     setTexture,
+    setCustomizationData,
+    selectedPart
   ]);
 
   return (

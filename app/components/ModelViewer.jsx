@@ -2,7 +2,19 @@ import { Center, useGLTF } from '@react-three/drei';
 import { useEffect } from 'react';
 import * as THREE from 'three';
 
-const ModelViewer = ({setCustomizationData, color, texture, textTexture, selectedPart, zoom, offsetX, offsetY }) => {
+const ModelViewer = ({
+  setCustomizationData, 
+  color, 
+  texture, 
+  textTexture, 
+  selectedPart, 
+  zoom, 
+  offsetX, 
+  offsetY,
+  textScale,
+  textPosX,
+  textPosY
+}) => {
     const { scene } = useGLTF('/models/brand1.glb');
 
     useEffect(() => {
@@ -11,7 +23,7 @@ const ModelViewer = ({setCustomizationData, color, texture, textTexture, selecte
                 const originalColor = child.material.color;
                 const currentColorHex = `#${originalColor.getHexString()}`;
 
-                // Check if the color is default white, then retain the original color
+                // Set base color
                 if (color && color !== '#ffffff') {
                     child.material.color.set(color);
                 } else {
@@ -23,12 +35,17 @@ const ModelViewer = ({setCustomizationData, color, texture, textTexture, selecte
                     canvas.width = canvas.height = 1024;
                     const ctx = canvas.getContext('2d');
 
+                    // Fill base color
                     ctx.fillStyle = color && color !== '#ffffff' ? color : currentColorHex;
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+                    // Apply main texture/image if available
                     if (texture?.image) {
                         ctx.drawImage(texture.image, 0, 0, canvas.width, canvas.height);
-                    } else if (textTexture?.image) {
+                    }
+
+                    // Apply text texture if available (with independent positioning)
+                    if (textTexture?.image) {
                         ctx.drawImage(textTexture.image, 0, 0, canvas.width, canvas.height);
                     }
 
@@ -49,7 +66,7 @@ const ModelViewer = ({setCustomizationData, color, texture, textTexture, selecte
                 }
             }
         });
-    }, [color, texture, textTexture, selectedPart, zoom, offsetX, offsetY, scene]);
+    }, [color, texture, textTexture, selectedPart, zoom, offsetX, offsetY, textScale, textPosX, textPosY, scene]);
 
     useEffect(() => {
         setCustomizationData(prev => ({
@@ -62,9 +79,7 @@ const ModelViewer = ({setCustomizationData, color, texture, textTexture, selecte
                 }
             }
         }));
-    }, [color, selectedPart]);
-
-
+    }, [color, selectedPart, setCustomizationData]);
 
     return (
         <Center>
@@ -72,6 +87,5 @@ const ModelViewer = ({setCustomizationData, color, texture, textTexture, selecte
         </Center>
     );
 };
-
 
 export default ModelViewer;

@@ -80,7 +80,7 @@ export default function Home() {
     } else {
       setTextTexture(null);
     }
-  }, [text, textColor, outlineColor, textScale, textPosX, textPosY]);
+  }, [text, textColor, outlineColor, textScale, textPosX, textPosY, selectedPart]);
 
   const handleScreenshot = async () => {
     if (screenshotRef.current) {
@@ -105,7 +105,6 @@ export default function Home() {
     }
   };
 
-
   return (
     <main className="h-screen w-screen flex justify-center items-center">
       <div className='h-[100vh] w-[60%]'>
@@ -114,7 +113,6 @@ export default function Home() {
           camera={{ position: [0, 0.5, 2.5], fov: 80 }}
         >
           <ambientLight intensity={1} />
-          {/* <Environment preset="city" /> */}
           <Suspense fallback={null}>
             <Environment preset="city" />
           </Suspense>
@@ -127,6 +125,9 @@ export default function Home() {
             zoom={zoom}
             offsetX={offsetX}
             offsetY={offsetY}
+            textScale={textScale}
+            textPosX={textPosX}
+            textPosY={textPosY}
             setCustomizationData={setCustomizationData}
           />
 
@@ -207,8 +208,6 @@ export default function Home() {
           />
         )}
       </div>
-
-
     </main>
   );
 }
