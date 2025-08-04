@@ -59,8 +59,6 @@ const TextureUploader = ({
         ctx.drawImage(image, x, y, logoSize, logoSize);
       }
 
-      // DO NOT draw text here - let text be handled independently
-      // The text will be composited separately in ModelViewer
 
       const finalTexture = new THREE.CanvasTexture(canvas);
       finalTexture.needsUpdate = true;

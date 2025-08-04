@@ -15,7 +15,7 @@ const ModelViewer = ({
   textPosX,
   textPosY
 }) => {
-    const { scene } = useGLTF('/models/newPolo1.glb');
+    const { scene } = useGLTF('/models/brand1.glb');
 
     useEffect(() => {
         scene.traverse((child) => {
@@ -39,21 +39,31 @@ const ModelViewer = ({
                     ctx.fillStyle = color && color !== '#ffffff' ? color : currentColorHex;
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                    // Apply main texture/image if available
+                    // --- Draw main texture (with zoom/offset) ---
                     if (texture?.image) {
-                        ctx.drawImage(texture.image, 0, 0, canvas.width, canvas.height);
+                        // Calculate repeat/offset for main texture
+                        const repeat = zoom || 1;
+                        const offsetXPx = (offsetX || 0) * canvas.width;
+                        const offsetYPx = (offsetY || 0) * canvas.height;
+                        ctx.save();
+                        ctx.translate(offsetXPx, offsetYPx);
+                        ctx.scale(repeat, repeat);
+                        ctx.drawImage(texture.image, 0, 0, canvas.width / repeat, canvas.height / repeat);
+                        ctx.restore();
                     }
 
-                    // Apply text texture if available (with independent positioning)
+                    // --- Draw text texture (ALWAYS centered/independent) ---
                     if (textTexture?.image) {
+                        // Get text position/scale from textTexture (created by createTextTexture)
+                        // These are already handled in createTextTexture, so just draw at 0,0
                         ctx.drawImage(textTexture.image, 0, 0, canvas.width, canvas.height);
                     }
 
                     const combinedTexture = new THREE.CanvasTexture(canvas);
                     combinedTexture.needsUpdate = true;
                     combinedTexture.wrapS = combinedTexture.wrapT = THREE.RepeatWrapping;
-                    combinedTexture.repeat.set(zoom, zoom);
-                    combinedTexture.offset.set(offsetX, offsetY);
+                    combinedTexture.repeat.set(1, 1); // No repeat here, handled in drawImage
+                    combinedTexture.offset.set(0, 0); // No offset here, handled in drawImage
                     combinedTexture.center.set(0.5, 0.5);
 
                     child.material.map = combinedTexture;
@@ -83,7 +93,7 @@ const ModelViewer = ({
 
     return (
         <Center>
-            <primitive object={scene} scale={2} position={[0, -12, 0]} />
+            <primitive object={scene} scale={0.04} position={[0, 0, 0]} />
         </Center>
     );
 };

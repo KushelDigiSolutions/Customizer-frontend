@@ -5,18 +5,18 @@ const ControlsPanel = ({
   textColor, setTextColor,
   outlineColor, setOutlineColor, onScreenshot
 }) => {
-  // const parts = ['Front', 'Back', 'LeftSleeve', 'RightSleeve','Slides'];
+  const parts = ['Front', 'Back', 'LeftSleeve', 'RightSleeve','Slides'];
 
-  const parts = [
-  'Back',
-  'BackBottomSlide',
-  'Front',
-  'FrontBottomSlide',
-  'FrontStrip',
-  'LeftSleeve',
-  'RightSleeve',
-  'Slides'
-];
+//   const parts = [
+//   'Back',
+//   'BackBottomSlide',
+//   'Front',
+//   'FrontBottomSlide',
+//   'FrontStrip',
+//   'LeftSleeve',
+//   'RightSleeve',
+//   'Slides'
+// ];
 
   return (
     <div className="bg-white p-3 rounded shadow-md space-y-2">
