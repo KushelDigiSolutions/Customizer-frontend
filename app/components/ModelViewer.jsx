@@ -39,16 +39,24 @@ const ModelViewer = ({
                     ctx.fillStyle = color && color !== '#ffffff' ? color : currentColorHex;
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                    // --- Draw main texture (with zoom/offset) ---
+                    // --- Draw main texture (with zoom/offset/repeat) ---
                     if (texture?.image) {
-                        // Calculate repeat/offset for main texture
                         const repeat = zoom || 1;
                         const offsetXPx = (offsetX || 0) * canvas.width;
                         const offsetYPx = (offsetY || 0) * canvas.height;
+                        const drawWidth = canvas.width / repeat;
+                        const drawHeight = canvas.height / repeat;
+
                         ctx.save();
                         ctx.translate(offsetXPx, offsetYPx);
-                        ctx.scale(repeat, repeat);
-                        ctx.drawImage(texture.image, 0, 0, canvas.width / repeat, canvas.height / repeat);
+
+                        // Tile the texture to fill the canvas
+                        for (let x = 0; x < canvas.width; x += drawWidth) {
+                            for (let y = 0; y < canvas.height; y += drawHeight) {
+                                ctx.drawImage(texture.image, x, y, drawWidth, drawHeight);
+                            }
+                        }
+
                         ctx.restore();
                     }
 

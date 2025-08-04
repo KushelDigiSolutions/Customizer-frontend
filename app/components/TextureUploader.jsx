@@ -113,6 +113,26 @@ const TextureUploader = ({
             alt="Preview"
             className="w-24 h-24 object-contain border mb-2"
           />
+          <button
+            className="mt-2 px-3 py-1 bg-red-500 text-white rounded"
+            onClick={() => {
+              setPreviewUrl(null);
+              setFile(null);
+              setTexture(null);
+              setCustomizationData(prev => ({
+                ...prev,
+                parts: {
+                  ...prev.parts,
+                  [selectedPart]: {
+                    ...prev.parts[selectedPart],
+                    image: null
+                  }
+                }
+              }));
+            }}
+          >
+            Remove Image
+          </button>
         </div>
       )}
 

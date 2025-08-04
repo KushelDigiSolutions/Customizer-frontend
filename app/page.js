@@ -115,6 +115,23 @@ export default function Home() {
     }
   };
 
+  const handleClearSelectedPart = () => {
+    setCustomizationData(prev => {
+      const newParts = { ...prev.parts };
+      delete newParts[selectedPart];
+      return { ...prev, parts: newParts };
+    });
+    setColor('#ffffff');
+    setTexture(null);
+    setText('');
+    setTextTexture(null);
+    setTextColor('#000000');
+    setOutlineColor('#ffffff');
+    setTextScale(1);
+    setTextPosX(0.5);
+    setTextPosY(0.5);
+  };
+
   return (
     <main className="h-screen w-screen flex justify-center items-center">
       <div className='h-[100vh] w-[60%]'>
@@ -217,6 +234,13 @@ export default function Home() {
             onDownloadAll={() => console.log('All downloaded')}
           />
         )}
+
+        <button
+          className="bg-red-600 text-white px-4 py-2 rounded mt-2 w-full"
+          onClick={handleClearSelectedPart}
+        >
+          Clear Selected Part
+        </button>
       </div>
     </main>
   );
