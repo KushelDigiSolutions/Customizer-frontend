@@ -15,7 +15,7 @@ const ModelViewer = ({
   textPosX,
   textPosY
 }) => {
-    const { scene } = useGLTF('/models/brand1.glb');
+    const { scene } = useGLTF('/models/newPolo1.glb');
 
     useEffect(() => {
         scene.traverse((child) => {
@@ -83,7 +83,7 @@ const ModelViewer = ({
 
     return (
         <Center>
-            <primitive object={scene} scale={0.04} position={[0, 0, 0]} />
+            <primitive object={scene} scale={2} position={[0, -12, 0]} />
         </Center>
     );
 };
