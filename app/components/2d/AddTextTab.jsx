@@ -1,6 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { use2D } from '../../context/2DContext';
 
-const AddTextTab = ({ setShowAddModal, customText, setCustomText, handleAddCustomText }) => {
+const AddTextTab = ({ handleAddCustomText }) => {
+    const {
+        customText, setCustomText,
+        showAddModal, setShowAddModal
+    } = use2D();
+
     return (
         <div className='bg-white rounded-lg border border-[#D3DBDF] w-80 h-fit'>
             <div className='flex items-center justify-between py-2 px-3'>
@@ -23,4 +29,4 @@ const AddTextTab = ({ setShowAddModal, customText, setCustomText, handleAddCusto
     )
 }
 
-export default AddTextTab
+export default AddTextTab;

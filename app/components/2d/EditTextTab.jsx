@@ -1,24 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import FontSelector from './FontSelector';
 import CustomColorSwatch from './CustomColorSwatch';
+import { use2D } from '../../context/2DContext';
 
-const EditTextTab = ({ 
-    setTextFlipX,
-    setTextFlipY,
-    setTextColor,
-    editor, 
-    setShowEditModal, 
-    customText, 
-    setCustomText, 
-    textSize, 
-    setTextSize, 
-    setTextSpacing, 
-    textSpacing, 
-    setTextFontFamily,
-    setFontStyle,
-    bringForward,
-    layerManager // NEW: Accept layerManager from parent
-}) => {
+const EditTextTab = ({ editor, layerManager }) => {
+    const {
+        customText, setCustomText,
+        textSize, setTextSize,
+        textSpacing, setTextSpacing,
+        textArc, setTextArc,
+        textColor, setTextColor,
+        fontFamily, setFontFamily,
+        fontStyle, setFontStyle,
+        textFlipX, setTextFlipX,
+        textFlipY, setTextFlipY,
+        showEditModal, setShowEditModal,
+        showAddModal, setShowAddModal
+    } = use2D();
 
     const [showColorTab, setShowColorTab] = useState(false);
     const [showTextSelectTab, setShowTextSelectTab] = useState(false);
@@ -126,7 +124,6 @@ const EditTextTab = ({
                 setCurrentColor(targetTextObj.fill || '#000000');
                 setTextSize(targetTextObj.fontSize || 28);
                 setTextSpacing(Math.round((targetTextObj.charSpacing || 0) / 10));
-                setTextFontFamily(targetTextObj.fontFamily || 'Arial');
                 setFontStyle(targetTextObj.fontWeight || 'normal');
                 setTextFlipX(targetTextObj.flipX || false);
                 setTextFlipY(targetTextObj.flipY || false);
@@ -194,7 +191,7 @@ const EditTextTab = ({
     };
 
     const handleFontSelection = (font) => {
-        setTextFontFamily(font);
+        setFontFamily(font);
         setCurrentFont(font);
         
         applyToTextObject((textObj) => {
@@ -509,4 +506,4 @@ const EditTextTab = ({
     )
 }
 
-export default EditTextTab
+export default EditTextTab;

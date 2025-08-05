@@ -1,16 +1,22 @@
 import React, { useState } from 'react'
+import { use2D } from '../../context/2DContext';
 
 const SelectColorsTab = ({
   handleColorChange,
-  selectedColor,
   setShowBgColorsModal,
   // NEW: Props for gradient colors
   handleTopColorChange,
   handleBottomColorChange,
-  selectedTopColor,
-  selectedBottomColor,
   selectedProduct
 }) => {
+  const {
+    selectedColor, setSelectedColor,
+    selectedTopColor, setSelectedTopColor,
+    selectedBottomColor, setSelectedBottomColor,
+    showSidebar, setShowSidebar,
+    showAddModal, setShowAddModal,
+    showEditModal, setShowEditModal
+  } = use2D();
 
   const [activeTab, setActiveTab] = useState('background'); // 'background', 'topColor', 'bottomColor'
 

@@ -1,49 +1,52 @@
 import { Center, useGLTF } from '@react-three/drei';
 import { useEffect } from 'react';
 import * as THREE from 'three';
+import { use3D } from '../../context/3DContext';
 
-const ModelViewer = ({
-  setCustomizationData, 
-  color, 
-  texture, 
-  textTexture, 
-  selectedPart, 
-  zoom, 
-  offsetX, 
-  offsetY,
-  textScale,
-  textPosX,
-  textPosY
-}) => {
+const ModelViewer = () => {
+    const {
+        threeDcolor,
+        threeDtexture,
+        threeDtextTexture,
+        threeDselectedPart,
+        threeDzoom,
+        threeDoffsetX,
+        threeDoffsetY,
+        threeDtextScale,
+        threeDtextPosX,
+        threeDtextPosY,
+        setCustomizationData
+    } = use3D();
+
     const { scene } = useGLTF('/models/brand1.glb');
 
     useEffect(() => {
         scene.traverse((child) => {
-            if (child.isMesh && child.name === selectedPart) {
+            if (child.isMesh && child.name === threeDselectedPart) {
                 const originalColor = child.material.color;
                 const currentColorHex = `#${originalColor.getHexString()}`;
 
                 // Set base color
-                if (color && color !== '#ffffff') {
-                    child.material.color.set(color);
+                if (threeDcolor && threeDcolor !== '#ffffff') {
+                    child.material.color.set(threeDcolor);
                 } else {
                     child.material.color.set(currentColorHex);
                 }
 
-                if (texture || textTexture) {
+                if (threeDtexture || threeDtextTexture) {
                     const canvas = document.createElement('canvas');
                     canvas.width = canvas.height = 1024;
                     const ctx = canvas.getContext('2d');
 
                     // Fill base color
-                    ctx.fillStyle = color && color !== '#ffffff' ? color : currentColorHex;
+                    ctx.fillStyle = threeDcolor && threeDcolor !== '#ffffff' ? threeDcolor : currentColorHex;
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
                     // --- Draw main texture (with zoom/offset/repeat) ---
-                    if (texture?.image) {
-                        const repeat = zoom || 1;
-                        const offsetXPx = (offsetX || 0) * canvas.width;
-                        const offsetYPx = (offsetY || 0) * canvas.height;
+                    if (threeDtexture?.image) {
+                        const repeat = threeDzoom || 1;
+                        const offsetXPx = (threeDoffsetX || 0) * canvas.width;
+                        const offsetYPx = (threeDoffsetY || 0) * canvas.height;
                         const drawWidth = canvas.width / repeat;
                         const drawHeight = canvas.height / repeat;
 
@@ -53,7 +56,7 @@ const ModelViewer = ({
                         // Tile the texture to fill the canvas
                         for (let x = 0; x < canvas.width; x += drawWidth) {
                             for (let y = 0; y < canvas.height; y += drawHeight) {
-                                ctx.drawImage(texture.image, x, y, drawWidth, drawHeight);
+                                ctx.drawImage(threeDtexture.image, x, y, drawWidth, drawHeight);
                             }
                         }
 
@@ -61,10 +64,8 @@ const ModelViewer = ({
                     }
 
                     // --- Draw text texture (ALWAYS centered/independent) ---
-                    if (textTexture?.image) {
-                        // Get text position/scale from textTexture (created by createTextTexture)
-                        // These are already handled in createTextTexture, so just draw at 0,0
-                        ctx.drawImage(textTexture.image, 0, 0, canvas.width, canvas.height);
+                    if (threeDtextTexture?.image) {
+                        ctx.drawImage(threeDtextTexture.image, 0, 0, canvas.width, canvas.height);
                     }
 
                     const combinedTexture = new THREE.CanvasTexture(canvas);
@@ -84,20 +85,32 @@ const ModelViewer = ({
                 }
             }
         });
-    }, [color, texture, textTexture, selectedPart, zoom, offsetX, offsetY, textScale, textPosX, textPosY, scene]);
+    }, [
+        threeDcolor,
+        threeDtexture,
+        threeDtextTexture,
+        threeDselectedPart,
+        threeDzoom,
+        threeDoffsetX,
+        threeDoffsetY,
+        threeDtextScale,
+        threeDtextPosX,
+        threeDtextPosY,
+        scene
+    ]);
 
     useEffect(() => {
         setCustomizationData(prev => ({
             ...prev,
             parts: {
                 ...prev.parts,
-                [selectedPart]: {
-                    ...prev.parts[selectedPart],
-                    color
+                [threeDselectedPart]: {
+                    ...prev.parts?.[threeDselectedPart],
+                    color: threeDcolor
                 }
             }
         }));
-    }, [color, selectedPart, setCustomizationData]);
+    }, [threeDcolor, threeDselectedPart, setCustomizationData]);
 
     return (
         <Center>
