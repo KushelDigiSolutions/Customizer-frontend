@@ -1,6 +1,6 @@
 "use client";
 
-import ProductsShowCase from "./components/ProductsShowCase";
+import ProductsShowCase from "./components/2d/ProductsShowCase";
 import { backendProducts } from "./data/productsData"; 
 
 export default function Home() {

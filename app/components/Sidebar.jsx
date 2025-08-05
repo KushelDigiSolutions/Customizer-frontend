@@ -1,13 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import EditorTab from "./EditorTab";
-import PreviewTab from "./PreviewTab";
-import EditTab from "./EditTab";
-import AddTextTab from "./AddTextTab";
-import EditTextTab from "./EditTextTab";
-import SelectColorsTab from "./SelectColorsTab";
-import DynamicClipartTab from "./ClipartTab"; // Updated import
-import RightSideImageUpload from "./RightSideImageComponent";
+import EditorTab from "./2d/EditorTab";
+import PreviewTab from "./2d/PreviewTab";
+import EditTab from "./2d/EditTab";
+import AddTextTab from "./2d/AddTextTab";
+import EditTextTab from "./2d/EditTextTab";
+import SelectColorsTab from "./2d/SelectColorsTab";
+import DynamicClipartTab from "./2d/ClipartTab"; // Updated import
+import RightSideImageUpload from "./2d/RightSideImageComponent";
 
 const Sidebar = ({
   editor,

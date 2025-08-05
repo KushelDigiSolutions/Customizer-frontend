@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
-import RightSmallPreview from "./components/RightSmallPreview";
+import RightSmallPreview from "./components/2d/RightSmallPreview";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { useFabricJSEditor, FabricJSCanvas } from "fabricjs-react";
-import LayerContextMenu from "./components/LayerContextMenu";
+import LayerContextMenu from "./components/2d/LayerContextMenu";
 import useCanvasContextMenu from "./hooks/useCanvasContextMenu";
-import RightSideImageUpload from "./components/RightSideImageComponent";
+import RightSideImageUpload from "./components/2d/RightSideImageComponent";
 
 const CustomizerLayout = ({ selectedProduct }) => {
 

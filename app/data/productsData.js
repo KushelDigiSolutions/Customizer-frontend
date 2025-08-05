@@ -8,16 +8,16 @@ export const backendProducts = [
         description: "Front/Back Sando",
         textTopRatio: 2.8,
         type: "sando",
-        customize:"2D",
+        productType: "2D",
 
         layers: {
-            BASE_COLOR: 0,               
-            TOP_GRADIENT: 1,     
-            PATTERN: 2,           
-            BOTTOM_GRADIENT: 3,  
-            DESIGN: 4,           
-            TEXT: 5,              
-            RIGHT_SIDE_IMAGE: 6, 
+            BASE_COLOR: 0,
+            TOP_GRADIENT: 1,
+            PATTERN: 2,
+            BOTTOM_GRADIENT: 3,
+            DESIGN: 4,
+            TEXT: 5,
+            RIGHT_SIDE_IMAGE: 6,
             PRODUCT: 7
         },
 
@@ -313,7 +313,10 @@ export const backendProducts = [
         width: 300,
         description: "Formal Shoe",
         type: "shoe",
-        customize:"2D",
+        productType: "2D",
+        textTab: false,
+        colorsTab: false,
+        uploadDesignTab: false,
 
         defaultLayers: {
             sole: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534528/sole-brown_dzgwxt.png", // z-index 0
@@ -481,7 +484,7 @@ export const backendProducts = [
         size: "M",
         description: "white shirt",
         type: "shirt",
-        customize:"3D",
+        productType: "3D",
 
     },
     {
@@ -490,10 +493,10 @@ export const backendProducts = [
         size: "42",
         color: "White",
         width: 300,
-        height:380,
+        height: 380,
         description: "Printed T-Shirt",
         type: "t-Shirt",
-        customize:"2D",
+        productType: "2D",
 
         defaultLayers: {
             mid: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1754374874/Middle-Part-White_g6hpnb.png", // z-index 0
@@ -502,7 +505,7 @@ export const backendProducts = [
 
         layers: {
             BASE_COLOR: 0,
-            MID : 1,
+            MID: 1,
             SLEEVES: 2,
         },
 

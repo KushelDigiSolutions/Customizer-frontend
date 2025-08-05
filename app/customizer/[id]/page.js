@@ -11,7 +11,7 @@ export default function CustomizerPage() {
 
   if (!product) return <div>Product not found</div>;
 
-  if(product.customize !== "3D") {
+  if(product.productType !== "3D") {
     return <CustomizerLayout selectedProduct={product} />;
   } else {
     return <ThreeDCustomize/>
