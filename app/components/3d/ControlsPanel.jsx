@@ -1,22 +1,15 @@
-const ControlsPanel = ({
-  color, setColor,
-  selectedPart, setSelectedPart,
-  text, setText,
-  textColor, setTextColor,
-  outlineColor, setOutlineColor, onScreenshot
-}) => {
-  const parts = ['Front', 'Back', 'LeftSleeve', 'RightSleeve','Slides'];
+import { use3D } from '../../context/3DContext';
 
-//   const parts = [
-//   'Back',
-//   'BackBottomSlide',
-//   'Front',
-//   'FrontBottomSlide',
-//   'FrontStrip',
-//   'LeftSleeve',
-//   'RightSleeve',
-//   'Slides'
-// ];
+const ControlsPanel = ({ onScreenshot }) => {
+  const {
+    threeDcolor, setthreeDColor,
+    threeDselectedPart, setthreeDSelectedPart,
+    threeDtext, setthreeDText,
+    threeDtextColor, setthreeDTextColor,
+    threeDoutlineColor, setthreeDOutlineColor
+  } = use3D();
+
+  const parts = ['Front', 'Back', 'LeftSleeve', 'RightSleeve', 'Slides'];
 
   return (
     <div className="bg-white p-3 rounded shadow-md space-y-2">
@@ -25,9 +18,8 @@ const ControlsPanel = ({
         {parts.map((part) => (
           <button
             key={part}
-            onClick={() => setSelectedPart(part)}
-            className={`px-2 py-1 rounded border ${selectedPart === part ? 'bg-blue-600 text-white' : 'bg-gray-200'
-              }`}
+            onClick={() => setthreeDSelectedPart(part)}
+            className={`px-2 py-1 rounded border ${threeDselectedPart === part ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
           >
             {part}
           </button>
@@ -38,8 +30,8 @@ const ControlsPanel = ({
         <label className="block mb-1">Pick Color:</label>
         <input
           type="color"
-          value={color}
-          onChange={(e) => setColor(e.target.value)}
+          value={threeDcolor}
+          onChange={(e) => setthreeDColor(e.target.value)}
         />
       </div>
 
@@ -48,23 +40,23 @@ const ControlsPanel = ({
       <input
         type="text"
         placeholder="Enter text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
+        value={threeDtext}
+        onChange={(e) => setthreeDText(e.target.value)}
         className="border px-2 py-1 w-full"
       />
 
       <label className="block mt-2">Text Color:</label>
       <input
         type="color"
-        value={textColor}
-        onChange={(e) => setTextColor(e.target.value)}
+        value={threeDtextColor}
+        onChange={(e) => setthreeDTextColor(e.target.value)}
       />
 
       <label className="block mt-2">Outline Color:</label>
       <input
         type="color"
-        value={outlineColor}
-        onChange={(e) => setOutlineColor(e.target.value)}
+        value={threeDoutlineColor}
+        onChange={(e) => setthreeDOutlineColor(e.target.value)}
       />
 
       <button

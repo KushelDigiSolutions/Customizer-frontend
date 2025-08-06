@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-:root {
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -10,17 +10,79 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
+} */
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  /* background: var(--background); */
+  /* color: var(--foreground); */
   font-family: Arial, Helvetica, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+/* canvas {
+  pointer-events: auto !important;
+  touch-action: auto;
+}
+
+.canvas-container {
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: 60% !important;
+  height: 60vh !important;
+  position: absolute !important;
+  background: aqua;
+  transform: translate(-50%, -50%);
+}
+
+.canvas-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+canvas {
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+} */
+
+
+.canvas-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60vw !important;
+  height: 90vh !important;
+  transform: translate(-50%, -50%);
+  /* background: aqua; */
+  z-index: 0;
+}
+
+.canvas-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+canvas {
+  pointer-events: auto !important;
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
