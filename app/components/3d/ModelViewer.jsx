@@ -114,7 +114,7 @@ const ModelViewer = () => {
 
     return (
         <Center>
-            <primitive object={scene} scale={0.04} position={[0, 0, 0]} />
+            <primitive object={scene} scale={0.03} position={[0, 0, 0]} />
         </Center>
     );
 };

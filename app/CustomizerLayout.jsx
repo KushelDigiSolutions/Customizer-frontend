@@ -10,8 +10,13 @@ import LayerContextMenu from "./components/2d/LayerContextMenu";
 import useCanvasContextMenu from "./hooks/useCanvasContextMenu";
 import RightSideImageUpload from "./components/2d/RightSideImageComponent";
 import { use2D } from "./context/2DContext";
+import ModelViewer from "./components/3d/ModelViewer";
+import { Canvas } from "@react-three/fiber";
+import ThreeDCustomize from "./3DCustomize";
+import ScreenshotGallery from "./components/3d/ScreenshotGallery";
+import { use3D } from "./context/3DContext";
 
-const CustomizerLayout = ({ selectedProduct }) => {
+const CustomizerLayout = () => {
   // Get all 2D context state and setters
   const {
     customText, setCustomText,
@@ -38,6 +43,11 @@ const CustomizerLayout = ({ selectedProduct }) => {
     currentProductId, setCurrentProductId,
     layerManager, setLayerManager
   } = use2D();
+
+  const {
+      threeDscreenshots, setthreeDScreenshots,
+      threeDloading,selectedProduct
+  } = use3D()
 
   class SimpleLayerManager {
     constructor(canvas) {
@@ -1280,6 +1290,7 @@ const CustomizerLayout = ({ selectedProduct }) => {
         setShowSidebar={setShowSidebar}
         onSave={handleSave}
         isSaving={isSaving}
+        selectedProduct={selectedProduct}
       />
 
       {(showSidebar && selectedProduct) && (
@@ -1334,12 +1345,33 @@ const CustomizerLayout = ({ selectedProduct }) => {
         />
       )}
 
-      {selectedProduct && (
+      {selectedProduct?.productType !== "3D" && (
         <FabricJSCanvas
           className="canvas-container"
           onReady={onReady}
           editor={editor}
           savedProductId={currentProductId}
+        />
+      )}
+
+      {selectedProduct?.productType === "3D" && (
+        <ThreeDCustomize />
+      )}
+
+      { selectedProduct?.productType === "3D" && threeDloading && (
+        <div className="fixed inset-0 z-50 bg-[rgba(0,0,0,0.9)] bg-opacity-60 flex items-center justify-center">
+          <div className="flex flex-col items-center">
+            <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin mb-4"></div>
+            <div className="text-white text-lg font-medium">Capturing screenshots...</div>
+          </div>
+        </div>
+      )}
+
+      {selectedProduct?.productType === "3D" && threeDscreenshots.length > 0 && (
+        <ScreenshotGallery
+          screenshots={threeDscreenshots}
+          onClose={() => setthreeDScreenshots([])}
+          onDownloadAll={() => console.log('All downloaded')}
         />
       )}
 

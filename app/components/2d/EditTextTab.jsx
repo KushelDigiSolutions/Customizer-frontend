@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FontSelector from './FontSelector';
 import CustomColorSwatch from './CustomColorSwatch';
 import { use2D } from '../../context/2DContext';
+import { use3D } from '@/app/context/3DContext';
 
 const EditTextTab = ({ editor, layerManager }) => {
     const {
@@ -18,9 +19,17 @@ const EditTextTab = ({ editor, layerManager }) => {
         showAddModal, setShowAddModal
     } = use2D();
 
+    const {
+        threeDtextScale, setthreeDTextScale,
+        threeDtextPosX, setthreeDTextPosX,
+        threeDtextPosY, setthreeDTextPosY,
+        threeDtextColor, setthreeDTextColor,
+        threeDoutlineColor, setthreeDOutlineColor,
+    } = use3D();
+
     const [showColorTab, setShowColorTab] = useState(false);
     const [showTextSelectTab, setShowTextSelectTab] = useState(false);
-    const [currentFont, setCurrentFont] = useState('Arial'); 
+    const [currentFont, setCurrentFont] = useState('Arial');
     const [currentColor, setCurrentColor] = useState('#000000');
     const [activeTextObject, setActiveTextObject] = useState(null);
     const [textObjectsCount, setTextObjectsCount] = useState(0);
@@ -28,7 +37,7 @@ const EditTextTab = ({ editor, layerManager }) => {
     // Get all i-text objects from canvas (excluding emojis)
     const getAllTextObjects = () => {
         if (!editor?.canvas) return [];
-        return editor.canvas.getObjects().filter(obj => 
+        return editor.canvas.getObjects().filter(obj =>
             obj.type === 'i-text' && !obj.isEmoji
         );
     };
@@ -36,13 +45,13 @@ const EditTextTab = ({ editor, layerManager }) => {
     // Get the most recently added or selected text object
     const getActiveTextObject = () => {
         if (!editor?.canvas) return null;
-        
+
         const textObjects = getAllTextObjects();
-        
+
         if (textObjects.length === 0) {
             return null;
         }
-        
+
         // Return the last added text object (highest index)
         return textObjects[textObjects.length - 1];
     };
@@ -50,18 +59,18 @@ const EditTextTab = ({ editor, layerManager }) => {
     // Create a new text object with proper layer management
     const createNewTextObject = () => {
         if (!editor?.canvas) return null;
-        
+
         import("fabric").then((fabric) => {
             const canvas = editor.canvas;
             const productImage = canvas.getObjects().find((obj) => obj.isTshirtBase);
-            
+
             if (!productImage) {
                 console.error('❌ No base product found for text placement');
                 return null;
             }
 
             const productBounds = productImage.getBoundingRect();
-            
+
             const newTextObj = new fabric.IText('Add your text here', {
                 left: productBounds.left + productBounds.width * 0.25,
                 top: productBounds.top + productBounds.height / 3.5,
@@ -85,16 +94,16 @@ const EditTextTab = ({ editor, layerManager }) => {
             });
 
             canvas.add(newTextObj);
-            
+
             // Apply proper layer management using the parent's layer system
             if (layerManager) {
                 layerManager.setObjectLayer(newTextObj);
                 layerManager.arrangeCanvasLayers();
             }
-            
+
             setActiveTextObject(newTextObj);
             console.log('✅ New text object created with proper layering (zIndex: 5)');
-            
+
             return newTextObj;
         });
     };
@@ -106,16 +115,16 @@ const EditTextTab = ({ editor, layerManager }) => {
         const syncWithTextObjects = () => {
             const textObjects = getAllTextObjects();
             const currentCount = textObjects.length;
-            
+
             // Update count to trigger re-renders when text objects change
             setTextObjectsCount(currentCount);
-            
+
             let targetTextObj = getActiveTextObject();
-            
+
             // If we have text objects, work with the most recent one
             if (targetTextObj && targetTextObj !== activeTextObject) {
                 setActiveTextObject(targetTextObj);
-                
+
                 // Sync all properties from the detected text object
                 if (targetTextObj.text !== customText) {
                     setCustomText(targetTextObj.text || 'Add your text here');
@@ -128,7 +137,7 @@ const EditTextTab = ({ editor, layerManager }) => {
                 setTextFlipX(targetTextObj.flipX || false);
                 setTextFlipY(targetTextObj.flipY || false);
                 setTextColor(targetTextObj.fill || '#000000');
-                
+
                 console.log('🔄 Synced with existing text object:', targetTextObj.text);
             }
         };
@@ -161,17 +170,17 @@ const EditTextTab = ({ editor, layerManager }) => {
     // Apply changes to the active text object
     const applyToTextObject = (updateFn) => {
         let textObj = activeTextObject || getActiveTextObject();
-        
+
         if (!textObj) {
             // If no text object exists, create one
             textObj = createNewTextObject();
             if (!textObj) return;
         }
-        
+
         if (textObj) {
             updateFn(textObj);
             editor.canvas.renderAll();
-            
+
             // Ensure proper layering after any change
             if (layerManager) {
                 setTimeout(() => {
@@ -184,7 +193,7 @@ const EditTextTab = ({ editor, layerManager }) => {
     const handleTextChange = (e) => {
         const newText = e.target.value;
         setCustomText(newText);
-        
+
         applyToTextObject((textObj) => {
             textObj.set('text', newText);
         });
@@ -193,23 +202,23 @@ const EditTextTab = ({ editor, layerManager }) => {
     const handleFontSelection = (font) => {
         setFontFamily(font);
         setCurrentFont(font);
-        
+
         applyToTextObject((textObj) => {
             textObj.set('fontFamily', font);
         });
-        
-        setShowTextSelectTab(false); 
+
+        setShowTextSelectTab(false);
     };
 
     const handleColorSelection = (color) => {
         setTextColor(color);
         setCurrentColor(color);
-        
+
         applyToTextObject((textObj) => {
             textObj.set('fill', color);
         });
-        
-        setShowColorTab(false); 
+
+        setShowColorTab(false);
     };
 
     const handleFontStyleChange = (styleType) => {
@@ -249,7 +258,7 @@ const EditTextTab = ({ editor, layerManager }) => {
     const handleSizeChange = (e) => {
         const newSize = parseInt(e.target.value);
         setTextSize(newSize);
-        
+
         applyToTextObject((textObj) => {
             textObj.set("fontSize", newSize);
         });
@@ -258,7 +267,7 @@ const EditTextTab = ({ editor, layerManager }) => {
     const handleSpacingChange = (e) => {
         const newSpacing = parseInt(e.target.value);
         setTextSpacing(newSpacing);
-        
+
         applyToTextObject((textObj) => {
             textObj.set("charSpacing", newSpacing * 10);
         });
@@ -275,7 +284,7 @@ const EditTextTab = ({ editor, layerManager }) => {
                 editor.canvas.bringForward(textObj);
                 editor.canvas.renderAll();
             }
-            
+
             // Re-apply layer management after arrange
             if (layerManager) {
                 setTimeout(() => {
@@ -290,7 +299,7 @@ const EditTextTab = ({ editor, layerManager }) => {
         if (!textObj || !editor?.canvas) return;
 
         const canvas = editor.canvas;
-        
+
         switch (action) {
             case 'bringToFront':
                 canvas.bringToFront(textObj);
@@ -308,7 +317,7 @@ const EditTextTab = ({ editor, layerManager }) => {
 
         textObj.setCoords();
         canvas.renderAll();
-        
+
         // Re-apply layer management to maintain proper order
         if (layerManager) {
             setTimeout(() => {
@@ -343,14 +352,14 @@ const EditTextTab = ({ editor, layerManager }) => {
                         </div>
                     </div>
                     <hr className="border-t border-[#D3DBDF] h-px" />
-                    
+
                     <div className='py-3 px-4'>
-                        <input 
-                            type="text" 
+                        <input
+                            type="text"
                             value={customText}
-                            onChange={handleTextChange} 
-                            placeholder="Add Headline" 
-                            className="border border-[#D3DBDF] text-black rounded-lg p-3 min-h-20 w-full placeholder:font-semibold" 
+                            onChange={handleTextChange}
+                            placeholder="Add Headline"
+                            className="border border-[#D3DBDF] text-black rounded-lg p-3 min-h-20 w-full placeholder:font-semibold"
                         />
                         {!activeTextObject && (
                             <p className="text-xs text-gray-500 mt-2">
@@ -366,17 +375,17 @@ const EditTextTab = ({ editor, layerManager }) => {
                             <h3 className='text-[14px] text-black font-semibold'>Flip</h3>
                         </div>
                         <div className="flex items-center gap-3">
-                            <img 
+                            <img
                                 onClick={handleFlipX}
-                                className='w-[22px] cursor-pointer' 
-                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507255/tune-vertical_ezas8p.png" 
-                                alt="flip horizontal" 
+                                className='w-[22px] cursor-pointer'
+                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507255/tune-vertical_ezas8p.png"
+                                alt="flip horizontal"
                             />
-                            <img 
+                            <img
                                 onClick={handleFlipY}
-                                className='w-[22px] cursor-pointer' 
-                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507254/flip-vertical_ajs5ur.png" 
-                                alt="flip vertical" 
+                                className='w-[22px] cursor-pointer'
+                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507254/flip-vertical_ajs5ur.png"
+                                alt="flip vertical"
                             />
                         </div>
                     </div>
@@ -388,8 +397,8 @@ const EditTextTab = ({ editor, layerManager }) => {
                             <h3 className='text-[14px] text-black font-semibold'>Font</h3>
                         </div>
                         <div className="flex items-center gap-3 mt-2">
-                            <div 
-                                onClick={() => setShowTextSelectTab(true)} 
+                            <div
+                                onClick={() => setShowTextSelectTab(true)}
                                 className='border border-[#D3DBDF] min-w-[165px] cursor-pointer flex items-center justify-between rounded-md p-2'
                             >
                                 <span className='text-[14px] text-gray-500 font-medium'>
@@ -398,17 +407,17 @@ const EditTextTab = ({ editor, layerManager }) => {
                                 <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1750138078/chevron-right_p6kmcp.svg" alt="arrow" />
                             </div>
 
-                            <img 
-                                className='cursor-pointer' 
-                                onClick={() => handleFontStyleChange('bold')} 
-                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1750137959/alpha-b_aygypw.svg" 
-                                alt="bold" 
+                            <img
+                                className='cursor-pointer'
+                                onClick={() => handleFontStyleChange('bold')}
+                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1750137959/alpha-b_aygypw.svg"
+                                alt="bold"
                             />
-                            <img 
-                                className='cursor-pointer' 
-                                onClick={() => handleFontStyleChange('italic')} 
-                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1750137959/format-italic_d9ndma.svg" 
-                                alt="italic" 
+                            <img
+                                className='cursor-pointer'
+                                onClick={() => handleFontStyleChange('italic')}
+                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1750137959/format-italic_d9ndma.svg"
+                                alt="italic"
                             />
 
                             <div
@@ -420,6 +429,39 @@ const EditTextTab = ({ editor, layerManager }) => {
                     </div>
 
                     <hr className="border-t border-[#D3DBDF] h-px" />
+
+                    <div className="bg-white p-3 rounded shadow-md mt-2 space-y-2">
+                        <div>
+                            <label>3D Text Scale: {threeDtextScale.toFixed(2)}</label>
+                            <input type="range" min="0.2" max="2" step="0.05" value={threeDtextScale} onChange={(e) => setthreeDTextScale(parseFloat(e.target.value))} />
+                        </div>
+                        <div>
+                            <label>3D Text Position X: {threeDtextPosX.toFixed(2)}</label>
+                            <input type="range" min="0" max="1" step="0.01" value={threeDtextPosX} onChange={(e) => setthreeDTextPosX(parseFloat(e.target.value))} />
+                        </div>
+                        <div>
+                            <label>3D Text Position Y: {threeDtextPosY.toFixed(2)}</label>
+                            <input type="range" min="0" max="1" step="0.01" value={threeDtextPosY} onChange={(e) => setthreeDTextPosY(parseFloat(e.target.value))} />
+                        </div>
+                    </div>
+
+                    <div className="bg-white p-3 rounded shadow-md mt-2 space-y-2">
+                        <label className="block mt-2">Text Color:</label>
+                        <input
+                            type="color"
+                            value={threeDtextColor}
+                            onChange={(e) => setthreeDTextColor(e.target.value)}
+                        />
+
+                        <label className="block mt-2">Outline Color:</label>
+                        <input
+                            type="color"
+                            value={threeDoutlineColor}
+                            onChange={(e) => setthreeDOutlineColor(e.target.value)}
+                        />
+                    </div>
+
+
 
                     <div className='flex flex-col gap-3 justify-between py-4 px-3'>
                         <label className="text-[14px] text-black font-medium">Size</label>
@@ -442,38 +484,38 @@ const EditTextTab = ({ editor, layerManager }) => {
                             className="w-full"
                         />
                     </div>
-                    
+
                     <hr className="border-t border-[#D3DBDF] h-px" />
 
                     <div className='flex flex-col gap-3 justify-between py-3 px-3'>
                         <h3 className='text-[14px] font-semibold text-black'>Arrange</h3>
                         <div className="flex items-center gap-7">
-                            <img 
-                                onClick={handleBringForward} 
-                                className='w-[20px] cursor-pointer' 
-                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-bring-forward_vigco4.png" 
-                                alt="bring forward" 
+                            <img
+                                onClick={handleBringForward}
+                                className='w-[20px] cursor-pointer'
+                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-bring-forward_vigco4.png"
+                                alt="bring forward"
                                 title="Bring Forward"
                             />
-                            <img 
+                            <img
                                 onClick={() => handleArrangeAction('bringToFront')}
-                                className='w-[20px] cursor-pointer' 
-                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-bring-to-front_povosv.png" 
-                                alt="bring to front" 
+                                className='w-[20px] cursor-pointer'
+                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-bring-to-front_povosv.png"
+                                alt="bring to front"
                                 title="Bring to Front"
                             />
-                            <img 
+                            <img
                                 onClick={() => handleArrangeAction('sendBackward')}
-                                className='w-[20px] cursor-pointer' 
-                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-send-backward_buzw6f.png" 
-                                alt="send backward" 
+                                className='w-[20px] cursor-pointer'
+                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-send-backward_buzw6f.png"
+                                alt="send backward"
                                 title="Send Backward"
                             />
-                            <img 
+                            <img
                                 onClick={() => handleArrangeAction('sendToBack')}
-                                className='w-[20px] cursor-pointer' 
-                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508121/arrange-send-to-back_bcyzlu.png" 
-                                alt="send to back" 
+                                className='w-[20px] cursor-pointer'
+                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508121/arrange-send-to-back_bcyzlu.png"
+                                alt="send to back"
                                 title="Send to Back"
                             />
                         </div>
@@ -488,18 +530,18 @@ const EditTextTab = ({ editor, layerManager }) => {
             )}
 
             {showTextSelectTab && (
-                <FontSelector 
-                    selectedFont={currentFont} 
-                    setShowTextSelectTab={setShowTextSelectTab} 
-                    setSelectedFont={handleFontSelection} 
+                <FontSelector
+                    selectedFont={currentFont}
+                    setShowTextSelectTab={setShowTextSelectTab}
+                    setSelectedFont={handleFontSelection}
                 />
             )}
 
             {showColorTab && (
-                <CustomColorSwatch 
-                    setTextColor={setTextColor} 
-                    setChangeTextColor={handleColorSelection} 
-                    setShowColorTab={setShowColorTab} 
+                <CustomColorSwatch
+                    setTextColor={setTextColor}
+                    setChangeTextColor={handleColorSelection}
+                    setShowColorTab={setShowColorTab}
                 />
             )}
         </>

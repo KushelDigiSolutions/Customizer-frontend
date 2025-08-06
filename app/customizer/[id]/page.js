@@ -1,20 +1,26 @@
 "use client";
-import { useParams } from "next/navigation";
-import CustomizerLayout from "../../CustomizerLayout";
 
+import { useParams } from "next/navigation";
+import { useEffect } from "react";
+import CustomizerLayout from "../../CustomizerLayout";
 import { backendProducts } from "../../data/productsData";
-import ThreeDCustomize from "@/app/3DCustomize";
+import { use3D } from "@/app/context/3DContext";
 
 export default function CustomizerPage() {
   const { id } = useParams();
+  const { selectedProduct, setSelectedProduct } = use3D();
+
   const product = backendProducts.find(p => String(p.id) === String(id));
+
+  useEffect(() => {
+    if (product) {
+      setSelectedProduct(product);
+    }
+  }, [product, setSelectedProduct]);
+
+  console.log("Selected Product:", selectedProduct);
 
   if (!product) return <div>Product not found</div>;
 
-  if(product.productType !== "3D") {
-    return <CustomizerLayout selectedProduct={product} />;
-  } else {
-    return <ThreeDCustomize/>
-  }
-
+  return <CustomizerLayout />;
 }

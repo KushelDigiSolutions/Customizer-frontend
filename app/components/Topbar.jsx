@@ -1,12 +1,17 @@
 // Simplified Topbar.jsx without 3D functionality
 
 import React from 'react';
+import { use3D } from '../context/3DContext';
 
 const Topbar = ({
   setShowSidebar,
   onSave,
-  isSaving
+  isSaving,
+  // selectedProduct
 }) => {
+
+  const { handleScreenshot, handleClearSelectedPart, selectedProduct
+  } = use3D();
 
   // Handle regular save
   const handleSave = () => {
@@ -14,6 +19,8 @@ const Topbar = ({
       onSave();
     }
   };
+
+
 
   return (
     <div className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 z-50">
@@ -39,15 +46,34 @@ const Topbar = ({
         {/* Right Section - Action Buttons */}
         <div className="flex items-center gap-3">
 
+          {
+            selectedProduct?.productType === "3D" && (
+              <>
+                <button
+                  className="bg-green-600 text-white px-4 py-2 rounded mt-2 w-full"
+                  onClick={handleScreenshot}
+                >
+                  Save All Views
+                </button>
+
+                <button
+                  className="bg-red-600 text-white px-4 py-2 h-full rounded mt-2 text-nowrap w-full"
+                  onClick={handleClearSelectedPart}
+                >
+                  Clear Selected Part
+                </button>
+              </>
+            )
+          }
+
           {/* Save Button */}
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
-              isSaving
-                ? 'bg-gray-400 cursor-not-allowed text-white'
-                : 'bg-blue-500 hover:bg-blue-600 text-white shadow-md hover:shadow-lg'
-            }`}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${isSaving
+              ? 'bg-gray-400 cursor-not-allowed text-white'
+              : 'bg-blue-500 hover:bg-blue-600 text-white shadow-md hover:shadow-lg'
+              }`}
             title="Save design"
           >
             {isSaving ? (

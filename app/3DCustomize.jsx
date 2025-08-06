@@ -34,10 +34,10 @@ export default function ThreeDCustomize() {
       threeDlogoScale, setthreeDLogoScale,
       threeDlogoPosX, setthreeDLogoPosX,
       threeDlogoPosY, setthreeDLogoPosY,
-      customizationData, setCustomizationData
+      customizationData, setCustomizationData,screenshotRef
   } = use3D();
 
-  const screenshotRef = useRef();
+  // const screenshotRef = useRef();
 
   // Reset text position to center when text changes or part changes
   const handleTextChange = (newText) => {
@@ -90,46 +90,6 @@ export default function ThreeDCustomize() {
     threeDselectedPart
   ]);
 
-  const handleScreenshot = async () => {
-    if (screenshotRef.current) {
-      setthreeDLoading(true);
-
-      try {
-        const capturedImages = await screenshotRef.current.captureAll();
-        setthreeDScreenshots(capturedImages);
-
-        setCustomizationData(prev => ({
-          ...prev,
-          screenshots: capturedImages.map(img => ({
-            angle: img.angle,
-            image: img.image
-          }))
-        }));
-      } catch (error) {
-        console.error("Error capturing screenshots:", error);
-      } finally {
-        setthreeDLoading(false);
-      }
-    }
-  };
-
-  const handleClearSelectedPart = () => {
-    setCustomizationData(prev => {
-      const newParts = { ...prev.parts };
-      delete newParts[threeDselectedPart];
-      return { ...prev, parts: newParts };
-    });
-    setthreeDColor('#ffffff');
-    setthreeDTexture(null);
-    setthreeDText('');
-    setthreeDTextTexture(null);
-    setthreeDTextColor('#000000');
-    setthreeDOutlineColor('#ffffff');
-    setthreeDTextScale(1);
-    setthreeDTextPosX(0.5);
-    setthreeDTextPosY(0.5);
-  };
-
   return (
     <main className="h-screen w-screen flex justify-center items-center">
       <div className='h-[100vh] w-[60%]'>
@@ -143,17 +103,6 @@ export default function ThreeDCustomize() {
           </Suspense>
 
           <ModelViewer
-            color={threeDcolor}
-            texture={threeDtexture}
-            textTexture={threeDtextTexture}
-            selectedPart={threeDselectedPart}
-            zoom={threeDzoom}
-            offsetX={threeDoffsetX}
-            offsetY={threeDoffsetY}
-            textScale={threeDtextScale}
-            textPosX={threeDtextPosX}
-            textPosY={threeDtextPosY}
-            setCustomizationData={setCustomizationData}
           />
 
           <ScreenshotManager ref={screenshotRef} />
@@ -162,7 +111,7 @@ export default function ThreeDCustomize() {
       </div>
 
       <div className="absolute bottom-4 left-4">
-        <ControlsPanel
+        {/* <ControlsPanel
           onScreenshot={handleScreenshot}
         />
 
@@ -173,9 +122,9 @@ export default function ThreeDCustomize() {
         />
 
         <TextureControlsPanel
-        />
+        /> */}
 
-        {customizationData?.parts && Object.keys(customizationData.parts).length > 0 && (
+        {/* {customizationData?.parts && Object.keys(customizationData.parts).length > 0 && (
           <button
             className="mt-4 bg-blue-600 text-white px-4 py-2 rounded"
             onClick={() => console.log('Customization Data:', customizationData)}
@@ -206,7 +155,7 @@ export default function ThreeDCustomize() {
           onClick={handleClearSelectedPart}
         >
           Clear Selected Part
-        </button>
+        </button> */}
       </div>
     </main>
   );

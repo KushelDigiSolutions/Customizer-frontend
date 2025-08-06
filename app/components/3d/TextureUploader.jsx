@@ -23,24 +23,30 @@ const TextureUploader = () => {
   } = use3D();
 
   const [previewUrl, setPreviewUrl] = useState(null);
-  const [file, setFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
 
-  const handleFileChange = (e) => {
-    const selected = e.target.files?.[0];
-    if (!selected) return;
+  const handleFileSelect = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setSelectedFile(file);
+  };
 
-    setFile(selected);
+  const handleUploadDesign = () => {
+    if (!selectedFile) return;
+    setIsUploading(true);
     const reader = new FileReader();
     reader.onload = () => {
       setPreviewUrl(reader.result);
+      setIsUploading(false);
     };
-    reader.readAsDataURL(selected);
+    reader.readAsDataURL(selectedFile);
   };
 
   useEffect(() => {
     if (!previewUrl) return;
 
-    const image = new Image();
+    const image = new window.Image();
     image.src = previewUrl;
     image.onload = () => {
       const size = 512;
@@ -82,6 +88,7 @@ const TextureUploader = () => {
         }
       }));
     };
+  // eslint-disable-next-line
   }, [
     previewUrl,
     threeDtextureMode,
@@ -105,8 +112,36 @@ const TextureUploader = () => {
         <option value="logo">Logo Only</option>
       </select>
 
-      <label className="block mb-2 font-semibold mt-3">Upload Design:</label>
-      <input type="file" accept="image/*" onChange={handleFileChange} />
+      <div className='flex flex-col gap-4'>
+        <h3 className='text-[14px] font-medium'>Original vector artwork best, if you have?</h3>
+        <label className="block bg-[#E4E9EC] py-12 px-4 rounded-lg cursor-pointer hover:bg-[#d9e2e6] transition-colors">
+          <input
+            type="file"
+            accept="image/*"
+            className="hidden"
+            onChange={handleFileSelect}
+          />
+          <div className="text-center">
+            <div className="bg-[#3559C7] text-white px-6 py-2 rounded-md inline-block mb-3">
+              {selectedFile ? "Image Uploaded" : "Choose a file"}
+            </div>
+            <p className='text-gray-500 text-[12px]'>
+              We support JPG, PNG, EAPS<br />
+              An max 5 MB
+            </p>
+          </div>
+        </label>
+        <button
+          onClick={handleUploadDesign}
+          disabled={!selectedFile || isUploading}
+          className={`w-full rounded-md py-3 text-[14px] font-medium cursor-pointer transition-colors ${selectedFile && !isUploading
+            ? 'text-white bg-[#3559C7] hover:bg-[#2a47a3]'
+            : 'bg-[#E6E9F3] text-[#B8C5E8] cursor-not-allowed'
+            }`}
+        >
+          {isUploading ? 'Uploading...' : 'Upload'}
+        </button>
+      </div>
 
       {previewUrl && (
         <div className="mt-3">
@@ -119,7 +154,7 @@ const TextureUploader = () => {
             className="mt-2 px-3 py-1 bg-red-500 text-white rounded"
             onClick={() => {
               setPreviewUrl(null);
-              setFile(null);
+              setSelectedFile(null);
               setthreeDTexture(null);
               setCustomizationData(prev => ({
                 ...prev,

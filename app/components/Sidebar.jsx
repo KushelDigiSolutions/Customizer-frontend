@@ -141,6 +141,12 @@ const Sidebar = ({
     }
   };
 
+  const update3DText = () => {
+    setHasAddedText(true);
+    setShowAddModal(false);
+    setShowEditModal(true);
+  }
+
   const handleTabClick = (key) => {
     setShowEditorModal(false);
     setShowImageEditModal(false);
@@ -187,7 +193,7 @@ const Sidebar = ({
   // Determine tab label based on product type
   const getClipartTabLabel = () => {
     if (!selectedProduct) return "Clipart";
-    
+
     switch (selectedProduct.type) {
       case "shoe":
         return "Customize";
@@ -261,6 +267,7 @@ const Sidebar = ({
               customText={customText}
               setCustomText={setCustomText}
               handleAddCustomText={handleAddCustomTextWithTracking}
+              update3DText={update3DText} // NEW: Pass update function
             />
           )}
           {hasAddedText && showEditModal && (

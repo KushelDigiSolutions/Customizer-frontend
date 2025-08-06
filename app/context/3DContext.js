@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useRef, useState } from "react";
 
 const threeDcontext = createContext();
 
@@ -31,6 +31,49 @@ export const ThreeDProvider = ({ children }) => {
   const [threeDlogoPosY, setthreeDLogoPosY] = useState(0.5);
 
   const [customizationData, setCustomizationData] = useState(0.5);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const screenshotRef = useRef();
+
+  const handleScreenshot = async () => {
+    if (screenshotRef.current) {
+      setthreeDLoading(true);
+
+      try {
+        const capturedImages = await screenshotRef.current.captureAll();
+        setthreeDScreenshots(capturedImages);
+
+        setCustomizationData(prev => ({
+          ...prev,
+          screenshots: capturedImages.map(img => ({
+            angle: img.angle,
+            image: img.image
+          }))
+        }));
+      } catch (error) {
+        console.error("Error capturing screenshots:", error);
+      } finally {
+        setthreeDLoading(false);
+      }
+    }
+  };
+
+  const handleClearSelectedPart = () => {
+    setCustomizationData(prev => {
+      const newParts = { ...prev.parts };
+      delete newParts[threeDselectedPart];
+      return { ...prev, parts: newParts };
+    });
+    setthreeDColor('#ffffff');
+    setthreeDTexture(null);
+    setthreeDText('');
+    setthreeDTextTexture(null);
+    setthreeDTextColor('#000000');
+    setthreeDOutlineColor('#ffffff');
+    setthreeDTextScale(1);
+    setthreeDTextPosX(0.5);
+    setthreeDTextPosY(0.5);
+  };
 
   return (
     <threeDcontext.Provider value={{
@@ -53,7 +96,9 @@ export const ThreeDProvider = ({ children }) => {
       threeDlogoScale, setthreeDLogoScale,
       threeDlogoPosX, setthreeDLogoPosX,
       threeDlogoPosY, setthreeDLogoPosY,
-      customizationData, setCustomizationData
+      customizationData, setCustomizationData,
+      handleScreenshot, handleClearSelectedPart,
+      screenshotRef, selectedProduct, setSelectedProduct
     }}>
       {children}
     </threeDcontext.Provider>
