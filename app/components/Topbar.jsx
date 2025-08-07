@@ -9,14 +9,27 @@ const Topbar = ({
   isSaving,
   // selectedProduct
 }) => {
+  const { handleScreenshot, handleClearSelectedPart, selectedProduct, threeDscreenshots } = use3D();
 
-  const { handleScreenshot, handleClearSelectedPart, selectedProduct
-  } = use3D();
+  // Handle save for both 2D and 3D
+  const handleSave = async () => {
+    if (selectedProduct?.productType === "3D") {
+      // Wait for screenshots to finish
+      const screenshots = await handleScreenshot();
 
-  // Handle regular save
-  const handleSave = () => {
-    if (onSave) {
-      onSave();
+      if (!screenshots || screenshots.length === 0) {
+        alert("Screenshots not ready yet. Please try again.");
+        return;
+      }
+
+      // Pass screenshots to save logic
+      if (onSave) {
+        onSave(screenshots);
+      }
+    } else {
+      if (onSave) {
+        onSave();
+      }
     }
   };
 

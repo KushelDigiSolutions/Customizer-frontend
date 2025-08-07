@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import * as THREE from 'three';
 import { use3D } from '../../context/3DContext';
 
-const ModelViewer = () => {
+const ModelViewer = ({ modelUrl, selectedPart }) => {
     const {
         threeDcolor,
         threeDtexture,
@@ -18,11 +18,21 @@ const ModelViewer = () => {
         setCustomizationData
     } = use3D();
 
-    const { scene } = useGLTF('/models/brand1.glb');
+    const { scene } = useGLTF(modelUrl);
 
     useEffect(() => {
         scene.traverse((child) => {
-            if (child.isMesh && child.name === threeDselectedPart) {
+            if (child.isMesh && child.name === selectedPart) {
+                // Always set the color from state
+                child.material.color.set(threeDcolor || '#ffffff');
+                child.material.needsUpdate = true;
+            }
+        });
+    }, [threeDcolor, selectedPart, scene]);
+
+    useEffect(() => {
+        scene.traverse((child) => {
+            if (child.isMesh && child.name === selectedPart) {
                 const originalColor = child.material.color;
                 const currentColorHex = `#${originalColor.getHexString()}`;
 
@@ -89,7 +99,7 @@ const ModelViewer = () => {
         threeDcolor,
         threeDtexture,
         threeDtextTexture,
-        threeDselectedPart,
+        selectedPart,
         threeDzoom,
         threeDoffsetX,
         threeDoffsetY,
@@ -104,13 +114,28 @@ const ModelViewer = () => {
             ...prev,
             parts: {
                 ...prev.parts,
-                [threeDselectedPart]: {
-                    ...prev.parts?.[threeDselectedPart],
+                [selectedPart]: {
+                    ...prev.parts?.[selectedPart],
                     color: threeDcolor
                 }
             }
         }));
-    }, [threeDcolor, threeDselectedPart, setCustomizationData]);
+    }, [threeDcolor, selectedPart, setCustomizationData]);
+
+    useEffect(() => {
+        scene.traverse((child) => {
+            if (child.isMesh) {
+                const baseColor = `#${child.material.color.getHexString()}`;
+                setCustomizationData(prev => ({
+                    ...prev,
+                    baseColors: {
+                        ...prev?.baseColors,
+                        [child.name]: baseColor
+                    }
+                }));
+            }
+        });
+    }, [scene, setCustomizationData]);
 
     return (
         <Center>

@@ -485,7 +485,36 @@ export const backendProducts = [
         description: "white shirt",
         type: "shirt",
         productType: "3D",
+        model3D: "/models/brand1.glb",
 
+        threeDDesigns: {
+            shirtDesign: [
+                {
+                    id: 1,
+                    name: "Design 1",
+                    url: "/shirtdesign/1.webp",
+                    // color: "White"
+                },
+                {
+                    id: 2,
+                    name: "Design 2",
+                    url: "/shirtdesign/2.webp",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 3,
+                    name: "Design 3",
+                    url: "/shirtdesign/3.webp",
+                    // color: "Green"
+                },
+                {
+                    id: 4,
+                    name: "Design 4",
+                    url: "/shirtdesign/4.webp",
+                    // color: "Dark Blue"
+                }
+            ]
+        }
     },
     {
         id: 8,

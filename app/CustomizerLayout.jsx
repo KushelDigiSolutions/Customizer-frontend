@@ -45,31 +45,15 @@ const CustomizerLayout = () => {
   } = use2D();
 
   const {
-      threeDscreenshots, setthreeDScreenshots,
-      threeDloading,selectedProduct
+    threeDscreenshots, setthreeDScreenshots,
+    threeDloading, selectedProduct,customizationData
   } = use3D()
 
-  class SimpleLayerManager {
-    constructor(canvas) {
-      this.canvas = canvas;
-      this.layerOrder = {
-        BASE_COLOR: 0,        // Base background color
-        TOP_GRADIENT: 1,      // Top color/gradient image (red/burgundy part)  
-        PATTERN: 2,           // Stars, stripes, or other patterns
-        BOTTOM_GRADIENT: 3,   // Bottom color/gradient image (green part) with fade
-        DESIGN: 4,            // User designs/logos
-        TEXT: 5,              // Custom text
-        RIGHT_SIDE_IMAGE: 6,  // Uploaded images for right side (highest priority)
-        // Dynamic shoe layers
-        SOLE: 1,              // Shoe sole
-        SURFACE: 2,           // Shoe surface
-        MIDDLE: 3,            // Shoe middle part
-        LACE: 4,              // Shoe laces
 
-        MID: 1,
-        SLEEVES: 2,           // T-Shirt sleeves
-        PRODUCT: 7            // Product outline/shape (should be transparent)
-      };
+  class SimpleLayerManager {
+    constructor(canvas, layerOrder) {
+      this.canvas = canvas;
+      this.layerOrder = layerOrder || {};
     }
 
     setObjectLayer(obj) {
@@ -77,41 +61,27 @@ const CustomizerLayout = () => {
 
       let zIndex = 0;
 
-      if (obj.isTshirtBase) {
+      // Dynamically assign zIndex based on product's layerOrder
+      if (obj.isTshirtBase && this.layerOrder.PRODUCT !== undefined) {
         zIndex = this.layerOrder.PRODUCT;
-      } else if (obj.isRightSideImage) {
+      } else if (obj.isRightSideImage && this.layerOrder.RIGHT_SIDE_IMAGE !== undefined) {
         zIndex = this.layerOrder.RIGHT_SIDE_IMAGE;
-      } else if (obj.type === 'i-text') {
+      } else if (obj.type === 'i-text' && this.layerOrder.TEXT !== undefined) {
         zIndex = this.layerOrder.TEXT;
-      } else if (obj.type === 'image' && obj.isTopGradient) {
+      } else if (obj.type === 'image' && obj.isTopGradient && this.layerOrder.TOP_GRADIENT !== undefined) {
         zIndex = this.layerOrder.TOP_GRADIENT;
-      } else if (obj.type === 'image' && obj.isPattern) {
+      } else if (obj.type === 'image' && obj.isPattern && this.layerOrder.PATTERN !== undefined) {
         zIndex = this.layerOrder.PATTERN;
-      } else if (obj.type === 'image' && obj.isBottomGradient) {
+      } else if (obj.type === 'image' && obj.isBottomGradient && this.layerOrder.BOTTOM_GRADIENT !== undefined) {
         zIndex = this.layerOrder.BOTTOM_GRADIENT;
-      } else if (obj.isBottomGradientFade || obj.isBottomGradientTopTransparent) {
+      } else if ((obj.isBottomGradientFade || obj.isBottomGradientTopTransparent) && this.layerOrder.BOTTOM_GRADIENT !== undefined) {
         zIndex = this.layerOrder.BOTTOM_GRADIENT + 0.1;
-      } else if (obj.type === 'image' && obj.layerType) {
-        // Handle dynamic shoe layers
-        switch (obj.layerType) {
-          case 'sole':
-            zIndex = this.layerOrder.SOLE;
-            break;
-          case 'surface':
-            zIndex = this.layerOrder.SURFACE;
-            break;
-          case 'middle':
-            zIndex = this.layerOrder.MIDDLE;
-            break;
-          case 'lace':
-            zIndex = this.layerOrder.LACE;
-            break;
-          default:
-            zIndex = this.layerOrder.DESIGN;
-        }
-      } else if (obj.type === 'image' && !obj.isTshirtBase) {
+      } else if (obj.type === 'image' && obj.layerType && this.layerOrder[obj.layerType?.toUpperCase()] !== undefined) {
+        // Dynamic layers (e.g., shoes, t-shirts)
+        zIndex = this.layerOrder[obj.layerType.toUpperCase()];
+      } else if (obj.type === 'image' && !obj.isTshirtBase && this.layerOrder.DESIGN !== undefined) {
         zIndex = this.layerOrder.DESIGN;
-      } else if (obj.isColorEffect) {
+      } else if (obj.isColorEffect && this.layerOrder.BASE_COLOR !== undefined) {
         zIndex = this.layerOrder.BASE_COLOR;
       }
 
@@ -168,12 +138,12 @@ const CustomizerLayout = () => {
 
   // Initialize layer manager when canvas is ready
   useEffect(() => {
-    if (editor?.canvas && !layerManager) {
-      const manager = new SimpleLayerManager(editor.canvas);
+    if (editor?.canvas && !layerManager && selectedProduct?.layers) {
+      const manager = new SimpleLayerManager(editor.canvas, selectedProduct.layers);
       setLayerManager(manager);
       console.log('🎯 Layer Manager initialized with dynamic layers system');
     }
-  }, [editor?.canvas]);
+  }, [editor?.canvas, selectedProduct?.layers]);
 
   // Helper function to get current product data with customizations
   const getCurrentProductData = () => {
@@ -1091,7 +1061,7 @@ const CustomizerLayout = () => {
     }
   };
 
-  const handleSave = async () => {
+  const handleSave = async (screenshotsFrom3D = null) => {
     if (!editor?.canvas) {
       alert('Canvas not ready!');
       return;
@@ -1102,184 +1072,266 @@ const CustomizerLayout = () => {
       return;
     }
 
-    setIsSaving(true);
-
-    try {
-      const screenshotDataURL = editor.canvas.toDataURL('image/png', 0.8);
-
-      if (!screenshotDataURL || screenshotDataURL === 'data:,') {
-        throw new Error('Failed to capture design screenshot');
-      }
-
-      let screenshotCloudinaryUrl = screenshotDataURL;
+    if (selectedProduct.productType === "3D") {
+      setIsSaving(true);
 
       try {
-        const response = await fetch(screenshotDataURL);
-        const blob = await response.blob();
-        const file = new File([blob], `design-screenshot-${Date.now()}.png`, {
-          type: 'image/png'
-        });
-
-        const cloudinaryResponse = await uploadToCloudinaryImg({ image: file });
-
-        if (cloudinaryResponse && cloudinaryResponse.url) {
-          screenshotCloudinaryUrl = cloudinaryResponse.url;
+        // Upload screenshots to Cloudinary
+        let cloudinaryScreenshots = [];
+        const screenshots = screenshotsFrom3D || customizationData?.screenshots || [];
+        for (const screenshot of screenshots) {
+          const blob = await (await fetch(screenshot.image)).blob();
+          const file = new File([blob], `3d-screenshot-${Date.now()}.png`, { type: 'image/png' });
+          const cloudinaryResponse = await uploadToCloudinaryImg({ image: file });
+          cloudinaryScreenshots.push({
+            angle: screenshot.angle,
+            url: cloudinaryResponse.url
+          });
         }
-      } catch (uploadError) {
-        console.error("Screenshot upload failed:", uploadError);
-      }
 
-      const canvasObjects = editor.canvas.getObjects().map(obj => {
-        const baseData = {
-          type: obj.type,
-          left: obj.left,
-          top: obj.top,
-          scaleX: obj.scaleX,
-          scaleY: obj.scaleY,
-          angle: obj.angle,
-          opacity: obj.opacity,
-          flipX: obj.flipX,
-          flipY: obj.flipY,
-          originX: obj.originX,
-          originY: obj.originY,
-          selectable: obj.selectable,
-          evented: obj.evented,
-          visible: obj.visible,
-          zIndex: obj.zIndex || 0
+        // Upload applied design/image/logo to Cloudinary (if present)
+        let appliedImageCloudUrl = null;
+        const appliedImageUrl = customizationData?.parts?.[customizationData?.selectedPart]?.image?.url;
+        if (appliedImageUrl) {
+          const blob = await (await fetch(appliedImageUrl)).blob();
+          const file = new File([blob], `3d-applied-image-${Date.now()}.png`, { type: 'image/png' });
+          const cloudinaryResponse = await uploadToCloudinaryImg({ image: file });
+          appliedImageCloudUrl = cloudinaryResponse.url;
+        }
+
+        // Prepare save payload
+        const saveData = {
+          timestamp: new Date().toISOString(),
+          product: {
+            id: selectedProduct.id,
+            image: selectedProduct.image,
+            description: selectedProduct.description,
+            size: selectedProduct.size,
+            type: selectedProduct.type,
+            color: selectedProduct.color,
+            model3D: selectedProduct.model3D,
+          },
+          customizations: {
+            ...customizationData,
+            appliedImageCloudUrl
+          },
+          screenshots: cloudinaryScreenshots,
+          productType: "3D"
         };
 
-        if (obj.type === 'i-text') {
-          return {
-            ...baseData,
-            text: obj.text,
-            fontSize: obj.fontSize,
-            fontFamily: obj.fontFamily,
-            fontStyle: obj.fontStyle,
-            fontWeight: obj.fontWeight,
-            fill: obj.fill,
-            textAlign: obj.textAlign,
-            charSpacing: obj.charSpacing,
-            lineHeight: obj.lineHeight,
-            isEmoji: obj.isEmoji || false,
-            editable: obj.editable
-          };
-        } else if (obj.type === 'image') {
-          return {
-            ...baseData,
-            src: obj.getSrc ? obj.getSrc() : obj._originalElement?.src,
-            isTshirtBase: obj.isTshirtBase || false,
-            isPattern: obj.isPattern || false,
-            isTopGradient: obj.isTopGradient || false,
-            isBottomGradient: obj.isBottomGradient || false,
-            layerType: obj.layerType || null,
-            name: obj.name,
-            isIcon: obj.isIcon || false,
-            hasControls: obj.hasControls,
-            hasBorders: obj.hasBorders,
-            lockMovementX: obj.lockMovementX,
-            lockMovementY: obj.lockMovementY,
-            lockScalingX: obj.lockScalingX,
-            lockScalingY: obj.lockScalingY,
-            lockRotation: obj.lockRotation
-          };
-        }
-
-        return baseData;
-      });
-
-      const currentProduct = getCurrentProductData();
-
-      const saveData = {
-        timestamp: new Date().toISOString(),
-        product: {
-          id: selectedProduct.id,
-          image: selectedProduct.image,
-          description: selectedProduct.description,
-          size: selectedProduct.size,
-          type: selectedProduct.type,
-          color: selectedColor.color,
-          width: selectedProduct.width,
-          textTopRatio: selectedProduct.textTopRatio,
-          hasDefaultLayers: !!selectedProduct.defaultLayers
-        },
-        canvas: {
-          width: editor.canvas.getWidth(),
-          height: editor.canvas.getHeight(),
-          objects: canvasObjects,
-          backgroundColor: editor.canvas.backgroundColor || selectedColor.color
-        },
-        customizations: {
-          text: customText,
-          textSize: textSize,
-          textSpacing: textSpacing,
-          textArc: textArc,
-          textColor: textColor,
-          fontFamily: fontFamily,
-          fontStyle: fontStyle,
-          textFlipX: textFlipX,
-          textFlipY: textFlipY,
-          flipX: flipX,
-          flipY: flipY,
-          selectedColor: selectedColor,
-          selectedTopColor: selectedTopColor,
-          selectedBottomColor: selectedBottomColor,
-          selectedLayers: selectedLayers
-        },
-        screenshot: screenshotCloudinaryUrl,
-        clippingSystemUsed: 'none',
-        layerSystemUsed: selectedProduct.defaultLayers ? 'dynamic-layer-system' : 'gradient-layer-system'
-      };
-
-      let savedProductId = null;
-
-      try {
+        // Save to backend
         const response = await fetch('https://customizer-backend-ttv5.onrender.com/api/save-product', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(saveData)
         });
 
         if (response.ok) {
-          const result = await response.json();
-          savedProductId = result._id || result.data?._id || result.product?._id;
-
-          if (savedProductId) {
-            setCurrentProductId(savedProductId);
-          }
+          setSaveSuccess(true);
+          setTimeout(() => setSaveSuccess(false), 3000);
+          alert("3D design saved! 📸");
+        } else {
+          throw new Error("Save failed");
         }
-      } catch (apiError) {
-        console.error("Database save error:", apiError);
+      } catch (error) {
+        alert('Save failed: ' + error.message);
+      } finally {
+        setIsSaving(false);
       }
+      return;
+    }
+
+    if (selectedProduct.productType === "2D") {
+      setIsSaving(true);
 
       try {
-        const response = await fetch(screenshotDataURL);
-        const blob = await response.blob();
-        const viewableURL = URL.createObjectURL(blob);
-        window.open(viewableURL, '_blank');
-      } catch (err) {
-        console.log("Screenshot preview failed:", err);
+        const screenshotDataURL = editor.canvas.toDataURL('image/png', 0.8);
+
+        if (!screenshotDataURL || screenshotDataURL === 'data:,') {
+          throw new Error('Failed to capture design screenshot');
+        }
+
+        let screenshotCloudinaryUrl = screenshotDataURL;
+
+        try {
+          const response = await fetch(screenshotDataURL);
+          const blob = await response.blob();
+          const file = new File([blob], `design-screenshot-${Date.now()}.png`, {
+            type: 'image/png'
+          });
+
+          const cloudinaryResponse = await uploadToCloudinaryImg({ image: file });
+
+          if (cloudinaryResponse && cloudinaryResponse.url) {
+            screenshotCloudinaryUrl = cloudinaryResponse.url;
+          }
+        } catch (uploadError) {
+          console.error("Screenshot upload failed:", uploadError);
+        }
+
+        // Upload applied design/image/logo to Cloudinary (if present)
+        let appliedImageCloudUrl = null;
+        const appliedDesignObj = editor.canvas.getObjects().find(obj => obj.name === "design-image" || obj.name === "logo-image");
+        if (appliedDesignObj && appliedDesignObj.getSrc) {
+          const appliedImageUrl = appliedDesignObj.getSrc();
+          const blob = await (await fetch(appliedImageUrl)).blob();
+          const file = new File([blob], `2d-applied-image-${Date.now()}.png`, { type: 'image/png' });
+          const cloudinaryResponse = await uploadToCloudinaryImg({ image: file });
+          appliedImageCloudUrl = cloudinaryResponse.url;
+        }
+
+        const canvasObjects = editor.canvas.getObjects().map(obj => {
+          const baseData = {
+            type: obj.type,
+            left: obj.left,
+            top: obj.top,
+            scaleX: obj.scaleX,
+            scaleY: obj.scaleY,
+            angle: obj.angle,
+            opacity: obj.opacity,
+            flipX: obj.flipX,
+            flipY: obj.flipY,
+            originX: obj.originX,
+            originY: obj.originY,
+            selectable: obj.selectable,
+            evented: obj.evented,
+            visible: obj.visible,
+            zIndex: obj.zIndex || 0
+          };
+
+          if (obj.type === 'i-text') {
+            return {
+              ...baseData,
+              text: obj.text,
+              fontSize: obj.fontSize,
+              fontFamily: obj.fontFamily,
+              fontStyle: obj.fontStyle,
+              fontWeight: obj.fontWeight,
+              fill: obj.fill,
+              textAlign: obj.textAlign,
+              charSpacing: obj.charSpacing,
+              lineHeight: obj.lineHeight,
+              isEmoji: obj.isEmoji || false,
+              editable: obj.editable
+            };
+          } else if (obj.type === 'image') {
+            return {
+              ...baseData,
+              src: obj.getSrc ? obj.getSrc() : obj._originalElement?.src,
+              isTshirtBase: obj.isTshirtBase || false,
+              isPattern: obj.isPattern || false,
+              isTopGradient: obj.isTopGradient || false,
+              isBottomGradient: obj.isBottomGradient || false,
+              layerType: obj.layerType || null,
+              name: obj.name,
+              isIcon: obj.isIcon || false,
+              hasControls: obj.hasControls,
+              hasBorders: obj.hasBorders,
+              lockMovementX: obj.lockMovementX,
+              lockMovementY: obj.lockMovementY,
+              lockScalingX: obj.lockScalingX,
+              lockScalingY: obj.lockScalingY,
+              lockRotation: obj.lockRotation
+            };
+          }
+
+          return baseData;
+        });
+
+        const currentProduct = getCurrentProductData();
+
+        const saveData = {
+          timestamp: new Date().toISOString(),
+          product: {
+            id: selectedProduct.id,
+            image: selectedProduct.image,
+            description: selectedProduct.description,
+            size: selectedProduct.size,
+            type: selectedProduct.type,
+            color: selectedColor.color,
+            width: selectedProduct.width,
+            textTopRatio: selectedProduct.textTopRatio,
+            hasDefaultLayers: !!selectedProduct.defaultLayers
+          },
+          canvas: {
+            width: editor.canvas.getWidth(),
+            height: editor.canvas.getHeight(),
+            objects: canvasObjects,
+            backgroundColor: editor.canvas.backgroundColor || selectedColor.color
+          },
+          customizations: {
+            text: customText,
+            textSize: textSize,
+            textSpacing: textSpacing,
+            textArc: textArc,
+            textColor: textColor,
+            fontFamily: fontFamily,
+            fontStyle: fontStyle,
+            textFlipX: textFlipX,
+            textFlipY: textFlipY,
+            flipX: flipX,
+            flipY: flipY,
+            selectedColor: selectedColor,
+            selectedTopColor: selectedTopColor,
+            selectedBottomColor: selectedBottomColor,
+            selectedLayers: selectedLayers
+          },
+          screenshot: screenshotCloudinaryUrl,
+          clippingSystemUsed: 'none',
+          layerSystemUsed: selectedProduct.defaultLayers ? 'dynamic-layer-system' : 'gradient-layer-system'
+        };
+
+        let savedProductId = null;
+
+        try {
+          const response = await fetch('https://customizer-backend-ttv5.onrender.com/api/save-product', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(saveData)
+          });
+
+          if (response.ok) {
+            const result = await response.json();
+            savedProductId = result._id || result.data?._id || result.product?._id;
+
+            if (savedProductId) {
+              setCurrentProductId(savedProductId);
+            }
+          }
+        } catch (apiError) {
+          console.error("Database save error:", apiError);
+        }
+
+        try {
+          const response = await fetch(screenshotDataURL);
+          const blob = await response.blob();
+          const viewableURL = URL.createObjectURL(blob);
+          window.open(viewableURL, '_blank');
+        } catch (err) {
+          console.log("Screenshot preview failed:", err);
+        }
+
+        setSaveSuccess(true);
+        setTimeout(() => setSaveSuccess(false), 3000);
+
+        const systemType = selectedProduct.defaultLayers ? 'Dynamic layer' : 'Gradient layer';
+        const successMessage = `${systemType} design saved! 📸\n\nMongoDB ID: ${savedProductId}`;
+        alert(successMessage);
+
+        return {
+          success: true,
+          productId: savedProductId
+        };
+
+      } catch (error) {
+        console.error('Save error:', error);
+        alert('Save failed: ' + error.message);
+        return { success: false, error: error.message };
+      } finally {
+        setIsSaving(false);
       }
-
-      setSaveSuccess(true);
-      setTimeout(() => setSaveSuccess(false), 3000);
-
-      const systemType = selectedProduct.defaultLayers ? 'Dynamic layer' : 'Gradient layer';
-      const successMessage = `${systemType} design saved! 📸\n\nMongoDB ID: ${savedProductId}`;
-      alert(successMessage);
-
-      return {
-        success: true,
-        productId: savedProductId
-      };
-
-    } catch (error) {
-      console.error('Save error:', error);
-      alert('Save failed: ' + error.message);
-      return { success: false, error: error.message };
-    } finally {
-      setIsSaving(false);
     }
   };
 
@@ -1358,7 +1410,7 @@ const CustomizerLayout = () => {
         <ThreeDCustomize />
       )}
 
-      { selectedProduct?.productType === "3D" && threeDloading && (
+      {selectedProduct?.productType === "3D" && threeDloading && (
         <div className="fixed inset-0 z-50 bg-[rgba(0,0,0,0.9)] bg-opacity-60 flex items-center justify-center">
           <div className="flex flex-col items-center">
             <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin mb-4"></div>

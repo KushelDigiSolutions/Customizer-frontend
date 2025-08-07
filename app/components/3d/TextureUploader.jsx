@@ -55,7 +55,7 @@ const TextureUploader = () => {
       const ctx = canvas.getContext('2d');
 
       // Fill base color
-      ctx.fillStyle = threeDcolor;
+      ctx.fillStyle = threeDcolor || "#fff"; 
       ctx.fillRect(0, 0, size, size);
 
       // Apply image based on mode
