@@ -50,12 +50,16 @@ export const ThreeDProvider = ({ children }) => {
             image: img.image
           }))
         }));
+
+        return capturedImages;
       } catch (error) {
         console.error("Error capturing screenshots:", error);
+        return [];
       } finally {
         setthreeDLoading(false);
       }
     }
+    return [];
   };
 
   const handleClearSelectedPart = () => {

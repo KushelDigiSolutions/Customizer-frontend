@@ -14,27 +14,49 @@ import TextControlsPanel from './components/3d/TextControlsPanel';
 import { use3D } from './context/3DContext';
 
 export default function ThreeDCustomize() {
-
-  const { threeDcolor, setthreeDColor,
-      threeDtexture, setthreeDTexture,
-      threeDselectedPart, setthreeDSelectedPart,
-      threeDzoom, setthreeDZoom,
-      threeDoffsetX, setthreeDOffsetX,
-      threeDoffsetY, setthreeDOffsetY,
-      threeDtext, setthreeDText,
-      threeDtextTexture, setthreeDTextTexture,
-      threeDtextColor, setthreeDTextColor,
-      threeDoutlineColor, setthreeDOutlineColor,
-      threeDtextScale, setthreeDTextScale,
-      threeDtextPosX, setthreeDTextPosX,
-      threeDtextPosY, setthreeDTextPosY,
-      threeDscreenshots, setthreeDScreenshots,
-      threeDloading, setthreeDLoading,
-      threeDtextureMode, setthreeDTextureMode,
-      threeDlogoScale, setthreeDLogoScale,
-      threeDlogoPosX, setthreeDLogoPosX,
-      threeDlogoPosY, setthreeDLogoPosY,
-      customizationData, setCustomizationData,screenshotRef
+  const {
+    threeDcolor,
+    setthreeDColor,
+    threeDtexture,
+    setthreeDTexture,
+    threeDselectedPart,
+    setthreeDSelectedPart,
+    threeDzoom,
+    setthreeDZoom,
+    threeDoffsetX,
+    setthreeDOffsetX,
+    threeDoffsetY,
+    setthreeDOffsetY,
+    threeDtext,
+    setthreeDText,
+    threeDtextTexture,
+    setthreeDTextTexture,
+    threeDtextColor,
+    setthreeDTextColor,
+    threeDoutlineColor,
+    setthreeDOutlineColor,
+    threeDtextScale,
+    setthreeDTextScale,
+    threeDtextPosX,
+    setthreeDTextPosX,
+    threeDtextPosY,
+    setthreeDTextPosY,
+    threeDscreenshots,
+    setthreeDScreenshots,
+    threeDloading,
+    setthreeDLoading,
+    threeDtextureMode,
+    setthreeDTextureMode,
+    threeDlogoScale,
+    setthreeDLogoScale,
+    threeDlogoPosX,
+    setthreeDLogoPosX,
+    threeDlogoPosY,
+    setthreeDLogoPosY,
+    customizationData,
+    setCustomizationData,
+    screenshotRef,
+    selectedProduct,
   } = use3D();
 
   // const screenshotRef = useRef();
@@ -61,7 +83,7 @@ export default function ThreeDCustomize() {
       });
       setthreeDTextTexture(texture);
 
-      setCustomizationData(prev => ({
+      setCustomizationData((prev) => ({
         ...prev,
         parts: {
           ...prev.parts,
@@ -72,10 +94,10 @@ export default function ThreeDCustomize() {
               color: threeDtextColor,
               outline: threeDoutlineColor,
               scale: threeDtextScale,
-              position: { x: threeDtextPosX, y: threeDtextPosY }
-            }
-          }
-        }
+              position: { x: threeDtextPosX, y: threeDtextPosY },
+            },
+          },
+        },
       }));
     } else {
       setthreeDTextTexture(null);
@@ -87,12 +109,15 @@ export default function ThreeDCustomize() {
     threeDtextScale,
     threeDtextPosX,
     threeDtextPosY,
-    threeDselectedPart
+    threeDselectedPart,
   ]);
+
+  // Get model URL from product data
+  const modelUrl = selectedProduct?.model3D || '/models/brand1.glb';
 
   return (
     <main className="h-screen w-screen flex justify-center items-center">
-      <div className='h-[100vh] w-[60%]'>
+      <div className="h-[100vh] w-[60%]">
         <Canvas
           gl={{ preserveDrawingBuffer: true }}
           camera={{ position: [0, 0.5, 2.5], fov: 80 }}
@@ -102,8 +127,7 @@ export default function ThreeDCustomize() {
             <Environment preset="city" />
           </Suspense>
 
-          <ModelViewer
-          />
+          <ModelViewer modelUrl={modelUrl} selectedPart={threeDselectedPart} />
 
           <ScreenshotManager ref={screenshotRef} />
           <OrbitControls />
@@ -111,6 +135,8 @@ export default function ThreeDCustomize() {
       </div>
 
       <div className="absolute bottom-4 left-4">
+        
+
         {/* <ControlsPanel
           onScreenshot={handleScreenshot}
         />

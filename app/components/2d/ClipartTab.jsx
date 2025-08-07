@@ -1,6 +1,9 @@
 // Updated ClipartTab.js - Completely Dynamic Based on Product Data
+'use client'
 
+import { use3D } from '@/app/context/3DContext';
 import React, { useState, useEffect } from 'react';
+import * as THREE from 'three'
 
 const DynamicClipartTab = ({
   setShowClipartTab,
@@ -12,6 +15,44 @@ const DynamicClipartTab = ({
 }) => {
   const [view, setView] = useState('main');
   const [availableCategories, setAvailableCategories] = useState([]);
+
+  const is3DProduct = selectedProduct?.productType === '3D';
+  const shirtDesigns = selectedProduct?.threeDDesigns?.shirtDesign || [];
+
+  const { setthreeDTexture, threeDcolor, setCustomizationData, threeDselectedPart } = use3D();
+
+  const handleApply3DDesign = (designUrl) => {
+    const image = new window.Image();
+    image.crossOrigin = "anonymous";
+    image.src = designUrl;
+    image.onload = () => {
+      const size = 512;
+      const canvas = document.createElement('canvas');
+      canvas.width = canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = threeDcolor || "#fff";
+      ctx.fillRect(0, 0, size, size);
+      ctx.drawImage(image, 0, 0, size, size);
+
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.needsUpdate = true;
+      setthreeDTexture(texture);
+
+      setCustomizationData(prev => ({
+        ...prev,
+        parts: {
+          ...prev.parts,
+          [threeDselectedPart]: {
+            ...prev.parts[threeDselectedPart],
+            image: {
+              mode: "full",
+              url: designUrl
+            }
+          }
+        }
+      }));
+    };
+  };
 
   // Extract available categories from product data
   useEffect(() => {
@@ -51,7 +92,7 @@ const DynamicClipartTab = ({
       logos: 'Logo Designs',
       typography: 'Typography Styles'
     };
-    
+
     return displayNames[key] || key.charAt(0).toUpperCase() + key.slice(1);
   };
 
@@ -92,11 +133,11 @@ const DynamicClipartTab = ({
       case 'designs':
         handleAddDesignToCanvas(item.url, item.position, item.offsetX, item.offsetY);
         break;
-      
+
       case 'patterns':
         handleAddPatternToCanvas(item.url);
         break;
-      
+
       // Handle dynamic layer types (shoe parts, etc.)
       case 'sole':
       case 'surface':
@@ -104,7 +145,7 @@ const DynamicClipartTab = ({
       case 'lace':
         handleDynamicLayerChange && handleDynamicLayerChange(categoryKey, item);
         break;
-      
+
       // Handle any other custom categories
       default:
         if (handleDynamicLayerChange) {
@@ -118,37 +159,60 @@ const DynamicClipartTab = ({
 
   // Render main category selection
   const renderMainView = () => (
-    <div className="p-3 space-y-2">
-      {availableCategories.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">
-          <div className="text-4xl mb-2">📦</div>
-          <p className="text-sm">No customization options available</p>
-          <p className="text-xs mt-1">This product doesn't have configurable layers</p>
-        </div>
-      ) : (
-        availableCategories.map((category) => (
-          <div
-            key={category.key}
-            onClick={() => setView(category.key)}
-            className="flex items-center justify-between p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all duration-200"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
-                {category.items.length}
+    <>
+      {
+        selectedProduct.productType === '2D' && (
+          <div className="p-3 space-y-2">
+            {availableCategories.length === 0 ? (
+              <div className="text-center py-8 text-gray-500">
+                <div className="text-4xl mb-2">📦</div>
+                <p className="text-sm">No customization options available</p>
+                <p className="text-xs mt-1">This product doesn't have configurable layers</p>
               </div>
-              <div>
-                <h4 className="font-semibold text-gray-800">{category.name}</h4>
-                <p className="text-xs text-gray-500">{category.items.length} options available</p>
-              </div>
-            </div>
-            <img
-              src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1750138078/chevron-right_p6kmcp.svg"
-              className="w-4"
-            />
+            ) : (
+              availableCategories.map((category) => (
+                <div
+                  key={category.key}
+                  onClick={() => setView(category.key)}
+                  className="flex items-center justify-between p-3 border border-gray-200 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all duration-200"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                      {category.items.length}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-800">{category.name}</h4>
+                      <p className="text-xs text-gray-500">{category.items.length} options available</p>
+                    </div>
+                  </div>
+                  <img
+                    src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1750138078/chevron-right_p6kmcp.svg"
+                    className="w-4"
+                  />
+                </div>
+              ))
+            )}
           </div>
-        ))
-      )}
-    </div>
+        )
+      }
+
+      {
+        is3DProduct && shirtDesigns.length > 0 && (
+          <div className="mt-4">
+            <h3 className="font-semibold mb-2">3D Shirt Designs</h3>
+            <div className="grid grid-cols-2 gap-3">
+              {shirtDesigns.map(design => (
+                <div key={design.id} className="cursor-pointer border rounded p-2 hover:border-blue-500"
+                  onClick={() => handleApply3DDesign(design.url)}>
+                  <img src={design.url} alt={design.name} className="w-full h-24 object-contain" />
+                  <div className="text-xs mt-1 text-center">{design.name}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+      }
+    </>
   );
 
   // Render category items
@@ -245,6 +309,7 @@ const DynamicClipartTab = ({
     );
   };
 
+
   return (
     <div className="bg-white rounded-lg border border-[#D3DBDF] w-80 h-fit max-h-[500px] overflow-hidden">
       <div className='flex items-center justify-between py-2 px-3'>
@@ -261,7 +326,7 @@ const DynamicClipartTab = ({
 
       {/* Dynamic info footer */}
       <div className="px-3 py-2 bg-gray-50 text-xs text-gray-600 border-t border-[#D3DBDF]">
-        {view === 'main' 
+        {view === 'main'
           ? `Product Type: ${selectedProduct?.type || 'Unknown'} • ${availableCategories.length} categories available`
           : `Select an option to customize your ${selectedProduct?.type || 'product'}`
         }

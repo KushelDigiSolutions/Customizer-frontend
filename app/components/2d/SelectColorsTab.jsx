@@ -18,7 +18,13 @@ const SelectColorsTab = () => {
     threeDselectedPart, setthreeDSelectedPart, selectedProduct
   } = use3D();
 
-  const parts = ['Front', 'Back', 'LeftSleeve', 'RightSleeve'];
+  // Get available parts from product data
+  const parts = selectedProduct?.parts || [
+    'Front',
+    'Back',
+    'LeftSleeve',
+    'RightSleeve',
+  ];
 
   const [activeTab, setActiveTab] = useState('background'); // 'background', 'topColor', 'bottomColor'
 
@@ -172,7 +178,7 @@ const SelectColorsTab = () => {
                   onClick={() => setthreeDSelectedPart(part)}
                   className={`px-2 py-1 rounded border ${threeDselectedPart === part ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
                 >
-                  {part}
+                  {part} 
                 </button>
               ))}
             </div>
