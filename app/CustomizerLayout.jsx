@@ -1076,6 +1076,28 @@ const CustomizerLayout = () => {
       setIsSaving(true);
 
       try {
+        // Upload screenshots to Cloudinary
+        let cloudinaryScreenshots = [];
+        const screenshots = screenshotsFrom3D || customizationData?.screenshots || [];
+        for (const screenshot of screenshots) {
+          const blob = await (await fetch(screenshot.image)).blob();
+          const file = new File([blob], `3d-screenshot-${Date.now()}.png`, { type: 'image/png' });
+          const cloudinaryResponse = await uploadToCloudinaryImg({ image: file });
+          cloudinaryScreenshots.push({
+            angle: screenshot.angle,
+            url: cloudinaryResponse.url
+          });
+        }
+
+        // Upload applied design/image/logo to Cloudinary (if present)
+        let appliedImageCloudUrl = null;
+        const appliedImageUrl = customizationData?.parts?.[customizationData?.selectedPart]?.image?.url;
+        if (appliedImageUrl) {
+          const blob = await (await fetch(appliedImageUrl)).blob();
+          const file = new File([blob], `3d-applied-image-${Date.now()}.png`, { type: 'image/png' });
+          const cloudinaryResponse = await uploadToCloudinaryImg({ image: file });
+          appliedImageCloudUrl = cloudinaryResponse.url;
+        }
 
         // Prepare save payload
         const saveData = {
@@ -1089,8 +1111,11 @@ const CustomizerLayout = () => {
             color: selectedProduct.color,
             model3D: selectedProduct.model3D,
           },
-          customizations: customizationData,
-          screenshots: screenshotsFrom3D || customizationData?.screenshots || [],
+          customizations: {
+            ...customizationData,
+            appliedImageCloudUrl
+          },
+          screenshots: cloudinaryScreenshots,
           productType: "3D"
         };
 
@@ -1142,6 +1167,17 @@ const CustomizerLayout = () => {
           }
         } catch (uploadError) {
           console.error("Screenshot upload failed:", uploadError);
+        }
+
+        // Upload applied design/image/logo to Cloudinary (if present)
+        let appliedImageCloudUrl = null;
+        const appliedDesignObj = editor.canvas.getObjects().find(obj => obj.name === "design-image" || obj.name === "logo-image");
+        if (appliedDesignObj && appliedDesignObj.getSrc) {
+          const appliedImageUrl = appliedDesignObj.getSrc();
+          const blob = await (await fetch(appliedImageUrl)).blob();
+          const file = new File([blob], `2d-applied-image-${Date.now()}.png`, { type: 'image/png' });
+          const cloudinaryResponse = await uploadToCloudinaryImg({ image: file });
+          appliedImageCloudUrl = cloudinaryResponse.url;
         }
 
         const canvasObjects = editor.canvas.getObjects().map(obj => {

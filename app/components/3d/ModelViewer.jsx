@@ -23,6 +23,16 @@ const ModelViewer = ({ modelUrl, selectedPart }) => {
     useEffect(() => {
         scene.traverse((child) => {
             if (child.isMesh && child.name === selectedPart) {
+                // Always set the color from state
+                child.material.color.set(threeDcolor || '#ffffff');
+                child.material.needsUpdate = true;
+            }
+        });
+    }, [threeDcolor, selectedPart, scene]);
+
+    useEffect(() => {
+        scene.traverse((child) => {
+            if (child.isMesh && child.name === selectedPart) {
                 const originalColor = child.material.color;
                 const currentColorHex = `#${originalColor.getHexString()}`;
 
@@ -111,6 +121,21 @@ const ModelViewer = ({ modelUrl, selectedPart }) => {
             }
         }));
     }, [threeDcolor, selectedPart, setCustomizationData]);
+
+    useEffect(() => {
+        scene.traverse((child) => {
+            if (child.isMesh) {
+                const baseColor = `#${child.material.color.getHexString()}`;
+                setCustomizationData(prev => ({
+                    ...prev,
+                    baseColors: {
+                        ...prev?.baseColors,
+                        [child.name]: baseColor
+                    }
+                }));
+            }
+        });
+    }, [scene, setCustomizationData]);
 
     return (
         <Center>

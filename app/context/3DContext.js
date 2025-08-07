@@ -30,7 +30,7 @@ export const ThreeDProvider = ({ children }) => {
   const [threeDlogoPosX, setthreeDLogoPosX] = useState(0.5);
   const [threeDlogoPosY, setthreeDLogoPosY] = useState(0.5);
 
-  const [customizationData, setCustomizationData] = useState(0.5);
+  const [customizationData, setCustomizationData] = useState({});
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const screenshotRef = useRef();
@@ -66,17 +66,21 @@ export const ThreeDProvider = ({ children }) => {
     setCustomizationData(prev => {
       const newParts = { ...prev.parts };
       delete newParts[threeDselectedPart];
-      return { ...prev, parts: newParts };
+      return { 
+        ...prev, 
+        parts: newParts 
+      };
     });
-    setthreeDColor('#ffffff');
+
+    // Get base color for selected part from customizationData
+    const baseColor = customizationData?.baseColors?.[threeDselectedPart] || '#ffffff';
+    setthreeDColor(baseColor);
+
     setthreeDTexture(null);
     setthreeDText('');
     setthreeDTextTexture(null);
     setthreeDTextColor('#000000');
     setthreeDOutlineColor('#ffffff');
-    setthreeDTextScale(1);
-    setthreeDTextPosX(0.5);
-    setthreeDTextPosY(0.5);
   };
 
   return (
