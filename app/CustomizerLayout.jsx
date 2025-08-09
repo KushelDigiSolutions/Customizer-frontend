@@ -48,8 +48,6 @@ const CustomizerLayout = (props) => {
   } = use3D()
 
 
-  console.log('props')
-  console.log(props)
   if(props?.productId != "" && typeof props?.productId != "undefined"){
     const idFromPath = 6;
     const product = backendProducts.find(p => String(p.id) === String(idFromPath))
@@ -1440,11 +1438,11 @@ const CustomizerLayout = (props) => {
             <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345256/undo_kp3eto.png" alt="redo" className="kds-transform-flip" />
           </div>
           <hr className="kds-controls-divider" />
-                      <div className="kds-controls-zoom">
+            {/* <div className="kds-controls-zoom">
               <FaMinus />
               <span className="kds-reset">100%</span>
               <FaPlus />
-            </div>
+            </div> */}
         </div>
       )}
 
