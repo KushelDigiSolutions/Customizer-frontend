@@ -14,10 +14,9 @@ export const createTextTexture = ({
   const size = 1024; // Match the ModelViewer canvas size
   canvas.width = canvas.height = size;
   const ctx = canvas?.getContext('2d');
-  this.clearContext(ctx);
 
   // Make background transparent for text overlay
-  ctx?.clearRect(0, 0, size, size);
+  //ctx?.clearRect(0, 0, size, size);
 
   if (text.trim()) {
     ctx.font = `bold ${Math.floor(64 * textScale)}px Arial`;
