@@ -18,7 +18,7 @@ window.mountProductCustomizer = function (selector = '#customizer-root', props =
     const idFromPath = 6;
     const product = backendProducts.find(p => String(p.id) === String(idFromPath))
 
-    console.log('product found')
+    console.log('product')
     console.log(product)
 
     if (!product) {
@@ -27,11 +27,12 @@ window.mountProductCustomizer = function (selector = '#customizer-root', props =
     }
 
     root.render(
+      <>
+      <CustomizerLayout {...props} initialProduct={product} />
       <TwoDProvider>
-        <ThreeDProvider>
-          <CustomizerLayout {...props} initialProduct={product} />
-        </ThreeDProvider>
+        <ThreeDProvider></ThreeDProvider>
       </TwoDProvider>
+      </>
     )
   } else {
     console.warn('No mount target found for ProductCustomizer')

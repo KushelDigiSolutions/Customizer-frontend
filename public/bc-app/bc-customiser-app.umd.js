@@ -84468,14 +84468,17 @@ MongoDB ID: ${savedProductId}`;
       const root = ReactDOM.createRoot(container);
       const idFromPath = 6;
       const product = backendProducts.find((p2) => String(p2.id) === String(idFromPath));
-      console.log("product found");
+      console.log("product");
       console.log(product);
       if (!product) {
         container.innerHTML = "<div>Product not found</div>";
         return;
       }
       root.render(
-        /* @__PURE__ */ jsxRuntimeExports.jsx(TwoDProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ThreeDProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CustomizerLayout, { ...props, initialProduct: product }) }) })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CustomizerLayout, { ...props, initialProduct: product }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(TwoDProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ThreeDProvider, {}) })
+        ] })
       );
     } else {
       console.warn("No mount target found for ProductCustomizer");
