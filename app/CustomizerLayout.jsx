@@ -9,8 +9,8 @@ import useCanvasContextMenu from "./hooks/useCanvasContextMenu";
 import ThreeDCustomize from "./3DCustomize";
 import ScreenshotGallery from "./components/3d/ScreenshotGallery";
 import "./CustomizerLayout.css";
-import { use2D } from "@/app/context/2DContext";
-import { use3D } from "@/app/context/3DContext";
+import { use2D } from "./context/2DContext";
+import { use3D } from "./context/3DContext";
 
 const CustomizerLayout = (props) => {
 
