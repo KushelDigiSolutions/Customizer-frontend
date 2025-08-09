@@ -485,8 +485,7 @@ export const backendProducts = [
         description: "white shirt",
         type: "shirt",
         productType: "3D",
-        model3D: "/models/brand1.glb",
-
+        model3D: "https://3d-customizer-git-combinesetup-v1-inderpals-projects-412a240f.vercel.app/models/brand1.glb",
         threeDDesigns: {
             shirtDesign: [
                 {
