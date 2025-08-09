@@ -55,9 +55,10 @@ const CustomizerLayout = (props) => {
 
   const {
     threeDscreenshots, setthreeDScreenshots,
-    threeDloading, selectedProduct,customizationData
+    threeDloading, selectedProduct, setSelectedProduct, customizationData
   } = use3D()
 
+  setSelectedProduct(props?.initialProduct);
 
   class SimpleLayerManager {
     constructor(canvas, layerOrder) {

@@ -82662,8 +82662,10 @@ void main() {
       setthreeDScreenshots,
       threeDloading,
       selectedProduct,
+      setSelectedProduct,
       customizationData
     } = use3D();
+    setSelectedProduct(props?.initialProduct);
     class SimpleLayerManager {
       constructor(canvas, layerOrder) {
         this.canvas = canvas;
