@@ -14,15 +14,6 @@ import { use3D } from "./context/3DContext";
 
 const CustomizerLayout = (props) => {
 
-  console.log('props Layout V3')
-  console.log(props)
-
-  // if(props?.productId != "") {
-  //   setCurrentProductId(props?.productId);
-  // }
-  // console.log('currentProductId')
-  // console.log(currentProductId)
-
   // Get all 2D context state and setters
   const {
     customText, setCustomText,
@@ -50,15 +41,17 @@ const CustomizerLayout = (props) => {
     layerManager, setLayerManager
   } = use2D();
 
-  console.log('customText')
-  console.log(customText)
-
   const {
     threeDscreenshots, setthreeDScreenshots,
     threeDloading, selectedProduct, setSelectedProduct, customizationData
   } = use3D()
 
-  setSelectedProduct(props?.initialProduct);
+
+  if(props?.productId != ""){
+    const idFromPath = 6;
+    const product = backendProducts.find(p => String(p.id) === String(idFromPath))
+    setSelectedProduct(product);
+  }
 
   class SimpleLayerManager {
     constructor(canvas, layerOrder) {
@@ -1347,10 +1340,6 @@ const CustomizerLayout = (props) => {
 
   return (
     <div className="kds-layout-container">
-
-      <p>This line show perftec</p>
-      <p>showSidebar : {JSON.stringify(showSidebar)}</p>
-      <p>selectedProduct : {JSON.stringify(selectedProduct)}</p>
 
       <Topbar
         setShowSidebar={setShowSidebar}

@@ -14,12 +14,9 @@ window.mountProductCustomizer = function (selector = '#customizer-root', props =
   if (container) {
     const root = ReactDOM.createRoot(container)
 
-    // Get product ID from URL like /customizer/6
-    const idFromPath = 6;
-    const product = backendProducts.find(p => String(p.id) === String(idFromPath))
-
-    console.log('product V3')
-    console.log(product)
+    // const idFromPath = 6;
+    // const product = backendProducts.find(p => String(p.id) === String(idFromPath))
+    const product={}
 
     if (!product) {
       container.innerHTML = '<div>Product not found</div>'

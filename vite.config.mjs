@@ -26,7 +26,7 @@ export default defineConfig({
     cssCodeSplit: true, //this line create style tag in head. if false create css file.
     outDir: 'public/bc-app',
     emptyOutDir: true,
-    minify: false
+    minify: true
   },
   content: [
     './app/**/*.{js,jsx,ts,tsx}',
