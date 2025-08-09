@@ -1,20 +1,15 @@
 "use client";
-
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
-import RightSmallPreview from "./components/2d/RightSmallPreview";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { useFabricJSEditor, FabricJSCanvas } from "fabricjs-react";
 import LayerContextMenu from "./components/2d/LayerContextMenu";
 import useCanvasContextMenu from "./hooks/useCanvasContextMenu";
-import RightSideImageUpload from "./components/2d/RightSideImageComponent";
-import { use2D } from "./context/2DContext";
-import ModelViewer from "./components/3d/ModelViewer";
-import { Canvas } from "@react-three/fiber";
 import ThreeDCustomize from "./3DCustomize";
 import ScreenshotGallery from "./components/3d/ScreenshotGallery";
 import { use3D } from "./context/3DContext";
+import { use2D } from "./context/2DContext";
 import "./CustomizerLayout.css";
 
 const CustomizerLayout = () => {
