@@ -3,7 +3,7 @@
 })(function() {
   "use strict";
   var __vite_style__ = document.createElement("style");
-  __vite_style__.textContent = "/* :root {\r\n  --background: #ffffff;\r\n  --foreground: #171717;\r\n}\r\n\r\n\r\n@theme inline {\r\n  --color-background: var(--background);\r\n  --color-foreground: var(--foreground);\r\n  --font-sans: var(--font-geist-sans);\r\n  --font-mono: var(--font-geist-mono);\r\n} */\r\n\r\n/* @media (prefers-color-scheme: dark) {\r\n  :root {\r\n    --background: #0a0a0a;\r\n    --foreground: #ededed;\r\n  }\r\n} */\r\n\r\n/* Universal CSS Reset */\r\n* {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n}\r\n\r\nhtml, body {\r\n  height: 100%;\r\n  width: 100%;\r\n}\r\n\r\n/* KDS-specific utility classes for margin/padding reset */\r\n.kds-reset {\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n\r\n.kds-reset-margin {\r\n  margin: 0;\r\n}\r\n\r\n.kds-reset-padding {\r\n  padding: 0;\r\n}\r\n\r\n/* Antialiased text rendering */\r\n.kds-antialiased {\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n}\r\n\r\nbody {\r\n  /* background: var(--background); */\r\n  /* color: var(--foreground); */\r\n  font-family: Arial, Helvetica, sans-serif;\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n}\r\n\r\n::-webkit-scrollbar {\r\n  width: 6px;\r\n}\r\n\r\n::-webkit-scrollbar-thumb {\r\n  background-color: rgba(0, 0, 0, 0.2);\r\n  border-radius: 4px;\r\n}\r\n\r\n/* canvas {\r\n  pointer-events: auto !important;\r\n  touch-action: auto;\r\n}\r\n\r\n.canvas-container {\r\n  z-index: 0;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 60% !important;\r\n  height: 60vh !important;\r\n  position: absolute !important;\r\n  background: aqua;\r\n  transform: translate(-50%, -50%);\r\n}\r\n\r\n.canvas-container canvas {\r\n  width: 100% !important;\r\n  height: 100% !important;\r\n}\r\n\r\ncanvas {\r\n  touch-action: manipulation;\r\n  -webkit-touch-callout: none;\r\n  -webkit-user-select: none;\r\n  user-select: none;\r\n} */\r\n\r\n\r\n.canvas-container {\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 60vw !important;\r\n  height: 90vh !important;\r\n  transform: translate(-50%, -50%);\r\n  /* background: aqua; */\r\n  z-index: 0;\r\n}\r\n\r\n.canvas-container canvas {\r\n  width: 100% !important;\r\n  height: 100% !important;\r\n}\r\n\r\ncanvas {\r\n  pointer-events: auto !important;\r\n  touch-action: manipulation;\r\n  -webkit-touch-callout: none;\r\n  -webkit-user-select: none;\r\n  user-select: none;\r\n}/* Topbar Component Styles */\r\n\r\n.kds-topbar {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background-color: white;\r\n  border-bottom: 1px solid #e5e7eb;\r\n  z-index: 50;\r\n}\r\n\r\n.kds-topbar-container {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.75rem 1.5rem;\r\n  max-width: 1720px;\r\n  margin: 0 auto;\r\n}\r\n\r\n.kds-left-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 1rem;\r\n}\r\n\r\n.kds-logo-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem;\r\n}\r\n\r\n.kds-menu-button {\r\n  padding: 0.5rem;\r\n  border-radius: 0.5rem;\r\n  transition: background-color 0.2s;\r\n  cursor: pointer;\r\n  border: none;\r\n  background: none;\r\n}\r\n\r\n.kds-menu-button:hover {\r\n  background-color: #f3f4f6;\r\n}\r\n\r\n.kds-menu-icon {\r\n  width: 1.25rem;\r\n  height: 1.25rem;\r\n  color: #4b5563;\r\n}\r\n\r\n.kds-right-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem;\r\n}\r\n\r\n.kds-save-views-button {\r\n  background-color: #16a34a;\r\n  color: white;\r\n  padding: 0.5rem 1rem;\r\n  border-radius: 0.25rem;\r\n  margin-top: 0.5rem;\r\n  width: 100%;\r\n  border: none;\r\n  cursor: pointer;\r\n  font-size: 0.875rem;\r\n  transition: background-color 0.2s;\r\n}\r\n\r\n.kds-save-views-button:hover {\r\n  background-color: #15803d;\r\n}\r\n\r\n.kds-clear-part-button {\r\n  background-color: #dc2626;\r\n  color: white;\r\n  padding: 0.5rem 1rem;\r\n  height: 100%;\r\n  border-radius: 0.25rem;\r\n  margin-top: 0.5rem;\r\n  white-space: nowrap;\r\n  width: 100%;\r\n  border: none;\r\n  cursor: pointer;\r\n  font-size: 0.875rem;\r\n  transition: background-color 0.2s;\r\n}\r\n\r\n.kds-clear-part-button:hover {\r\n  background-color: #b91c1c;\r\n}\r\n\r\n.kds-save-button {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n  padding: 0.5rem 1rem;\r\n  border-radius: 0.5rem;\r\n  font-weight: 500;\r\n  transition: all 0.2s;\r\n  border: none;\r\n  cursor: pointer;\r\n  font-size: 0.875rem;\r\n}\r\n\r\n.kds-save-button:disabled {\r\n  background-color: #9ca3af;\r\n  cursor: not-allowed;\r\n  color: white;\r\n}\r\n\r\n.kds-save-button:not(:disabled) {\r\n  background-color: #3b82f6;\r\n  color: white;\r\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\r\n}\r\n\r\n.kds-save-button:not(:disabled):hover {\r\n  background-color: #2563eb;\r\n  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n.kds-spinner {\r\n  animation: spin 1s linear infinite;\r\n  height: 1rem;\r\n  width: 1rem;\r\n  border: 2px solid white;\r\n  border-top-color: transparent;\r\n  border-radius: 50%;\r\n}\r\n\r\n.kds-save-icon {\r\n  width: 1rem;\r\n  height: 1rem;\r\n}\r\n\r\n@keyframes spin {\r\n  to {\r\n    transform: rotate(360deg);\r\n  }\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-topbar-container {\r\n    padding: 0.5rem 1rem;\r\n    flex-direction: column;\r\n    gap: 0.75rem;\r\n  }\r\n  \r\n  .kds-left-section {\r\n    width: 100%;\r\n    justify-content: space-between;\r\n  }\r\n  \r\n  .kds-right-section {\r\n    width: 100%;\r\n    flex-wrap: wrap;\r\n    gap: 0.5rem;\r\n  }\r\n  \r\n  .kds-save-views-button,\r\n  .kds-clear-part-button {\r\n    margin-top: 0;\r\n    padding: 0.375rem 0.75rem;\r\n    font-size: 0.75rem;\r\n  }\r\n  \r\n  .kds-save-button {\r\n    padding: 0.375rem 0.75rem;\r\n    font-size: 0.75rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-topbar-container {\r\n    padding: 0.375rem 0.75rem;\r\n  }\r\n  \r\n  .kds-logo-section img {\r\n    max-width: 120px;\r\n  }\r\n  \r\n  .kds-right-section img {\r\n    max-width: 80px;\r\n  }\r\n  \r\n  .kds-save-views-button,\r\n  .kds-clear-part-button {\r\n    padding: 0.25rem 0.5rem;\r\n    font-size: 0.7rem;\r\n  }\r\n  \r\n  .kds-save-button {\r\n    padding: 0.25rem 0.5rem;\r\n    font-size: 0.7rem;\r\n  }\r\n} /* EditorTab Component Styles */\r\n\r\n.kds-editor-container {\r\n  background-color: white;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  border: 1px solid #D3DBDF;\r\n  width: 100%; /* w-full */\r\n  height: fit-content; /* h-fit */\r\n}\r\n\r\n@media (min-width: 640px) {\r\n  .kds-editor-container {\r\n    width: 20rem; /* sm:w-80 */\r\n  }\r\n}\r\n\r\n.kds-editor-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-editor-title-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-editor-title {\r\n  font-size: 16px; /* text-[16px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-editor-close {\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-editor-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px; /* h-px */\r\n}\r\n\r\n.kds-editor-content {\r\n  padding: 0.75rem 1rem; /* py-3 px-4 */\r\n}\r\n\r\n.kds-editor-form {\r\n  display: flex;\r\n  flex-direction: column; /* flex-col */\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-editor-label {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n}\r\n\r\n.kds-editor-textarea-container {\r\n  position: relative;\r\n  background-color: #E4E9EC; /* bg-[#E4E9EC] */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  height: 11.5rem; /* h-46 */\r\n}\r\n\r\n.kds-editor-textarea {\r\n  padding: 0.5rem; /* p-2 */\r\n  color: #000000; /* text-black */\r\n  resize: none; /* resize-none */\r\n  width: 100%; /* w-full */\r\n  font-size: 13px; /* text-[13px] */\r\n  height: 9rem; /* h-36 */\r\n  border: none; /* border-none */\r\n  outline: none; /* outline-none */\r\n  overflow-y: scroll; /* overflow-y-scroll */\r\n  background: transparent;\r\n}\r\n\r\n.kds-editor-textarea::placeholder {\r\n  font-size: 13px; /* placeholder:text-[13px] */\r\n  color: #6b7280;\r\n}\r\n\r\n.kds-editor-textarea:focus {\r\n  border: none; /* focus:border-none */\r\n}\r\n\r\n.kds-editor-prompt-badge {\r\n  background-color: white;\r\n  display: flex;\r\n  gap: 0.5rem; /* gap-2 */\r\n  padding: 0 0.5rem 0.25rem; /* px-2 py-1 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  position: absolute;\r\n  bottom: 0.5rem; /* bottom-2 */\r\n  right: 0.5rem; /* right-2 */\r\n}\r\n\r\n.kds-editor-prompt-text {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n}\r\n\r\n.kds-editor-tags {\r\n  margin: 0.5rem 0; /* my-2 */\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem; /* gap-3 */\r\n}\r\n\r\n.kds-editor-tag {\r\n  padding: 0 1.25rem 0.375rem; /* px-5 py-1.5 */\r\n  font-size: 13px; /* text-[13px] */\r\n  border-radius: 9999px; /* rounded-full */\r\n  border: none;\r\n  cursor: pointer;\r\n  transition: all 0.2s;\r\n}\r\n\r\n.kds-editor-tag.kds-active {\r\n  background-color: #f3f4f6; /* bg-gray-100 */\r\n  color: #000000; /* text-black */\r\n}\r\n\r\n.kds-editor-tag.kds-inactive {\r\n  background-color: #e5e7eb; /* bg-gray-200 */\r\n  color: #4b5563; /* text-gray-600 */\r\n}\r\n\r\n.kds-editor-generate-btn {\r\n  background-color: #2563eb; /* bg-blue-600 */\r\n  color: white;\r\n  border-radius: 0.375rem; /* rounded-md */\r\n  padding: 0.5rem 0; /* py-2 */\r\n  font-size: 14px; /* text-[14px] */\r\n  border: none;\r\n  cursor: pointer;\r\n  transition: all 0.2s;\r\n}\r\n\r\n.kds-editor-generate-btn:hover:not(:disabled) {\r\n  background-color: #1d4ed8;\r\n}\r\n\r\n.kds-editor-generate-btn:disabled {\r\n  background-color: #D7DEF4; /* disabled:bg-[#D7DEF4] */\r\n  color: #AEBDEA; /* disabled:text-[#AEBDEA] */\r\n  cursor: not-allowed;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 640px) {\r\n  .kds-editor-container {\r\n    width: 100%;\r\n    max-width: none;\r\n  }\r\n  \r\n  .kds-editor-content {\r\n    padding: 0.5rem 0.75rem;\r\n  }\r\n  \r\n  .kds-editor-textarea-container {\r\n    height: 10rem;\r\n  }\r\n  \r\n  .kds-editor-textarea {\r\n    height: 8rem;\r\n  }\r\n  \r\n  .kds-editor-tags {\r\n    flex-wrap: wrap;\r\n    gap: 0.5rem;\r\n  }\r\n  \r\n  .kds-editor-tag {\r\n    padding: 0.25rem 1rem;\r\n    font-size: 12px;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-editor-header {\r\n    padding: 0.375rem 0.5rem;\r\n  }\r\n  \r\n  .kds-editor-title {\r\n    font-size: 14px;\r\n  }\r\n  \r\n  .kds-editor-content {\r\n    padding: 0.375rem 0.5rem;\r\n  }\r\n  \r\n  .kds-editor-textarea-container {\r\n    height: 8rem;\r\n  }\r\n  \r\n  .kds-editor-textarea {\r\n    height: 6rem;\r\n    font-size: 12px;\r\n  }\r\n  \r\n  .kds-editor-textarea::placeholder {\r\n    font-size: 12px;\r\n  }\r\n  \r\n  .kds-editor-prompt-badge {\r\n    bottom: 0.25rem;\r\n    right: 0.25rem;\r\n    padding: 0.125rem 0.375rem;\r\n  }\r\n  \r\n  .kds-editor-prompt-text {\r\n    font-size: 12px;\r\n  }\r\n} /* PreviewTab Component Styles */\r\n\r\n.kds-preview-container {\r\n  background-color: white;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  border: 1px solid #D3DBDF;\r\n  width: 20rem; /* w-80 */\r\n  height: fit-content; /* h-fit */\r\n  max-height: 600px; /* max-h-[600px] */\r\n  overflow-y: auto; /* overflow-y-auto */\r\n}\r\n\r\n.kds-preview-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-preview-title-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-preview-title {\r\n  font-size: 16px; /* text-[16px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-preview-close {\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-preview-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px; /* h-px */\r\n}\r\n\r\n.kds-preview-design-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem; /* gap-3 */\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-preview-design-image {\r\n  border: 1px solid #D3DBDF;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  padding: 0.5rem; /* p-2 */\r\n  width: 30%; /* w-[30%] */\r\n}\r\n\r\n.kds-preview-design-img {\r\n  width: 100%;\r\n  height: 3rem; /* h-12 */\r\n  object-fit: contain; /* object-contain */\r\n  border-radius: 0.25rem; /* rounded */\r\n}\r\n\r\n.kds-preview-design-placeholder {\r\n  width: 100%;\r\n  height: 3rem; /* h-12 */\r\n  background-color: #f3f4f6; /* bg-gray-100 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.kds-preview-design-placeholder-text {\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #6b7280; /* text-gray-500 */\r\n}\r\n\r\n.kds-preview-design-info {\r\n  flex: 1; /* flex-1 */\r\n}\r\n\r\n.kds-preview-dimensions-label {\r\n  font-weight: 600; /* font-semibold */\r\n  font-size: 12px; /* text-[12px] */\r\n  color: #4b5563; /* text-gray-600 */\r\n  margin-bottom: 0.5rem; /* mb-2 */\r\n}\r\n\r\n.kds-preview-dimensions {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-preview-dimension-badge {\r\n  border-radius: 9999px; /* rounded-full */\r\n  background-color: #f3f4f6; /* bg-gray-100 */\r\n  padding: 0.25rem 0.5rem; /* py-1 px-2 */\r\n  color: #4b5563; /* text-gray-600 */\r\n  font-size: 11px; /* text-[11px] */\r\n}\r\n\r\n.kds-preview-flip-section {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-preview-flip-title {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-preview-flip-buttons {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem; /* gap-3 */\r\n}\r\n\r\n.kds-preview-flip-button {\r\n  padding: 0.25rem; /* p-1 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  transition: background-color 0.2s;\r\n}\r\n\r\n.kds-preview-flip-button:hover {\r\n  background-color: #f3f4f6; /* hover:bg-gray-100 */\r\n}\r\n\r\n.kds-preview-flip-button.kds-active {\r\n  background-color: #dbeafe; /* bg-blue-100 */\r\n}\r\n\r\n.kds-preview-flip-icon {\r\n  width: 20px; /* w-[20px] */\r\n  height: 20px; /* h-[20px] */\r\n}\r\n\r\n.kds-preview-alignment-section {\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-preview-alignment-title {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n  margin-bottom: 0.75rem; /* mb-3 */\r\n}\r\n\r\n.kds-preview-alignment-grid {\r\n  display: grid;\r\n  grid-template-columns: repeat(6, 1fr); /* grid-cols-6 */\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-preview-alignment-button {\r\n  padding: 0.5rem; /* p-2 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  transition: background-color 0.2s;\r\n}\r\n\r\n.kds-preview-alignment-button:hover {\r\n  background-color: #f3f4f6; /* hover:bg-gray-100 */\r\n}\r\n\r\n.kds-preview-alignment-icon {\r\n  width: 18px; /* w-[18px] */\r\n  height: 18px; /* h-[18px] */\r\n  margin: 0 auto; /* mx-auto */\r\n}\r\n\r\n.kds-preview-control-section {\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-preview-control-label {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n  display: block;\r\n  margin-bottom: 0.5rem; /* mb-2 */\r\n}\r\n\r\n.kds-preview-control-input-group {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-preview-slider {\r\n  flex: 1; /* flex-1 */\r\n  height: 0.5rem; /* h-2 */\r\n  background-color: #e5e7eb; /* bg-gray-200 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  appearance: none;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-preview-slider::-webkit-slider-thumb {\r\n  appearance: none;\r\n  height: 16px;\r\n  width: 16px;\r\n  border-radius: 50%;\r\n  background: #3559C7;\r\n  cursor: pointer;\r\n  border: 2px solid #ffffff;\r\n  box-shadow: 0 2px 4px rgba(0,0,0,0.2);\r\n}\r\n\r\n.kds-preview-slider::-moz-range-thumb {\r\n  height: 16px;\r\n  width: 16px;\r\n  border-radius: 50%;\r\n  background: #3559C7;\r\n  cursor: pointer;\r\n  border: 2px solid #ffffff;\r\n  box-shadow: 0 2px 4px rgba(0,0,0,0.2);\r\n}\r\n\r\n.kds-preview-value-display {\r\n  border: 1px solid #D3DBDF;\r\n  min-width: 3rem; /* min-w-12 */\r\n  text-align: center;\r\n  border-radius: 0.375rem; /* rounded-md */\r\n  font-size: 12px; /* text-[12px] */\r\n  padding: 0.25rem 0.5rem; /* py-1 px-2 */\r\n}\r\n\r\n.kds-preview-arrange-section {\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-preview-arrange-title {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n  margin-bottom: 0.75rem; /* mb-3 */\r\n}\r\n\r\n.kds-preview-arrange-buttons {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 1rem; /* gap-4 */\r\n}\r\n\r\n.kds-preview-arrange-button {\r\n  padding: 0.5rem; /* p-2 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  transition: background-color 0.2s;\r\n}\r\n\r\n.kds-preview-arrange-button:hover {\r\n  background-color: #f3f4f6; /* hover:bg-gray-100 */\r\n}\r\n\r\n.kds-preview-arrange-icon {\r\n  width: 18px; /* w-[18px] */\r\n  height: 18px; /* h-[18px] */\r\n}\r\n\r\n.kds-preview-tools-section {\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-preview-tools-title {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n  margin-bottom: 0.75rem; /* mb-3 */\r\n}\r\n\r\n.kds-preview-tool-button {\r\n  width: 100%; /* w-full */\r\n  border: 1px solid #d1d5db; /* border-gray-300 */\r\n  border-radius: 0.375rem; /* rounded-md */\r\n  padding: 0.75rem; /* py-3 */\r\n  font-size: 14px; /* text-[14px] */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: flex-start;\r\n  gap: 0.75rem; /* gap-3 */\r\n  margin-bottom: 0.75rem; /* mb-3 */\r\n  transition: background-color 0.2s;\r\n}\r\n\r\n.kds-preview-tool-button:hover {\r\n  background-color: #f9fafb; /* hover:bg-gray-50 */\r\n}\r\n\r\n.kds-preview-tool-button:last-child {\r\n  margin-bottom: 0;\r\n}\r\n\r\n.kds-preview-tool-button.kds-disabled {\r\n  opacity: 0.5;\r\n  cursor: not-allowed;\r\n}\r\n\r\n.kds-preview-tool-icon {\r\n  width: 1rem; /* w-4 */\r\n  height: 1rem; /* h-4 */\r\n  margin-left: 0.75rem; /* ml-3 */\r\n}\r\n\r\n.kds-preview-tool-text {\r\n  color: #000000; /* text-black */\r\n}\r\n\r\n.kds-preview-empty-state {\r\n  padding: 1.5rem; /* p-6 */\r\n  text-align: center;\r\n  color: #6b7280; /* text-gray-500 */\r\n}\r\n\r\n.kds-preview-empty-text {\r\n  font-size: 14px; /* text-[14px] */\r\n}\r\n\r\n.kds-preview-empty-subtext {\r\n  font-size: 12px; /* text-[12px] */\r\n  margin-top: 0.25rem; /* mt-1 */\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-preview-container {\r\n    width: calc(100vw - 2rem);\r\n    max-width: 20rem;\r\n  }\r\n  \r\n  .kds-preview-alignment-grid {\r\n    grid-template-columns: repeat(3, 1fr);\r\n  }\r\n  \r\n  .kds-preview-arrange-buttons {\r\n    gap: 0.5rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-preview-container {\r\n    width: calc(100vw - 1rem);\r\n  }\r\n  \r\n  .kds-preview-header {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-preview-design-section,\r\n  .kds-preview-flip-section,\r\n  .kds-preview-alignment-section,\r\n  .kds-preview-control-section,\r\n  .kds-preview-arrange-section,\r\n  .kds-preview-tools-section {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-preview-alignment-grid {\r\n    grid-template-columns: repeat(2, 1fr);\r\n  }\r\n  \r\n  .kds-preview-arrange-buttons {\r\n    flex-wrap: wrap;\r\n    gap: 0.25rem;\r\n  }\r\n} /* Texture Uploader Styles with kds- prefix */\r\n\r\n.kds-texture-uploader {\r\n  background-color: white;\r\n  padding: 0.75rem;\r\n  border-radius: 0.375rem;\r\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\r\n  margin-top: 0.5rem;\r\n}\r\n\r\n.kds-texture-mode-select {\r\n  margin-top: 0.5rem;\r\n  border: 1px solid #d1d5db;\r\n  border-radius: 0.25rem;\r\n  padding: 0.25rem;\r\n  width: 100%;\r\n}\r\n\r\n.kds-texture-upload-container {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem;\r\n}\r\n\r\n.kds-texture-upload-title {\r\n  font-size: 0.875rem;\r\n  font-weight: 500;\r\n}\r\n\r\n.kds-texture-upload-area {\r\n  display: block;\r\n  background-color: #E4E9EC;\r\n  padding: 3rem 1rem;\r\n  border-radius: 0.5rem;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s ease;\r\n}\r\n\r\n.kds-texture-upload-area:hover {\r\n  background-color: #d9e2e6;\r\n}\r\n\r\n.kds-texture-file-input {\r\n  display: none;\r\n}\r\n\r\n.kds-texture-upload-content {\r\n  text-align: center;\r\n}\r\n\r\n.kds-texture-upload-btn {\r\n  background-color: #3559C7;\r\n  color: white;\r\n  padding: 0.5rem 1.5rem;\r\n  border-radius: 0.375rem;\r\n  display: inline-block;\r\n  margin-bottom: 0.75rem;\r\n  border: none;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-texture-upload-text {\r\n  color: #6b7280;\r\n  font-size: 0.75rem;\r\n  line-height: 1.2;\r\n}\r\n\r\n.kds-texture-submit-btn {\r\n  width: 100%;\r\n  border-radius: 0.375rem;\r\n  padding: 0.75rem;\r\n  font-size: 0.875rem;\r\n  font-weight: 500;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s ease;\r\n  border: none;\r\n}\r\n\r\n.kds-texture-submit-btn-enabled {\r\n  color: white;\r\n  background-color: #3559C7;\r\n}\r\n\r\n.kds-texture-submit-btn-enabled:hover {\r\n  background-color: #2a47a3;\r\n}\r\n\r\n.kds-texture-submit-btn-disabled {\r\n  background-color: #E6E9F3;\r\n  color: #B8C5E8;\r\n  cursor: not-allowed;\r\n}\r\n\r\n.kds-texture-preview-container {\r\n  margin-top: 0.75rem;\r\n}\r\n\r\n.kds-texture-preview-image {\r\n  width: 6rem;\r\n  height: 6rem;\r\n  object-fit: contain;\r\n  border: 1px solid #d1d5db;\r\n  margin-bottom: 0.5rem;\r\n}\r\n\r\n.kds-texture-remove-btn {\r\n  margin-top: 0.5rem;\r\n  padding: 0.25rem 0.75rem;\r\n  background-color: #ef4444;\r\n  color: white;\r\n  border-radius: 0.25rem;\r\n  border: none;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s ease;\r\n}\r\n\r\n.kds-texture-remove-btn:hover {\r\n  background-color: #dc2626;\r\n}\r\n\r\n.kds-texture-logo-controls {\r\n  margin-top: 0.75rem;\r\n}\r\n\r\n.kds-texture-logo-controls > * + * {\r\n  margin-top: 0.5rem;\r\n}\r\n\r\n.kds-texture-logo-label {\r\n  display: block;\r\n  font-weight: 600;\r\n  margin-bottom: 0.25rem;\r\n}\r\n\r\n.kds-texture-logo-slider {\r\n  width: 100%;\r\n  height: 0.375rem;\r\n  border-radius: 0.25rem;\r\n  background: #d1d5db;\r\n  outline: none;\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-texture-logo-slider::-webkit-slider-thumb {\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #2563eb;\r\n  cursor: pointer;\r\n  border: 2px solid white;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.kds-texture-logo-slider::-moz-range-thumb {\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #2563eb;\r\n  cursor: pointer;\r\n  border: 2px solid white;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.kds-texture-logo-slider:focus {\r\n  outline: none;\r\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\r\n}\r\n\r\n.kds-texture-logo-labels {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  font-size: 0.875rem;\r\n  margin-top: 0.25rem;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-texture-uploader {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-texture-upload-area {\r\n    padding: 2rem 0.75rem;\r\n  }\r\n  \r\n  .kds-texture-upload-title {\r\n    font-size: 0.8rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-texture-upload-container {\r\n    gap: 0.75rem;\r\n  }\r\n  \r\n  .kds-texture-upload-area {\r\n    padding: 1.5rem 0.5rem;\r\n  }\r\n  \r\n  .kds-texture-upload-btn {\r\n    padding: 0.5rem 1rem;\r\n    font-size: 0.8rem;\r\n  }\r\n  \r\n  .kds-texture-upload-text {\r\n    font-size: 0.7rem;\r\n  }\r\n}\r\n/* Texture Controls Panel Styles with kds- prefix */\r\n\r\n.kds-texture-controls-panel {\r\n  background-color: white;\r\n  padding: 0.75rem;\r\n  border-radius: 0.375rem;\r\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\r\n  margin-top: 0.5rem;\r\n}\r\n\r\n.kds-texture-controls-panel > * + * {\r\n  margin-top: 0.5rem;\r\n}\r\n\r\n.kds-texture-control-group {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.25rem;\r\n}\r\n\r\n.kds-texture-control-label {\r\n  font-size: 0.875rem;\r\n  font-weight: 500;\r\n  color: #374151;\r\n}\r\n\r\n.kds-texture-control-slider {\r\n  width: 100%;\r\n  height: 0.375rem;\r\n  border-radius: 0.25rem;\r\n  background: #d1d5db;\r\n  outline: none;\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-texture-control-slider::-webkit-slider-thumb {\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #2563eb;\r\n  cursor: pointer;\r\n  border: 2px solid white;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.kds-texture-control-slider::-moz-range-thumb {\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #2563eb;\r\n  cursor: pointer;\r\n  border: 2px solid white;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.kds-texture-control-slider:focus {\r\n  outline: none;\r\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-texture-controls-panel {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-texture-control-label {\r\n    font-size: 0.8rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-texture-controls-panel {\r\n    margin-top: 0.25rem;\r\n  }\r\n  \r\n  .kds-texture-control-group {\r\n    gap: 0.125rem;\r\n  }\r\n}\r\n/* EditTab Component Styles */\r\n\r\n.kds-edit-container {\r\n  background-color: #ffffff;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  border: 1px solid #D3DBDF;\r\n  width: 100%; /* w-full */\r\n  height: fit-content; /* h-fit */\r\n}\r\n\r\n@media (min-width: 640px) {\r\n  .kds-edit-container {\r\n    width: 20rem; /* w-80 */\r\n  }\r\n}\r\n\r\n.kds-edit-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-edit-title-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-edit-title {\r\n  font-size: 16px; /* text-[16px] */\r\n  font-weight: 600; /* font-semibold */\r\n  color: #111827;\r\n}\r\n\r\n.kds-edit-close {\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-edit-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px;\r\n}\r\n\r\n.kds-edit-body {\r\n  padding: 1.5rem; /* py-6 px-6 */\r\n}\r\n\r\n.kds-edit-form {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem; /* gap-4 */\r\n}\r\n\r\n.kds-edit-subtitle {\r\n  font-size: 14px; /* text-[14px] */\r\n  font-weight: 500; /* font-medium */\r\n  color: #111827;\r\n}\r\n\r\n.kds-upload-label {\r\n  display: block;\r\n  background-color: #E4E9EC;\r\n  padding: 3rem 1rem; /* py-12 px-4 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  cursor: pointer;\r\n  transition: background-color 0.2s;\r\n}\r\n\r\n.kds-upload-label:hover {\r\n  background-color: #d9e2e6; /* hover:bg-[#d9e2e6] */\r\n}\r\n\r\n.kds-hidden {\r\n  display: none;\r\n}\r\n\r\n.kds-upload-helper {\r\n  text-align: center;\r\n}\r\n\r\n.kds-upload-cta {\r\n  background-color: #3559C7;\r\n  color: white;\r\n  padding: 0.5rem 1.5rem; /* px-6 py-2 */\r\n  border-radius: 0.375rem; /* rounded-md */\r\n  display: inline-block;\r\n  margin-bottom: 0.75rem; /* mb-3 */\r\n  font-size: 0.875rem;\r\n}\r\n\r\n.kds-upload-note {\r\n  color: #6b7280; /* text-gray-500 */\r\n  font-size: 12px; /* text-[12px] */\r\n  line-height: 1.25rem;\r\n}\r\n\r\n.kds-upload-button {\r\n  width: 100%;\r\n  border-radius: 0.375rem; /* rounded-md */\r\n  padding: 0.75rem 0; /* py-3 */\r\n  font-size: 14px; /* text-[14px] */\r\n  font-weight: 500; /* font-medium */\r\n  cursor: pointer;\r\n  transition: background-color 0.2s, color 0.2s;\r\n  background-color: #3559C7;\r\n  color: #ffffff;\r\n  border: none;\r\n}\r\n\r\n.kds-upload-button:hover:not(:disabled) {\r\n  background-color: #2a47a3; /* hover */\r\n}\r\n\r\n.kds-upload-button:disabled {\r\n  background-color: #E6E9F3;\r\n  color: #B8C5E8;\r\n  cursor: not-allowed;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 640px) {\r\n  .kds-edit-body {\r\n    padding: 1rem;\r\n  }\r\n}/* AddTextTab.css - Converted from Tailwind CSS with kds- prefix */\r\n\r\n.kds-container {\r\n  background-color: white;\r\n  border-radius: 0.5rem;\r\n  border: 1px solid #D3DBDF;\r\n  width: 20rem; /* w-80 = 20rem */\r\n  height: fit-content;\r\n}\r\n\r\n/* Responsive container */\r\n@media (max-width: 768px) {\r\n  .kds-container {\r\n    width: 100%;\r\n    max-width: 20rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 640px) {\r\n  .kds-container {\r\n    width: 100%;\r\n    max-width: 18rem;\r\n  }\r\n}\r\n\r\n.kds-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-header-left {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 = 0.5rem */\r\n}\r\n\r\n.kds-title {\r\n  font-size: 16px;\r\n  color: black;\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-close-button {\r\n  cursor: pointer;\r\n  transition: opacity 0.2s ease;\r\n}\r\n\r\n.kds-close-button:hover {\r\n  opacity: 0.7;\r\n}\r\n\r\n.kds-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px;\r\n}\r\n\r\n.kds-content {\r\n  padding: 0.75rem 1rem; /* py-3 px-4 */\r\n}\r\n\r\n.kds-input-container {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem; /* gap-2 = 0.5rem */\r\n}\r\n\r\n.kds-text-input {\r\n  border: 1px solid #D3DBDF;\r\n  color: black;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  padding: 0.75rem; /* p-3 */\r\n  min-height: 5rem; /* min-h-20 = 5rem */\r\n  font-family: inherit;\r\n  font-size: 0.875rem;\r\n  resize: vertical;\r\n  outline: none;\r\n  transition: border-color 0.2s ease;\r\n}\r\n\r\n.kds-text-input:focus {\r\n  border-color: #3b82f6;\r\n  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);\r\n}\r\n\r\n.kds-text-input::placeholder {\r\n  font-weight: 600; /* placeholder:font-semibold */\r\n  color: #6b7280;\r\n}\r\n\r\n.kds-add-button {\r\n  border-radius: 0.375rem; /* rounded-md */\r\n  margin-top: 0.75rem; /* mt-3 = 0.75rem */\r\n  padding: 0.75rem; /* py-3 = 0.75rem */\r\n  width: 100%; /* w-full */\r\n  font-size: 16px; /* text-[16px] */\r\n  cursor: pointer;\r\n  border: none;\r\n  font-weight: 500;\r\n  transition: all 0.2s ease;\r\n}\r\n\r\n.kds-add-button.active {\r\n  color: white;\r\n  background-color: #2563eb; /* bg-blue-600 */\r\n}\r\n\r\n.kds-add-button.active:hover {\r\n  background-color: #1d4ed8;\r\n}\r\n\r\n.kds-add-button.inactive {\r\n  background-color: #D7DEF4;\r\n  color: #AEBDEA;\r\n  cursor: not-allowed;\r\n}\r\n\r\n.kds-add-button.inactive:hover {\r\n  background-color: #c7d1f0;\r\n}\r\n\r\n/* Responsive adjustments */\r\n@media (max-width: 480px) {\r\n  .kds-container {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-title {\r\n    font-size: 14px;\r\n  }\r\n  \r\n  .kds-header {\r\n    padding: 0.375rem 0.5rem;\r\n  }\r\n  \r\n  .kds-content {\r\n    padding: 0.5rem 0.75rem;\r\n  }\r\n  \r\n  .kds-text-input {\r\n    min-height: 4rem;\r\n    font-size: 0.75rem;\r\n  }\r\n  \r\n  .kds-add-button {\r\n    padding: 0.625rem;\r\n    font-size: 14px;\r\n  }\r\n}\r\n\r\n/* Focus states for accessibility */\r\n.kds-text-input:focus-visible {\r\n  outline: 2px solid #3b82f6;\r\n  outline-offset: 2px;\r\n}\r\n\r\n.kds-add-button:focus-visible {\r\n  outline: 2px solid #3b82f6;\r\n  outline-offset: 2px;\r\n}\r\n/* FontSelector Component Styles */\r\n\r\n.kds-fontselector-container {\r\n  background-color: #ffffff;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  border: 1px solid #D3DBDF;\r\n  width: 20rem; /* w-80 */\r\n  height: fit-content; /* h-fit */\r\n  max-height: 460px; /* max-h-[460px] */\r\n  overflow-y: auto; /* overflow-y-scroll */\r\n}\r\n\r\n.kds-fontselector-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-fontselector-title {\r\n  font-size: 16px; /* text-[16px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-fontselector-close {\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-fontselector-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px; /* h-px */\r\n}\r\n\r\n.kds-fontselector-content {\r\n  padding: 0.75rem; /* p-3 */\r\n  display: flex;\r\n  flex-direction: column; /* flex-col */\r\n  gap: 1rem; /* gap-4 */\r\n}\r\n\r\n.kds-fontselector-item {\r\n  padding: 0 0.75rem; /* px-3 */\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-fontselector-font {\r\n  color: #000000; /* text-black */\r\n  font-size: 14px; /* text-[14px] */\r\n}\r\n\r\n/* Responsive */\r\n@media (max-width: 768px) {\r\n  .kds-fontselector-container {\r\n    width: calc(100vw - 2rem);\r\n    max-width: 20rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-fontselector-container {\r\n    width: calc(100vw - 1rem);\r\n  }\r\n  .kds-fontselector-content {\r\n    padding: 0.5rem;\r\n  }\r\n}/* CustomColorSwatch Component Styles */\r\n\r\n.kds-color-container {\r\n  background-color: white;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  border: 1px solid #D3DBDF;\r\n  width: 18rem; /* w-72 */\r\n  height: fit-content; /* h-fit */\r\n  max-height: 460px; /* max-h-[460px] */\r\n  overflow-y: scroll;\r\n}\r\n\r\n.kds-color-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-color-title-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-color-title {\r\n  font-size: 16px; /* text-[16px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-color-close {\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-color-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px; /* h-px */\r\n}\r\n\r\n.kds-color-content {\r\n  padding: 0.75rem; /* p-3 */\r\n  display: flex;\r\n  flex-direction: column; /* flex-col */\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-used-colors-section h3 {\r\n  font-size: 12px; /* text-[12px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-used-color-display {\r\n  margin-bottom: 1rem; /* mb-4 */\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n  margin-top: 0.5rem; /* mt-2 */\r\n}\r\n\r\n.kds-used-color-swatch {\r\n  width: 1.5rem; /* w-6 */\r\n  height: 1.5rem; /* h-6 */\r\n  border-radius: 50%; /* rounded-full */\r\n  cursor: pointer;\r\n  border: 2px solid transparent; /* border-2 */\r\n  transition: all 0.15s; /* transition-all duration-150 */\r\n}\r\n\r\n.kds-used-color-text {\r\n  font-size: 0.875rem; /* text-sm */\r\n}\r\n\r\n.kds-all-colors-section h3 {\r\n  font-size: 12px; /* text-[12px] */\r\n  font-weight: 600; /* font-semibold */\r\n  color: #000000; /* text-black */\r\n}\r\n\r\n.kds-color-grid {\r\n  display: grid;\r\n  grid-template-columns: repeat(6, 1fr); /* grid-cols-6 */\r\n  align-items: center; /* items-center */\r\n  gap: 0.5rem; /* gap-2 */\r\n  margin-top: 0.5rem; /* mt-2 */\r\n}\r\n\r\n.kds-color-swatch {\r\n  width: 1.5rem; /* w-6 */\r\n  height: 1.5rem; /* h-6 */\r\n  border-radius: 50%; /* rounded-full */\r\n  cursor: pointer;\r\n  border: 2px solid transparent; /* border-2 */\r\n  transition: all 0.15s; /* transition-all duration-150 */\r\n}\r\n\r\n.kds-color-swatch.kds-selected {\r\n  border-color: #000000; /* border-black */\r\n  transform: scale(1.1); /* scale-110 */\r\n}\r\n\r\n.kds-color-swatch.kds-unselected {\r\n  border-color: transparent; /* border-transparent */\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-color-container {\r\n    width: calc(100vw - 2rem);\r\n    max-width: 18rem;\r\n  }\r\n  \r\n  .kds-color-grid {\r\n    grid-template-columns: repeat(5, 1fr);\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-color-container {\r\n    width: calc(100vw - 1rem);\r\n  }\r\n  \r\n  .kds-color-grid {\r\n    grid-template-columns: repeat(4, 1fr);\r\n    gap: 0.375rem;\r\n  }\r\n  \r\n  .kds-color-swatch,\r\n  .kds-used-color-swatch {\r\n    width: 1.25rem;\r\n    height: 1.25rem;\r\n  }\r\n  \r\n  .kds-color-content {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-color-header {\r\n    padding: 0.375rem 0.5rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 360px) {\r\n  .kds-color-grid {\r\n    grid-template-columns: repeat(3, 1fr);\r\n  }\r\n} /* EditTextTab Component Styles */\r\n\r\n.kds-edit-text-container {\r\n  background-color: white;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  border: 1px solid #D3DBDF;\r\n  width: 20rem; /* w-80 */\r\n  height: fit-content; /* h-fit */\r\n  max-height: 460px; /* max-h-[460px] */\r\n  overflow-y: scroll;\r\n}\r\n\r\n.kds-edit-text-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-edit-text-title-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-edit-text-title {\r\n  font-size: 16px; /* text-[16px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-edit-text-status {\r\n  font-size: 0.75rem; /* text-xs */\r\n  font-weight: 500; /* font-medium */\r\n}\r\n\r\n.kds-edit-text-status.kds-detected {\r\n  color: #059669; /* text-green-600 */\r\n}\r\n\r\n.kds-edit-text-status.kds-ready {\r\n  color: #2563eb; /* text-blue-600 */\r\n}\r\n\r\n.kds-edit-text-close {\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-edit-text-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px; /* h-px */\r\n}\r\n\r\n.kds-edit-text-content {\r\n  padding: 0.75rem 1rem; /* py-3 px-4 */\r\n}\r\n\r\n.kds-edit-text-input {\r\n  border: 1px solid #D3DBDF;\r\n  color: #000000; /* text-black */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  padding: 0.75rem; /* p-3 */\r\n  min-height: 5rem; /* min-h-20 */\r\n  width: 100%; /* w-full */\r\n  font-size: 0.875rem;\r\n  outline: none;\r\n  transition: border-color 0.2s;\r\n}\r\n\r\n.kds-edit-text-input:focus {\r\n  border-color: #3b82f6;\r\n}\r\n\r\n.kds-edit-text-input::placeholder {\r\n  font-weight: 600; /* placeholder:font-semibold */\r\n  color: #6b7280;\r\n}\r\n\r\n.kds-edit-text-hint {\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #6b7280; /* text-gray-500 */\r\n  margin-top: 0.5rem; /* mt-2 */\r\n}\r\n\r\n.kds-edit-text-section {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-edit-text-section-title {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-edit-text-controls {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem; /* gap-3 */\r\n}\r\n\r\n.kds-edit-text-control-icon {\r\n  width: 22px; /* w-[22px] */\r\n  cursor: pointer;\r\n  transition: opacity 0.2s;\r\n}\r\n\r\n.kds-edit-text-control-icon:hover {\r\n  opacity: 0.7;\r\n}\r\n\r\n.kds-edit-text-font-section {\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-edit-text-font-header {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-edit-text-font-controls {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem; /* gap-3 */\r\n  margin-top: 0.5rem; /* mt-2 */\r\n}\r\n\r\n.kds-edit-text-font-selector {\r\n  border: 1px solid #D3DBDF;\r\n  min-width: 165px; /* min-w-[165px] */\r\n  cursor: pointer;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  border-radius: 0.375rem; /* rounded-md */\r\n  padding: 0.5rem; /* p-2 */\r\n  transition: border-color 0.2s;\r\n}\r\n\r\n.kds-edit-text-font-selector:hover {\r\n  border-color: #3b82f6;\r\n}\r\n\r\n.kds-edit-text-font-name {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #6b7280; /* text-gray-500 */\r\n  font-weight: 500; /* font-medium */\r\n}\r\n\r\n.kds-edit-text-font-arrow {\r\n  width: 1rem;\r\n  height: 1rem;\r\n}\r\n\r\n.kds-edit-text-style-icon {\r\n  cursor: pointer;\r\n  transition: opacity 0.2s;\r\n}\r\n\r\n.kds-edit-text-style-icon:hover {\r\n  opacity: 0.7;\r\n}\r\n\r\n.kds-edit-text-color-swatch {\r\n  width: 1.5rem; /* w-6 */\r\n  height: 1.5rem; /* h-6 */\r\n  border-radius: 50%; /* rounded-full */\r\n  cursor: pointer;\r\n  border: 2px solid transparent; /* border-2 */\r\n  transition: all 0.15s; /* transition-all duration-150 */\r\n}\r\n\r\n.kds-edit-text-color-swatch:hover {\r\n  transform: scale(1.1);\r\n}\r\n\r\n.kds-edit-text-3d-section {\r\n  background-color: white;\r\n  padding: 0.75rem; /* p-3 */\r\n  border-radius: 0.375rem; /* rounded */\r\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* shadow-md */\r\n  margin-top: 0.5rem; /* mt-2 */\r\n}\r\n\r\n.kds-edit-text-3d-controls {\r\n  display: flex;\r\n  flex-direction: column; /* flex-col */\r\n  gap: 0.5rem; /* space-y-2 */\r\n}\r\n\r\n.kds-edit-text-3d-control {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.25rem;\r\n}\r\n\r\n.kds-edit-text-3d-label {\r\n  font-size: 0.875rem;\r\n  color: #374151;\r\n  margin-bottom: 0.25rem;\r\n}\r\n\r\n.kds-edit-text-3d-range {\r\n  width: 100%;\r\n  height: 0.375rem;\r\n  border-radius: 0.25rem;\r\n  background: #e5e7eb;\r\n  outline: none;\r\n  -webkit-appearance: none;\r\n}\r\n\r\n.kds-edit-text-3d-range::-webkit-slider-thumb {\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #3b82f6;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-edit-text-3d-range::-moz-range-thumb {\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #3b82f6;\r\n  cursor: pointer;\r\n  border: none;\r\n}\r\n\r\n.kds-edit-text-3d-color-section {\r\n  background-color: white;\r\n  padding: 0.75rem; /* p-3 */\r\n  border-radius: 0.375rem; /* rounded */\r\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* shadow-md */\r\n  margin-top: 0.5rem; /* mt-2 */\r\n}\r\n\r\n.kds-edit-text-3d-color-controls {\r\n  display: flex;\r\n  flex-direction: column; /* flex-col */\r\n  gap: 0.5rem; /* space-y-2 */\r\n}\r\n\r\n.kds-edit-text-3d-color-label {\r\n  display: block;\r\n  margin-top: 0.5rem; /* block mt-2 */\r\n  font-size: 0.875rem;\r\n  color: #374151;\r\n}\r\n\r\n.kds-edit-text-3d-color-input {\r\n  width: 3rem;\r\n  height: 2rem;\r\n  border: 1px solid #d1d5db;\r\n  border-radius: 0.25rem;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-edit-text-sliders {\r\n  display: flex;\r\n  flex-direction: column; /* flex-col */\r\n  gap: 0.75rem; /* gap-3 */\r\n  justify-content: space-between;\r\n  padding: 1rem 0.75rem; /* py-4 px-3 */\r\n}\r\n\r\n.kds-edit-text-slider-label {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 500; /* font-medium */\r\n}\r\n\r\n.kds-edit-text-slider {\r\n  width: 100%; /* w-full */\r\n  height: 0.375rem;\r\n  border-radius: 0.25rem;\r\n  background: #e5e7eb;\r\n  outline: none;\r\n  -webkit-appearance: none;\r\n}\r\n\r\n.kds-edit-text-slider::-webkit-slider-thumb {\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #3b82f6;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-edit-text-slider::-moz-range-thumb {\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #3b82f6;\r\n  cursor: pointer;\r\n  border: none;\r\n}\r\n\r\n.kds-edit-text-arrange {\r\n  display: flex;\r\n  flex-direction: column; /* flex-col */\r\n  gap: 0.75rem; /* gap-3 */\r\n  justify-content: space-between;\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-edit-text-arrange-title {\r\n  font-size: 14px; /* text-[14px] */\r\n  font-weight: 600; /* font-semibold */\r\n  color: #000000; /* text-black */\r\n}\r\n\r\n.kds-edit-text-arrange-controls {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 1.75rem; /* gap-7 */\r\n}\r\n\r\n.kds-edit-text-arrange-icon {\r\n  width: 20px; /* w-[20px] */\r\n  cursor: pointer;\r\n  transition: opacity 0.2s;\r\n}\r\n\r\n.kds-edit-text-arrange-icon:hover {\r\n  opacity: 0.7;\r\n}\r\n\r\n.kds-edit-text-layer-info {\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #6b7280; /* text-gray-500 */\r\n  margin-top: 0.25rem; /* mt-1 */\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-edit-text-container {\r\n    width: calc(100vw - 2rem);\r\n    max-width: 20rem;\r\n  }\r\n  \r\n  .kds-edit-text-font-selector {\r\n    min-width: 140px;\r\n  }\r\n  \r\n  .kds-edit-text-arrange-controls {\r\n    gap: 1rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-edit-text-container {\r\n    width: calc(100vw - 1rem);\r\n  }\r\n  \r\n  .kds-edit-text-content {\r\n    padding: 0.5rem 0.75rem;\r\n  }\r\n  \r\n  .kds-edit-text-section,\r\n  .kds-edit-text-font-section,\r\n  .kds-edit-text-arrange {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-edit-text-font-controls {\r\n    flex-wrap: wrap;\r\n    gap: 0.5rem;\r\n  }\r\n  \r\n  .kds-edit-text-font-selector {\r\n    min-width: 120px;\r\n  }\r\n  \r\n  .kds-edit-text-arrange-controls {\r\n    gap: 0.75rem;\r\n  }\r\n  \r\n  .kds-edit-text-arrange-icon {\r\n    width: 18px;\r\n  }\r\n} /* SelectColorsTab.css - Converted from Tailwind CSS with kds- prefix */\r\n\r\n.kds-container {\r\n  background-color: white;\r\n  border-radius: 0.5rem;\r\n  border: 1px solid #D3DBDF;\r\n  width: 18rem; /* w-72 = 18rem */\r\n  height: fit-content;\r\n  max-height: 460px;\r\n  overflow: hidden;\r\n}\r\n\r\n/* Responsive container */\r\n@media (max-width: 768px) {\r\n  .kds-container {\r\n    width: 100%;\r\n    max-width: 18rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 640px) {\r\n  .kds-container {\r\n    width: 100%;\r\n    max-width: 16rem;\r\n  }\r\n}\r\n\r\n.kds-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-header-left {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 = 0.5rem */\r\n}\r\n\r\n.kds-title {\r\n  font-size: 16px;\r\n  color: black;\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-close-button {\r\n  cursor: pointer;\r\n  transition: opacity 0.2s ease;\r\n}\r\n\r\n.kds-close-button:hover {\r\n  opacity: 0.7;\r\n}\r\n\r\n.kds-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px;\r\n}\r\n\r\n.kds-3d-section {\r\n  background-color: white;\r\n  padding: 0.75rem; /* p-3 = 0.75rem */\r\n  border-radius: 0.375rem; /* rounded */\r\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem; /* space-y-2 = 0.5rem */\r\n}\r\n\r\n.kds-part-label {\r\n  font-weight: 600; /* font-semibold */\r\n  display: block;\r\n}\r\n\r\n.kds-parts-grid {\r\n  display: grid;\r\n  grid-template-columns: repeat(2, 1fr);\r\n  gap: 0.5rem; /* gap-2 = 0.5rem */\r\n}\r\n\r\n.kds-part-button {\r\n  padding: 0.25rem 0.5rem; /* px-2 py-1 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  border: 1px solid #d1d5db;\r\n  background-color: #f3f4f6; /* bg-gray-200 */\r\n  cursor: pointer;\r\n  transition: all 0.2s ease;\r\n  font-size: 0.875rem;\r\n}\r\n\r\n.kds-part-button:hover {\r\n  background-color: #e5e7eb;\r\n}\r\n\r\n.kds-part-button.active {\r\n  background-color: #2563eb; /* bg-blue-600 */\r\n  color: white;\r\n  border-color: #2563eb;\r\n}\r\n\r\n.kds-color-picker-section {\r\n  margin-top: 0.75rem; /* mt-3 = 0.75rem */\r\n}\r\n\r\n.kds-color-picker-label {\r\n  display: block;\r\n  margin-bottom: 0.25rem; /* mb-1 = 0.25rem */\r\n  font-size: 0.875rem;\r\n}\r\n\r\n.kds-color-picker {\r\n  width: 100%;\r\n  height: 2.5rem;\r\n  border: 1px solid #d1d5db;\r\n  border-radius: 0.25rem;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-tab-navigation {\r\n  display: flex;\r\n  border-bottom: 1px solid #D3DBDF;\r\n}\r\n\r\n.kds-tab-button {\r\n  flex: 1;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n  font-size: 0.875rem; /* text-sm */\r\n  font-weight: 500; /* font-medium */\r\n  transition: all 0.2s ease;\r\n  background: none;\r\n  border: none;\r\n  cursor: pointer;\r\n  color: #4b5563; /* text-gray-600 */\r\n  border-bottom: 2px solid transparent;\r\n}\r\n\r\n.kds-tab-button:hover {\r\n  color: #1f2937; /* hover:text-gray-800 */\r\n}\r\n\r\n.kds-tab-button.active.background {\r\n  background-color: #eff6ff; /* bg-blue-50 */\r\n  color: #2563eb; /* text-blue-600 */\r\n  border-bottom-color: #2563eb; /* border-blue-600 */\r\n}\r\n\r\n.kds-tab-button.active.topColor {\r\n  background-color: #fef2f2; /* bg-red-50 */\r\n  color: #dc2626; /* text-red-600 */\r\n  border-bottom-color: #dc2626; /* border-red-600 */\r\n}\r\n\r\n.kds-tab-button.active.bottomColor {\r\n  background-color: #f0fdf4; /* bg-green-50 */\r\n  color: #16a34a; /* text-green-600 */\r\n  border-bottom-color: #16a34a; /* border-green-600 */\r\n}\r\n\r\n.kds-colors-container {\r\n  max-height: 320px;\r\n  overflow-y: auto;\r\n}\r\n\r\n.kds-colors-list {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.75rem; /* gap-3 = 0.75rem */\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-color-item {\r\n  display: flex;\r\n  position: relative;\r\n  align-items: center;\r\n  padding: 0.5rem; /* p-2 = 0.5rem */\r\n  border-radius: 0.375rem; /* rounded-md */\r\n  cursor: pointer;\r\n  gap: 1rem; /* gap-4 = 1rem */\r\n  transition: all 0.2s ease;\r\n  border: 1px solid transparent;\r\n}\r\n\r\n.kds-color-item:hover {\r\n  background-color: #f9fafb; /* hover:bg-gray-50 */\r\n}\r\n\r\n.kds-color-item.selected {\r\n  border-color: #60a5fa; /* border-blue-400 */\r\n  background-color: #eff6ff; /* bg-blue-50 */\r\n}\r\n\r\n.kds-color-preview {\r\n  width: 2rem; /* w-8 = 2rem */\r\n  height: 2rem; /* h-8 = 2rem */\r\n  border-radius: 50%; /* rounded-full */\r\n  cursor: pointer;\r\n  transition: all 0.15s ease;\r\n  border: 1px solid #e5e7eb; /* border-gray-200 */\r\n  overflow: hidden;\r\n}\r\n\r\n.kds-color-preview img {\r\n  width: 100%;\r\n  height: 100%;\r\n  object-fit: cover;\r\n}\r\n\r\n.kds-color-info {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.kds-color-name {\r\n  font-size: 16px;\r\n  color: black;\r\n  font-weight: 500; /* font-medium */\r\n  margin: 0;\r\n}\r\n\r\n.kds-color-description {\r\n  color: #6b7280; /* text-gray-500 */\r\n  font-size: 14px;\r\n  margin: 0;\r\n}\r\n\r\n.kds-selected-icon {\r\n  position: absolute;\r\n  right: 0.375rem; /* right-1.5 = 0.375rem */\r\n  top: 1rem; /* top-4 = 1rem */\r\n  width: 1.25rem;\r\n  height: 1.25rem;\r\n}\r\n\r\n.kds-info-footer {\r\n  padding: 0.5rem 0.75rem; /* px-3 py-2 */\r\n  background-color: #f9fafb; /* bg-gray-50 */\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #4b5563; /* text-gray-600 */\r\n}\r\n\r\n/* Responsive adjustments */\r\n@media (max-width: 480px) {\r\n  .kds-container {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-title {\r\n    font-size: 14px;\r\n  }\r\n  \r\n  .kds-header {\r\n    padding: 0.375rem 0.5rem;\r\n  }\r\n  \r\n  .kds-parts-grid {\r\n    grid-template-columns: 1fr;\r\n    gap: 0.25rem;\r\n  }\r\n  \r\n  .kds-part-button {\r\n    padding: 0.5rem;\r\n    font-size: 0.75rem;\r\n  }\r\n  \r\n  .kds-tab-button {\r\n    padding: 0.375rem 0.5rem;\r\n    font-size: 0.75rem;\r\n  }\r\n  \r\n  .kds-colors-list {\r\n    gap: 0.5rem;\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-color-item {\r\n    padding: 0.375rem;\r\n    gap: 0.75rem;\r\n  }\r\n  \r\n  .kds-color-preview {\r\n    width: 1.75rem;\r\n    height: 1.75rem;\r\n  }\r\n  \r\n  .kds-color-name {\r\n    font-size: 14px;\r\n  }\r\n  \r\n  .kds-color-description {\r\n    font-size: 12px;\r\n  }\r\n}\r\n\r\n/* Custom scrollbar for colors container */\r\n.kds-colors-container::-webkit-scrollbar {\r\n  width: 4px;\r\n}\r\n\r\n.kds-colors-container::-webkit-scrollbar-track {\r\n  background: #f1f1f1;\r\n  border-radius: 2px;\r\n}\r\n\r\n.kds-colors-container::-webkit-scrollbar-thumb {\r\n  background: #c1c1c1;\r\n  border-radius: 2px;\r\n}\r\n\r\n.kds-colors-container::-webkit-scrollbar-thumb:hover {\r\n  background: #a8a8a8;\r\n}\r\n/* ClipartTab Component Styles */\r\n\r\n.kds-clipart-container {\r\n  background-color: white;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  border: 1px solid #D3DBDF;\r\n  width: 20rem; /* w-80 */\r\n  height: fit-content; /* h-fit */\r\n  max-height: 500px; /* max-h-[500px] */\r\n  overflow: hidden;\r\n}\r\n\r\n.kds-clipart-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-clipart-title {\r\n  font-size: 16px; /* text-[16px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-clipart-close {\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-clipart-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n}\r\n\r\n.kds-clipart-content {\r\n  padding: 0.75rem; /* p-3 */\r\n}\r\n\r\n.kds-clipart-space-y-2 > * + * {\r\n  margin-top: 0.5rem; /* space-y-2 */\r\n}\r\n\r\n.kds-empty-state {\r\n  text-align: center;\r\n  padding: 2rem 0; /* py-8 */\r\n  color: #6b7280; /* text-gray-500 */\r\n}\r\n\r\n.kds-empty-icon {\r\n  font-size: 2.25rem; /* text-4xl */\r\n  margin-bottom: 0.5rem; /* mb-2 */\r\n}\r\n\r\n.kds-empty-text {\r\n  font-size: 0.875rem; /* text-sm */\r\n}\r\n\r\n.kds-empty-subtext {\r\n  font-size: 0.75rem; /* text-xs */\r\n  margin-top: 0.25rem; /* mt-1 */\r\n}\r\n\r\n.kds-category-item {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.75rem; /* p-3 */\r\n  border: 1px solid #e5e7eb; /* border-gray-200 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  cursor: pointer;\r\n  transition: all 0.2s; /* transition-all duration-200 */\r\n}\r\n\r\n.kds-category-item:hover {\r\n  border-color: #3b82f6; /* hover:border-blue-500 */\r\n  background-color: #eff6ff; /* hover:bg-blue-50 */\r\n}\r\n\r\n.kds-category-left {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem; /* gap-3 */\r\n}\r\n\r\n.kds-category-badge {\r\n  width: 2rem; /* w-8 */\r\n  height: 2rem; /* h-8 */\r\n  background: linear-gradient(to right, #3b82f6, #8b5cf6); /* bg-gradient-to-r from-blue-500 to-purple-500 */\r\n  border-radius: 50%; /* rounded-full */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  color: white;\r\n  font-size: 0.875rem; /* text-sm */\r\n  font-weight: 700; /* font-bold */\r\n}\r\n\r\n.kds-category-info h4 {\r\n  font-weight: 600; /* font-semibold */\r\n  color: #1f2937; /* text-gray-800 */\r\n}\r\n\r\n.kds-category-info p {\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #6b7280; /* text-gray-500 */\r\n}\r\n\r\n.kds-chevron-icon {\r\n  width: 1rem; /* w-4 */\r\n}\r\n\r\n.kds-back-icon {\r\n  transform: rotate(180deg); /* rotate-180 */\r\n  width: 1rem; /* w-4 */\r\n}\r\n\r\n.kds-back-button {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.25rem; /* gap-1 */\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-back-text {\r\n  font-size: 16px; /* text-[16px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-3d-section {\r\n  margin-top: 1rem; /* mt-4 */\r\n}\r\n\r\n.kds-3d-title {\r\n  font-weight: 600; /* font-semibold */\r\n  margin-bottom: 0.5rem; /* mb-2 */\r\n}\r\n\r\n.kds-3d-grid {\r\n  display: grid;\r\n  grid-template-columns: repeat(2, 1fr); /* grid-cols-2 */\r\n  gap: 0.75rem; /* gap-3 */\r\n}\r\n\r\n.kds-3d-item {\r\n  cursor: pointer;\r\n  border: 1px solid #e5e7eb; /* border */\r\n  border-radius: 0.25rem; /* rounded */\r\n  padding: 0.5rem; /* p-2 */\r\n  transition: border-color 0.2s;\r\n}\r\n\r\n.kds-3d-item:hover {\r\n  border-color: #3b82f6; /* hover:border-blue-500 */\r\n}\r\n\r\n.kds-3d-image {\r\n  width: 100%;\r\n  height: 6rem; /* h-24 */\r\n  object-fit: contain;\r\n}\r\n\r\n.kds-3d-name {\r\n  font-size: 0.75rem; /* text-xs */\r\n  margin-top: 0.25rem; /* mt-1 */\r\n  text-align: center;\r\n}\r\n\r\n.kds-category-content {\r\n  padding: 0.75rem; /* p-3 */\r\n  max-height: 20rem; /* max-h-80 */\r\n  overflow-y: auto;\r\n}\r\n\r\n.kds-design-grid-3 {\r\n  display: grid;\r\n  grid-template-columns: repeat(3, 1fr); /* grid-cols-3 */\r\n  gap: 0.75rem; /* gap-3 */\r\n}\r\n\r\n.kds-design-grid-2 {\r\n  display: grid;\r\n  grid-template-columns: repeat(2, 1fr); /* grid-cols-2 */\r\n  gap: 0.75rem; /* gap-3 */\r\n}\r\n\r\n.kds-design-item {\r\n  position: relative;\r\n}\r\n\r\n.kds-pattern-container {\r\n  border: 2px solid #93c5fd; /* border-2 border-blue-300 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  padding: 0.5rem; /* p-2 */\r\n}\r\n\r\n.kds-pattern-image {\r\n  width: 100%;\r\n  height: 4rem; /* h-16 */\r\n  object-fit: contain;\r\n  border-radius: 0.25rem; /* rounded */\r\n  margin-bottom: 0.5rem; /* mb-2 */\r\n}\r\n\r\n.kds-add-pattern-btn {\r\n  width: 100%;\r\n  background: linear-gradient(to right, #8b5cf6, #3b82f6); /* bg-gradient-to-r from-purple-500 to-blue-500 */\r\n  color: white;\r\n  font-size: 0.75rem; /* text-xs */\r\n  padding: 0.25rem 0; /* py-1 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  border: none;\r\n  cursor: pointer;\r\n  font-weight: 500; /* font-medium */\r\n  transition: all 0.2s; /* transition-all duration-200 */\r\n}\r\n\r\n.kds-add-pattern-btn:hover {\r\n  background: linear-gradient(to right, #7c3aed, #2563eb); /* hover:from-purple-600 hover:to-blue-600 */\r\n}\r\n\r\n.kds-pattern-name {\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #4b5563; /* text-gray-600 */\r\n  margin-top: 0.25rem; /* mt-1 */\r\n  font-weight: 500; /* font-medium */\r\n}\r\n\r\n.kds-design-simple {\r\n  cursor: pointer;\r\n  border: 1px solid #e5e7eb; /* border border-gray-200 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  padding: 0.25rem; /* p-1 */\r\n  transition: border-color 0.2s;\r\n}\r\n\r\n.kds-design-simple:hover {\r\n  border-color: #3b82f6; /* hover:border-blue-500 */\r\n}\r\n\r\n.kds-design-image {\r\n  width: 100%;\r\n  height: 5rem; /* h-20 */\r\n  object-fit: contain;\r\n}\r\n\r\n.kds-shoe-item {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem; /* gap-3 */\r\n  padding: 0.75rem; /* p-3 */\r\n  border: 1px solid #e5e7eb; /* border border-gray-200 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  cursor: pointer;\r\n  transition: all 0.2s; /* transition-all duration-200 */\r\n}\r\n\r\n.kds-shoe-item:hover {\r\n  border-color: #3b82f6; /* hover:border-blue-500 */\r\n  background-color: #eff6ff; /* hover:bg-blue-50 */\r\n}\r\n\r\n.kds-shoe-thumbnail {\r\n  width: 3rem; /* w-12 */\r\n  height: 3rem; /* h-12 */\r\n  border: 1px solid #d1d5db; /* border border-gray-300 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  overflow: hidden;\r\n}\r\n\r\n.kds-shoe-thumbnail img {\r\n  width: 100%;\r\n  height: 100%;\r\n  object-fit: cover;\r\n}\r\n\r\n.kds-shoe-info {\r\n  flex: 1;\r\n}\r\n\r\n.kds-shoe-name {\r\n  font-weight: 600; /* font-semibold */\r\n  font-size: 0.875rem; /* text-sm */\r\n}\r\n\r\n.kds-shoe-detail {\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #6b7280; /* text-gray-500 */\r\n}\r\n\r\n.kds-shoe-arrow {\r\n  width: 1.5rem; /* w-6 */\r\n  height: 1.5rem; /* h-6 */\r\n  background-color: #3b82f6; /* bg-blue-500 */\r\n  border-radius: 50%; /* rounded-full */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.kds-shoe-arrow svg {\r\n  width: 0.75rem; /* w-3 */\r\n  height: 0.75rem; /* h-3 */\r\n  color: white;\r\n}\r\n\r\n.kds-footer {\r\n  padding: 0 0.75rem 0.5rem; /* px-3 py-2 */\r\n  background-color: #f9fafb; /* bg-gray-50 */\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #4b5563; /* text-gray-600 */\r\n  border-top: 1px solid #D3DBDF;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-clipart-container {\r\n    width: calc(100vw - 2rem);\r\n    max-width: 20rem;\r\n  }\r\n  \r\n  .kds-design-grid-3 {\r\n    grid-template-columns: repeat(2, 1fr);\r\n  }\r\n  \r\n  .kds-3d-grid {\r\n    grid-template-columns: 1fr;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-clipart-container {\r\n    width: calc(100vw - 1rem);\r\n  }\r\n  \r\n  .kds-design-grid-3,\r\n  .kds-design-grid-2 {\r\n    grid-template-columns: 1fr;\r\n  }\r\n  \r\n  .kds-category-item {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-category-left {\r\n    gap: 0.5rem;\r\n  }\r\n  \r\n  .kds-category-badge {\r\n    width: 1.5rem;\r\n    height: 1.5rem;\r\n    font-size: 0.75rem;\r\n  }\r\n} /* RightSideImageComponent.css - Converted from Tailwind CSS with kds- prefix */\r\n\r\n.kds-container {\r\n  background-color: white;\r\n  border-radius: 0.5rem;\r\n  border: 1px solid #D3DBDF;\r\n  width: 20rem; /* w-80 = 20rem */\r\n  height: fit-content;\r\n  max-height: 500px;\r\n  overflow-y: auto;\r\n  padding: 0.75rem; /* p-3 = 0.75rem */\r\n}\r\n\r\n/* Responsive container */\r\n@media (max-width: 768px) {\r\n  .kds-container {\r\n    width: 100%;\r\n    max-width: 20rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 640px) {\r\n  .kds-container {\r\n    width: 100%;\r\n    max-width: 18rem;\r\n  }\r\n}\r\n\r\n.kds-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  margin-bottom: 1rem; /* mb-4 = 1rem */\r\n}\r\n\r\n.kds-title {\r\n  font-size: 1.125rem; /* text-lg = 1.125rem */\r\n  font-weight: 600; /* font-semibold */\r\n  color: #1f2937; /* text-gray-800 */\r\n}\r\n\r\n.kds-spacer {\r\n  width: 1.5rem; /* w-6 = 1.5rem */\r\n  height: 1.5rem; /* h-6 = 1.5rem */\r\n}\r\n\r\n.kds-upload-section {\r\n  margin-bottom: 1rem; /* mb-4 = 1rem */\r\n}\r\n\r\n.kds-file-input {\r\n  display: none; /* hidden */\r\n}\r\n\r\n.kds-upload-button {\r\n  width: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  gap: 0.5rem; /* gap-2 = 0.5rem */\r\n  padding: 0.75rem; /* p-3 = 0.75rem */\r\n  border: 2px dashed #d1d5db; /* border-gray-300 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  transition: all 0.2s ease;\r\n  background-color: transparent;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-upload-button:hover {\r\n  border-color: #60a5fa; /* hover:border-blue-400 */\r\n  background-color: #eff6ff; /* hover:bg-blue-50 */\r\n}\r\n\r\n.kds-upload-button:disabled {\r\n  opacity: 0.5; /* disabled:opacity-50 */\r\n  cursor: not-allowed;\r\n}\r\n\r\n.kds-upload-icon {\r\n  color: #6b7280; /* text-gray-500 */\r\n}\r\n\r\n.kds-upload-text {\r\n  color: #4b5563; /* text-gray-600 */\r\n  font-size: 0.875rem; /* text-sm = 0.875rem */\r\n}\r\n\r\n.kds-controls {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem; /* space-y-4 = 1rem */\r\n}\r\n\r\n.kds-preview {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem; /* gap-3 = 0.75rem */\r\n  padding: 0.5rem; /* p-2 = 0.5rem */\r\n  background-color: #f9fafb; /* bg-gray-50 */\r\n  border-radius: 0.25rem; /* rounded */\r\n}\r\n\r\n.kds-preview-image {\r\n  width: 2.5rem; /* w-10 = 2.5rem */\r\n  height: 2.5rem; /* h-10 = 2.5rem */\r\n  object-fit: cover;\r\n  border-radius: 0.25rem; /* rounded */\r\n  border: 1px solid #d1d5db;\r\n}\r\n\r\n.kds-preview-text {\r\n  font-size: 0.75rem; /* text-xs = 0.75rem */\r\n  color: #4b5563; /* text-gray-600 */\r\n  flex: 1;\r\n}\r\n\r\n.kds-remove-button {\r\n  color: #ef4444; /* text-red-500 */\r\n  padding: 0.25rem; /* p-1 = 0.25rem */\r\n  cursor: pointer;\r\n  background: none;\r\n  border: none;\r\n  border-radius: 0.25rem;\r\n  transition: color 0.2s ease;\r\n}\r\n\r\n.kds-remove-button:hover {\r\n  color: #dc2626; /* hover:text-red-700 */\r\n}\r\n\r\n.kds-scale-section {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem; /* space-y-2 = 0.5rem */\r\n}\r\n\r\n.kds-scale-label {\r\n  display: block;\r\n  font-size: 0.875rem; /* text-sm = 0.875rem */\r\n  font-weight: 500; /* font-medium */\r\n  color: #374151; /* text-gray-700 */\r\n}\r\n\r\n.kds-scale-controls {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 = 0.5rem */\r\n}\r\n\r\n.kds-scale-button {\r\n  padding: 0.375rem; /* p-1.5 = 0.375rem */\r\n  background-color: #f3f4f6; /* bg-gray-100 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  border: none;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s ease;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.kds-scale-button:hover {\r\n  background-color: #e5e7eb; /* hover:bg-gray-200 */\r\n}\r\n\r\n.kds-scale-button .kds-icon {\r\n  font-size: 0.875rem; /* text-sm = 0.875rem */\r\n}\r\n\r\n.kds-scale-slider {\r\n  flex: 1;\r\n  height: 0.25rem;\r\n  border-radius: 0.125rem;\r\n  background: #d1d5db;\r\n  outline: none;\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n}\r\n\r\n.kds-scale-slider::-webkit-slider-thumb {\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #3b82f6;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-scale-slider::-moz-range-thumb {\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #3b82f6;\r\n  cursor: pointer;\r\n  border: none;\r\n}\r\n\r\n.kds-position-section {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem; /* space-y-2 = 0.5rem */\r\n}\r\n\r\n.kds-position-label {\r\n  display: block;\r\n  font-size: 0.875rem; /* text-sm = 0.875rem */\r\n  font-weight: 500; /* font-medium */\r\n  color: #374151; /* text-gray-700 */\r\n}\r\n\r\n.kds-position-grid {\r\n  display: grid;\r\n  grid-template-columns: repeat(3, 1fr);\r\n  gap: 0.25rem; /* gap-1 = 0.25rem */\r\n}\r\n\r\n.kds-position-button {\r\n  padding: 0.5rem; /* p-2 = 0.5rem */\r\n  background-color: #f3f4f6; /* bg-gray-100 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  border: none;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s ease;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n.kds-position-button:hover {\r\n  background-color: #e5e7eb; /* hover:bg-gray-200 */\r\n}\r\n\r\n.kds-position-center {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.kds-center-icon {\r\n  color: #9ca3af; /* text-gray-400 */\r\n  font-size: 0.875rem; /* text-sm = 0.875rem */\r\n}\r\n\r\n.kds-fine-position {\r\n  display: grid;\r\n  grid-template-columns: repeat(2, 1fr);\r\n  gap: 0.5rem; /* gap-2 = 0.5rem */\r\n}\r\n\r\n.kds-fine-position-item {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.kds-fine-position-label {\r\n  display: block;\r\n  font-size: 0.75rem; /* text-xs = 0.75rem */\r\n  color: #6b7280; /* text-gray-500 */\r\n  margin-bottom: 0.25rem; /* mb-1 = 0.25rem */\r\n}\r\n\r\n.kds-fine-position-slider {\r\n  width: 100%;\r\n  height: 0.25rem;\r\n  border-radius: 0.125rem;\r\n  background: #d1d5db;\r\n  outline: none;\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n}\r\n\r\n.kds-fine-position-slider::-webkit-slider-thumb {\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #3b82f6;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-fine-position-slider::-moz-range-thumb {\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #3b82f6;\r\n  cursor: pointer;\r\n  border: none;\r\n}\r\n\r\n.kds-info {\r\n  font-size: 0.75rem; /* text-xs = 0.75rem */\r\n  color: #6b7280; /* text-gray-500 */\r\n  padding: 0.5rem; /* p-2 = 0.5rem */\r\n  background-color: #eff6ff; /* bg-blue-50 */\r\n  border-radius: 0.25rem; /* rounded */\r\n}\r\n\r\n/* Responsive adjustments */\r\n@media (max-width: 480px) {\r\n  .kds-container {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-title {\r\n    font-size: 1rem;\r\n  }\r\n  \r\n  .kds-upload-button {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-upload-text {\r\n    font-size: 0.75rem;\r\n  }\r\n  \r\n  .kds-scale-controls {\r\n    flex-direction: column;\r\n    gap: 0.25rem;\r\n  }\r\n  \r\n  .kds-position-grid {\r\n    gap: 0.125rem;\r\n  }\r\n  \r\n  .kds-position-button {\r\n    padding: 0.375rem;\r\n  }\r\n  \r\n  .kds-fine-position {\r\n    grid-template-columns: 1fr;\r\n    gap: 0.25rem;\r\n  }\r\n}\r\n/* Sidebar Component Styles */\r\n\r\n.kds-sidebar {\r\n  position: absolute;\r\n  top: 6rem; /* top-24 */\r\n  left: 1.75rem; /* left-7 */\r\n  width: 35%;\r\n  display: flex;\r\n  gap: 1.25rem; /* gap-5 */\r\n  z-index: 50; /* z-50 */\r\n  flex-direction: column; /* flex-col */\r\n}\r\n\r\n@media (min-width: 640px) {\r\n  .kds-sidebar {\r\n    top: 7rem; /* sm:top-28 */\r\n    flex-direction: row; /* sm:flex-row */\r\n  }\r\n}\r\n\r\n.kds-sidebar-menu {\r\n  background-color: #ffffff;\r\n  padding: 1.25rem; /* p-5 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  border: 1px solid #D3DBDF;\r\n  display: flex;\r\n  flex-direction: row; /* flex-row */\r\n  height: fit-content; /* h-fit */\r\n  align-items: center; /* items-center */\r\n  justify-content: space-between; /* justify-between */\r\n  gap: 1.5rem; /* gap-6 */\r\n}\r\n\r\n@media (min-width: 640px) {\r\n  .kds-sidebar-menu {\r\n    flex-direction: column; /* sm:flex-col */\r\n    justify-content: flex-start; /* sm:justify-normal */\r\n  }\r\n}\r\n\r\n.kds-tab {\r\n  display: flex;\r\n  flex-direction: column; /* flex-col */\r\n  gap: 0.5rem; /* gap-2 */\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-tab-icon {\r\n  display: block;\r\n  margin: 0 auto; /* m-auto */\r\n  width: 23px; /* w-[23px] */\r\n  height: 23px; /* h-[23px] */\r\n}\r\n\r\n.kds-tab-label {\r\n  font-size: 12px; /* text-[12px] */\r\n  color: #000000; /* text-black */\r\n  text-align: center; /* text-center */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-tab-label.kds-active {\r\n  color: #2563eb; /* text-blue-600 */\r\n}\r\n\r\n/* Small screens: consider wider sidebar for usability */\r\n@media (max-width: 480px) {\r\n  .kds-sidebar {\r\n    left: 1rem;\r\n    width: calc(100% - 2rem);\r\n  }\r\n}/* LayerContextMenu Component Styles */\r\n\r\n.kds-layer-overlay {\r\n  position: fixed;\r\n  inset: 0;\r\n  z-index: 40;\r\n}\r\n\r\n.kds-layer-menu {\r\n  position: fixed;\r\n  background-color: #ffffff;\r\n  border: 1px solid #e5e7eb; /* border-gray-200 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); /* shadow-lg */\r\n  padding: 0.5rem 0; /* py-2 */\r\n  z-index: 50;\r\n  min-width: 180px;\r\n}\r\n\r\n.kds-layer-menu-header {\r\n  padding: 0.5rem 1rem; /* px-4 py-2 */\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #6b7280; /* text-gray-500 */\r\n  border-bottom: 1px solid #f3f4f6; /* border-gray-100 */\r\n  background-color: #f9fafb; /* bg-gray-50 */\r\n}\r\n\r\n.kds-layer-menu-item {\r\n  display: flex;\r\n  align-items: center;\r\n  padding: 0.5rem 1rem; /* px-4 py-2 */\r\n  font-size: 0.875rem; /* text-sm */\r\n  color: #374151; /* text-gray-700 */\r\n  cursor: pointer;\r\n  transition: background-color 0.15s ease;\r\n}\r\n\r\n.kds-layer-menu-item:hover {\r\n  background-color: #f9fafb; /* hover:bg-gray-50 */\r\n}\r\n\r\n.kds-layer-menu-item--danger {\r\n  color: #dc2626; /* text-red-600 */\r\n}\r\n\r\n.kds-layer-menu-item--danger:hover {\r\n  background-color: #fef2f2; /* hover:bg-red-50 */\r\n}\r\n\r\n.kds-layer-divider {\r\n  margin: 0.25rem 0; /* my-1 */\r\n  border: none;\r\n  border-top: 1px solid #e5e7eb; /* border-gray-200 */\r\n}\r\n\r\n.kds-layer-icon {\r\n  width: 1rem; /* w-4 */\r\n  height: 1rem; /* h-4 */\r\n  margin-right: 0.75rem; /* mr-3 */\r\n  flex-shrink: 0;\r\n}\r\n\r\n/* Responsive - larger touch targets on small screens */\r\n@media (max-width: 480px) {\r\n  .kds-layer-menu {\r\n    min-width: 200px;\r\n  }\r\n  .kds-layer-menu-item {\r\n    padding: 0.625rem 1rem;\r\n  }\r\n}/* Controls Panel Styles with kds- prefix */\r\n\r\n.kds-controls-panel {\r\n  background-color: white;\r\n  padding: 0.75rem;\r\n  border-radius: 0.375rem;\r\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\r\n}\r\n\r\n.kds-controls-panel > * + * {\r\n  margin-top: 0.5rem;\r\n}\r\n\r\n.kds-label {\r\n  font-weight: 600;\r\n  display: block;\r\n}\r\n\r\n.kds-label-regular {\r\n  font-weight: normal;\r\n  display: block;\r\n  margin-bottom: 0.25rem;\r\n}\r\n\r\n.kds-parts-grid {\r\n  display: grid;\r\n  grid-template-columns: repeat(4, 1fr);\r\n  gap: 0.5rem;\r\n}\r\n\r\n.kds-part-btn {\r\n  padding: 0.25rem 0.5rem;\r\n  border-radius: 0.25rem;\r\n  border: 1px solid #d1d5db;\r\n  background-color: #f3f4f6;\r\n  cursor: pointer;\r\n  transition: all 0.2s ease;\r\n}\r\n\r\n.kds-part-btn:hover {\r\n  background-color: #e5e7eb;\r\n}\r\n\r\n.kds-part-btn-active {\r\n  background-color: #2563eb;\r\n  color: white;\r\n  border-color: #2563eb;\r\n}\r\n\r\n.kds-part-btn-active:hover {\r\n  background-color: #1d4ed8;\r\n}\r\n\r\n.kds-color-input {\r\n  border: 1px solid #d1d5db;\r\n  border-radius: 0.25rem;\r\n  padding: 0.25rem;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-text-input {\r\n  border: 1px solid #d1d5db;\r\n  padding: 0.25rem 0.5rem;\r\n  width: 100%;\r\n  border-radius: 0.25rem;\r\n}\r\n\r\n.kds-text-input:focus {\r\n  outline: none;\r\n  border-color: #2563eb;\r\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\r\n}\r\n\r\n.kds-divider {\r\n  margin: 0.5rem 0;\r\n  border: none;\r\n  border-top: 1px solid #e5e7eb;\r\n}\r\n\r\n.kds-save-btn {\r\n  background-color: #16a34a;\r\n  color: white;\r\n  padding: 0.5rem 1rem;\r\n  border-radius: 0.25rem;\r\n  margin-top: 0.5rem;\r\n  width: 100%;\r\n  border: none;\r\n  cursor: pointer;\r\n  font-weight: 500;\r\n  transition: background-color 0.2s ease;\r\n}\r\n\r\n.kds-save-btn:hover {\r\n  background-color: #15803d;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-controls-panel {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-parts-grid {\r\n    grid-template-columns: repeat(2, 1fr);\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-parts-grid {\r\n    grid-template-columns: 1fr;\r\n  }\r\n  \r\n  .kds-part-btn {\r\n    padding: 0.5rem;\r\n    font-size: 0.875rem;\r\n  }\r\n}\r\n/* Screenshot Gallery Styles with kds- prefix */\r\n\r\n.kds-gallery-overlay {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background-color: rgba(0, 0, 0, 0.8);\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  z-index: 50;\r\n}\r\n\r\n.kds-gallery-modal {\r\n  background-color: white;\r\n  border-radius: 0.5rem;\r\n  padding: 1.5rem;\r\n  max-width: 64rem;\r\n  width: 100%;\r\n  max-height: 90vh;\r\n  overflow: auto;\r\n}\r\n\r\n.kds-gallery-header {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  margin-bottom: 1rem;\r\n}\r\n\r\n.kds-gallery-title {\r\n  font-size: 1.5rem;\r\n  font-weight: 700;\r\n  color: #1f2937;\r\n}\r\n\r\n.kds-gallery-close-btn {\r\n  color: #6b7280;\r\n  font-size: 1.5rem;\r\n  font-weight: 700;\r\n  background: none;\r\n  border: none;\r\n  cursor: pointer;\r\n  transition: color 0.2s ease;\r\n}\r\n\r\n.kds-gallery-close-btn:hover {\r\n  color: #374151;\r\n}\r\n\r\n.kds-gallery-preview-container {\r\n  margin-bottom: 1.5rem;\r\n  display: flex;\r\n  justify-content: center;\r\n}\r\n\r\n.kds-gallery-preview-wrapper {\r\n  position: relative;\r\n}\r\n\r\n.kds-gallery-preview-image {\r\n  width: 24rem;\r\n  height: 24rem;\r\n  object-fit: contain;\r\n  border: 1px solid #d1d5db;\r\n  border-radius: 0.5rem;\r\n  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);\r\n  background-color: #f9fafb;\r\n}\r\n\r\n.kds-gallery-preview-label {\r\n  position: absolute;\r\n  bottom: 0.5rem;\r\n  left: 0.5rem;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n  color: white;\r\n  padding: 0.25rem 0.5rem;\r\n  border-radius: 0.25rem;\r\n  font-size: 0.875rem;\r\n  text-transform: capitalize;\r\n}\r\n\r\n.kds-gallery-thumbnails {\r\n  display: flex;\r\n  justify-content: center;\r\n  gap: 1rem;\r\n  margin-bottom: 1.5rem;\r\n}\r\n\r\n.kds-gallery-thumbnail {\r\n  position: relative;\r\n  cursor: pointer;\r\n  border: 2px solid transparent;\r\n  border-radius: 0.5rem;\r\n  padding: 0.25rem;\r\n  transition: border-color 0.2s ease;\r\n}\r\n\r\n.kds-gallery-thumbnail:hover {\r\n  border-color: #3b82f6;\r\n}\r\n\r\n.kds-gallery-thumbnail-active {\r\n  border-color: #3b82f6;\r\n}\r\n\r\n.kds-gallery-thumbnail-image {\r\n  width: 6rem;\r\n  height: 6rem;\r\n  object-fit: contain;\r\n  background-color: #f9fafb;\r\n  border-radius: 0.375rem;\r\n}\r\n\r\n.kds-gallery-thumbnail-label {\r\n  position: absolute;\r\n  bottom: 0.25rem;\r\n  left: 0.25rem;\r\n  background-color: rgba(0, 0, 0, 0.6);\r\n  color: white;\r\n  font-size: 0.75rem;\r\n  padding: 0.125rem 0.25rem;\r\n  border-radius: 0.125rem;\r\n  text-transform: capitalize;\r\n}\r\n\r\n.kds-gallery-actions {\r\n  display: flex;\r\n  justify-content: center;\r\n  gap: 1rem;\r\n}\r\n\r\n.kds-gallery-btn {\r\n  padding: 0.5rem 1.5rem;\r\n  border-radius: 0.5rem;\r\n  font-weight: 600;\r\n  border: none;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s ease;\r\n}\r\n\r\n.kds-gallery-btn-primary {\r\n  background-color: #16a34a;\r\n  color: white;\r\n}\r\n\r\n.kds-gallery-btn-primary:hover {\r\n  background-color: #15803d;\r\n}\r\n\r\n.kds-gallery-btn-secondary {\r\n  background-color: #4b5563;\r\n  color: white;\r\n}\r\n\r\n.kds-gallery-btn-secondary:hover {\r\n  background-color: #374151;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-gallery-modal {\r\n    margin: 1rem;\r\n    padding: 1rem;\r\n  }\r\n  \r\n  .kds-gallery-preview-image {\r\n    width: 100%;\r\n    height: auto;\r\n    max-height: 20rem;\r\n  }\r\n  \r\n  .kds-gallery-thumbnails {\r\n    flex-wrap: wrap;\r\n    gap: 0.5rem;\r\n  }\r\n  \r\n  .kds-gallery-thumbnail-image {\r\n    width: 4rem;\r\n    height: 4rem;\r\n  }\r\n  \r\n  .kds-gallery-actions {\r\n    flex-direction: column;\r\n    gap: 0.5rem;\r\n  }\r\n  \r\n  .kds-gallery-btn {\r\n    width: 100%;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-gallery-title {\r\n    font-size: 1.25rem;\r\n  }\r\n  \r\n  .kds-gallery-preview-image {\r\n    max-height: 15rem;\r\n  }\r\n  \r\n  .kds-gallery-thumbnail-image {\r\n    width: 3rem;\r\n    height: 3rem;\r\n  }\r\n}\r\n/* Text Controls Panel Styles with kds- prefix */\r\n\r\n.kds-text-controls-panel {\r\n  background-color: white;\r\n  padding: 0.75rem;\r\n  border-radius: 0.375rem;\r\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\r\n  margin-top: 0.5rem;\r\n}\r\n\r\n.kds-text-controls-panel > * + * {\r\n  margin-top: 0.5rem;\r\n}\r\n\r\n.kds-text-control-group {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.25rem;\r\n}\r\n\r\n.kds-text-control-label {\r\n  font-size: 0.875rem;\r\n  font-weight: 500;\r\n  color: #374151;\r\n}\r\n\r\n.kds-text-control-slider {\r\n  width: 100%;\r\n  height: 0.375rem;\r\n  border-radius: 0.25rem;\r\n  background: #d1d5db;\r\n  outline: none;\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-text-control-slider::-webkit-slider-thumb {\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #2563eb;\r\n  cursor: pointer;\r\n  border: 2px solid white;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.kds-text-control-slider::-moz-range-thumb {\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #2563eb;\r\n  cursor: pointer;\r\n  border: 2px solid white;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.kds-text-control-slider:focus {\r\n  outline: none;\r\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-text-controls-panel {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-text-control-label {\r\n    font-size: 0.8rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-text-controls-panel {\r\n    margin-top: 0.25rem;\r\n  }\r\n  \r\n  .kds-text-control-group {\r\n    gap: 0.125rem;\r\n  }\r\n}\r\n/* 3D Customizer Styles with kds- prefix */\r\n\r\n/* Main container */\r\n.kds-main {\r\n  height: 100vh;\r\n  width: 100vw;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n/* Canvas container */\r\n.kds-canvas-container {\r\n  height: 100vh;\r\n  width: 60%;\r\n}\r\n\r\n/* Controls panel container */\r\n.kds-controls-container {\r\n  position: absolute;\r\n  bottom: 1rem;\r\n  left: 1rem;\r\n}\r\n\r\n/* Button styles */\r\n.kds-btn {\r\n  padding: 0.5rem 1rem;\r\n  border-radius: 0.25rem;\r\n  font-weight: 500;\r\n  cursor: pointer;\r\n  border: none;\r\n  transition: all 0.2s ease;\r\n}\r\n\r\n.kds-btn-primary {\r\n  background-color: #2563eb;\r\n  color: white;\r\n}\r\n\r\n.kds-btn-primary:hover {\r\n  background-color: #1d4ed8;\r\n}\r\n\r\n.kds-btn-danger {\r\n  background-color: #dc2626;\r\n  color: white;\r\n}\r\n\r\n.kds-btn-danger:hover {\r\n  background-color: #b91c1c;\r\n}\r\n\r\n.kds-btn-full {\r\n  width: 100%;\r\n}\r\n\r\n.kds-btn-mt-2 {\r\n  margin-top: 0.5rem;\r\n}\r\n\r\n/* Loading overlay */\r\n.kds-loading-overlay {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  z-index: 50;\r\n  background-color: rgba(0, 0, 0, 0.9);\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.kds-loading-content {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n}\r\n\r\n.kds-spinner {\r\n  width: 3rem;\r\n  height: 3rem;\r\n  border: 4px solid white;\r\n  border-top-color: transparent;\r\n  border-radius: 50%;\r\n  animation: kds-spin 1s linear infinite;\r\n  margin-bottom: 1rem;\r\n}\r\n\r\n.kds-loading-text {\r\n  color: white;\r\n  font-size: 1.125rem;\r\n  font-weight: 500;\r\n}\r\n\r\n/* Animation */\r\n@keyframes kds-spin {\r\n  to {\r\n    transform: rotate(360deg);\r\n  }\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 1024px) {\r\n  .kds-canvas-container {\r\n    width: 70%;\r\n  }\r\n}\r\n\r\n@media (max-width: 768px) {\r\n  .kds-main {\r\n    flex-direction: column;\r\n  }\r\n  \r\n  .kds-canvas-container {\r\n    width: 100%;\r\n    height: 70vh;\r\n  }\r\n  \r\n  .kds-controls-container {\r\n    position: relative;\r\n    bottom: auto;\r\n    left: auto;\r\n    margin-top: 1rem;\r\n    width: 100%;\r\n    padding: 0 1rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 640px) {\r\n  .kds-canvas-container {\r\n    height: 60vh;\r\n  }\r\n  \r\n  .kds-controls-container {\r\n    padding: 0 0.5rem;\r\n  }\r\n  \r\n  .kds-btn {\r\n    padding: 0.75rem 1rem;\r\n    font-size: 0.875rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-canvas-container {\r\n    height: 50vh;\r\n  }\r\n  \r\n  .kds-loading-text {\r\n    font-size: 1rem;\r\n  }\r\n  \r\n  .kds-spinner {\r\n    width: 2.5rem;\r\n    height: 2.5rem;\r\n  }\r\n}\r\n/* Customizer Layout Styles with kds- prefix */\r\n\r\n.kds-layout-container {\r\n  width: 100%;\r\n  height: 100vh;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  background-color: #f3f4f6;\r\n  position: relative;\r\n  max-width: 1720px;\r\n  margin: 0 auto;\r\n}\r\n\r\n.kds-loading-overlay {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  z-index: 50;\r\n  background-color: rgba(0, 0, 0, 0.9);\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.kds-loading-content {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n}\r\n\r\n.kds-loading-spinner {\r\n  width: 3rem;\r\n  height: 3rem;\r\n  border: 4px solid white;\r\n  border-top-color: transparent;\r\n  border-radius: 50%;\r\n  animation: kds-spin 1s linear infinite;\r\n  margin-bottom: 1rem;\r\n}\r\n\r\n.kds-loading-text {\r\n  color: white;\r\n  font-size: 1.125rem;\r\n  font-weight: 500;\r\n}\r\n\r\n@keyframes kds-spin {\r\n  to {\r\n    transform: rotate(360deg);\r\n  }\r\n}\r\n\r\n.kds-controls-bar {\r\n  position: absolute;\r\n  bottom: 1.75rem;\r\n  left: 50%;\r\n  transform: translateX(-50%);\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n  border: 1px solid #D3DBDF;\r\n  background-color: white;\r\n  padding: 0.875rem;\r\n  border-radius: 0.5rem;\r\n}\r\n\r\n.kds-controls-group {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n}\r\n\r\n.kds-controls-divider {\r\n  transform: rotate(90deg);\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px;\r\n  width: 20px;\r\n}\r\n\r\n.kds-controls-zoom {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem;\r\n}\r\n\r\n/* Transform flip for redo button */\r\n.kds-transform-flip {\r\n  transform: scaleX(-1);\r\n}\r\n\r\n/* Canvas container */\r\n.kds-canvas-container {\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 60vw !important;\r\n  height: 90vh !important;\r\n  transform: translate(-50%, -50%);\r\n  z-index: 0;\r\n}\r\n\r\n.kds-save-success {\r\n  position: fixed;\r\n  top: 5rem;\r\n  right: 1.75rem;\r\n  background-color: #10b981;\r\n  color: white;\r\n  padding: 0.5rem 1rem;\r\n  border-radius: 0.5rem;\r\n  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);\r\n  z-index: 50;\r\n  transition: all 0.3s ease;\r\n}\r\n\r\n.kds-save-success-content {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n}\r\n\r\n.kds-save-success-icon {\r\n  width: 1.25rem;\r\n  height: 1.25rem;\r\n}\r\n\r\n.kds-chat-box {\r\n  width: 350px;\r\n  height: 430px;\r\n  position: absolute;\r\n  right: 1.75rem;\r\n  bottom: 7rem;\r\n  border-radius: 0.75rem;\r\n  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);\r\n  background-color: white;\r\n  border: 1px solid #e5e7eb;\r\n  overflow: hidden;\r\n  z-index: 70;\r\n}\r\n\r\n.kds-chat-header {\r\n  background: linear-gradient(to bottom, #1B2653, #192248);\r\n  color: white;\r\n  padding: 0.75rem 1rem;\r\n}\r\n\r\n.kds-chat-header-top {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n}\r\n\r\n.kds-chat-close-btn {\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-chat-title {\r\n  margin-top: 0.75rem;\r\n  margin-bottom: 1.25rem;\r\n}\r\n\r\n.kds-chat-title h2 {\r\n  font-size: 1.375rem;\r\n  font-weight: 600;\r\n}\r\n\r\n.kds-chat-title p {\r\n  font-size: 0.875rem;\r\n  color: rgba(255, 255, 255, 0.7);\r\n}\r\n\r\n.kds-chat-content {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.25rem;\r\n}\r\n\r\n.kds-chat-item {\r\n  padding: 0.75rem 1rem;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s ease;\r\n}\r\n\r\n.kds-chat-item:hover {\r\n  background-color: #f9fafb;\r\n}\r\n\r\n.kds-chat-item-text {\r\n  font-size: 1rem;\r\n  color: #1f2937;\r\n  font-weight: 500;\r\n}\r\n\r\n.kds-chat-item-arrow {\r\n  color: #9ca3af;\r\n}\r\n\r\n.kds-chat-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px;\r\n}\r\n\r\n.kds-chat-button {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  padding: 1.25rem;\r\n  border-radius: 50%;\r\n  background-color: #3559C7;\r\n  position: absolute;\r\n  right: 1.75rem;\r\n  bottom: 1.75rem;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s ease;\r\n}\r\n\r\n.kds-chat-button:hover {\r\n  background-color: #2a47a3;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 1024px) {\r\n  .kds-layout-container {\r\n    max-width: 100%;\r\n  }\r\n  \r\n  .kds-chat-box {\r\n    width: 300px;\r\n    height: 400px;\r\n    right: 1rem;\r\n    bottom: 6rem;\r\n  }\r\n  \r\n  .kds-chat-button {\r\n    right: 1rem;\r\n    bottom: 1rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 768px) {\r\n  .kds-layout-container {\r\n    flex-direction: column;\r\n  }\r\n  \r\n  .kds-controls-bar {\r\n    bottom: 1rem;\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-controls-zoom {\r\n    gap: 0.5rem;\r\n  }\r\n  \r\n  .kds-save-success {\r\n    top: 4rem;\r\n    right: 1rem;\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-chat-box {\r\n    width: 280px;\r\n    height: 350px;\r\n    right: 0.5rem;\r\n    bottom: 5rem;\r\n  }\r\n  \r\n  .kds-chat-header {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-chat-title h2 {\r\n    font-size: 1.125rem;\r\n  }\r\n  \r\n  .kds-chat-title p {\r\n    font-size: 0.8rem;\r\n  }\r\n  \r\n  .kds-chat-item {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-chat-item-text {\r\n    font-size: 0.875rem;\r\n  }\r\n  \r\n  .kds-chat-button {\r\n    right: 0.5rem;\r\n    bottom: 0.5rem;\r\n    padding: 1rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-controls-bar {\r\n    flex-direction: column;\r\n    gap: 0.25rem;\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-controls-divider {\r\n    transform: rotate(0deg);\r\n    width: 100%;\r\n    height: 1px;\r\n  }\r\n  \r\n  .kds-save-success {\r\n    top: 3rem;\r\n    right: 0.5rem;\r\n    left: 0.5rem;\r\n    text-align: center;\r\n  }\r\n  \r\n  .kds-chat-box {\r\n    width: calc(100% - 1rem);\r\n    height: 300px;\r\n    right: 0.5rem;\r\n    left: 0.5rem;\r\n    bottom: 4rem;\r\n  }\r\n  \r\n  .kds-chat-button {\r\n    right: 0.5rem;\r\n    bottom: 0.5rem;\r\n    padding: 0.75rem;\r\n  }\r\n}\r\n/*$vite$:1*/";
+  __vite_style__.textContent = "/* :root {\r\n  --background: #ffffff;\r\n  --foreground: #171717;\r\n}\r\n\r\n\r\n@theme inline {\r\n  --color-background: var(--background);\r\n  --color-foreground: var(--foreground);\r\n  --font-sans: var(--font-geist-sans);\r\n  --font-mono: var(--font-geist-mono);\r\n} */\r\n\r\n/* @media (prefers-color-scheme: dark) {\r\n  :root {\r\n    --background: #0a0a0a;\r\n    --foreground: #ededed;\r\n  }\r\n} */\r\n\r\n/* Universal CSS Reset */\r\n* {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n}\r\n\r\nhtml, body {\r\n  height: 100%;\r\n  width: 100%;\r\n}\r\n\r\n/* KDS-specific utility classes for margin/padding reset */\r\n.kds-reset {\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n\r\n.kds-reset-margin {\r\n  margin: 0;\r\n}\r\n\r\n.kds-reset-padding {\r\n  padding: 0;\r\n}\r\n\r\n/* Antialiased text rendering */\r\n.kds-antialiased {\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n}\r\n\r\nbody {\r\n  /* background: var(--background); */\r\n  /* color: var(--foreground); */\r\n  font-family: Arial, Helvetica, sans-serif;\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n}\r\n\r\n::-webkit-scrollbar {\r\n  width: 6px;\r\n}\r\n\r\n::-webkit-scrollbar-thumb {\r\n  background-color: rgba(0, 0, 0, 0.2);\r\n  border-radius: 4px;\r\n}\r\n\r\n/* canvas {\r\n  pointer-events: auto !important;\r\n  touch-action: auto;\r\n}\r\n\r\n.canvas-container {\r\n  z-index: 0;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 60% !important;\r\n  height: 60vh !important;\r\n  position: absolute !important;\r\n  background: aqua;\r\n  transform: translate(-50%, -50%);\r\n}\r\n\r\n.canvas-container canvas {\r\n  width: 100% !important;\r\n  height: 100% !important;\r\n}\r\n\r\ncanvas {\r\n  touch-action: manipulation;\r\n  -webkit-touch-callout: none;\r\n  -webkit-user-select: none;\r\n  user-select: none;\r\n} */\r\n\r\n\r\n.canvas-container {\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 60vw !important;\r\n  height: 90vh !important;\r\n  transform: translate(-50%, -50%);\r\n  /* background: aqua; */\r\n  z-index: 0;\r\n}\r\n\r\n.canvas-container canvas {\r\n  width: 100% !important;\r\n  height: 100% !important;\r\n}\r\n\r\ncanvas {\r\n  pointer-events: auto !important;\r\n  touch-action: manipulation;\r\n  -webkit-touch-callout: none;\r\n  -webkit-user-select: none;\r\n  user-select: none;\r\n}/* Topbar Component Styles */\r\n\r\n.kds-topbar {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background-color: white;\r\n  border-bottom: 1px solid #e5e7eb;\r\n  z-index: 50;\r\n}\r\n\r\n.kds-topbar-container {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.75rem 1.5rem;\r\n  max-width: 1720px;\r\n  margin: 0 auto;\r\n}\r\n\r\n.kds-left-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 1rem;\r\n}\r\n\r\n.kds-logo-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem;\r\n}\r\n\r\n.kds-menu-button {\r\n  padding: 0.5rem;\r\n  border-radius: 0.5rem;\r\n  transition: background-color 0.2s;\r\n  cursor: pointer;\r\n  border: none;\r\n  background: none;\r\n}\r\n\r\n.kds-menu-button:hover {\r\n  background-color: #f3f4f6;\r\n}\r\n\r\n.kds-menu-icon {\r\n  width: 1.25rem;\r\n  height: 1.25rem;\r\n  color: #4b5563;\r\n}\r\n\r\n.kds-right-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem;\r\n}\r\n\r\n.kds-save-views-button {\r\n  background-color: #16a34a;\r\n  color: white;\r\n  padding: 0.5rem 1rem;\r\n  border-radius: 0.25rem;\r\n  margin-top: 0.5rem;\r\n  width: 100%;\r\n  border: none;\r\n  cursor: pointer;\r\n  font-size: 0.875rem;\r\n  transition: background-color 0.2s;\r\n}\r\n\r\n.kds-save-views-button:hover {\r\n  background-color: #15803d;\r\n}\r\n\r\n.kds-clear-part-button {\r\n  background-color: #dc2626;\r\n  color: white;\r\n  padding: 0.5rem 1rem;\r\n  height: 100%;\r\n  border-radius: 0.25rem;\r\n  margin-top: 0.5rem;\r\n  white-space: nowrap;\r\n  width: 100%;\r\n  border: none;\r\n  cursor: pointer;\r\n  font-size: 0.875rem;\r\n  transition: background-color 0.2s;\r\n}\r\n\r\n.kds-clear-part-button:hover {\r\n  background-color: #b91c1c;\r\n}\r\n\r\n.kds-save-button {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n  padding: 0.5rem 1rem;\r\n  border-radius: 0.5rem;\r\n  font-weight: 500;\r\n  transition: all 0.2s;\r\n  border: none;\r\n  cursor: pointer;\r\n  font-size: 0.875rem;\r\n}\r\n\r\n.kds-save-button:disabled {\r\n  background-color: #9ca3af;\r\n  cursor: not-allowed;\r\n  color: white;\r\n}\r\n\r\n.kds-save-button:not(:disabled) {\r\n  background-color: #3b82f6;\r\n  color: white;\r\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\r\n}\r\n\r\n.kds-save-button:not(:disabled):hover {\r\n  background-color: #2563eb;\r\n  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n.kds-spinner {\r\n  animation: spin 1s linear infinite;\r\n  height: 1rem;\r\n  width: 1rem;\r\n  border: 2px solid white;\r\n  border-top-color: transparent;\r\n  border-radius: 50%;\r\n}\r\n\r\n.kds-save-icon {\r\n  width: 1rem;\r\n  height: 1rem;\r\n}\r\n\r\n@keyframes spin {\r\n  to {\r\n    transform: rotate(360deg);\r\n  }\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-topbar-container {\r\n    padding: 0.5rem 1rem;\r\n    flex-direction: column;\r\n    gap: 0.75rem;\r\n  }\r\n  \r\n  .kds-left-section {\r\n    width: 100%;\r\n    justify-content: space-between;\r\n  }\r\n  \r\n  .kds-right-section {\r\n    width: 100%;\r\n    flex-wrap: wrap;\r\n    gap: 0.5rem;\r\n  }\r\n  \r\n  .kds-save-views-button,\r\n  .kds-clear-part-button {\r\n    margin-top: 0;\r\n    padding: 0.375rem 0.75rem;\r\n    font-size: 0.75rem;\r\n  }\r\n  \r\n  .kds-save-button {\r\n    padding: 0.375rem 0.75rem;\r\n    font-size: 0.75rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-topbar-container {\r\n    padding: 0.375rem 0.75rem;\r\n  }\r\n  \r\n  .kds-logo-section img {\r\n    max-width: 120px;\r\n  }\r\n  \r\n  .kds-right-section img {\r\n    max-width: 80px;\r\n  }\r\n  \r\n  .kds-save-views-button,\r\n  .kds-clear-part-button {\r\n    padding: 0.25rem 0.5rem;\r\n    font-size: 0.7rem;\r\n  }\r\n  \r\n  .kds-save-button {\r\n    padding: 0.25rem 0.5rem;\r\n    font-size: 0.7rem;\r\n  }\r\n} /* EditorTab Component Styles */\r\n\r\n.kds-editor-container {\r\n  background-color: white;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  border: 1px solid #D3DBDF;\r\n  width: 100%; /* w-full */\r\n  height: fit-content; /* h-fit */\r\n}\r\n\r\n@media (min-width: 640px) {\r\n  .kds-editor-container {\r\n    width: 20rem; /* sm:w-80 */\r\n  }\r\n}\r\n\r\n.kds-editor-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-editor-title-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-editor-title {\r\n  font-size: 16px; /* text-[16px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-editor-close {\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-editor-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px; /* h-px */\r\n}\r\n\r\n.kds-editor-content {\r\n  padding: 0.75rem 1rem; /* py-3 px-4 */\r\n}\r\n\r\n.kds-editor-form {\r\n  display: flex;\r\n  flex-direction: column; /* flex-col */\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-editor-label {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n}\r\n\r\n.kds-editor-textarea-container {\r\n  position: relative;\r\n  background-color: #E4E9EC; /* bg-[#E4E9EC] */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  height: 11.5rem; /* h-46 */\r\n}\r\n\r\n.kds-editor-textarea {\r\n  padding: 0.5rem; /* p-2 */\r\n  color: #000000; /* text-black */\r\n  resize: none; /* resize-none */\r\n  width: 100%; /* w-full */\r\n  font-size: 13px; /* text-[13px] */\r\n  height: 9rem; /* h-36 */\r\n  border: none; /* border-none */\r\n  outline: none; /* outline-none */\r\n  overflow-y: scroll; /* overflow-y-scroll */\r\n  background: transparent;\r\n}\r\n\r\n.kds-editor-textarea::placeholder {\r\n  font-size: 13px; /* placeholder:text-[13px] */\r\n  color: #6b7280;\r\n}\r\n\r\n.kds-editor-textarea:focus {\r\n  border: none; /* focus:border-none */\r\n}\r\n\r\n.kds-editor-prompt-badge {\r\n  background-color: white;\r\n  display: flex;\r\n  gap: 0.5rem; /* gap-2 */\r\n  padding: 0 0.5rem 0.25rem; /* px-2 py-1 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  position: absolute;\r\n  bottom: 0.5rem; /* bottom-2 */\r\n  right: 0.5rem; /* right-2 */\r\n}\r\n\r\n.kds-editor-prompt-text {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n}\r\n\r\n.kds-editor-tags {\r\n  margin: 0.5rem 0; /* my-2 */\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem; /* gap-3 */\r\n}\r\n\r\n.kds-editor-tag {\r\n  padding: 0 1.25rem 0.375rem; /* px-5 py-1.5 */\r\n  font-size: 13px; /* text-[13px] */\r\n  border-radius: 9999px; /* rounded-full */\r\n  border: none;\r\n  cursor: pointer;\r\n  transition: all 0.2s;\r\n}\r\n\r\n.kds-editor-tag.kds-active {\r\n  background-color: #f3f4f6; /* bg-gray-100 */\r\n  color: #000000; /* text-black */\r\n}\r\n\r\n.kds-editor-tag.kds-inactive {\r\n  background-color: #e5e7eb; /* bg-gray-200 */\r\n  color: #4b5563; /* text-gray-600 */\r\n}\r\n\r\n.kds-editor-generate-btn {\r\n  background-color: #2563eb; /* bg-blue-600 */\r\n  color: white;\r\n  border-radius: 0.375rem; /* rounded-md */\r\n  padding: 0.5rem 0; /* py-2 */\r\n  font-size: 14px; /* text-[14px] */\r\n  border: none;\r\n  cursor: pointer;\r\n  transition: all 0.2s;\r\n}\r\n\r\n.kds-editor-generate-btn:hover:not(:disabled) {\r\n  background-color: #1d4ed8;\r\n}\r\n\r\n.kds-editor-generate-btn:disabled {\r\n  background-color: #D7DEF4; /* disabled:bg-[#D7DEF4] */\r\n  color: #AEBDEA; /* disabled:text-[#AEBDEA] */\r\n  cursor: not-allowed;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 640px) {\r\n  .kds-editor-container {\r\n    width: 100%;\r\n    max-width: none;\r\n  }\r\n  \r\n  .kds-editor-content {\r\n    padding: 0.5rem 0.75rem;\r\n  }\r\n  \r\n  .kds-editor-textarea-container {\r\n    height: 10rem;\r\n  }\r\n  \r\n  .kds-editor-textarea {\r\n    height: 8rem;\r\n  }\r\n  \r\n  .kds-editor-tags {\r\n    flex-wrap: wrap;\r\n    gap: 0.5rem;\r\n  }\r\n  \r\n  .kds-editor-tag {\r\n    padding: 0.25rem 1rem;\r\n    font-size: 12px;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-editor-header {\r\n    padding: 0.375rem 0.5rem;\r\n  }\r\n  \r\n  .kds-editor-title {\r\n    font-size: 14px;\r\n  }\r\n  \r\n  .kds-editor-content {\r\n    padding: 0.375rem 0.5rem;\r\n  }\r\n  \r\n  .kds-editor-textarea-container {\r\n    height: 8rem;\r\n  }\r\n  \r\n  .kds-editor-textarea {\r\n    height: 6rem;\r\n    font-size: 12px;\r\n  }\r\n  \r\n  .kds-editor-textarea::placeholder {\r\n    font-size: 12px;\r\n  }\r\n  \r\n  .kds-editor-prompt-badge {\r\n    bottom: 0.25rem;\r\n    right: 0.25rem;\r\n    padding: 0.125rem 0.375rem;\r\n  }\r\n  \r\n  .kds-editor-prompt-text {\r\n    font-size: 12px;\r\n  }\r\n} /* PreviewTab Component Styles */\r\n\r\n.kds-preview-container {\r\n  background-color: white;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  border: 1px solid #D3DBDF;\r\n  width: 20rem; /* w-80 */\r\n  height: fit-content; /* h-fit */\r\n  max-height: 600px; /* max-h-[600px] */\r\n  overflow-y: auto; /* overflow-y-auto */\r\n}\r\n\r\n.kds-preview-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-preview-title-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-preview-title {\r\n  font-size: 16px; /* text-[16px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-preview-close {\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-preview-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px; /* h-px */\r\n}\r\n\r\n.kds-preview-design-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem; /* gap-3 */\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-preview-design-image {\r\n  border: 1px solid #D3DBDF;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  padding: 0.5rem; /* p-2 */\r\n  width: 30%; /* w-[30%] */\r\n}\r\n\r\n.kds-preview-design-img {\r\n  width: 100%;\r\n  height: 3rem; /* h-12 */\r\n  object-fit: contain; /* object-contain */\r\n  border-radius: 0.25rem; /* rounded */\r\n}\r\n\r\n.kds-preview-design-placeholder {\r\n  width: 100%;\r\n  height: 3rem; /* h-12 */\r\n  background-color: #f3f4f6; /* bg-gray-100 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.kds-preview-design-placeholder-text {\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #6b7280; /* text-gray-500 */\r\n}\r\n\r\n.kds-preview-design-info {\r\n  flex: 1; /* flex-1 */\r\n}\r\n\r\n.kds-preview-dimensions-label {\r\n  font-weight: 600; /* font-semibold */\r\n  font-size: 12px; /* text-[12px] */\r\n  color: #4b5563; /* text-gray-600 */\r\n  margin-bottom: 0.5rem; /* mb-2 */\r\n}\r\n\r\n.kds-preview-dimensions {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-preview-dimension-badge {\r\n  border-radius: 9999px; /* rounded-full */\r\n  background-color: #f3f4f6; /* bg-gray-100 */\r\n  padding: 0.25rem 0.5rem; /* py-1 px-2 */\r\n  color: #4b5563; /* text-gray-600 */\r\n  font-size: 11px; /* text-[11px] */\r\n}\r\n\r\n.kds-preview-flip-section {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-preview-flip-title {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-preview-flip-buttons {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem; /* gap-3 */\r\n}\r\n\r\n.kds-preview-flip-button {\r\n  padding: 0.25rem; /* p-1 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  transition: background-color 0.2s;\r\n}\r\n\r\n.kds-preview-flip-button:hover {\r\n  background-color: #f3f4f6; /* hover:bg-gray-100 */\r\n}\r\n\r\n.kds-preview-flip-button.kds-active {\r\n  background-color: #dbeafe; /* bg-blue-100 */\r\n}\r\n\r\n.kds-preview-flip-icon {\r\n  width: 20px; /* w-[20px] */\r\n  height: 20px; /* h-[20px] */\r\n}\r\n\r\n.kds-preview-alignment-section {\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-preview-alignment-title {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n  margin-bottom: 0.75rem; /* mb-3 */\r\n}\r\n\r\n.kds-preview-alignment-grid {\r\n  display: grid;\r\n  grid-template-columns: repeat(6, 1fr); /* grid-cols-6 */\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-preview-alignment-button {\r\n  padding: 0.5rem; /* p-2 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  transition: background-color 0.2s;\r\n}\r\n\r\n.kds-preview-alignment-button:hover {\r\n  background-color: #f3f4f6; /* hover:bg-gray-100 */\r\n}\r\n\r\n.kds-preview-alignment-icon {\r\n  width: 18px; /* w-[18px] */\r\n  height: 18px; /* h-[18px] */\r\n  margin: 0 auto; /* mx-auto */\r\n}\r\n\r\n.kds-preview-control-section {\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-preview-control-label {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n  display: block;\r\n  margin-bottom: 0.5rem; /* mb-2 */\r\n}\r\n\r\n.kds-preview-control-input-group {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-preview-slider {\r\n  flex: 1; /* flex-1 */\r\n  height: 0.5rem; /* h-2 */\r\n  background-color: #e5e7eb; /* bg-gray-200 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  appearance: none;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-preview-slider::-webkit-slider-thumb {\r\n  appearance: none;\r\n  height: 16px;\r\n  width: 16px;\r\n  border-radius: 50%;\r\n  background: #3559C7;\r\n  cursor: pointer;\r\n  border: 2px solid #ffffff;\r\n  box-shadow: 0 2px 4px rgba(0,0,0,0.2);\r\n}\r\n\r\n.kds-preview-slider::-moz-range-thumb {\r\n  height: 16px;\r\n  width: 16px;\r\n  border-radius: 50%;\r\n  background: #3559C7;\r\n  cursor: pointer;\r\n  border: 2px solid #ffffff;\r\n  box-shadow: 0 2px 4px rgba(0,0,0,0.2);\r\n}\r\n\r\n.kds-preview-value-display {\r\n  border: 1px solid #D3DBDF;\r\n  min-width: 3rem; /* min-w-12 */\r\n  text-align: center;\r\n  border-radius: 0.375rem; /* rounded-md */\r\n  font-size: 12px; /* text-[12px] */\r\n  padding: 0.25rem 0.5rem; /* py-1 px-2 */\r\n}\r\n\r\n.kds-preview-arrange-section {\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-preview-arrange-title {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n  margin-bottom: 0.75rem; /* mb-3 */\r\n}\r\n\r\n.kds-preview-arrange-buttons {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 1rem; /* gap-4 */\r\n}\r\n\r\n.kds-preview-arrange-button {\r\n  padding: 0.5rem; /* p-2 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  transition: background-color 0.2s;\r\n}\r\n\r\n.kds-preview-arrange-button:hover {\r\n  background-color: #f3f4f6; /* hover:bg-gray-100 */\r\n}\r\n\r\n.kds-preview-arrange-icon {\r\n  width: 18px; /* w-[18px] */\r\n  height: 18px; /* h-[18px] */\r\n}\r\n\r\n.kds-preview-tools-section {\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-preview-tools-title {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n  margin-bottom: 0.75rem; /* mb-3 */\r\n}\r\n\r\n.kds-preview-tool-button {\r\n  width: 100%; /* w-full */\r\n  border: 1px solid #d1d5db; /* border-gray-300 */\r\n  border-radius: 0.375rem; /* rounded-md */\r\n  padding: 0.75rem; /* py-3 */\r\n  font-size: 14px; /* text-[14px] */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: flex-start;\r\n  gap: 0.75rem; /* gap-3 */\r\n  margin-bottom: 0.75rem; /* mb-3 */\r\n  transition: background-color 0.2s;\r\n}\r\n\r\n.kds-preview-tool-button:hover {\r\n  background-color: #f9fafb; /* hover:bg-gray-50 */\r\n}\r\n\r\n.kds-preview-tool-button:last-child {\r\n  margin-bottom: 0;\r\n}\r\n\r\n.kds-preview-tool-button.kds-disabled {\r\n  opacity: 0.5;\r\n  cursor: not-allowed;\r\n}\r\n\r\n.kds-preview-tool-icon {\r\n  width: 1rem; /* w-4 */\r\n  height: 1rem; /* h-4 */\r\n  margin-left: 0.75rem; /* ml-3 */\r\n}\r\n\r\n.kds-preview-tool-text {\r\n  color: #000000; /* text-black */\r\n}\r\n\r\n.kds-preview-empty-state {\r\n  padding: 1.5rem; /* p-6 */\r\n  text-align: center;\r\n  color: #6b7280; /* text-gray-500 */\r\n}\r\n\r\n.kds-preview-empty-text {\r\n  font-size: 14px; /* text-[14px] */\r\n}\r\n\r\n.kds-preview-empty-subtext {\r\n  font-size: 12px; /* text-[12px] */\r\n  margin-top: 0.25rem; /* mt-1 */\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-preview-container {\r\n    width: calc(100vw - 2rem);\r\n    max-width: 20rem;\r\n  }\r\n  \r\n  .kds-preview-alignment-grid {\r\n    grid-template-columns: repeat(3, 1fr);\r\n  }\r\n  \r\n  .kds-preview-arrange-buttons {\r\n    gap: 0.5rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-preview-container {\r\n    width: calc(100vw - 1rem);\r\n  }\r\n  \r\n  .kds-preview-header {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-preview-design-section,\r\n  .kds-preview-flip-section,\r\n  .kds-preview-alignment-section,\r\n  .kds-preview-control-section,\r\n  .kds-preview-arrange-section,\r\n  .kds-preview-tools-section {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-preview-alignment-grid {\r\n    grid-template-columns: repeat(2, 1fr);\r\n  }\r\n  \r\n  .kds-preview-arrange-buttons {\r\n    flex-wrap: wrap;\r\n    gap: 0.25rem;\r\n  }\r\n} /* Texture Uploader Styles with kds- prefix */\r\n\r\n.kds-texture-uploader {\r\n  background-color: white;\r\n  padding: 0.75rem;\r\n  border-radius: 0.375rem;\r\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\r\n  margin-top: 0.5rem;\r\n}\r\n\r\n.kds-texture-mode-select {\r\n  margin-top: 0.5rem;\r\n  border: 1px solid #d1d5db;\r\n  border-radius: 0.25rem;\r\n  padding: 0.25rem;\r\n  width: 100%;\r\n}\r\n\r\n.kds-texture-upload-container {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem;\r\n}\r\n\r\n.kds-texture-upload-title {\r\n  font-size: 0.875rem;\r\n  font-weight: 500;\r\n}\r\n\r\n.kds-texture-upload-area {\r\n  display: block;\r\n  background-color: #E4E9EC;\r\n  padding: 3rem 1rem;\r\n  border-radius: 0.5rem;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s ease;\r\n}\r\n\r\n.kds-texture-upload-area:hover {\r\n  background-color: #d9e2e6;\r\n}\r\n\r\n.kds-texture-file-input {\r\n  display: none;\r\n}\r\n\r\n.kds-texture-upload-content {\r\n  text-align: center;\r\n}\r\n\r\n.kds-texture-upload-btn {\r\n  background-color: #3559C7;\r\n  color: white;\r\n  padding: 0.5rem 1.5rem;\r\n  border-radius: 0.375rem;\r\n  display: inline-block;\r\n  margin-bottom: 0.75rem;\r\n  border: none;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-texture-upload-text {\r\n  color: #6b7280;\r\n  font-size: 0.75rem;\r\n  line-height: 1.2;\r\n}\r\n\r\n.kds-texture-submit-btn {\r\n  width: 100%;\r\n  border-radius: 0.375rem;\r\n  padding: 0.75rem;\r\n  font-size: 0.875rem;\r\n  font-weight: 500;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s ease;\r\n  border: none;\r\n}\r\n\r\n.kds-texture-submit-btn-enabled {\r\n  color: white;\r\n  background-color: #3559C7;\r\n}\r\n\r\n.kds-texture-submit-btn-enabled:hover {\r\n  background-color: #2a47a3;\r\n}\r\n\r\n.kds-texture-submit-btn-disabled {\r\n  background-color: #E6E9F3;\r\n  color: #B8C5E8;\r\n  cursor: not-allowed;\r\n}\r\n\r\n.kds-texture-preview-container {\r\n  margin-top: 0.75rem;\r\n}\r\n\r\n.kds-texture-preview-image {\r\n  width: 6rem;\r\n  height: 6rem;\r\n  object-fit: contain;\r\n  border: 1px solid #d1d5db;\r\n  margin-bottom: 0.5rem;\r\n}\r\n\r\n.kds-texture-remove-btn {\r\n  margin-top: 0.5rem;\r\n  padding: 0.25rem 0.75rem;\r\n  background-color: #ef4444;\r\n  color: white;\r\n  border-radius: 0.25rem;\r\n  border: none;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s ease;\r\n}\r\n\r\n.kds-texture-remove-btn:hover {\r\n  background-color: #dc2626;\r\n}\r\n\r\n.kds-texture-logo-controls {\r\n  margin-top: 0.75rem;\r\n}\r\n\r\n.kds-texture-logo-controls > * + * {\r\n  margin-top: 0.5rem;\r\n}\r\n\r\n.kds-texture-logo-label {\r\n  display: block;\r\n  font-weight: 600;\r\n  margin-bottom: 0.25rem;\r\n}\r\n\r\n.kds-texture-logo-slider {\r\n  width: 100%;\r\n  height: 0.375rem;\r\n  border-radius: 0.25rem;\r\n  background: #d1d5db;\r\n  outline: none;\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-texture-logo-slider::-webkit-slider-thumb {\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #2563eb;\r\n  cursor: pointer;\r\n  border: 2px solid white;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.kds-texture-logo-slider::-moz-range-thumb {\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #2563eb;\r\n  cursor: pointer;\r\n  border: 2px solid white;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.kds-texture-logo-slider:focus {\r\n  outline: none;\r\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\r\n}\r\n\r\n.kds-texture-logo-labels {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  font-size: 0.875rem;\r\n  margin-top: 0.25rem;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-texture-uploader {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-texture-upload-area {\r\n    padding: 2rem 0.75rem;\r\n  }\r\n  \r\n  .kds-texture-upload-title {\r\n    font-size: 0.8rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-texture-upload-container {\r\n    gap: 0.75rem;\r\n  }\r\n  \r\n  .kds-texture-upload-area {\r\n    padding: 1.5rem 0.5rem;\r\n  }\r\n  \r\n  .kds-texture-upload-btn {\r\n    padding: 0.5rem 1rem;\r\n    font-size: 0.8rem;\r\n  }\r\n  \r\n  .kds-texture-upload-text {\r\n    font-size: 0.7rem;\r\n  }\r\n}\r\n/* Texture Controls Panel Styles with kds- prefix */\r\n\r\n.kds-texture-controls-panel {\r\n  background-color: white;\r\n  padding: 0.75rem;\r\n  border-radius: 0.375rem;\r\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\r\n  margin-top: 0.5rem;\r\n}\r\n\r\n.kds-texture-controls-panel > * + * {\r\n  margin-top: 0.5rem;\r\n}\r\n\r\n.kds-texture-control-group {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.25rem;\r\n}\r\n\r\n.kds-texture-control-label {\r\n  font-size: 0.875rem;\r\n  font-weight: 500;\r\n  color: #374151;\r\n}\r\n\r\n.kds-texture-control-slider {\r\n  width: 100%;\r\n  height: 0.375rem;\r\n  border-radius: 0.25rem;\r\n  background: #d1d5db;\r\n  outline: none;\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-texture-control-slider::-webkit-slider-thumb {\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #2563eb;\r\n  cursor: pointer;\r\n  border: 2px solid white;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.kds-texture-control-slider::-moz-range-thumb {\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #2563eb;\r\n  cursor: pointer;\r\n  border: 2px solid white;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.kds-texture-control-slider:focus {\r\n  outline: none;\r\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-texture-controls-panel {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-texture-control-label {\r\n    font-size: 0.8rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-texture-controls-panel {\r\n    margin-top: 0.25rem;\r\n  }\r\n  \r\n  .kds-texture-control-group {\r\n    gap: 0.125rem;\r\n  }\r\n}\r\n/* EditTab Component Styles */\r\n\r\n.kds-edit-container {\r\n  background-color: #ffffff;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  border: 1px solid #D3DBDF;\r\n  width: 100%; /* w-full */\r\n  height: fit-content; /* h-fit */\r\n}\r\n\r\n@media (min-width: 640px) {\r\n  .kds-edit-container {\r\n    width: 20rem; /* w-80 */\r\n  }\r\n}\r\n\r\n.kds-edit-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-edit-title-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-edit-title {\r\n  font-size: 16px; /* text-[16px] */\r\n  font-weight: 600; /* font-semibold */\r\n  color: #111827;\r\n}\r\n\r\n.kds-edit-close {\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-edit-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px;\r\n}\r\n\r\n.kds-edit-body {\r\n  padding: 1.5rem; /* py-6 px-6 */\r\n}\r\n\r\n.kds-edit-form {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem; /* gap-4 */\r\n}\r\n\r\n.kds-edit-subtitle {\r\n  font-size: 14px; /* text-[14px] */\r\n  font-weight: 500; /* font-medium */\r\n  color: #111827;\r\n}\r\n\r\n.kds-upload-label {\r\n  display: block;\r\n  background-color: #E4E9EC;\r\n  padding: 3rem 1rem; /* py-12 px-4 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  cursor: pointer;\r\n  transition: background-color 0.2s;\r\n}\r\n\r\n.kds-upload-label:hover {\r\n  background-color: #d9e2e6; /* hover:bg-[#d9e2e6] */\r\n}\r\n\r\n.kds-hidden {\r\n  display: none;\r\n}\r\n\r\n.kds-upload-helper {\r\n  text-align: center;\r\n}\r\n\r\n.kds-upload-cta {\r\n  background-color: #3559C7;\r\n  color: white;\r\n  padding: 0.5rem 1.5rem; /* px-6 py-2 */\r\n  border-radius: 0.375rem; /* rounded-md */\r\n  display: inline-block;\r\n  margin-bottom: 0.75rem; /* mb-3 */\r\n  font-size: 0.875rem;\r\n}\r\n\r\n.kds-upload-note {\r\n  color: #6b7280; /* text-gray-500 */\r\n  font-size: 12px; /* text-[12px] */\r\n  line-height: 1.25rem;\r\n}\r\n\r\n.kds-upload-button {\r\n  width: 100%;\r\n  border-radius: 0.375rem; /* rounded-md */\r\n  padding: 0.75rem 0; /* py-3 */\r\n  font-size: 14px; /* text-[14px] */\r\n  font-weight: 500; /* font-medium */\r\n  cursor: pointer;\r\n  transition: background-color 0.2s, color 0.2s;\r\n  background-color: #3559C7;\r\n  color: #ffffff;\r\n  border: none;\r\n}\r\n\r\n.kds-upload-button:hover:not(:disabled) {\r\n  background-color: #2a47a3; /* hover */\r\n}\r\n\r\n.kds-upload-button:disabled {\r\n  background-color: #E6E9F3;\r\n  color: #B8C5E8;\r\n  cursor: not-allowed;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 640px) {\r\n  .kds-edit-body {\r\n    padding: 1rem;\r\n  }\r\n}/* AddTextTab.css - Converted from Tailwind CSS with kds- prefix */\r\n\r\n.kds-container {\r\n  background-color: white;\r\n  border-radius: 0.5rem;\r\n  border: 1px solid #D3DBDF;\r\n  width: 20rem; /* w-80 = 20rem */\r\n  height: fit-content;\r\n}\r\n\r\n/* Responsive container */\r\n@media (max-width: 768px) {\r\n  .kds-container {\r\n    width: 100%;\r\n    max-width: 20rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 640px) {\r\n  .kds-container {\r\n    width: 100%;\r\n    max-width: 18rem;\r\n  }\r\n}\r\n\r\n.kds-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-header-left {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 = 0.5rem */\r\n}\r\n\r\n.kds-title {\r\n  font-size: 16px;\r\n  color: black;\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-close-button {\r\n  cursor: pointer;\r\n  transition: opacity 0.2s ease;\r\n}\r\n\r\n.kds-close-button:hover {\r\n  opacity: 0.7;\r\n}\r\n\r\n.kds-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px;\r\n}\r\n\r\n.kds-content {\r\n  padding: 0.75rem 1rem; /* py-3 px-4 */\r\n}\r\n\r\n.kds-input-container {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem; /* gap-2 = 0.5rem */\r\n}\r\n\r\n.kds-text-input {\r\n  border: 1px solid #D3DBDF;\r\n  color: black;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  padding: 0.75rem; /* p-3 */\r\n  min-height: 5rem; /* min-h-20 = 5rem */\r\n  font-family: inherit;\r\n  font-size: 0.875rem;\r\n  resize: vertical;\r\n  outline: none;\r\n  transition: border-color 0.2s ease;\r\n}\r\n\r\n.kds-text-input:focus {\r\n  border-color: #3b82f6;\r\n  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);\r\n}\r\n\r\n.kds-text-input::placeholder {\r\n  font-weight: 600; /* placeholder:font-semibold */\r\n  color: #6b7280;\r\n}\r\n\r\n.kds-add-button {\r\n  border-radius: 0.375rem; /* rounded-md */\r\n  margin-top: 0.75rem; /* mt-3 = 0.75rem */\r\n  padding: 0.75rem; /* py-3 = 0.75rem */\r\n  width: 100%; /* w-full */\r\n  font-size: 16px; /* text-[16px] */\r\n  cursor: pointer;\r\n  border: none;\r\n  font-weight: 500;\r\n  transition: all 0.2s ease;\r\n}\r\n\r\n.kds-add-button.active {\r\n  color: white;\r\n  background-color: #2563eb; /* bg-blue-600 */\r\n}\r\n\r\n.kds-add-button.active:hover {\r\n  background-color: #1d4ed8;\r\n}\r\n\r\n.kds-add-button.inactive {\r\n  background-color: #D7DEF4;\r\n  color: #AEBDEA;\r\n  cursor: not-allowed;\r\n}\r\n\r\n.kds-add-button.inactive:hover {\r\n  background-color: #c7d1f0;\r\n}\r\n\r\n/* Responsive adjustments */\r\n@media (max-width: 480px) {\r\n  .kds-container {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-title {\r\n    font-size: 14px;\r\n  }\r\n  \r\n  .kds-header {\r\n    padding: 0.375rem 0.5rem;\r\n  }\r\n  \r\n  .kds-content {\r\n    padding: 0.5rem 0.75rem;\r\n  }\r\n  \r\n  .kds-text-input {\r\n    min-height: 4rem;\r\n    font-size: 0.75rem;\r\n  }\r\n  \r\n  .kds-add-button {\r\n    padding: 0.625rem;\r\n    font-size: 14px;\r\n  }\r\n}\r\n\r\n/* Focus states for accessibility */\r\n.kds-text-input:focus-visible {\r\n  outline: 2px solid #3b82f6;\r\n  outline-offset: 2px;\r\n}\r\n\r\n.kds-add-button:focus-visible {\r\n  outline: 2px solid #3b82f6;\r\n  outline-offset: 2px;\r\n}\r\n/* FontSelector Component Styles */\r\n\r\n.kds-fontselector-container {\r\n  background-color: #ffffff;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  border: 1px solid #D3DBDF;\r\n  width: 20rem; /* w-80 */\r\n  height: fit-content; /* h-fit */\r\n  max-height: 460px; /* max-h-[460px] */\r\n  overflow-y: auto; /* overflow-y-scroll */\r\n}\r\n\r\n.kds-fontselector-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-fontselector-title {\r\n  font-size: 16px; /* text-[16px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-fontselector-close {\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-fontselector-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px; /* h-px */\r\n}\r\n\r\n.kds-fontselector-content {\r\n  padding: 0.75rem; /* p-3 */\r\n  display: flex;\r\n  flex-direction: column; /* flex-col */\r\n  gap: 1rem; /* gap-4 */\r\n}\r\n\r\n.kds-fontselector-item {\r\n  padding: 0 0.75rem; /* px-3 */\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-fontselector-font {\r\n  color: #000000; /* text-black */\r\n  font-size: 14px; /* text-[14px] */\r\n}\r\n\r\n/* Responsive */\r\n@media (max-width: 768px) {\r\n  .kds-fontselector-container {\r\n    width: calc(100vw - 2rem);\r\n    max-width: 20rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-fontselector-container {\r\n    width: calc(100vw - 1rem);\r\n  }\r\n  .kds-fontselector-content {\r\n    padding: 0.5rem;\r\n  }\r\n}/* CustomColorSwatch Component Styles */\r\n\r\n.kds-color-container {\r\n  background-color: white;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  border: 1px solid #D3DBDF;\r\n  width: 18rem; /* w-72 */\r\n  height: fit-content; /* h-fit */\r\n  max-height: 460px; /* max-h-[460px] */\r\n  overflow-y: scroll;\r\n}\r\n\r\n.kds-color-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-color-title-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-color-title {\r\n  font-size: 16px; /* text-[16px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-color-close {\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-color-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px; /* h-px */\r\n}\r\n\r\n.kds-color-content {\r\n  padding: 0.75rem; /* p-3 */\r\n  display: flex;\r\n  flex-direction: column; /* flex-col */\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-used-colors-section h3 {\r\n  font-size: 12px; /* text-[12px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-used-color-display {\r\n  margin-bottom: 1rem; /* mb-4 */\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n  margin-top: 0.5rem; /* mt-2 */\r\n}\r\n\r\n.kds-used-color-swatch {\r\n  width: 1.5rem; /* w-6 */\r\n  height: 1.5rem; /* h-6 */\r\n  border-radius: 50%; /* rounded-full */\r\n  cursor: pointer;\r\n  border: 2px solid transparent; /* border-2 */\r\n  transition: all 0.15s; /* transition-all duration-150 */\r\n}\r\n\r\n.kds-used-color-text {\r\n  font-size: 0.875rem; /* text-sm */\r\n}\r\n\r\n.kds-all-colors-section h3 {\r\n  font-size: 12px; /* text-[12px] */\r\n  font-weight: 600; /* font-semibold */\r\n  color: #000000; /* text-black */\r\n}\r\n\r\n.kds-color-grid {\r\n  display: grid;\r\n  grid-template-columns: repeat(6, 1fr); /* grid-cols-6 */\r\n  align-items: center; /* items-center */\r\n  gap: 0.5rem; /* gap-2 */\r\n  margin-top: 0.5rem; /* mt-2 */\r\n}\r\n\r\n.kds-color-swatch {\r\n  width: 1.5rem; /* w-6 */\r\n  height: 1.5rem; /* h-6 */\r\n  border-radius: 50%; /* rounded-full */\r\n  cursor: pointer;\r\n  border: 2px solid transparent; /* border-2 */\r\n  transition: all 0.15s; /* transition-all duration-150 */\r\n}\r\n\r\n.kds-color-swatch.kds-selected {\r\n  border-color: #000000; /* border-black */\r\n  transform: scale(1.1); /* scale-110 */\r\n}\r\n\r\n.kds-color-swatch.kds-unselected {\r\n  border-color: transparent; /* border-transparent */\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-color-container {\r\n    width: calc(100vw - 2rem);\r\n    max-width: 18rem;\r\n  }\r\n  \r\n  .kds-color-grid {\r\n    grid-template-columns: repeat(5, 1fr);\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-color-container {\r\n    width: calc(100vw - 1rem);\r\n  }\r\n  \r\n  .kds-color-grid {\r\n    grid-template-columns: repeat(4, 1fr);\r\n    gap: 0.375rem;\r\n  }\r\n  \r\n  .kds-color-swatch,\r\n  .kds-used-color-swatch {\r\n    width: 1.25rem;\r\n    height: 1.25rem;\r\n  }\r\n  \r\n  .kds-color-content {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-color-header {\r\n    padding: 0.375rem 0.5rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 360px) {\r\n  .kds-color-grid {\r\n    grid-template-columns: repeat(3, 1fr);\r\n  }\r\n} /* EditTextTab Component Styles */\r\n\r\n.kds-edit-text-container {\r\n  background-color: white;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  border: 1px solid #D3DBDF;\r\n  width: 20rem; /* w-80 */\r\n  height: fit-content; /* h-fit */\r\n  max-height: 460px; /* max-h-[460px] */\r\n  overflow-y: scroll;\r\n}\r\n\r\n.kds-edit-text-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-edit-text-title-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-edit-text-title {\r\n  font-size: 16px; /* text-[16px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-edit-text-status {\r\n  font-size: 0.75rem; /* text-xs */\r\n  font-weight: 500; /* font-medium */\r\n}\r\n\r\n.kds-edit-text-status.kds-detected {\r\n  color: #059669; /* text-green-600 */\r\n}\r\n\r\n.kds-edit-text-status.kds-ready {\r\n  color: #2563eb; /* text-blue-600 */\r\n}\r\n\r\n.kds-edit-text-close {\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-edit-text-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px; /* h-px */\r\n}\r\n\r\n.kds-edit-text-content {\r\n  padding: 0.75rem 1rem; /* py-3 px-4 */\r\n}\r\n\r\n.kds-edit-text-input {\r\n  border: 1px solid #D3DBDF;\r\n  color: #000000; /* text-black */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  padding: 0.75rem; /* p-3 */\r\n  min-height: 5rem; /* min-h-20 */\r\n  width: 100%; /* w-full */\r\n  font-size: 0.875rem;\r\n  outline: none;\r\n  transition: border-color 0.2s;\r\n}\r\n\r\n.kds-edit-text-input:focus {\r\n  border-color: #3b82f6;\r\n}\r\n\r\n.kds-edit-text-input::placeholder {\r\n  font-weight: 600; /* placeholder:font-semibold */\r\n  color: #6b7280;\r\n}\r\n\r\n.kds-edit-text-hint {\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #6b7280; /* text-gray-500 */\r\n  margin-top: 0.5rem; /* mt-2 */\r\n}\r\n\r\n.kds-edit-text-section {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-edit-text-section-title {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-edit-text-controls {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem; /* gap-3 */\r\n}\r\n\r\n.kds-edit-text-control-icon {\r\n  width: 22px; /* w-[22px] */\r\n  cursor: pointer;\r\n  transition: opacity 0.2s;\r\n}\r\n\r\n.kds-edit-text-control-icon:hover {\r\n  opacity: 0.7;\r\n}\r\n\r\n.kds-edit-text-font-section {\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-edit-text-font-header {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 */\r\n}\r\n\r\n.kds-edit-text-font-controls {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem; /* gap-3 */\r\n  margin-top: 0.5rem; /* mt-2 */\r\n}\r\n\r\n.kds-edit-text-font-selector {\r\n  border: 1px solid #D3DBDF;\r\n  min-width: 165px; /* min-w-[165px] */\r\n  cursor: pointer;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  border-radius: 0.375rem; /* rounded-md */\r\n  padding: 0.5rem; /* p-2 */\r\n  transition: border-color 0.2s;\r\n}\r\n\r\n.kds-edit-text-font-selector:hover {\r\n  border-color: #3b82f6;\r\n}\r\n\r\n.kds-edit-text-font-name {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #6b7280; /* text-gray-500 */\r\n  font-weight: 500; /* font-medium */\r\n}\r\n\r\n.kds-edit-text-font-arrow {\r\n  width: 1rem;\r\n  height: 1rem;\r\n}\r\n\r\n.kds-edit-text-style-icon {\r\n  cursor: pointer;\r\n  transition: opacity 0.2s;\r\n}\r\n\r\n.kds-edit-text-style-icon:hover {\r\n  opacity: 0.7;\r\n}\r\n\r\n.kds-edit-text-color-swatch {\r\n  width: 1.5rem; /* w-6 */\r\n  height: 1.5rem; /* h-6 */\r\n  border-radius: 50%; /* rounded-full */\r\n  cursor: pointer;\r\n  border: 2px solid transparent; /* border-2 */\r\n  transition: all 0.15s; /* transition-all duration-150 */\r\n}\r\n\r\n.kds-edit-text-color-swatch:hover {\r\n  transform: scale(1.1);\r\n}\r\n\r\n.kds-edit-text-3d-section {\r\n  background-color: white;\r\n  padding: 0.75rem; /* p-3 */\r\n  border-radius: 0.375rem; /* rounded */\r\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* shadow-md */\r\n  margin-top: 0.5rem; /* mt-2 */\r\n}\r\n\r\n.kds-edit-text-3d-controls {\r\n  display: flex;\r\n  flex-direction: column; /* flex-col */\r\n  gap: 0.5rem; /* space-y-2 */\r\n}\r\n\r\n.kds-edit-text-3d-control {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.25rem;\r\n}\r\n\r\n.kds-edit-text-3d-label {\r\n  font-size: 0.875rem;\r\n  color: #374151;\r\n  margin-bottom: 0.25rem;\r\n}\r\n\r\n.kds-edit-text-3d-range {\r\n  width: 100%;\r\n  height: 0.375rem;\r\n  border-radius: 0.25rem;\r\n  background: #e5e7eb;\r\n  outline: none;\r\n  -webkit-appearance: none;\r\n}\r\n\r\n.kds-edit-text-3d-range::-webkit-slider-thumb {\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #3b82f6;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-edit-text-3d-range::-moz-range-thumb {\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #3b82f6;\r\n  cursor: pointer;\r\n  border: none;\r\n}\r\n\r\n.kds-edit-text-3d-color-section {\r\n  background-color: white;\r\n  padding: 0.75rem; /* p-3 */\r\n  border-radius: 0.375rem; /* rounded */\r\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* shadow-md */\r\n  margin-top: 0.5rem; /* mt-2 */\r\n}\r\n\r\n.kds-edit-text-3d-color-controls {\r\n  display: flex;\r\n  flex-direction: column; /* flex-col */\r\n  gap: 0.5rem; /* space-y-2 */\r\n}\r\n\r\n.kds-edit-text-3d-color-label {\r\n  display: block;\r\n  margin-top: 0.5rem; /* block mt-2 */\r\n  font-size: 0.875rem;\r\n  color: #374151;\r\n}\r\n\r\n.kds-edit-text-3d-color-input {\r\n  width: 3rem;\r\n  height: 2rem;\r\n  border: 1px solid #d1d5db;\r\n  border-radius: 0.25rem;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-edit-text-sliders {\r\n  display: flex;\r\n  flex-direction: column; /* flex-col */\r\n  gap: 0.75rem; /* gap-3 */\r\n  justify-content: space-between;\r\n  padding: 1rem 0.75rem; /* py-4 px-3 */\r\n}\r\n\r\n.kds-edit-text-slider-label {\r\n  font-size: 14px; /* text-[14px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 500; /* font-medium */\r\n}\r\n\r\n.kds-edit-text-slider {\r\n  width: 100%; /* w-full */\r\n  height: 0.375rem;\r\n  border-radius: 0.25rem;\r\n  background: #e5e7eb;\r\n  outline: none;\r\n  -webkit-appearance: none;\r\n}\r\n\r\n.kds-edit-text-slider::-webkit-slider-thumb {\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #3b82f6;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-edit-text-slider::-moz-range-thumb {\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #3b82f6;\r\n  cursor: pointer;\r\n  border: none;\r\n}\r\n\r\n.kds-edit-text-arrange {\r\n  display: flex;\r\n  flex-direction: column; /* flex-col */\r\n  gap: 0.75rem; /* gap-3 */\r\n  justify-content: space-between;\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-edit-text-arrange-title {\r\n  font-size: 14px; /* text-[14px] */\r\n  font-weight: 600; /* font-semibold */\r\n  color: #000000; /* text-black */\r\n}\r\n\r\n.kds-edit-text-arrange-controls {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 1.75rem; /* gap-7 */\r\n}\r\n\r\n.kds-edit-text-arrange-icon {\r\n  width: 20px; /* w-[20px] */\r\n  cursor: pointer;\r\n  transition: opacity 0.2s;\r\n}\r\n\r\n.kds-edit-text-arrange-icon:hover {\r\n  opacity: 0.7;\r\n}\r\n\r\n.kds-edit-text-layer-info {\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #6b7280; /* text-gray-500 */\r\n  margin-top: 0.25rem; /* mt-1 */\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-edit-text-container {\r\n    width: calc(100vw - 2rem);\r\n    max-width: 20rem;\r\n  }\r\n  \r\n  .kds-edit-text-font-selector {\r\n    min-width: 140px;\r\n  }\r\n  \r\n  .kds-edit-text-arrange-controls {\r\n    gap: 1rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-edit-text-container {\r\n    width: calc(100vw - 1rem);\r\n  }\r\n  \r\n  .kds-edit-text-content {\r\n    padding: 0.5rem 0.75rem;\r\n  }\r\n  \r\n  .kds-edit-text-section,\r\n  .kds-edit-text-font-section,\r\n  .kds-edit-text-arrange {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-edit-text-font-controls {\r\n    flex-wrap: wrap;\r\n    gap: 0.5rem;\r\n  }\r\n  \r\n  .kds-edit-text-font-selector {\r\n    min-width: 120px;\r\n  }\r\n  \r\n  .kds-edit-text-arrange-controls {\r\n    gap: 0.75rem;\r\n  }\r\n  \r\n  .kds-edit-text-arrange-icon {\r\n    width: 18px;\r\n  }\r\n} /* SelectColorsTab.css - Converted from Tailwind CSS with kds- prefix */\r\n\r\n.kds-container {\r\n  background-color: white;\r\n  border-radius: 0.5rem;\r\n  border: 1px solid #D3DBDF;\r\n  width: 18rem; /* w-72 = 18rem */\r\n  height: fit-content;\r\n  max-height: 460px;\r\n  overflow: hidden;\r\n}\r\n\r\n/* Responsive container */\r\n@media (max-width: 768px) {\r\n  .kds-container {\r\n    width: 100%;\r\n    max-width: 18rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 640px) {\r\n  .kds-container {\r\n    width: 100%;\r\n    max-width: 16rem;\r\n  }\r\n}\r\n\r\n.kds-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-header-left {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 = 0.5rem */\r\n}\r\n\r\n.kds-title {\r\n  font-size: 16px;\r\n  color: black;\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-close-button {\r\n  cursor: pointer;\r\n  transition: opacity 0.2s ease;\r\n}\r\n\r\n.kds-close-button:hover {\r\n  opacity: 0.7;\r\n}\r\n\r\n.kds-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px;\r\n}\r\n\r\n.kds-3d-section {\r\n  background-color: white;\r\n  padding: 0.75rem; /* p-3 = 0.75rem */\r\n  border-radius: 0.375rem; /* rounded */\r\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem; /* space-y-2 = 0.5rem */\r\n}\r\n\r\n.kds-part-label {\r\n  font-weight: 600; /* font-semibold */\r\n  display: block;\r\n}\r\n\r\n.kds-parts-grid {\r\n  display: grid;\r\n  grid-template-columns: repeat(2, 1fr);\r\n  gap: 0.5rem; /* gap-2 = 0.5rem */\r\n}\r\n\r\n.kds-part-button {\r\n  padding: 0.25rem 0.5rem; /* px-2 py-1 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  border: 1px solid #d1d5db;\r\n  background-color: #f3f4f6; /* bg-gray-200 */\r\n  cursor: pointer;\r\n  transition: all 0.2s ease;\r\n  font-size: 0.875rem;\r\n}\r\n\r\n.kds-part-button:hover {\r\n  background-color: #e5e7eb;\r\n}\r\n\r\n.kds-part-button.active {\r\n  background-color: #2563eb; /* bg-blue-600 */\r\n  color: white;\r\n  border-color: #2563eb;\r\n}\r\n\r\n.kds-color-picker-section {\r\n  margin-top: 0.75rem; /* mt-3 = 0.75rem */\r\n}\r\n\r\n.kds-color-picker-label {\r\n  display: block;\r\n  margin-bottom: 0.25rem; /* mb-1 = 0.25rem */\r\n  font-size: 0.875rem;\r\n}\r\n\r\n.kds-color-picker {\r\n  width: 100%;\r\n  height: 2.5rem;\r\n  border: 1px solid #d1d5db;\r\n  border-radius: 0.25rem;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-tab-navigation {\r\n  display: flex;\r\n  border-bottom: 1px solid #D3DBDF;\r\n}\r\n\r\n.kds-tab-button {\r\n  flex: 1;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n  font-size: 0.875rem; /* text-sm */\r\n  font-weight: 500; /* font-medium */\r\n  transition: all 0.2s ease;\r\n  background: none;\r\n  border: none;\r\n  cursor: pointer;\r\n  color: #4b5563; /* text-gray-600 */\r\n  border-bottom: 2px solid transparent;\r\n}\r\n\r\n.kds-tab-button:hover {\r\n  color: #1f2937; /* hover:text-gray-800 */\r\n}\r\n\r\n.kds-tab-button.active.background {\r\n  background-color: #eff6ff; /* bg-blue-50 */\r\n  color: #2563eb; /* text-blue-600 */\r\n  border-bottom-color: #2563eb; /* border-blue-600 */\r\n}\r\n\r\n.kds-tab-button.active.topColor {\r\n  background-color: #fef2f2; /* bg-red-50 */\r\n  color: #dc2626; /* text-red-600 */\r\n  border-bottom-color: #dc2626; /* border-red-600 */\r\n}\r\n\r\n.kds-tab-button.active.bottomColor {\r\n  background-color: #f0fdf4; /* bg-green-50 */\r\n  color: #16a34a; /* text-green-600 */\r\n  border-bottom-color: #16a34a; /* border-green-600 */\r\n}\r\n\r\n.kds-colors-container {\r\n  max-height: 320px;\r\n  overflow-y: auto;\r\n}\r\n\r\n.kds-colors-list {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.75rem; /* gap-3 = 0.75rem */\r\n  padding: 0.75rem; /* py-3 px-3 */\r\n}\r\n\r\n.kds-color-item {\r\n  display: flex;\r\n  position: relative;\r\n  align-items: center;\r\n  padding: 0.5rem; /* p-2 = 0.5rem */\r\n  border-radius: 0.375rem; /* rounded-md */\r\n  cursor: pointer;\r\n  gap: 1rem; /* gap-4 = 1rem */\r\n  transition: all 0.2s ease;\r\n  border: 1px solid transparent;\r\n}\r\n\r\n.kds-color-item:hover {\r\n  background-color: #f9fafb; /* hover:bg-gray-50 */\r\n}\r\n\r\n.kds-color-item.selected {\r\n  border-color: #60a5fa; /* border-blue-400 */\r\n  background-color: #eff6ff; /* bg-blue-50 */\r\n}\r\n\r\n.kds-color-preview {\r\n  width: 2rem; /* w-8 = 2rem */\r\n  height: 2rem; /* h-8 = 2rem */\r\n  border-radius: 50%; /* rounded-full */\r\n  cursor: pointer;\r\n  transition: all 0.15s ease;\r\n  border: 1px solid #e5e7eb; /* border-gray-200 */\r\n  overflow: hidden;\r\n}\r\n\r\n.kds-color-preview img {\r\n  width: 100%;\r\n  height: 100%;\r\n  object-fit: cover;\r\n}\r\n\r\n.kds-color-info {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.kds-color-name {\r\n  font-size: 16px;\r\n  color: black;\r\n  font-weight: 500; /* font-medium */\r\n  margin: 0;\r\n}\r\n\r\n.kds-color-description {\r\n  color: #6b7280; /* text-gray-500 */\r\n  font-size: 14px;\r\n  margin: 0;\r\n}\r\n\r\n.kds-selected-icon {\r\n  position: absolute;\r\n  right: 0.375rem; /* right-1.5 = 0.375rem */\r\n  top: 1rem; /* top-4 = 1rem */\r\n  width: 1.25rem;\r\n  height: 1.25rem;\r\n}\r\n\r\n.kds-info-footer {\r\n  padding: 0.5rem 0.75rem; /* px-3 py-2 */\r\n  background-color: #f9fafb; /* bg-gray-50 */\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #4b5563; /* text-gray-600 */\r\n}\r\n\r\n/* Responsive adjustments */\r\n@media (max-width: 480px) {\r\n  .kds-container {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-title {\r\n    font-size: 14px;\r\n  }\r\n  \r\n  .kds-header {\r\n    padding: 0.375rem 0.5rem;\r\n  }\r\n  \r\n  .kds-parts-grid {\r\n    grid-template-columns: 1fr;\r\n    gap: 0.25rem;\r\n  }\r\n  \r\n  .kds-part-button {\r\n    padding: 0.5rem;\r\n    font-size: 0.75rem;\r\n  }\r\n  \r\n  .kds-tab-button {\r\n    padding: 0.375rem 0.5rem;\r\n    font-size: 0.75rem;\r\n  }\r\n  \r\n  .kds-colors-list {\r\n    gap: 0.5rem;\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-color-item {\r\n    padding: 0.375rem;\r\n    gap: 0.75rem;\r\n  }\r\n  \r\n  .kds-color-preview {\r\n    width: 1.75rem;\r\n    height: 1.75rem;\r\n  }\r\n  \r\n  .kds-color-name {\r\n    font-size: 14px;\r\n  }\r\n  \r\n  .kds-color-description {\r\n    font-size: 12px;\r\n  }\r\n}\r\n\r\n/* Custom scrollbar for colors container */\r\n.kds-colors-container::-webkit-scrollbar {\r\n  width: 4px;\r\n}\r\n\r\n.kds-colors-container::-webkit-scrollbar-track {\r\n  background: #f1f1f1;\r\n  border-radius: 2px;\r\n}\r\n\r\n.kds-colors-container::-webkit-scrollbar-thumb {\r\n  background: #c1c1c1;\r\n  border-radius: 2px;\r\n}\r\n\r\n.kds-colors-container::-webkit-scrollbar-thumb:hover {\r\n  background: #a8a8a8;\r\n}\r\n/* ClipartTab Component Styles */\r\n\r\n.kds-clipart-container {\r\n  background-color: white;\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  border: 1px solid #D3DBDF;\r\n  width: 20rem; /* w-80 */\r\n  height: fit-content; /* h-fit */\r\n  max-height: 500px; /* max-h-[500px] */\r\n  overflow: hidden;\r\n}\r\n\r\n.kds-clipart-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 0.75rem; /* py-2 px-3 */\r\n}\r\n\r\n.kds-clipart-title {\r\n  font-size: 16px; /* text-[16px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-clipart-close {\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-clipart-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n}\r\n\r\n.kds-clipart-content {\r\n  padding: 0.75rem; /* p-3 */\r\n}\r\n\r\n.kds-clipart-space-y-2 > * + * {\r\n  margin-top: 0.5rem; /* space-y-2 */\r\n}\r\n\r\n.kds-empty-state {\r\n  text-align: center;\r\n  padding: 2rem 0; /* py-8 */\r\n  color: #6b7280; /* text-gray-500 */\r\n}\r\n\r\n.kds-empty-icon {\r\n  font-size: 2.25rem; /* text-4xl */\r\n  margin-bottom: 0.5rem; /* mb-2 */\r\n}\r\n\r\n.kds-empty-text {\r\n  font-size: 0.875rem; /* text-sm */\r\n}\r\n\r\n.kds-empty-subtext {\r\n  font-size: 0.75rem; /* text-xs */\r\n  margin-top: 0.25rem; /* mt-1 */\r\n}\r\n\r\n.kds-category-item {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.75rem; /* p-3 */\r\n  border: 1px solid #e5e7eb; /* border-gray-200 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  cursor: pointer;\r\n  transition: all 0.2s; /* transition-all duration-200 */\r\n}\r\n\r\n.kds-category-item:hover {\r\n  border-color: #3b82f6; /* hover:border-blue-500 */\r\n  background-color: #eff6ff; /* hover:bg-blue-50 */\r\n}\r\n\r\n.kds-category-left {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem; /* gap-3 */\r\n}\r\n\r\n.kds-category-badge {\r\n  width: 2rem; /* w-8 */\r\n  height: 2rem; /* h-8 */\r\n  background: linear-gradient(to right, #3b82f6, #8b5cf6); /* bg-gradient-to-r from-blue-500 to-purple-500 */\r\n  border-radius: 50%; /* rounded-full */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  color: white;\r\n  font-size: 0.875rem; /* text-sm */\r\n  font-weight: 700; /* font-bold */\r\n}\r\n\r\n.kds-category-info h4 {\r\n  font-weight: 600; /* font-semibold */\r\n  color: #1f2937; /* text-gray-800 */\r\n}\r\n\r\n.kds-category-info p {\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #6b7280; /* text-gray-500 */\r\n}\r\n\r\n.kds-chevron-icon {\r\n  width: 1rem; /* w-4 */\r\n}\r\n\r\n.kds-back-icon {\r\n  transform: rotate(180deg); /* rotate-180 */\r\n  width: 1rem; /* w-4 */\r\n}\r\n\r\n.kds-back-button {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.25rem; /* gap-1 */\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-back-text {\r\n  font-size: 16px; /* text-[16px] */\r\n  color: #000000; /* text-black */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-3d-section {\r\n  margin-top: 1rem; /* mt-4 */\r\n}\r\n\r\n.kds-3d-title {\r\n  font-weight: 600; /* font-semibold */\r\n  margin-bottom: 0.5rem; /* mb-2 */\r\n}\r\n\r\n.kds-3d-grid {\r\n  display: grid;\r\n  grid-template-columns: repeat(2, 1fr); /* grid-cols-2 */\r\n  gap: 0.75rem; /* gap-3 */\r\n}\r\n\r\n.kds-3d-item {\r\n  cursor: pointer;\r\n  border: 1px solid #e5e7eb; /* border */\r\n  border-radius: 0.25rem; /* rounded */\r\n  padding: 0.5rem; /* p-2 */\r\n  transition: border-color 0.2s;\r\n}\r\n\r\n.kds-3d-item:hover {\r\n  border-color: #3b82f6; /* hover:border-blue-500 */\r\n}\r\n\r\n.kds-3d-image {\r\n  width: 100%;\r\n  height: 6rem; /* h-24 */\r\n  object-fit: contain;\r\n}\r\n\r\n.kds-3d-name {\r\n  font-size: 0.75rem; /* text-xs */\r\n  margin-top: 0.25rem; /* mt-1 */\r\n  text-align: center;\r\n}\r\n\r\n.kds-category-content {\r\n  padding: 0.75rem; /* p-3 */\r\n  max-height: 20rem; /* max-h-80 */\r\n  overflow-y: auto;\r\n}\r\n\r\n.kds-design-grid-3 {\r\n  display: grid;\r\n  grid-template-columns: repeat(3, 1fr); /* grid-cols-3 */\r\n  gap: 0.75rem; /* gap-3 */\r\n}\r\n\r\n.kds-design-grid-2 {\r\n  display: grid;\r\n  grid-template-columns: repeat(2, 1fr); /* grid-cols-2 */\r\n  gap: 0.75rem; /* gap-3 */\r\n}\r\n\r\n.kds-design-item {\r\n  position: relative;\r\n}\r\n\r\n.kds-pattern-container {\r\n  border: 2px solid #93c5fd; /* border-2 border-blue-300 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  padding: 0.5rem; /* p-2 */\r\n}\r\n\r\n.kds-pattern-image {\r\n  width: 100%;\r\n  height: 4rem; /* h-16 */\r\n  object-fit: contain;\r\n  border-radius: 0.25rem; /* rounded */\r\n  margin-bottom: 0.5rem; /* mb-2 */\r\n}\r\n\r\n.kds-add-pattern-btn {\r\n  width: 100%;\r\n  background: linear-gradient(to right, #8b5cf6, #3b82f6); /* bg-gradient-to-r from-purple-500 to-blue-500 */\r\n  color: white;\r\n  font-size: 0.75rem; /* text-xs */\r\n  padding: 0.25rem 0; /* py-1 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  border: none;\r\n  cursor: pointer;\r\n  font-weight: 500; /* font-medium */\r\n  transition: all 0.2s; /* transition-all duration-200 */\r\n}\r\n\r\n.kds-add-pattern-btn:hover {\r\n  background: linear-gradient(to right, #7c3aed, #2563eb); /* hover:from-purple-600 hover:to-blue-600 */\r\n}\r\n\r\n.kds-pattern-name {\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #4b5563; /* text-gray-600 */\r\n  margin-top: 0.25rem; /* mt-1 */\r\n  font-weight: 500; /* font-medium */\r\n}\r\n\r\n.kds-design-simple {\r\n  cursor: pointer;\r\n  border: 1px solid #e5e7eb; /* border border-gray-200 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  padding: 0.25rem; /* p-1 */\r\n  transition: border-color 0.2s;\r\n}\r\n\r\n.kds-design-simple:hover {\r\n  border-color: #3b82f6; /* hover:border-blue-500 */\r\n}\r\n\r\n.kds-design-image {\r\n  width: 100%;\r\n  height: 5rem; /* h-20 */\r\n  object-fit: contain;\r\n}\r\n\r\n.kds-shoe-item {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem; /* gap-3 */\r\n  padding: 0.75rem; /* p-3 */\r\n  border: 1px solid #e5e7eb; /* border border-gray-200 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  cursor: pointer;\r\n  transition: all 0.2s; /* transition-all duration-200 */\r\n}\r\n\r\n.kds-shoe-item:hover {\r\n  border-color: #3b82f6; /* hover:border-blue-500 */\r\n  background-color: #eff6ff; /* hover:bg-blue-50 */\r\n}\r\n\r\n.kds-shoe-thumbnail {\r\n  width: 3rem; /* w-12 */\r\n  height: 3rem; /* h-12 */\r\n  border: 1px solid #d1d5db; /* border border-gray-300 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  overflow: hidden;\r\n}\r\n\r\n.kds-shoe-thumbnail img {\r\n  width: 100%;\r\n  height: 100%;\r\n  object-fit: cover;\r\n}\r\n\r\n.kds-shoe-info {\r\n  flex: 1;\r\n}\r\n\r\n.kds-shoe-name {\r\n  font-weight: 600; /* font-semibold */\r\n  font-size: 0.875rem; /* text-sm */\r\n}\r\n\r\n.kds-shoe-detail {\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #6b7280; /* text-gray-500 */\r\n}\r\n\r\n.kds-shoe-arrow {\r\n  width: 1.5rem; /* w-6 */\r\n  height: 1.5rem; /* h-6 */\r\n  background-color: #3b82f6; /* bg-blue-500 */\r\n  border-radius: 50%; /* rounded-full */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.kds-shoe-arrow svg {\r\n  width: 0.75rem; /* w-3 */\r\n  height: 0.75rem; /* h-3 */\r\n  color: white;\r\n}\r\n\r\n.kds-footer {\r\n  padding: 0 0.75rem 0.5rem; /* px-3 py-2 */\r\n  background-color: #f9fafb; /* bg-gray-50 */\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #4b5563; /* text-gray-600 */\r\n  border-top: 1px solid #D3DBDF;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-clipart-container {\r\n    width: calc(100vw - 2rem);\r\n    max-width: 20rem;\r\n  }\r\n  \r\n  .kds-design-grid-3 {\r\n    grid-template-columns: repeat(2, 1fr);\r\n  }\r\n  \r\n  .kds-3d-grid {\r\n    grid-template-columns: 1fr;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-clipart-container {\r\n    width: calc(100vw - 1rem);\r\n  }\r\n  \r\n  .kds-design-grid-3,\r\n  .kds-design-grid-2 {\r\n    grid-template-columns: 1fr;\r\n  }\r\n  \r\n  .kds-category-item {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-category-left {\r\n    gap: 0.5rem;\r\n  }\r\n  \r\n  .kds-category-badge {\r\n    width: 1.5rem;\r\n    height: 1.5rem;\r\n    font-size: 0.75rem;\r\n  }\r\n} /* RightSideImageComponent.css - Converted from Tailwind CSS with kds- prefix */\r\n\r\n.kds-container {\r\n  background-color: white;\r\n  border-radius: 0.5rem;\r\n  border: 1px solid #D3DBDF;\r\n  width: 20rem; /* w-80 = 20rem */\r\n  height: fit-content;\r\n  max-height: 500px;\r\n  overflow-y: auto;\r\n  padding: 0.75rem; /* p-3 = 0.75rem */\r\n}\r\n\r\n/* Responsive container */\r\n@media (max-width: 768px) {\r\n  .kds-container {\r\n    width: 100%;\r\n    max-width: 20rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 640px) {\r\n  .kds-container {\r\n    width: 100%;\r\n    max-width: 18rem;\r\n  }\r\n}\r\n\r\n.kds-header {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  margin-bottom: 1rem; /* mb-4 = 1rem */\r\n}\r\n\r\n.kds-title {\r\n  font-size: 1.125rem; /* text-lg = 1.125rem */\r\n  font-weight: 600; /* font-semibold */\r\n  color: #1f2937; /* text-gray-800 */\r\n}\r\n\r\n.kds-spacer {\r\n  width: 1.5rem; /* w-6 = 1.5rem */\r\n  height: 1.5rem; /* h-6 = 1.5rem */\r\n}\r\n\r\n.kds-upload-section {\r\n  margin-bottom: 1rem; /* mb-4 = 1rem */\r\n}\r\n\r\n.kds-file-input {\r\n  display: none; /* hidden */\r\n}\r\n\r\n.kds-upload-button {\r\n  width: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  gap: 0.5rem; /* gap-2 = 0.5rem */\r\n  padding: 0.75rem; /* p-3 = 0.75rem */\r\n  border: 2px dashed #d1d5db; /* border-gray-300 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  transition: all 0.2s ease;\r\n  background-color: transparent;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-upload-button:hover {\r\n  border-color: #60a5fa; /* hover:border-blue-400 */\r\n  background-color: #eff6ff; /* hover:bg-blue-50 */\r\n}\r\n\r\n.kds-upload-button:disabled {\r\n  opacity: 0.5; /* disabled:opacity-50 */\r\n  cursor: not-allowed;\r\n}\r\n\r\n.kds-upload-icon {\r\n  color: #6b7280; /* text-gray-500 */\r\n}\r\n\r\n.kds-upload-text {\r\n  color: #4b5563; /* text-gray-600 */\r\n  font-size: 0.875rem; /* text-sm = 0.875rem */\r\n}\r\n\r\n.kds-controls {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 1rem; /* space-y-4 = 1rem */\r\n}\r\n\r\n.kds-preview {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem; /* gap-3 = 0.75rem */\r\n  padding: 0.5rem; /* p-2 = 0.5rem */\r\n  background-color: #f9fafb; /* bg-gray-50 */\r\n  border-radius: 0.25rem; /* rounded */\r\n}\r\n\r\n.kds-preview-image {\r\n  width: 2.5rem; /* w-10 = 2.5rem */\r\n  height: 2.5rem; /* h-10 = 2.5rem */\r\n  object-fit: cover;\r\n  border-radius: 0.25rem; /* rounded */\r\n  border: 1px solid #d1d5db;\r\n}\r\n\r\n.kds-preview-text {\r\n  font-size: 0.75rem; /* text-xs = 0.75rem */\r\n  color: #4b5563; /* text-gray-600 */\r\n  flex: 1;\r\n}\r\n\r\n.kds-remove-button {\r\n  color: #ef4444; /* text-red-500 */\r\n  padding: 0.25rem; /* p-1 = 0.25rem */\r\n  cursor: pointer;\r\n  background: none;\r\n  border: none;\r\n  border-radius: 0.25rem;\r\n  transition: color 0.2s ease;\r\n}\r\n\r\n.kds-remove-button:hover {\r\n  color: #dc2626; /* hover:text-red-700 */\r\n}\r\n\r\n.kds-scale-section {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem; /* space-y-2 = 0.5rem */\r\n}\r\n\r\n.kds-scale-label {\r\n  display: block;\r\n  font-size: 0.875rem; /* text-sm = 0.875rem */\r\n  font-weight: 500; /* font-medium */\r\n  color: #374151; /* text-gray-700 */\r\n}\r\n\r\n.kds-scale-controls {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem; /* gap-2 = 0.5rem */\r\n}\r\n\r\n.kds-scale-button {\r\n  padding: 0.375rem; /* p-1.5 = 0.375rem */\r\n  background-color: #f3f4f6; /* bg-gray-100 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  border: none;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s ease;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.kds-scale-button:hover {\r\n  background-color: #e5e7eb; /* hover:bg-gray-200 */\r\n}\r\n\r\n.kds-scale-button .kds-icon {\r\n  font-size: 0.875rem; /* text-sm = 0.875rem */\r\n}\r\n\r\n.kds-scale-slider {\r\n  flex: 1;\r\n  height: 0.25rem;\r\n  border-radius: 0.125rem;\r\n  background: #d1d5db;\r\n  outline: none;\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n}\r\n\r\n.kds-scale-slider::-webkit-slider-thumb {\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #3b82f6;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-scale-slider::-moz-range-thumb {\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #3b82f6;\r\n  cursor: pointer;\r\n  border: none;\r\n}\r\n\r\n.kds-position-section {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.5rem; /* space-y-2 = 0.5rem */\r\n}\r\n\r\n.kds-position-label {\r\n  display: block;\r\n  font-size: 0.875rem; /* text-sm = 0.875rem */\r\n  font-weight: 500; /* font-medium */\r\n  color: #374151; /* text-gray-700 */\r\n}\r\n\r\n.kds-position-grid {\r\n  display: grid;\r\n  grid-template-columns: repeat(3, 1fr);\r\n  gap: 0.25rem; /* gap-1 = 0.25rem */\r\n}\r\n\r\n.kds-position-button {\r\n  padding: 0.5rem; /* p-2 = 0.5rem */\r\n  background-color: #f3f4f6; /* bg-gray-100 */\r\n  border-radius: 0.25rem; /* rounded */\r\n  border: none;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s ease;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n.kds-position-button:hover {\r\n  background-color: #e5e7eb; /* hover:bg-gray-200 */\r\n}\r\n\r\n.kds-position-center {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.kds-center-icon {\r\n  color: #9ca3af; /* text-gray-400 */\r\n  font-size: 0.875rem; /* text-sm = 0.875rem */\r\n}\r\n\r\n.kds-fine-position {\r\n  display: grid;\r\n  grid-template-columns: repeat(2, 1fr);\r\n  gap: 0.5rem; /* gap-2 = 0.5rem */\r\n}\r\n\r\n.kds-fine-position-item {\r\n  display: flex;\r\n  flex-direction: column;\r\n}\r\n\r\n.kds-fine-position-label {\r\n  display: block;\r\n  font-size: 0.75rem; /* text-xs = 0.75rem */\r\n  color: #6b7280; /* text-gray-500 */\r\n  margin-bottom: 0.25rem; /* mb-1 = 0.25rem */\r\n}\r\n\r\n.kds-fine-position-slider {\r\n  width: 100%;\r\n  height: 0.25rem;\r\n  border-radius: 0.125rem;\r\n  background: #d1d5db;\r\n  outline: none;\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n}\r\n\r\n.kds-fine-position-slider::-webkit-slider-thumb {\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #3b82f6;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-fine-position-slider::-moz-range-thumb {\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #3b82f6;\r\n  cursor: pointer;\r\n  border: none;\r\n}\r\n\r\n.kds-info {\r\n  font-size: 0.75rem; /* text-xs = 0.75rem */\r\n  color: #6b7280; /* text-gray-500 */\r\n  padding: 0.5rem; /* p-2 = 0.5rem */\r\n  background-color: #eff6ff; /* bg-blue-50 */\r\n  border-radius: 0.25rem; /* rounded */\r\n}\r\n\r\n/* Responsive adjustments */\r\n@media (max-width: 480px) {\r\n  .kds-container {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-title {\r\n    font-size: 1rem;\r\n  }\r\n  \r\n  .kds-upload-button {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-upload-text {\r\n    font-size: 0.75rem;\r\n  }\r\n  \r\n  .kds-scale-controls {\r\n    flex-direction: column;\r\n    gap: 0.25rem;\r\n  }\r\n  \r\n  .kds-position-grid {\r\n    gap: 0.125rem;\r\n  }\r\n  \r\n  .kds-position-button {\r\n    padding: 0.375rem;\r\n  }\r\n  \r\n  .kds-fine-position {\r\n    grid-template-columns: 1fr;\r\n    gap: 0.25rem;\r\n  }\r\n}\r\n/* Sidebar Component Styles */\r\n\r\n.kds-sidebar {\r\n  position: absolute;\r\n  top: 6rem; /* top-24 */\r\n  left: 1.75rem; /* left-7 */\r\n  width: 35%;\r\n  display: flex;\r\n  gap: 1.25rem; /* gap-5 */\r\n  z-index: 50; /* z-50 */\r\n  flex-direction: column; /* flex-col */\r\n}\r\n\r\n@media (min-width: 640px) {\r\n  .kds-sidebar {\r\n    top: 7rem; /* sm:top-28 */\r\n    flex-direction: row; /* sm:flex-row */\r\n  }\r\n}\r\n\r\n.kds-sidebar-menu {\r\n  background-color: #ffffff;\r\n  padding: 1.25rem; /* p-5 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  border: 1px solid #D3DBDF;\r\n  display: flex;\r\n  flex-direction: row; /* flex-row */\r\n  height: fit-content; /* h-fit */\r\n  align-items: center; /* items-center */\r\n  justify-content: space-between; /* justify-between */\r\n  gap: 1.5rem; /* gap-6 */\r\n}\r\n\r\n@media (min-width: 640px) {\r\n  .kds-sidebar-menu {\r\n    flex-direction: column; /* sm:flex-col */\r\n    justify-content: flex-start; /* sm:justify-normal */\r\n  }\r\n}\r\n\r\n.kds-tab {\r\n  display: flex;\r\n  flex-direction: column; /* flex-col */\r\n  gap: 0.5rem; /* gap-2 */\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-tab-icon {\r\n  display: block;\r\n  margin: 0 auto; /* m-auto */\r\n  width: 23px; /* w-[23px] */\r\n  height: 23px; /* h-[23px] */\r\n}\r\n\r\n.kds-tab-label {\r\n  font-size: 12px; /* text-[12px] */\r\n  color: #000000; /* text-black */\r\n  text-align: center; /* text-center */\r\n  font-weight: 600; /* font-semibold */\r\n}\r\n\r\n.kds-tab-label.kds-active {\r\n  color: #2563eb; /* text-blue-600 */\r\n}\r\n\r\n/* Small screens: consider wider sidebar for usability */\r\n@media (max-width: 480px) {\r\n  .kds-sidebar {\r\n    left: 1rem;\r\n    width: calc(100% - 2rem);\r\n  }\r\n}/* LayerContextMenu Component Styles */\r\n\r\n.kds-layer-overlay {\r\n  position: fixed;\r\n  inset: 0;\r\n  z-index: 40;\r\n}\r\n\r\n.kds-layer-menu {\r\n  position: fixed;\r\n  background-color: #ffffff;\r\n  border: 1px solid #e5e7eb; /* border-gray-200 */\r\n  border-radius: 0.5rem; /* rounded-lg */\r\n  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); /* shadow-lg */\r\n  padding: 0.5rem 0; /* py-2 */\r\n  z-index: 50;\r\n  min-width: 180px;\r\n}\r\n\r\n.kds-layer-menu-header {\r\n  padding: 0.5rem 1rem; /* px-4 py-2 */\r\n  font-size: 0.75rem; /* text-xs */\r\n  color: #6b7280; /* text-gray-500 */\r\n  border-bottom: 1px solid #f3f4f6; /* border-gray-100 */\r\n  background-color: #f9fafb; /* bg-gray-50 */\r\n}\r\n\r\n.kds-layer-menu-item {\r\n  display: flex;\r\n  align-items: center;\r\n  padding: 0.5rem 1rem; /* px-4 py-2 */\r\n  font-size: 0.875rem; /* text-sm */\r\n  color: #374151; /* text-gray-700 */\r\n  cursor: pointer;\r\n  transition: background-color 0.15s ease;\r\n}\r\n\r\n.kds-layer-menu-item:hover {\r\n  background-color: #f9fafb; /* hover:bg-gray-50 */\r\n}\r\n\r\n.kds-layer-menu-item--danger {\r\n  color: #dc2626; /* text-red-600 */\r\n}\r\n\r\n.kds-layer-menu-item--danger:hover {\r\n  background-color: #fef2f2; /* hover:bg-red-50 */\r\n}\r\n\r\n.kds-layer-divider {\r\n  margin: 0.25rem 0; /* my-1 */\r\n  border: none;\r\n  border-top: 1px solid #e5e7eb; /* border-gray-200 */\r\n}\r\n\r\n.kds-layer-icon {\r\n  width: 1rem; /* w-4 */\r\n  height: 1rem; /* h-4 */\r\n  margin-right: 0.75rem; /* mr-3 */\r\n  flex-shrink: 0;\r\n}\r\n\r\n/* Responsive - larger touch targets on small screens */\r\n@media (max-width: 480px) {\r\n  .kds-layer-menu {\r\n    min-width: 200px;\r\n  }\r\n  .kds-layer-menu-item {\r\n    padding: 0.625rem 1rem;\r\n  }\r\n}/* Controls Panel Styles with kds- prefix */\r\n\r\n.kds-controls-panel {\r\n  background-color: white;\r\n  padding: 0.75rem;\r\n  border-radius: 0.375rem;\r\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\r\n}\r\n\r\n.kds-controls-panel > * + * {\r\n  margin-top: 0.5rem;\r\n}\r\n\r\n.kds-label {\r\n  font-weight: 600;\r\n  display: block;\r\n}\r\n\r\n.kds-label-regular {\r\n  font-weight: normal;\r\n  display: block;\r\n  margin-bottom: 0.25rem;\r\n}\r\n\r\n.kds-parts-grid {\r\n  display: grid;\r\n  grid-template-columns: repeat(4, 1fr);\r\n  gap: 0.5rem;\r\n}\r\n\r\n.kds-part-btn {\r\n  padding: 0.25rem 0.5rem;\r\n  border-radius: 0.25rem;\r\n  border: 1px solid #d1d5db;\r\n  background-color: #f3f4f6;\r\n  cursor: pointer;\r\n  transition: all 0.2s ease;\r\n}\r\n\r\n.kds-part-btn:hover {\r\n  background-color: #e5e7eb;\r\n}\r\n\r\n.kds-part-btn-active {\r\n  background-color: #2563eb;\r\n  color: white;\r\n  border-color: #2563eb;\r\n}\r\n\r\n.kds-part-btn-active:hover {\r\n  background-color: #1d4ed8;\r\n}\r\n\r\n.kds-color-input {\r\n  border: 1px solid #d1d5db;\r\n  border-radius: 0.25rem;\r\n  padding: 0.25rem;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-text-input {\r\n  border: 1px solid #d1d5db;\r\n  padding: 0.25rem 0.5rem;\r\n  width: 100%;\r\n  border-radius: 0.25rem;\r\n}\r\n\r\n.kds-text-input:focus {\r\n  outline: none;\r\n  border-color: #2563eb;\r\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\r\n}\r\n\r\n.kds-divider {\r\n  margin: 0.5rem 0;\r\n  border: none;\r\n  border-top: 1px solid #e5e7eb;\r\n}\r\n\r\n.kds-save-btn {\r\n  background-color: #16a34a;\r\n  color: white;\r\n  padding: 0.5rem 1rem;\r\n  border-radius: 0.25rem;\r\n  margin-top: 0.5rem;\r\n  width: 100%;\r\n  border: none;\r\n  cursor: pointer;\r\n  font-weight: 500;\r\n  transition: background-color 0.2s ease;\r\n}\r\n\r\n.kds-save-btn:hover {\r\n  background-color: #15803d;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-controls-panel {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-parts-grid {\r\n    grid-template-columns: repeat(2, 1fr);\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-parts-grid {\r\n    grid-template-columns: 1fr;\r\n  }\r\n  \r\n  .kds-part-btn {\r\n    padding: 0.5rem;\r\n    font-size: 0.875rem;\r\n  }\r\n}\r\n/* Screenshot Gallery Styles with kds- prefix */\r\n\r\n.kds-gallery-overlay {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  background-color: rgba(0, 0, 0, 0.8);\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  z-index: 50;\r\n}\r\n\r\n.kds-gallery-modal {\r\n  background-color: white;\r\n  border-radius: 0.5rem;\r\n  padding: 1.5rem;\r\n  max-width: 64rem;\r\n  width: 100%;\r\n  max-height: 90vh;\r\n  overflow: auto;\r\n}\r\n\r\n.kds-gallery-header {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  margin-bottom: 1rem;\r\n}\r\n\r\n.kds-gallery-title {\r\n  font-size: 1.5rem;\r\n  font-weight: 700;\r\n  color: #1f2937;\r\n}\r\n\r\n.kds-gallery-close-btn {\r\n  color: #6b7280;\r\n  font-size: 1.5rem;\r\n  font-weight: 700;\r\n  background: none;\r\n  border: none;\r\n  cursor: pointer;\r\n  transition: color 0.2s ease;\r\n}\r\n\r\n.kds-gallery-close-btn:hover {\r\n  color: #374151;\r\n}\r\n\r\n.kds-gallery-preview-container {\r\n  margin-bottom: 1.5rem;\r\n  display: flex;\r\n  justify-content: center;\r\n}\r\n\r\n.kds-gallery-preview-wrapper {\r\n  position: relative;\r\n}\r\n\r\n.kds-gallery-preview-image {\r\n  width: 24rem;\r\n  height: 24rem;\r\n  object-fit: contain;\r\n  border: 1px solid #d1d5db;\r\n  border-radius: 0.5rem;\r\n  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);\r\n  background-color: #f9fafb;\r\n}\r\n\r\n.kds-gallery-preview-label {\r\n  position: absolute;\r\n  bottom: 0.5rem;\r\n  left: 0.5rem;\r\n  background-color: rgba(0, 0, 0, 0.7);\r\n  color: white;\r\n  padding: 0.25rem 0.5rem;\r\n  border-radius: 0.25rem;\r\n  font-size: 0.875rem;\r\n  text-transform: capitalize;\r\n}\r\n\r\n.kds-gallery-thumbnails {\r\n  display: flex;\r\n  justify-content: center;\r\n  gap: 1rem;\r\n  margin-bottom: 1.5rem;\r\n}\r\n\r\n.kds-gallery-thumbnail {\r\n  position: relative;\r\n  cursor: pointer;\r\n  border: 2px solid transparent;\r\n  border-radius: 0.5rem;\r\n  padding: 0.25rem;\r\n  transition: border-color 0.2s ease;\r\n}\r\n\r\n.kds-gallery-thumbnail:hover {\r\n  border-color: #3b82f6;\r\n}\r\n\r\n.kds-gallery-thumbnail-active {\r\n  border-color: #3b82f6;\r\n}\r\n\r\n.kds-gallery-thumbnail-image {\r\n  width: 6rem;\r\n  height: 6rem;\r\n  object-fit: contain;\r\n  background-color: #f9fafb;\r\n  border-radius: 0.375rem;\r\n}\r\n\r\n.kds-gallery-thumbnail-label {\r\n  position: absolute;\r\n  bottom: 0.25rem;\r\n  left: 0.25rem;\r\n  background-color: rgba(0, 0, 0, 0.6);\r\n  color: white;\r\n  font-size: 0.75rem;\r\n  padding: 0.125rem 0.25rem;\r\n  border-radius: 0.125rem;\r\n  text-transform: capitalize;\r\n}\r\n\r\n.kds-gallery-actions {\r\n  display: flex;\r\n  justify-content: center;\r\n  gap: 1rem;\r\n}\r\n\r\n.kds-gallery-btn {\r\n  padding: 0.5rem 1.5rem;\r\n  border-radius: 0.5rem;\r\n  font-weight: 600;\r\n  border: none;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s ease;\r\n}\r\n\r\n.kds-gallery-btn-primary {\r\n  background-color: #16a34a;\r\n  color: white;\r\n}\r\n\r\n.kds-gallery-btn-primary:hover {\r\n  background-color: #15803d;\r\n}\r\n\r\n.kds-gallery-btn-secondary {\r\n  background-color: #4b5563;\r\n  color: white;\r\n}\r\n\r\n.kds-gallery-btn-secondary:hover {\r\n  background-color: #374151;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-gallery-modal {\r\n    margin: 1rem;\r\n    padding: 1rem;\r\n  }\r\n  \r\n  .kds-gallery-preview-image {\r\n    width: 100%;\r\n    height: auto;\r\n    max-height: 20rem;\r\n  }\r\n  \r\n  .kds-gallery-thumbnails {\r\n    flex-wrap: wrap;\r\n    gap: 0.5rem;\r\n  }\r\n  \r\n  .kds-gallery-thumbnail-image {\r\n    width: 4rem;\r\n    height: 4rem;\r\n  }\r\n  \r\n  .kds-gallery-actions {\r\n    flex-direction: column;\r\n    gap: 0.5rem;\r\n  }\r\n  \r\n  .kds-gallery-btn {\r\n    width: 100%;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-gallery-title {\r\n    font-size: 1.25rem;\r\n  }\r\n  \r\n  .kds-gallery-preview-image {\r\n    max-height: 15rem;\r\n  }\r\n  \r\n  .kds-gallery-thumbnail-image {\r\n    width: 3rem;\r\n    height: 3rem;\r\n  }\r\n}\r\n/* Text Controls Panel Styles with kds- prefix */\r\n\r\n.kds-text-controls-panel {\r\n  background-color: white;\r\n  padding: 0.75rem;\r\n  border-radius: 0.375rem;\r\n  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\r\n  margin-top: 0.5rem;\r\n}\r\n\r\n.kds-text-controls-panel > * + * {\r\n  margin-top: 0.5rem;\r\n}\r\n\r\n.kds-text-control-group {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.25rem;\r\n}\r\n\r\n.kds-text-control-label {\r\n  font-size: 0.875rem;\r\n  font-weight: 500;\r\n  color: #374151;\r\n}\r\n\r\n.kds-text-control-slider {\r\n  width: 100%;\r\n  height: 0.375rem;\r\n  border-radius: 0.25rem;\r\n  background: #d1d5db;\r\n  outline: none;\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-text-control-slider::-webkit-slider-thumb {\r\n  -webkit-appearance: none;\r\n  appearance: none;\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #2563eb;\r\n  cursor: pointer;\r\n  border: 2px solid white;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.kds-text-control-slider::-moz-range-thumb {\r\n  width: 1rem;\r\n  height: 1rem;\r\n  border-radius: 50%;\r\n  background: #2563eb;\r\n  cursor: pointer;\r\n  border: 2px solid white;\r\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.kds-text-control-slider:focus {\r\n  outline: none;\r\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 768px) {\r\n  .kds-text-controls-panel {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-text-control-label {\r\n    font-size: 0.8rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-text-controls-panel {\r\n    margin-top: 0.25rem;\r\n  }\r\n  \r\n  .kds-text-control-group {\r\n    gap: 0.125rem;\r\n  }\r\n}\r\n/* 3D Customizer Styles with kds- prefix */\r\n\r\n/* Main container */\r\n.kds-main {\r\n  height: 100vh;\r\n  width: 100vw;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n/* Canvas container */\r\n.kds-canvas-container {\r\n  height: 100vh;\r\n  width: 60%;\r\n}\r\n\r\n/* Controls panel container */\r\n.kds-controls-container {\r\n  position: absolute;\r\n  bottom: 1rem;\r\n  left: 1rem;\r\n}\r\n\r\n/* Button styles */\r\n.kds-btn {\r\n  padding: 0.5rem 1rem;\r\n  border-radius: 0.25rem;\r\n  font-weight: 500;\r\n  cursor: pointer;\r\n  border: none;\r\n  transition: all 0.2s ease;\r\n}\r\n\r\n.kds-btn-primary {\r\n  background-color: #2563eb;\r\n  color: white;\r\n}\r\n\r\n.kds-btn-primary:hover {\r\n  background-color: #1d4ed8;\r\n}\r\n\r\n.kds-btn-danger {\r\n  background-color: #dc2626;\r\n  color: white;\r\n}\r\n\r\n.kds-btn-danger:hover {\r\n  background-color: #b91c1c;\r\n}\r\n\r\n.kds-btn-full {\r\n  width: 100%;\r\n}\r\n\r\n.kds-btn-mt-2 {\r\n  margin-top: 0.5rem;\r\n}\r\n\r\n/* Loading overlay */\r\n.kds-loading-overlay {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  z-index: 50;\r\n  background-color: rgba(0, 0, 0, 0.9);\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.kds-loading-content {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n}\r\n\r\n.kds-spinner {\r\n  width: 3rem;\r\n  height: 3rem;\r\n  border: 4px solid white;\r\n  border-top-color: transparent;\r\n  border-radius: 50%;\r\n  animation: kds-spin 1s linear infinite;\r\n  margin-bottom: 1rem;\r\n}\r\n\r\n.kds-loading-text {\r\n  color: white;\r\n  font-size: 1.125rem;\r\n  font-weight: 500;\r\n}\r\n\r\n/* Animation */\r\n@keyframes kds-spin {\r\n  to {\r\n    transform: rotate(360deg);\r\n  }\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 1024px) {\r\n  .kds-canvas-container {\r\n    width: 70%;\r\n  }\r\n}\r\n\r\n@media (max-width: 768px) {\r\n  .kds-main {\r\n    flex-direction: column;\r\n  }\r\n  \r\n  .kds-canvas-container {\r\n    width: 100%;\r\n    height: 70vh;\r\n  }\r\n  \r\n  .kds-controls-container {\r\n    position: relative;\r\n    bottom: auto;\r\n    left: auto;\r\n    margin-top: 1rem;\r\n    width: 100%;\r\n    padding: 0 1rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 640px) {\r\n  .kds-canvas-container {\r\n    height: 60vh;\r\n  }\r\n  \r\n  .kds-controls-container {\r\n    padding: 0 0.5rem;\r\n  }\r\n  \r\n  .kds-btn {\r\n    padding: 0.75rem 1rem;\r\n    font-size: 0.875rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-canvas-container {\r\n    height: 50vh;\r\n  }\r\n  \r\n  .kds-loading-text {\r\n    font-size: 1rem;\r\n  }\r\n  \r\n  .kds-spinner {\r\n    width: 2.5rem;\r\n    height: 2.5rem;\r\n  }\r\n}\r\n/* Customizer Layout Styles with kds- prefix */\r\n\r\n.kds-layout-container {\r\n  width: 100%;\r\n  height: 100vh;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  background-color: #f3f4f6;\r\n  position: relative;\r\n  max-width: 1720px;\r\n  margin: 0 auto;\r\n}\r\n\r\n.kds-loading-overlay {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  bottom: 0;\r\n  z-index: 50;\r\n  background-color: rgba(0, 0, 0, 0.9);\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n}\r\n\r\n.kds-loading-content {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n}\r\n\r\n.kds-loading-spinner {\r\n  width: 3rem;\r\n  height: 3rem;\r\n  border: 4px solid white;\r\n  border-top-color: transparent;\r\n  border-radius: 50%;\r\n  animation: kds-spin 1s linear infinite;\r\n  margin-bottom: 1rem;\r\n}\r\n\r\n.kds-loading-text {\r\n  color: white;\r\n  font-size: 1.125rem;\r\n  font-weight: 500;\r\n}\r\n\r\n@keyframes kds-spin {\r\n  to {\r\n    transform: rotate(360deg);\r\n  }\r\n}\r\n\r\n.kds-controls-bar {\r\n  position: absolute;\r\n  bottom: 1.75rem;\r\n  left: 50%;\r\n  transform: translateX(-50%);\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n  border: 1px solid #D3DBDF;\r\n  background-color: white;\r\n  padding: 0.875rem;\r\n  border-radius: 0.5rem;\r\n}\r\n\r\n.kds-controls-group {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n}\r\n\r\n.kds-controls-divider {\r\n  transform: rotate(90deg);\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px;\r\n  width: 20px;\r\n}\r\n\r\n.kds-controls-zoom {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem;\r\n}\r\n\r\n/* Transform flip for redo button */\r\n.kds-transform-flip {\r\n  transform: scaleX(-1);\r\n}\r\n\r\n/* Canvas container */\r\n.kds-canvas-container {\r\n  position: absolute;\r\n  top: 50%;\r\n  left: 50%;\r\n  width: 60vw !important;\r\n  height: 90vh !important;\r\n  transform: translate(-50%, -50%);\r\n  z-index: 0;\r\n}\r\n\r\n.kds-save-success {\r\n  position: fixed;\r\n  top: 5rem;\r\n  right: 1.75rem;\r\n  background-color: #10b981;\r\n  color: white;\r\n  padding: 0.5rem 1rem;\r\n  border-radius: 0.5rem;\r\n  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);\r\n  z-index: 50;\r\n  transition: all 0.3s ease;\r\n}\r\n\r\n.kds-save-success-content {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.5rem;\r\n}\r\n\r\n.kds-save-success-icon {\r\n  width: 1.25rem;\r\n  height: 1.25rem;\r\n}\r\n\r\n.kds-chat-box {\r\n  width: 350px;\r\n  height: 430px;\r\n  position: absolute;\r\n  right: 1.75rem;\r\n  bottom: 7rem;\r\n  border-radius: 0.75rem;\r\n  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);\r\n  background-color: white;\r\n  border: 1px solid #e5e7eb;\r\n  overflow: hidden;\r\n  z-index: 70;\r\n}\r\n\r\n.kds-chat-header {\r\n  background: linear-gradient(to bottom, #1B2653, #192248);\r\n  color: white;\r\n  padding: 0.75rem 1rem;\r\n}\r\n\r\n.kds-chat-header-top {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n}\r\n\r\n.kds-chat-close-btn {\r\n  cursor: pointer;\r\n}\r\n\r\n.kds-chat-title {\r\n  margin-top: 0.75rem;\r\n  margin-bottom: 1.25rem;\r\n}\r\n\r\n.kds-chat-title h2 {\r\n  font-size: 1.375rem;\r\n  font-weight: 600;\r\n}\r\n\r\n.kds-chat-title p {\r\n  font-size: 0.875rem;\r\n  color: rgba(255, 255, 255, 0.7);\r\n}\r\n\r\n.kds-chat-content {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 0.25rem;\r\n}\r\n\r\n.kds-chat-item {\r\n  padding: 0.75rem 1rem;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s ease;\r\n}\r\n\r\n.kds-chat-item:hover {\r\n  background-color: #f9fafb;\r\n}\r\n\r\n.kds-chat-item-text {\r\n  font-size: 1rem;\r\n  color: #1f2937;\r\n  font-weight: 500;\r\n}\r\n\r\n.kds-chat-item-arrow {\r\n  color: #9ca3af;\r\n}\r\n\r\n.kds-chat-divider {\r\n  border-top: 1px solid #D3DBDF;\r\n  height: 1px;\r\n}\r\n\r\n.kds-chat-button {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  padding: 1.25rem;\r\n  border-radius: 50%;\r\n  background-color: #3559C7;\r\n  position: absolute;\r\n  right: 1.75rem;\r\n  bottom: 1.75rem;\r\n  cursor: pointer;\r\n  transition: background-color 0.2s ease;\r\n}\r\n\r\n.kds-chat-button:hover {\r\n  background-color: #2a47a3;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (max-width: 1024px) {\r\n  .kds-layout-container {\r\n    max-width: 100%;\r\n  }\r\n  \r\n  .kds-chat-box {\r\n    width: 300px;\r\n    height: 400px;\r\n    right: 1rem;\r\n    bottom: 6rem;\r\n  }\r\n  \r\n  .kds-chat-button {\r\n    right: 1rem;\r\n    bottom: 1rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 768px) {\r\n  .kds-layout-container {\r\n    flex-direction: column;\r\n  }\r\n  \r\n  .kds-controls-bar {\r\n    bottom: 1rem;\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-controls-zoom {\r\n    gap: 0.5rem;\r\n  }\r\n  \r\n  .kds-save-success {\r\n    top: 4rem;\r\n    right: 1rem;\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-chat-box {\r\n    width: 280px;\r\n    height: 350px;\r\n    right: 0.5rem;\r\n    bottom: 5rem;\r\n  }\r\n  \r\n  .kds-chat-header {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-chat-title h2 {\r\n    font-size: 1.125rem;\r\n  }\r\n  \r\n  .kds-chat-title p {\r\n    font-size: 0.8rem;\r\n  }\r\n  \r\n  .kds-chat-item {\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-chat-item-text {\r\n    font-size: 0.875rem;\r\n  }\r\n  \r\n  .kds-chat-button {\r\n    right: 0.5rem;\r\n    bottom: 0.5rem;\r\n    padding: 1rem;\r\n  }\r\n}\r\n\r\n@media (max-width: 480px) {\r\n  .kds-controls-bar {\r\n    flex-direction: column;\r\n    gap: 0.25rem;\r\n    padding: 0.5rem;\r\n  }\r\n  \r\n  .kds-controls-divider {\r\n    transform: rotate(0deg);\r\n    width: 100%;\r\n    height: 1px;\r\n  }\r\n  \r\n  .kds-save-success {\r\n    top: 3rem;\r\n    right: 0.5rem;\r\n    left: 0.5rem;\r\n    text-align: center;\r\n  }\r\n  \r\n  .kds-chat-box {\r\n    width: calc(100% - 1rem);\r\n    height: 300px;\r\n    right: 0.5rem;\r\n    left: 0.5rem;\r\n    bottom: 4rem;\r\n  }\r\n  \r\n  .kds-chat-button {\r\n    right: 0.5rem;\r\n    bottom: 0.5rem;\r\n    padding: 0.75rem;\r\n  }\r\n}\r\n/* ProductsShowCase Component Styles */\r\n\r\n.kds-header {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  right: 0;\r\n  background-color: white;\r\n  border-bottom: 1px solid #e5e7eb;\r\n  z-index: 50;\r\n}\r\n\r\n.kds-header-container {\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.75rem 1.5rem;\r\n  max-width: 1720px;\r\n  margin: 0 auto;\r\n}\r\n\r\n.kds-logo-section {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 1rem;\r\n}\r\n\r\n.kds-logo-wrapper {\r\n  display: flex;\r\n  align-items: center;\r\n  gap: 0.75rem;\r\n}\r\n\r\n.kds-menu-button {\r\n  padding: 0.5rem;\r\n  border-radius: 0.5rem;\r\n  transition: background-color 0.2s;\r\n  cursor: pointer;\r\n  border: none;\r\n  background: none;\r\n}\r\n\r\n.kds-menu-button:hover {\r\n  background-color: #f3f4f6;\r\n}\r\n\r\n.kds-menu-icon {\r\n  width: 1.25rem;\r\n  height: 1.25rem;\r\n  color: #4b5563;\r\n}\r\n\r\n.kds-main-container {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  min-height: 100vh;\r\n  padding: 6rem 0.5rem 2rem 0.5rem;\r\n}\r\n\r\n.kds-content-wrapper {\r\n  width: 100%;\r\n  max-width: 80rem;\r\n}\r\n\r\n.kds-products-grid {\r\n  display: grid;\r\n  grid-template-columns: 1fr;\r\n  gap: 1.5rem;\r\n  justify-items: center;\r\n}\r\n\r\n.kds-product-card {\r\n  padding: 0.75rem;\r\n  border: 1px solid #e5e7eb;\r\n  border-radius: 0.375rem;\r\n  cursor: pointer;\r\n  width: 100%;\r\n  max-width: 20rem;\r\n  background-color: white;\r\n  transition: box-shadow 0.2s;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n}\r\n\r\n.kds-product-card:hover {\r\n  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);\r\n}\r\n\r\n.kds-product-image {\r\n  width: 100%;\r\n  height: 11rem;\r\n  object-fit: contain;\r\n}\r\n\r\n.kds-product-info {\r\n  margin-top: 0.5rem;\r\n  text-align: center;\r\n}\r\n\r\n.kds-product-title {\r\n  font-weight: 600;\r\n  font-size: 0.875rem;\r\n  margin: 0;\r\n}\r\n\r\n.kds-product-detail {\r\n  font-size: 0.75rem;\r\n  color: #6b7280;\r\n  margin: 0.125rem 0;\r\n}\r\n\r\n/* Responsive Design */\r\n@media (min-width: 640px) {\r\n  .kds-products-grid {\r\n    grid-template-columns: repeat(2, 1fr);\r\n  }\r\n}\r\n\r\n@media (min-width: 768px) {\r\n  .kds-products-grid {\r\n    grid-template-columns: repeat(3, 1fr);\r\n  }\r\n}\r\n\r\n@media (min-width: 1024px) {\r\n  .kds-products-grid {\r\n    grid-template-columns: repeat(4, 1fr);\r\n  }\r\n}\r\n\r\n@media (max-width: 639px) {\r\n  .kds-header-container {\r\n    padding: 0.5rem 1rem;\r\n  }\r\n  \r\n  .kds-main-container {\r\n    padding: 5rem 0.25rem 1rem 0.25rem;\r\n  }\r\n  \r\n  .kds-product-card {\r\n    max-width: 16rem;\r\n  }\r\n  \r\n  .kds-product-image {\r\n    height: 9rem;\r\n  }\r\n} /*$vite$:1*/";
   document.head.appendChild(__vite_style__);
   function getDefaultExportFromCjs(x2) {
     return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
@@ -511,7 +511,7 @@
   const React = /* @__PURE__ */ getDefaultExportFromCjs(reactExports);
   var client = { exports: {} };
   var reactDomClient_production = {};
-  var scheduler$2 = { exports: {} };
+  var scheduler$3 = { exports: {} };
   var scheduler_production$2 = {};
   /**
    * @license React
@@ -777,14 +777,14 @@
     })(scheduler_production$2);
     return scheduler_production$2;
   }
-  var hasRequiredScheduler$2;
-  function requireScheduler$2() {
-    if (hasRequiredScheduler$2) return scheduler$2.exports;
-    hasRequiredScheduler$2 = 1;
+  var hasRequiredScheduler$3;
+  function requireScheduler$3() {
+    if (hasRequiredScheduler$3) return scheduler$3.exports;
+    hasRequiredScheduler$3 = 1;
     {
-      scheduler$2.exports = requireScheduler_production$2();
+      scheduler$3.exports = requireScheduler_production$2();
     }
-    return scheduler$2.exports;
+    return scheduler$3.exports;
   }
   var reactDom = { exports: {} };
   var reactDom_production = {};
@@ -977,7 +977,7 @@
   function requireReactDomClient_production() {
     if (hasRequiredReactDomClient_production) return reactDomClient_production;
     hasRequiredReactDomClient_production = 1;
-    var Scheduler = requireScheduler$2(), React2 = requireReact(), ReactDOM2 = requireReactDom();
+    var Scheduler = requireScheduler$3(), React2 = requireReact(), ReactDOM2 = requireReactDom();
     function formatProdErrorMessage(code) {
       var url = "https://react.dev/errors/" + code;
       if (1 < arguments.length) {
@@ -29566,9 +29566,9 @@
       normals.push(0, 0, 1);
       uvs.push(0.5, 0.5);
       for (let s2 = 0, i2 = 3; s2 <= segments; s2++, i2 += 3) {
-        const segment = thetaStart + s2 / segments * thetaLength;
-        vertex2.x = radius * Math.cos(segment);
-        vertex2.y = radius * Math.sin(segment);
+        const segment2 = thetaStart + s2 / segments * thetaLength;
+        vertex2.x = radius * Math.cos(segment2);
+        vertex2.y = radius * Math.sin(segment2);
         vertices.push(vertex2.x, vertex2.y, vertex2.z);
         normals.push(0, 0, 1);
         uv.x = (vertices[i2] / radius + 1) / 2;
@@ -33059,9 +33059,9 @@
       const uv = new Vector2();
       for (let j2 = 0; j2 <= phiSegments; j2++) {
         for (let i2 = 0; i2 <= thetaSegments; i2++) {
-          const segment = thetaStart + i2 / thetaSegments * thetaLength;
-          vertex2.x = radius * Math.cos(segment);
-          vertex2.y = radius * Math.sin(segment);
+          const segment2 = thetaStart + i2 / thetaSegments * thetaLength;
+          vertex2.x = radius * Math.cos(segment2);
+          vertex2.y = radius * Math.sin(segment2);
           vertices.push(vertex2.x, vertex2.y, vertex2.z);
           normals.push(0, 0, 1);
           uv.x = (vertex2.x / outerRadius + 1) / 2;
@@ -33073,11 +33073,11 @@
       for (let j2 = 0; j2 < phiSegments; j2++) {
         const thetaSegmentLevel = j2 * (thetaSegments + 1);
         for (let i2 = 0; i2 < thetaSegments; i2++) {
-          const segment = i2 + thetaSegmentLevel;
-          const a2 = segment;
-          const b2 = segment + thetaSegments + 1;
-          const c2 = segment + thetaSegments + 2;
-          const d2 = segment + 1;
+          const segment2 = i2 + thetaSegmentLevel;
+          const a2 = segment2;
+          const b2 = segment2 + thetaSegments + 1;
+          const c2 = segment2 + thetaSegments + 2;
+          const d2 = segment2 + 1;
           indices.push(a2, b2, d2);
           indices.push(b2, c2, d2);
         }
@@ -64227,7 +64227,7 @@ void main() {
   };
   var reactReconciler = { exports: {} };
   var reactReconciler_production = { exports: {} };
-  var scheduler$1 = { exports: {} };
+  var scheduler$2 = { exports: {} };
   var scheduler_production$1 = {};
   /**
    * @license React
@@ -64502,14 +64502,14 @@ void main() {
     })(scheduler_production$1);
     return scheduler_production$1;
   }
-  var hasRequiredScheduler$1;
-  function requireScheduler$1() {
-    if (hasRequiredScheduler$1) return scheduler$1.exports;
-    hasRequiredScheduler$1 = 1;
+  var hasRequiredScheduler$2;
+  function requireScheduler$2() {
+    if (hasRequiredScheduler$2) return scheduler$2.exports;
+    hasRequiredScheduler$2 = 1;
     {
-      scheduler$1.exports = requireScheduler_production$1();
+      scheduler$2.exports = requireScheduler_production$1();
     }
-    return scheduler$1.exports;
+    return scheduler$2.exports;
   }
   /**
    * @license React
@@ -71479,7 +71479,7 @@ void main() {
           (fiber = fiber.alternate) && markRetryLaneImpl(fiber, retryLane);
         }
         var exports = {};
-        var React2 = requireReact(), Scheduler = requireScheduler$1(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_PROVIDER_TYPE = Symbol.for("react.provider"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
+        var React2 = requireReact(), Scheduler = requireScheduler$2(), assign = Object.assign, REACT_LEGACY_ELEMENT_TYPE = Symbol.for("react.element"), REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"), REACT_PORTAL_TYPE = Symbol.for("react.portal"), REACT_FRAGMENT_TYPE = Symbol.for("react.fragment"), REACT_STRICT_MODE_TYPE = Symbol.for("react.strict_mode"), REACT_PROFILER_TYPE = Symbol.for("react.profiler"), REACT_PROVIDER_TYPE = Symbol.for("react.provider"), REACT_CONSUMER_TYPE = Symbol.for("react.consumer"), REACT_CONTEXT_TYPE = Symbol.for("react.context"), REACT_FORWARD_REF_TYPE = Symbol.for("react.forward_ref"), REACT_SUSPENSE_TYPE = Symbol.for("react.suspense"), REACT_SUSPENSE_LIST_TYPE = Symbol.for("react.suspense_list"), REACT_MEMO_TYPE = Symbol.for("react.memo"), REACT_LAZY_TYPE = Symbol.for("react.lazy");
         var REACT_OFFSCREEN_TYPE = Symbol.for("react.offscreen");
         var REACT_MEMO_CACHE_SENTINEL = Symbol.for("react.memo_cache_sentinel"), MAYBE_ITERATOR_SYMBOL = Symbol.iterator, REACT_CLIENT_REFERENCE = Symbol.for("react.client.reference"), ReactSharedInternals = React2.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE, prefix, suffix, reentry = false, isArrayImpl = Array.isArray, rendererVersion = $$$config.rendererVersion, rendererPackageName = $$$config.rendererPackageName, extraDevToolsConfig = $$$config.extraDevToolsConfig, getPublicInstance = $$$config.getPublicInstance, getRootHostContext = $$$config.getRootHostContext, getChildHostContext = $$$config.getChildHostContext, prepareForCommit = $$$config.prepareForCommit, resetAfterCommit = $$$config.resetAfterCommit, createInstance2 = $$$config.createInstance, appendInitialChild = $$$config.appendInitialChild, finalizeInitialChildren = $$$config.finalizeInitialChildren, shouldSetTextContent = $$$config.shouldSetTextContent, createTextInstance = $$$config.createTextInstance, scheduleTimeout = $$$config.scheduleTimeout, cancelTimeout = $$$config.cancelTimeout, noTimeout = $$$config.noTimeout, isPrimaryRenderer = $$$config.isPrimaryRenderer;
         $$$config.warnsIfNotActing;
@@ -72224,7 +72224,7 @@ void main() {
   }
   var reactReconcilerExports = requireReactReconciler();
   const Reconciler = /* @__PURE__ */ getDefaultExportFromCjs(reactReconcilerExports);
-  var scheduler = { exports: {} };
+  var scheduler$1 = { exports: {} };
   var scheduler_production = {};
   /**
    * @license React
@@ -72499,16 +72499,16 @@ void main() {
     })(scheduler_production);
     return scheduler_production;
   }
-  var hasRequiredScheduler;
-  function requireScheduler() {
-    if (hasRequiredScheduler) return scheduler.exports;
-    hasRequiredScheduler = 1;
+  var hasRequiredScheduler$1;
+  function requireScheduler$1() {
+    if (hasRequiredScheduler$1) return scheduler$1.exports;
+    hasRequiredScheduler$1 = 1;
     {
-      scheduler.exports = requireScheduler_production();
+      scheduler$1.exports = requireScheduler_production();
     }
-    return scheduler.exports;
+    return scheduler$1.exports;
   }
-  var schedulerExports = requireScheduler();
+  var schedulerExports = requireScheduler$1();
   function i$2(e2, t2, r2) {
     if (!e2) return;
     if (r2(e2) === true) return e2;
@@ -83847,6 +83847,2813 @@ MongoDB ID: ${savedProductId}`;
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { onClick: () => setShowChatBox(!showChatBox), className: "kds-chat-button", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345784/qqchat_jn7bok.png", alt: "chat" }) })
     ] });
   };
+  var navigation$1 = { exports: {} };
+  var appRouterContext_sharedRuntime = {};
+  var _interop_require_default = {};
+  var hasRequired_interop_require_default;
+  function require_interop_require_default() {
+    if (hasRequired_interop_require_default) return _interop_require_default;
+    hasRequired_interop_require_default = 1;
+    function _interop_require_default$1(obj) {
+      return obj && obj.__esModule ? obj : { default: obj };
+    }
+    _interop_require_default._ = _interop_require_default$1;
+    return _interop_require_default;
+  }
+  var hasRequiredAppRouterContext_sharedRuntime;
+  function requireAppRouterContext_sharedRuntime() {
+    if (hasRequiredAppRouterContext_sharedRuntime) return appRouterContext_sharedRuntime;
+    hasRequiredAppRouterContext_sharedRuntime = 1;
+    (function(exports) {
+      "use client";
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        AppRouterContext: function() {
+          return AppRouterContext;
+        },
+        GlobalLayoutRouterContext: function() {
+          return GlobalLayoutRouterContext;
+        },
+        LayoutRouterContext: function() {
+          return LayoutRouterContext;
+        },
+        MissingSlotContext: function() {
+          return MissingSlotContext;
+        },
+        TemplateContext: function() {
+          return TemplateContext;
+        }
+      });
+      const _interop_require_default2 = /* @__PURE__ */ require_interop_require_default();
+      const _react = /* @__PURE__ */ _interop_require_default2._(requireReact());
+      const AppRouterContext = _react.default.createContext(null);
+      const LayoutRouterContext = _react.default.createContext(null);
+      const GlobalLayoutRouterContext = _react.default.createContext(null);
+      const TemplateContext = _react.default.createContext(null);
+      const MissingSlotContext = _react.default.createContext(/* @__PURE__ */ new Set());
+    })(appRouterContext_sharedRuntime);
+    return appRouterContext_sharedRuntime;
+  }
+  var hooksClientContext_sharedRuntime = {};
+  var hasRequiredHooksClientContext_sharedRuntime;
+  function requireHooksClientContext_sharedRuntime() {
+    if (hasRequiredHooksClientContext_sharedRuntime) return hooksClientContext_sharedRuntime;
+    hasRequiredHooksClientContext_sharedRuntime = 1;
+    (function(exports) {
+      "use client";
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        PathParamsContext: function() {
+          return PathParamsContext;
+        },
+        PathnameContext: function() {
+          return PathnameContext;
+        },
+        SearchParamsContext: function() {
+          return SearchParamsContext;
+        }
+      });
+      const _react = requireReact();
+      const SearchParamsContext = (0, _react.createContext)(null);
+      const PathnameContext = (0, _react.createContext)(null);
+      const PathParamsContext = (0, _react.createContext)(null);
+    })(hooksClientContext_sharedRuntime);
+    return hooksClientContext_sharedRuntime;
+  }
+  var getSegmentValue = { exports: {} };
+  var hasRequiredGetSegmentValue;
+  function requireGetSegmentValue() {
+    if (hasRequiredGetSegmentValue) return getSegmentValue.exports;
+    hasRequiredGetSegmentValue = 1;
+    (function(module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      Object.defineProperty(exports, "getSegmentValue", {
+        enumerable: true,
+        get: function() {
+          return getSegmentValue2;
+        }
+      });
+      function getSegmentValue2(segment2) {
+        return Array.isArray(segment2) ? segment2[1] : segment2;
+      }
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(getSegmentValue, getSegmentValue.exports);
+    return getSegmentValue.exports;
+  }
+  var segment = {};
+  var hasRequiredSegment;
+  function requireSegment() {
+    if (hasRequiredSegment) return segment;
+    hasRequiredSegment = 1;
+    (function(exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        DEFAULT_SEGMENT_KEY: function() {
+          return DEFAULT_SEGMENT_KEY;
+        },
+        PAGE_SEGMENT_KEY: function() {
+          return PAGE_SEGMENT_KEY;
+        },
+        addSearchParamsIfPageSegment: function() {
+          return addSearchParamsIfPageSegment;
+        },
+        isGroupSegment: function() {
+          return isGroupSegment;
+        },
+        isParallelRouteSegment: function() {
+          return isParallelRouteSegment;
+        }
+      });
+      function isGroupSegment(segment2) {
+        return segment2[0] === "(" && segment2.endsWith(")");
+      }
+      function isParallelRouteSegment(segment2) {
+        return segment2.startsWith("@") && segment2 !== "@children";
+      }
+      function addSearchParamsIfPageSegment(segment2, searchParams) {
+        const isPageSegment = segment2.includes(PAGE_SEGMENT_KEY);
+        if (isPageSegment) {
+          const stringifiedQuery = JSON.stringify(searchParams);
+          return stringifiedQuery !== "{}" ? PAGE_SEGMENT_KEY + "?" + stringifiedQuery : PAGE_SEGMENT_KEY;
+        }
+        return segment2;
+      }
+      const PAGE_SEGMENT_KEY = "__PAGE__";
+      const DEFAULT_SEGMENT_KEY = "__DEFAULT__";
+    })(segment);
+    return segment;
+  }
+  var navigation_reactServer = { exports: {} };
+  var redirect = { exports: {} };
+  var redirectStatusCode = { exports: {} };
+  var hasRequiredRedirectStatusCode;
+  function requireRedirectStatusCode() {
+    if (hasRequiredRedirectStatusCode) return redirectStatusCode.exports;
+    hasRequiredRedirectStatusCode = 1;
+    (function(module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      Object.defineProperty(exports, "RedirectStatusCode", {
+        enumerable: true,
+        get: function() {
+          return RedirectStatusCode;
+        }
+      });
+      var RedirectStatusCode = /* @__PURE__ */ function(RedirectStatusCode2) {
+        RedirectStatusCode2[RedirectStatusCode2["SeeOther"] = 303] = "SeeOther";
+        RedirectStatusCode2[RedirectStatusCode2["TemporaryRedirect"] = 307] = "TemporaryRedirect";
+        RedirectStatusCode2[RedirectStatusCode2["PermanentRedirect"] = 308] = "PermanentRedirect";
+        return RedirectStatusCode2;
+      }({});
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(redirectStatusCode, redirectStatusCode.exports);
+    return redirectStatusCode.exports;
+  }
+  var redirectError = { exports: {} };
+  var hasRequiredRedirectError;
+  function requireRedirectError() {
+    if (hasRequiredRedirectError) return redirectError.exports;
+    hasRequiredRedirectError = 1;
+    (function(module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        REDIRECT_ERROR_CODE: function() {
+          return REDIRECT_ERROR_CODE;
+        },
+        RedirectType: function() {
+          return RedirectType;
+        },
+        isRedirectError: function() {
+          return isRedirectError;
+        }
+      });
+      const _redirectstatuscode = requireRedirectStatusCode();
+      const REDIRECT_ERROR_CODE = "NEXT_REDIRECT";
+      var RedirectType = /* @__PURE__ */ function(RedirectType2) {
+        RedirectType2["push"] = "push";
+        RedirectType2["replace"] = "replace";
+        return RedirectType2;
+      }({});
+      function isRedirectError(error) {
+        if (typeof error !== "object" || error === null || !("digest" in error) || typeof error.digest !== "string") {
+          return false;
+        }
+        const digest = error.digest.split(";");
+        const [errorCode, type] = digest;
+        const destination = digest.slice(2, -2).join(";");
+        const status = digest.at(-2);
+        const statusCode = Number(status);
+        return errorCode === REDIRECT_ERROR_CODE && (type === "replace" || type === "push") && typeof destination === "string" && !isNaN(statusCode) && statusCode in _redirectstatuscode.RedirectStatusCode;
+      }
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(redirectError, redirectError.exports);
+    return redirectError.exports;
+  }
+  var actionAsyncStorage_external = {};
+  var actionAsyncStorageInstance = {};
+  var asyncLocalStorage = {};
+  var hasRequiredAsyncLocalStorage;
+  function requireAsyncLocalStorage() {
+    if (hasRequiredAsyncLocalStorage) return asyncLocalStorage;
+    hasRequiredAsyncLocalStorage = 1;
+    (function(exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        bindSnapshot: function() {
+          return bindSnapshot;
+        },
+        createAsyncLocalStorage: function() {
+          return createAsyncLocalStorage;
+        },
+        createSnapshot: function() {
+          return createSnapshot;
+        }
+      });
+      const sharedAsyncLocalStorageNotAvailableError = Object.defineProperty(new Error("Invariant: AsyncLocalStorage accessed in runtime where it is not available"), "__NEXT_ERROR_CODE", {
+        value: "E504",
+        enumerable: false,
+        configurable: true
+      });
+      class FakeAsyncLocalStorage {
+        disable() {
+          throw sharedAsyncLocalStorageNotAvailableError;
+        }
+        getStore() {
+          return void 0;
+        }
+        run() {
+          throw sharedAsyncLocalStorageNotAvailableError;
+        }
+        exit() {
+          throw sharedAsyncLocalStorageNotAvailableError;
+        }
+        enterWith() {
+          throw sharedAsyncLocalStorageNotAvailableError;
+        }
+        static bind(fn2) {
+          return fn2;
+        }
+      }
+      const maybeGlobalAsyncLocalStorage = typeof globalThis !== "undefined" && globalThis.AsyncLocalStorage;
+      function createAsyncLocalStorage() {
+        if (maybeGlobalAsyncLocalStorage) {
+          return new maybeGlobalAsyncLocalStorage();
+        }
+        return new FakeAsyncLocalStorage();
+      }
+      function bindSnapshot(fn2) {
+        if (maybeGlobalAsyncLocalStorage) {
+          return maybeGlobalAsyncLocalStorage.bind(fn2);
+        }
+        return FakeAsyncLocalStorage.bind(fn2);
+      }
+      function createSnapshot() {
+        if (maybeGlobalAsyncLocalStorage) {
+          return maybeGlobalAsyncLocalStorage.snapshot();
+        }
+        return function(fn2, ...args) {
+          return fn2(...args);
+        };
+      }
+    })(asyncLocalStorage);
+    return asyncLocalStorage;
+  }
+  var hasRequiredActionAsyncStorageInstance;
+  function requireActionAsyncStorageInstance() {
+    if (hasRequiredActionAsyncStorageInstance) return actionAsyncStorageInstance;
+    hasRequiredActionAsyncStorageInstance = 1;
+    (function(exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      Object.defineProperty(exports, "actionAsyncStorageInstance", {
+        enumerable: true,
+        get: function() {
+          return actionAsyncStorageInstance2;
+        }
+      });
+      const _asynclocalstorage = requireAsyncLocalStorage();
+      const actionAsyncStorageInstance2 = (0, _asynclocalstorage.createAsyncLocalStorage)();
+    })(actionAsyncStorageInstance);
+    return actionAsyncStorageInstance;
+  }
+  var hasRequiredActionAsyncStorage_external;
+  function requireActionAsyncStorage_external() {
+    if (hasRequiredActionAsyncStorage_external) return actionAsyncStorage_external;
+    hasRequiredActionAsyncStorage_external = 1;
+    (function(exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      Object.defineProperty(exports, "actionAsyncStorage", {
+        enumerable: true,
+        get: function() {
+          return _actionasyncstorageinstance.actionAsyncStorageInstance;
+        }
+      });
+      const _actionasyncstorageinstance = requireActionAsyncStorageInstance();
+    })(actionAsyncStorage_external);
+    return actionAsyncStorage_external;
+  }
+  var hasRequiredRedirect;
+  function requireRedirect() {
+    if (hasRequiredRedirect) return redirect.exports;
+    hasRequiredRedirect = 1;
+    (function(module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        getRedirectError: function() {
+          return getRedirectError;
+        },
+        getRedirectStatusCodeFromError: function() {
+          return getRedirectStatusCodeFromError;
+        },
+        getRedirectTypeFromError: function() {
+          return getRedirectTypeFromError;
+        },
+        getURLFromRedirectError: function() {
+          return getURLFromRedirectError;
+        },
+        permanentRedirect: function() {
+          return permanentRedirect;
+        },
+        redirect: function() {
+          return redirect2;
+        }
+      });
+      const _redirectstatuscode = requireRedirectStatusCode();
+      const _redirecterror = requireRedirectError();
+      const actionAsyncStorage = typeof window === "undefined" ? requireActionAsyncStorage_external().actionAsyncStorage : void 0;
+      function getRedirectError(url, type, statusCode) {
+        if (statusCode === void 0) statusCode = _redirectstatuscode.RedirectStatusCode.TemporaryRedirect;
+        const error = Object.defineProperty(new Error(_redirecterror.REDIRECT_ERROR_CODE), "__NEXT_ERROR_CODE", {
+          value: "E394",
+          enumerable: false,
+          configurable: true
+        });
+        error.digest = _redirecterror.REDIRECT_ERROR_CODE + ";" + type + ";" + url + ";" + statusCode + ";";
+        return error;
+      }
+      function redirect2(url, type) {
+        var _actionAsyncStorage_getStore;
+        type != null ? type : type = (actionAsyncStorage == null ? void 0 : (_actionAsyncStorage_getStore = actionAsyncStorage.getStore()) == null ? void 0 : _actionAsyncStorage_getStore.isAction) ? _redirecterror.RedirectType.push : _redirecterror.RedirectType.replace;
+        throw getRedirectError(url, type, _redirectstatuscode.RedirectStatusCode.TemporaryRedirect);
+      }
+      function permanentRedirect(url, type) {
+        if (type === void 0) type = _redirecterror.RedirectType.replace;
+        throw getRedirectError(url, type, _redirectstatuscode.RedirectStatusCode.PermanentRedirect);
+      }
+      function getURLFromRedirectError(error) {
+        if (!(0, _redirecterror.isRedirectError)(error)) return null;
+        return error.digest.split(";").slice(2, -2).join(";");
+      }
+      function getRedirectTypeFromError(error) {
+        if (!(0, _redirecterror.isRedirectError)(error)) {
+          throw Object.defineProperty(new Error("Not a redirect error"), "__NEXT_ERROR_CODE", {
+            value: "E260",
+            enumerable: false,
+            configurable: true
+          });
+        }
+        return error.digest.split(";", 2)[1];
+      }
+      function getRedirectStatusCodeFromError(error) {
+        if (!(0, _redirecterror.isRedirectError)(error)) {
+          throw Object.defineProperty(new Error("Not a redirect error"), "__NEXT_ERROR_CODE", {
+            value: "E260",
+            enumerable: false,
+            configurable: true
+          });
+        }
+        return Number(error.digest.split(";").at(-2));
+      }
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(redirect, redirect.exports);
+    return redirect.exports;
+  }
+  var notFound = { exports: {} };
+  var httpAccessFallback = { exports: {} };
+  var hasRequiredHttpAccessFallback;
+  function requireHttpAccessFallback() {
+    if (hasRequiredHttpAccessFallback) return httpAccessFallback.exports;
+    hasRequiredHttpAccessFallback = 1;
+    (function(module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        HTTPAccessErrorStatus: function() {
+          return HTTPAccessErrorStatus;
+        },
+        HTTP_ERROR_FALLBACK_ERROR_CODE: function() {
+          return HTTP_ERROR_FALLBACK_ERROR_CODE;
+        },
+        getAccessFallbackErrorTypeByStatus: function() {
+          return getAccessFallbackErrorTypeByStatus;
+        },
+        getAccessFallbackHTTPStatus: function() {
+          return getAccessFallbackHTTPStatus;
+        },
+        isHTTPAccessFallbackError: function() {
+          return isHTTPAccessFallbackError;
+        }
+      });
+      const HTTPAccessErrorStatus = {
+        NOT_FOUND: 404,
+        FORBIDDEN: 403,
+        UNAUTHORIZED: 401
+      };
+      const ALLOWED_CODES = new Set(Object.values(HTTPAccessErrorStatus));
+      const HTTP_ERROR_FALLBACK_ERROR_CODE = "NEXT_HTTP_ERROR_FALLBACK";
+      function isHTTPAccessFallbackError(error) {
+        if (typeof error !== "object" || error === null || !("digest" in error) || typeof error.digest !== "string") {
+          return false;
+        }
+        const [prefix, httpStatus] = error.digest.split(";");
+        return prefix === HTTP_ERROR_FALLBACK_ERROR_CODE && ALLOWED_CODES.has(Number(httpStatus));
+      }
+      function getAccessFallbackHTTPStatus(error) {
+        const httpStatus = error.digest.split(";")[1];
+        return Number(httpStatus);
+      }
+      function getAccessFallbackErrorTypeByStatus(status) {
+        switch (status) {
+          case 401:
+            return "unauthorized";
+          case 403:
+            return "forbidden";
+          case 404:
+            return "not-found";
+          default:
+            return;
+        }
+      }
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(httpAccessFallback, httpAccessFallback.exports);
+    return httpAccessFallback.exports;
+  }
+  var hasRequiredNotFound;
+  function requireNotFound() {
+    if (hasRequiredNotFound) return notFound.exports;
+    hasRequiredNotFound = 1;
+    (function(module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      Object.defineProperty(exports, "notFound", {
+        enumerable: true,
+        get: function() {
+          return notFound2;
+        }
+      });
+      const _httpaccessfallback = requireHttpAccessFallback();
+      const DIGEST = "" + _httpaccessfallback.HTTP_ERROR_FALLBACK_ERROR_CODE + ";404";
+      function notFound2() {
+        const error = Object.defineProperty(new Error(DIGEST), "__NEXT_ERROR_CODE", {
+          value: "E394",
+          enumerable: false,
+          configurable: true
+        });
+        error.digest = DIGEST;
+        throw error;
+      }
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(notFound, notFound.exports);
+    return notFound.exports;
+  }
+  var forbidden = { exports: {} };
+  var hasRequiredForbidden;
+  function requireForbidden() {
+    if (hasRequiredForbidden) return forbidden.exports;
+    hasRequiredForbidden = 1;
+    (function(module, exports) {
+      var define_process_env_default2 = {};
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      Object.defineProperty(exports, "forbidden", {
+        enumerable: true,
+        get: function() {
+          return forbidden2;
+        }
+      });
+      const _httpaccessfallback = requireHttpAccessFallback();
+      const DIGEST = "" + _httpaccessfallback.HTTP_ERROR_FALLBACK_ERROR_CODE + ";403";
+      function forbidden2() {
+        if (!define_process_env_default2.__NEXT_EXPERIMENTAL_AUTH_INTERRUPTS) {
+          throw Object.defineProperty(new Error("`forbidden()` is experimental and only allowed to be enabled when `experimental.authInterrupts` is enabled."), "__NEXT_ERROR_CODE", {
+            value: "E488",
+            enumerable: false,
+            configurable: true
+          });
+        }
+        const error = Object.defineProperty(new Error(DIGEST), "__NEXT_ERROR_CODE", {
+          value: "E394",
+          enumerable: false,
+          configurable: true
+        });
+        error.digest = DIGEST;
+        throw error;
+      }
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(forbidden, forbidden.exports);
+    return forbidden.exports;
+  }
+  var unauthorized = { exports: {} };
+  var hasRequiredUnauthorized;
+  function requireUnauthorized() {
+    if (hasRequiredUnauthorized) return unauthorized.exports;
+    hasRequiredUnauthorized = 1;
+    (function(module, exports) {
+      var define_process_env_default2 = {};
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      Object.defineProperty(exports, "unauthorized", {
+        enumerable: true,
+        get: function() {
+          return unauthorized2;
+        }
+      });
+      const _httpaccessfallback = requireHttpAccessFallback();
+      const DIGEST = "" + _httpaccessfallback.HTTP_ERROR_FALLBACK_ERROR_CODE + ";401";
+      function unauthorized2() {
+        if (!define_process_env_default2.__NEXT_EXPERIMENTAL_AUTH_INTERRUPTS) {
+          throw Object.defineProperty(new Error("`unauthorized()` is experimental and only allowed to be used when `experimental.authInterrupts` is enabled."), "__NEXT_ERROR_CODE", {
+            value: "E411",
+            enumerable: false,
+            configurable: true
+          });
+        }
+        const error = Object.defineProperty(new Error(DIGEST), "__NEXT_ERROR_CODE", {
+          value: "E394",
+          enumerable: false,
+          configurable: true
+        });
+        error.digest = DIGEST;
+        throw error;
+      }
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(unauthorized, unauthorized.exports);
+    return unauthorized.exports;
+  }
+  var unstableRethrow = { exports: {} };
+  var unstableRethrow_server = { exports: {} };
+  var dynamicRenderingUtils = {};
+  var hasRequiredDynamicRenderingUtils;
+  function requireDynamicRenderingUtils() {
+    if (hasRequiredDynamicRenderingUtils) return dynamicRenderingUtils;
+    hasRequiredDynamicRenderingUtils = 1;
+    (function(exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        isHangingPromiseRejectionError: function() {
+          return isHangingPromiseRejectionError;
+        },
+        makeHangingPromise: function() {
+          return makeHangingPromise;
+        }
+      });
+      function isHangingPromiseRejectionError(err) {
+        if (typeof err !== "object" || err === null || !("digest" in err)) {
+          return false;
+        }
+        return err.digest === HANGING_PROMISE_REJECTION;
+      }
+      const HANGING_PROMISE_REJECTION = "HANGING_PROMISE_REJECTION";
+      class HangingPromiseRejectionError extends Error {
+        constructor(expression) {
+          super(`During prerendering, ${expression} rejects when the prerender is complete. Typically these errors are handled by React but if you move ${expression} to a different context by using \`setTimeout\`, \`after\`, or similar functions you may observe this error and you should handle it in that context.`), this.expression = expression, this.digest = HANGING_PROMISE_REJECTION;
+        }
+      }
+      const abortListenersBySignal = /* @__PURE__ */ new WeakMap();
+      function makeHangingPromise(signal, expression) {
+        if (signal.aborted) {
+          return Promise.reject(new HangingPromiseRejectionError(expression));
+        } else {
+          const hangingPromise = new Promise((_2, reject) => {
+            const boundRejection = reject.bind(null, new HangingPromiseRejectionError(expression));
+            let currentListeners = abortListenersBySignal.get(signal);
+            if (currentListeners) {
+              currentListeners.push(boundRejection);
+            } else {
+              const listeners = [
+                boundRejection
+              ];
+              abortListenersBySignal.set(signal, listeners);
+              signal.addEventListener("abort", () => {
+                for (let i2 = 0; i2 < listeners.length; i2++) {
+                  listeners[i2]();
+                }
+              }, {
+                once: true
+              });
+            }
+          });
+          hangingPromise.catch(ignoreReject);
+          return hangingPromise;
+        }
+      }
+      function ignoreReject() {
+      }
+    })(dynamicRenderingUtils);
+    return dynamicRenderingUtils;
+  }
+  var isPostpone = {};
+  var hasRequiredIsPostpone;
+  function requireIsPostpone() {
+    if (hasRequiredIsPostpone) return isPostpone;
+    hasRequiredIsPostpone = 1;
+    (function(exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      Object.defineProperty(exports, "isPostpone", {
+        enumerable: true,
+        get: function() {
+          return isPostpone2;
+        }
+      });
+      const REACT_POSTPONE_TYPE = Symbol.for("react.postpone");
+      function isPostpone2(error) {
+        return typeof error === "object" && error !== null && error.$$typeof === REACT_POSTPONE_TYPE;
+      }
+    })(isPostpone);
+    return isPostpone;
+  }
+  var bailoutToCsr = {};
+  var hasRequiredBailoutToCsr;
+  function requireBailoutToCsr() {
+    if (hasRequiredBailoutToCsr) return bailoutToCsr;
+    hasRequiredBailoutToCsr = 1;
+    (function(exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        BailoutToCSRError: function() {
+          return BailoutToCSRError;
+        },
+        isBailoutToCSRError: function() {
+          return isBailoutToCSRError;
+        }
+      });
+      const BAILOUT_TO_CSR = "BAILOUT_TO_CLIENT_SIDE_RENDERING";
+      class BailoutToCSRError extends Error {
+        constructor(reason) {
+          super("Bail out to client-side rendering: " + reason), this.reason = reason, this.digest = BAILOUT_TO_CSR;
+        }
+      }
+      function isBailoutToCSRError(err) {
+        if (typeof err !== "object" || err === null || !("digest" in err)) {
+          return false;
+        }
+        return err.digest === BAILOUT_TO_CSR;
+      }
+    })(bailoutToCsr);
+    return bailoutToCsr;
+  }
+  var isNextRouterError = { exports: {} };
+  var hasRequiredIsNextRouterError;
+  function requireIsNextRouterError() {
+    if (hasRequiredIsNextRouterError) return isNextRouterError.exports;
+    hasRequiredIsNextRouterError = 1;
+    (function(module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      Object.defineProperty(exports, "isNextRouterError", {
+        enumerable: true,
+        get: function() {
+          return isNextRouterError2;
+        }
+      });
+      const _httpaccessfallback = requireHttpAccessFallback();
+      const _redirecterror = requireRedirectError();
+      function isNextRouterError2(error) {
+        return (0, _redirecterror.isRedirectError)(error) || (0, _httpaccessfallback.isHTTPAccessFallbackError)(error);
+      }
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(isNextRouterError, isNextRouterError.exports);
+    return isNextRouterError.exports;
+  }
+  var dynamicRendering = {};
+  var hooksServerContext = { exports: {} };
+  var hasRequiredHooksServerContext;
+  function requireHooksServerContext() {
+    if (hasRequiredHooksServerContext) return hooksServerContext.exports;
+    hasRequiredHooksServerContext = 1;
+    (function(module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        DynamicServerError: function() {
+          return DynamicServerError;
+        },
+        isDynamicServerError: function() {
+          return isDynamicServerError;
+        }
+      });
+      const DYNAMIC_ERROR_CODE = "DYNAMIC_SERVER_USAGE";
+      class DynamicServerError extends Error {
+        constructor(description) {
+          super("Dynamic server usage: " + description), this.description = description, this.digest = DYNAMIC_ERROR_CODE;
+        }
+      }
+      function isDynamicServerError(err) {
+        if (typeof err !== "object" || err === null || !("digest" in err) || typeof err.digest !== "string") {
+          return false;
+        }
+        return err.digest === DYNAMIC_ERROR_CODE;
+      }
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(hooksServerContext, hooksServerContext.exports);
+    return hooksServerContext.exports;
+  }
+  var staticGenerationBailout = { exports: {} };
+  var hasRequiredStaticGenerationBailout;
+  function requireStaticGenerationBailout() {
+    if (hasRequiredStaticGenerationBailout) return staticGenerationBailout.exports;
+    hasRequiredStaticGenerationBailout = 1;
+    (function(module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        StaticGenBailoutError: function() {
+          return StaticGenBailoutError;
+        },
+        isStaticGenBailoutError: function() {
+          return isStaticGenBailoutError;
+        }
+      });
+      const NEXT_STATIC_GEN_BAILOUT = "NEXT_STATIC_GEN_BAILOUT";
+      class StaticGenBailoutError extends Error {
+        constructor(...args) {
+          super(...args), this.code = NEXT_STATIC_GEN_BAILOUT;
+        }
+      }
+      function isStaticGenBailoutError(error) {
+        if (typeof error !== "object" || error === null || !("code" in error)) {
+          return false;
+        }
+        return error.code === NEXT_STATIC_GEN_BAILOUT;
+      }
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(staticGenerationBailout, staticGenerationBailout.exports);
+    return staticGenerationBailout.exports;
+  }
+  var workUnitAsyncStorage_external = {};
+  var workUnitAsyncStorageInstance = {};
+  var hasRequiredWorkUnitAsyncStorageInstance;
+  function requireWorkUnitAsyncStorageInstance() {
+    if (hasRequiredWorkUnitAsyncStorageInstance) return workUnitAsyncStorageInstance;
+    hasRequiredWorkUnitAsyncStorageInstance = 1;
+    (function(exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      Object.defineProperty(exports, "workUnitAsyncStorageInstance", {
+        enumerable: true,
+        get: function() {
+          return workUnitAsyncStorageInstance2;
+        }
+      });
+      const _asynclocalstorage = requireAsyncLocalStorage();
+      const workUnitAsyncStorageInstance2 = (0, _asynclocalstorage.createAsyncLocalStorage)();
+    })(workUnitAsyncStorageInstance);
+    return workUnitAsyncStorageInstance;
+  }
+  var appRouterHeaders = { exports: {} };
+  var hasRequiredAppRouterHeaders;
+  function requireAppRouterHeaders() {
+    if (hasRequiredAppRouterHeaders) return appRouterHeaders.exports;
+    hasRequiredAppRouterHeaders = 1;
+    (function(module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        ACTION_HEADER: function() {
+          return ACTION_HEADER;
+        },
+        FLIGHT_HEADERS: function() {
+          return FLIGHT_HEADERS;
+        },
+        NEXT_ACTION_NOT_FOUND_HEADER: function() {
+          return NEXT_ACTION_NOT_FOUND_HEADER;
+        },
+        NEXT_DID_POSTPONE_HEADER: function() {
+          return NEXT_DID_POSTPONE_HEADER;
+        },
+        NEXT_HMR_REFRESH_HASH_COOKIE: function() {
+          return NEXT_HMR_REFRESH_HASH_COOKIE;
+        },
+        NEXT_HMR_REFRESH_HEADER: function() {
+          return NEXT_HMR_REFRESH_HEADER;
+        },
+        NEXT_IS_PRERENDER_HEADER: function() {
+          return NEXT_IS_PRERENDER_HEADER;
+        },
+        NEXT_REWRITTEN_PATH_HEADER: function() {
+          return NEXT_REWRITTEN_PATH_HEADER;
+        },
+        NEXT_REWRITTEN_QUERY_HEADER: function() {
+          return NEXT_REWRITTEN_QUERY_HEADER;
+        },
+        NEXT_ROUTER_PREFETCH_HEADER: function() {
+          return NEXT_ROUTER_PREFETCH_HEADER;
+        },
+        NEXT_ROUTER_SEGMENT_PREFETCH_HEADER: function() {
+          return NEXT_ROUTER_SEGMENT_PREFETCH_HEADER;
+        },
+        NEXT_ROUTER_STALE_TIME_HEADER: function() {
+          return NEXT_ROUTER_STALE_TIME_HEADER;
+        },
+        NEXT_ROUTER_STATE_TREE_HEADER: function() {
+          return NEXT_ROUTER_STATE_TREE_HEADER;
+        },
+        NEXT_RSC_UNION_QUERY: function() {
+          return NEXT_RSC_UNION_QUERY;
+        },
+        NEXT_URL: function() {
+          return NEXT_URL;
+        },
+        RSC_CONTENT_TYPE_HEADER: function() {
+          return RSC_CONTENT_TYPE_HEADER;
+        },
+        RSC_HEADER: function() {
+          return RSC_HEADER;
+        }
+      });
+      const RSC_HEADER = "RSC";
+      const ACTION_HEADER = "Next-Action";
+      const NEXT_ROUTER_STATE_TREE_HEADER = "Next-Router-State-Tree";
+      const NEXT_ROUTER_PREFETCH_HEADER = "Next-Router-Prefetch";
+      const NEXT_ROUTER_SEGMENT_PREFETCH_HEADER = "Next-Router-Segment-Prefetch";
+      const NEXT_HMR_REFRESH_HEADER = "Next-HMR-Refresh";
+      const NEXT_HMR_REFRESH_HASH_COOKIE = "__next_hmr_refresh_hash__";
+      const NEXT_URL = "Next-Url";
+      const RSC_CONTENT_TYPE_HEADER = "text/x-component";
+      const FLIGHT_HEADERS = [
+        RSC_HEADER,
+        NEXT_ROUTER_STATE_TREE_HEADER,
+        NEXT_ROUTER_PREFETCH_HEADER,
+        NEXT_HMR_REFRESH_HEADER,
+        NEXT_ROUTER_SEGMENT_PREFETCH_HEADER
+      ];
+      const NEXT_RSC_UNION_QUERY = "_rsc";
+      const NEXT_ROUTER_STALE_TIME_HEADER = "x-nextjs-stale-time";
+      const NEXT_DID_POSTPONE_HEADER = "x-nextjs-postponed";
+      const NEXT_REWRITTEN_PATH_HEADER = "x-nextjs-rewritten-path";
+      const NEXT_REWRITTEN_QUERY_HEADER = "x-nextjs-rewritten-query";
+      const NEXT_IS_PRERENDER_HEADER = "x-nextjs-prerender";
+      const NEXT_ACTION_NOT_FOUND_HEADER = "x-nextjs-action-not-found";
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(appRouterHeaders, appRouterHeaders.exports);
+    return appRouterHeaders.exports;
+  }
+  var hasRequiredWorkUnitAsyncStorage_external;
+  function requireWorkUnitAsyncStorage_external() {
+    if (hasRequiredWorkUnitAsyncStorage_external) return workUnitAsyncStorage_external;
+    hasRequiredWorkUnitAsyncStorage_external = 1;
+    (function(exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        getDraftModeProviderForCacheScope: function() {
+          return getDraftModeProviderForCacheScope;
+        },
+        getExpectedRequestStore: function() {
+          return getExpectedRequestStore;
+        },
+        getHmrRefreshHash: function() {
+          return getHmrRefreshHash;
+        },
+        getPrerenderResumeDataCache: function() {
+          return getPrerenderResumeDataCache;
+        },
+        getRenderResumeDataCache: function() {
+          return getRenderResumeDataCache;
+        },
+        throwForMissingRequestStore: function() {
+          return throwForMissingRequestStore;
+        },
+        workUnitAsyncStorage: function() {
+          return _workunitasyncstorageinstance.workUnitAsyncStorageInstance;
+        }
+      });
+      const _workunitasyncstorageinstance = requireWorkUnitAsyncStorageInstance();
+      const _approuterheaders = requireAppRouterHeaders();
+      function getExpectedRequestStore(callingExpression) {
+        const workUnitStore = _workunitasyncstorageinstance.workUnitAsyncStorageInstance.getStore();
+        if (!workUnitStore) {
+          throwForMissingRequestStore(callingExpression);
+        }
+        switch (workUnitStore.type) {
+          case "request":
+            return workUnitStore;
+          case "prerender":
+          case "prerender-client":
+          case "prerender-ppr":
+          case "prerender-legacy":
+            throw Object.defineProperty(new Error(`\`${callingExpression}\` cannot be called inside a prerender. This is a bug in Next.js.`), "__NEXT_ERROR_CODE", {
+              value: "E401",
+              enumerable: false,
+              configurable: true
+            });
+          case "cache":
+            throw Object.defineProperty(new Error(`\`${callingExpression}\` cannot be called inside "use cache". Call it outside and pass an argument instead. Read more: https://nextjs.org/docs/messages/next-request-in-use-cache`), "__NEXT_ERROR_CODE", {
+              value: "E37",
+              enumerable: false,
+              configurable: true
+            });
+          case "unstable-cache":
+            throw Object.defineProperty(new Error(`\`${callingExpression}\` cannot be called inside unstable_cache. Call it outside and pass an argument instead. Read more: https://nextjs.org/docs/app/api-reference/functions/unstable_cache`), "__NEXT_ERROR_CODE", {
+              value: "E69",
+              enumerable: false,
+              configurable: true
+            });
+          default:
+            const _exhaustiveCheck = workUnitStore;
+            return _exhaustiveCheck;
+        }
+      }
+      function throwForMissingRequestStore(callingExpression) {
+        throw Object.defineProperty(new Error(`\`${callingExpression}\` was called outside a request scope. Read more: https://nextjs.org/docs/messages/next-dynamic-api-wrong-context`), "__NEXT_ERROR_CODE", {
+          value: "E251",
+          enumerable: false,
+          configurable: true
+        });
+      }
+      function getPrerenderResumeDataCache(workUnitStore) {
+        if (workUnitStore.type === "prerender" || // TODO eliminate fetch caching in client scope and stop exposing this data cache during SSR
+        workUnitStore.type === "prerender-client" || workUnitStore.type === "prerender-ppr") {
+          return workUnitStore.prerenderResumeDataCache;
+        }
+        return null;
+      }
+      function getRenderResumeDataCache(workUnitStore) {
+        switch (workUnitStore.type) {
+          case "request":
+            return workUnitStore.renderResumeDataCache;
+          case "prerender":
+          case "prerender-client":
+            if (workUnitStore.renderResumeDataCache) {
+              return workUnitStore.renderResumeDataCache;
+            }
+          // fallthrough
+          case "prerender-ppr":
+            return workUnitStore.prerenderResumeDataCache;
+          default:
+            return null;
+        }
+      }
+      function getHmrRefreshHash(workStore, workUnitStore) {
+        var _workUnitStore_cookies_get;
+        if (!workStore.dev) {
+          return void 0;
+        }
+        return workUnitStore.type === "cache" || workUnitStore.type === "prerender" ? workUnitStore.hmrRefreshHash : workUnitStore.type === "request" ? (_workUnitStore_cookies_get = workUnitStore.cookies.get(_approuterheaders.NEXT_HMR_REFRESH_HASH_COOKIE)) == null ? void 0 : _workUnitStore_cookies_get.value : void 0;
+      }
+      function getDraftModeProviderForCacheScope(workStore, workUnitStore) {
+        if (workStore.isDraftMode) {
+          switch (workUnitStore.type) {
+            case "cache":
+            case "unstable-cache":
+            case "request":
+              return workUnitStore.draftMode;
+            default:
+              return void 0;
+          }
+        }
+        return void 0;
+      }
+    })(workUnitAsyncStorage_external);
+    return workUnitAsyncStorage_external;
+  }
+  var workAsyncStorage_external = {};
+  var workAsyncStorageInstance = {};
+  var hasRequiredWorkAsyncStorageInstance;
+  function requireWorkAsyncStorageInstance() {
+    if (hasRequiredWorkAsyncStorageInstance) return workAsyncStorageInstance;
+    hasRequiredWorkAsyncStorageInstance = 1;
+    (function(exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      Object.defineProperty(exports, "workAsyncStorageInstance", {
+        enumerable: true,
+        get: function() {
+          return workAsyncStorageInstance2;
+        }
+      });
+      const _asynclocalstorage = requireAsyncLocalStorage();
+      const workAsyncStorageInstance2 = (0, _asynclocalstorage.createAsyncLocalStorage)();
+    })(workAsyncStorageInstance);
+    return workAsyncStorageInstance;
+  }
+  var hasRequiredWorkAsyncStorage_external;
+  function requireWorkAsyncStorage_external() {
+    if (hasRequiredWorkAsyncStorage_external) return workAsyncStorage_external;
+    hasRequiredWorkAsyncStorage_external = 1;
+    (function(exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      Object.defineProperty(exports, "workAsyncStorage", {
+        enumerable: true,
+        get: function() {
+          return _workasyncstorageinstance.workAsyncStorageInstance;
+        }
+      });
+      const _workasyncstorageinstance = requireWorkAsyncStorageInstance();
+    })(workAsyncStorage_external);
+    return workAsyncStorage_external;
+  }
+  var metadataConstants = {};
+  var hasRequiredMetadataConstants;
+  function requireMetadataConstants() {
+    if (hasRequiredMetadataConstants) return metadataConstants;
+    hasRequiredMetadataConstants = 1;
+    (function(exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        METADATA_BOUNDARY_NAME: function() {
+          return METADATA_BOUNDARY_NAME;
+        },
+        OUTLET_BOUNDARY_NAME: function() {
+          return OUTLET_BOUNDARY_NAME;
+        },
+        VIEWPORT_BOUNDARY_NAME: function() {
+          return VIEWPORT_BOUNDARY_NAME;
+        }
+      });
+      const METADATA_BOUNDARY_NAME = "__next_metadata_boundary__";
+      const VIEWPORT_BOUNDARY_NAME = "__next_viewport_boundary__";
+      const OUTLET_BOUNDARY_NAME = "__next_outlet_boundary__";
+    })(metadataConstants);
+    return metadataConstants;
+  }
+  var scheduler = {};
+  var hasRequiredScheduler;
+  function requireScheduler() {
+    if (hasRequiredScheduler) return scheduler;
+    hasRequiredScheduler = 1;
+    (function(exports) {
+      var define_process_env_default2 = {};
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        atLeastOneTask: function() {
+          return atLeastOneTask;
+        },
+        scheduleImmediate: function() {
+          return scheduleImmediate;
+        },
+        scheduleOnNextTick: function() {
+          return scheduleOnNextTick;
+        },
+        waitAtLeastOneReactRenderTask: function() {
+          return waitAtLeastOneReactRenderTask;
+        }
+      });
+      const scheduleOnNextTick = (cb) => {
+        Promise.resolve().then(() => {
+          if (define_process_env_default2.NEXT_RUNTIME === "edge") {
+            setTimeout(cb, 0);
+          } else {
+            process.nextTick(cb);
+          }
+        });
+      };
+      const scheduleImmediate = (cb) => {
+        if (define_process_env_default2.NEXT_RUNTIME === "edge") {
+          setTimeout(cb, 0);
+        } else {
+          setImmediate(cb);
+        }
+      };
+      function atLeastOneTask() {
+        return new Promise((resolve2) => scheduleImmediate(resolve2));
+      }
+      function waitAtLeastOneReactRenderTask() {
+        if (define_process_env_default2.NEXT_RUNTIME === "edge") {
+          return new Promise((r2) => setTimeout(r2, 0));
+        } else {
+          return new Promise((r2) => setImmediate(r2));
+        }
+      }
+    })(scheduler);
+    return scheduler;
+  }
+  var hasRequiredDynamicRendering;
+  function requireDynamicRendering() {
+    if (hasRequiredDynamicRendering) return dynamicRendering;
+    hasRequiredDynamicRendering = 1;
+    (function(exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        Postpone: function() {
+          return Postpone;
+        },
+        PreludeState: function() {
+          return PreludeState;
+        },
+        abortAndThrowOnSynchronousRequestDataAccess: function() {
+          return abortAndThrowOnSynchronousRequestDataAccess;
+        },
+        abortOnSynchronousPlatformIOAccess: function() {
+          return abortOnSynchronousPlatformIOAccess;
+        },
+        accessedDynamicData: function() {
+          return accessedDynamicData;
+        },
+        annotateDynamicAccess: function() {
+          return annotateDynamicAccess;
+        },
+        consumeDynamicAccess: function() {
+          return consumeDynamicAccess;
+        },
+        createDynamicTrackingState: function() {
+          return createDynamicTrackingState;
+        },
+        createDynamicValidationState: function() {
+          return createDynamicValidationState;
+        },
+        createHangingInputAbortSignal: function() {
+          return createHangingInputAbortSignal;
+        },
+        createPostponedAbortSignal: function() {
+          return createPostponedAbortSignal;
+        },
+        formatDynamicAPIAccesses: function() {
+          return formatDynamicAPIAccesses;
+        },
+        getFirstDynamicReason: function() {
+          return getFirstDynamicReason;
+        },
+        isDynamicPostpone: function() {
+          return isDynamicPostpone;
+        },
+        isPrerenderInterruptedError: function() {
+          return isPrerenderInterruptedError;
+        },
+        markCurrentScopeAsDynamic: function() {
+          return markCurrentScopeAsDynamic;
+        },
+        postponeWithTracking: function() {
+          return postponeWithTracking;
+        },
+        throwIfDisallowedDynamic: function() {
+          return throwIfDisallowedDynamic;
+        },
+        throwToInterruptStaticGeneration: function() {
+          return throwToInterruptStaticGeneration;
+        },
+        trackAllowedDynamicAccess: function() {
+          return trackAllowedDynamicAccess;
+        },
+        trackDynamicDataInDynamicRender: function() {
+          return trackDynamicDataInDynamicRender;
+        },
+        trackFallbackParamAccessed: function() {
+          return trackFallbackParamAccessed;
+        },
+        trackSynchronousPlatformIOAccessInDev: function() {
+          return trackSynchronousPlatformIOAccessInDev;
+        },
+        trackSynchronousRequestDataAccessInDev: function() {
+          return trackSynchronousRequestDataAccessInDev;
+        },
+        useDynamicRouteParams: function() {
+          return useDynamicRouteParams;
+        }
+      });
+      const _react = /* @__PURE__ */ _interop_require_default2(requireReact());
+      const _hooksservercontext = requireHooksServerContext();
+      const _staticgenerationbailout = requireStaticGenerationBailout();
+      const _workunitasyncstorageexternal = requireWorkUnitAsyncStorage_external();
+      const _workasyncstorageexternal = requireWorkAsyncStorage_external();
+      const _dynamicrenderingutils = requireDynamicRenderingUtils();
+      const _metadataconstants = requireMetadataConstants();
+      const _scheduler = requireScheduler();
+      function _interop_require_default2(obj) {
+        return obj && obj.__esModule ? obj : {
+          default: obj
+        };
+      }
+      const hasPostpone = typeof _react.default.unstable_postpone === "function";
+      function createDynamicTrackingState(isDebugDynamicAccesses) {
+        return {
+          isDebugDynamicAccesses,
+          dynamicAccesses: [],
+          syncDynamicErrorWithStack: null
+        };
+      }
+      function createDynamicValidationState() {
+        return {
+          hasSuspenseAboveBody: false,
+          hasDynamicMetadata: false,
+          hasDynamicViewport: false,
+          hasAllowedDynamic: false,
+          dynamicErrors: []
+        };
+      }
+      function getFirstDynamicReason(trackingState) {
+        var _trackingState_dynamicAccesses_;
+        return (_trackingState_dynamicAccesses_ = trackingState.dynamicAccesses[0]) == null ? void 0 : _trackingState_dynamicAccesses_.expression;
+      }
+      function markCurrentScopeAsDynamic(store, workUnitStore, expression) {
+        if (workUnitStore) {
+          if (workUnitStore.type === "cache" || workUnitStore.type === "unstable-cache") {
+            return;
+          }
+        }
+        if (store.forceDynamic || store.forceStatic) return;
+        if (store.dynamicShouldError) {
+          throw Object.defineProperty(new _staticgenerationbailout.StaticGenBailoutError(`Route ${store.route} with \`dynamic = "error"\` couldn't be rendered statically because it used \`${expression}\`. See more info here: https://nextjs.org/docs/app/building-your-application/rendering/static-and-dynamic#dynamic-rendering`), "__NEXT_ERROR_CODE", {
+            value: "E553",
+            enumerable: false,
+            configurable: true
+          });
+        }
+        if (workUnitStore) {
+          if (workUnitStore.type === "prerender-ppr") {
+            postponeWithTracking(store.route, expression, workUnitStore.dynamicTracking);
+          } else if (workUnitStore.type === "prerender-legacy") {
+            workUnitStore.revalidate = 0;
+            const err = Object.defineProperty(new _hooksservercontext.DynamicServerError(`Route ${store.route} couldn't be rendered statically because it used ${expression}. See more info here: https://nextjs.org/docs/messages/dynamic-server-error`), "__NEXT_ERROR_CODE", {
+              value: "E550",
+              enumerable: false,
+              configurable: true
+            });
+            store.dynamicUsageDescription = expression;
+            store.dynamicUsageStack = err.stack;
+            throw err;
+          } else ;
+        }
+      }
+      function trackFallbackParamAccessed(store, expression) {
+        const prerenderStore = _workunitasyncstorageexternal.workUnitAsyncStorage.getStore();
+        if (!prerenderStore || prerenderStore.type !== "prerender-ppr") return;
+        postponeWithTracking(store.route, expression, prerenderStore.dynamicTracking);
+      }
+      function throwToInterruptStaticGeneration(expression, store, prerenderStore) {
+        const err = Object.defineProperty(new _hooksservercontext.DynamicServerError(`Route ${store.route} couldn't be rendered statically because it used \`${expression}\`. See more info here: https://nextjs.org/docs/messages/dynamic-server-error`), "__NEXT_ERROR_CODE", {
+          value: "E558",
+          enumerable: false,
+          configurable: true
+        });
+        prerenderStore.revalidate = 0;
+        store.dynamicUsageDescription = expression;
+        store.dynamicUsageStack = err.stack;
+        throw err;
+      }
+      function trackDynamicDataInDynamicRender(_store, workUnitStore) {
+        if (workUnitStore) {
+          if (workUnitStore.type === "cache" || workUnitStore.type === "unstable-cache") {
+            return;
+          }
+          if (workUnitStore.type === "prerender" || workUnitStore.type === "prerender-client" || workUnitStore.type === "prerender-legacy") {
+            workUnitStore.revalidate = 0;
+          }
+        }
+      }
+      function abortOnSynchronousDynamicDataAccess(route, expression, prerenderStore) {
+        const reason = `Route ${route} needs to bail out of prerendering at this point because it used ${expression}.`;
+        const error = createPrerenderInterruptedError(reason);
+        prerenderStore.controller.abort(error);
+        const dynamicTracking = prerenderStore.dynamicTracking;
+        if (dynamicTracking) {
+          dynamicTracking.dynamicAccesses.push({
+            // When we aren't debugging, we don't need to create another error for the
+            // stack trace.
+            stack: dynamicTracking.isDebugDynamicAccesses ? new Error().stack : void 0,
+            expression
+          });
+        }
+      }
+      function abortOnSynchronousPlatformIOAccess(route, expression, errorWithStack, prerenderStore) {
+        const dynamicTracking = prerenderStore.dynamicTracking;
+        abortOnSynchronousDynamicDataAccess(route, expression, prerenderStore);
+        if (dynamicTracking) {
+          if (dynamicTracking.syncDynamicErrorWithStack === null) {
+            dynamicTracking.syncDynamicErrorWithStack = errorWithStack;
+          }
+        }
+      }
+      function trackSynchronousPlatformIOAccessInDev(requestStore) {
+        requestStore.prerenderPhase = false;
+      }
+      function abortAndThrowOnSynchronousRequestDataAccess(route, expression, errorWithStack, prerenderStore) {
+        const prerenderSignal = prerenderStore.controller.signal;
+        if (prerenderSignal.aborted === false) {
+          abortOnSynchronousDynamicDataAccess(route, expression, prerenderStore);
+          const dynamicTracking = prerenderStore.dynamicTracking;
+          if (dynamicTracking) {
+            if (dynamicTracking.syncDynamicErrorWithStack === null) {
+              dynamicTracking.syncDynamicErrorWithStack = errorWithStack;
+            }
+          }
+        }
+        throw createPrerenderInterruptedError(`Route ${route} needs to bail out of prerendering at this point because it used ${expression}.`);
+      }
+      const trackSynchronousRequestDataAccessInDev = trackSynchronousPlatformIOAccessInDev;
+      function Postpone({ reason, route }) {
+        const prerenderStore = _workunitasyncstorageexternal.workUnitAsyncStorage.getStore();
+        const dynamicTracking = prerenderStore && prerenderStore.type === "prerender-ppr" ? prerenderStore.dynamicTracking : null;
+        postponeWithTracking(route, reason, dynamicTracking);
+      }
+      function postponeWithTracking(route, expression, dynamicTracking) {
+        assertPostpone();
+        if (dynamicTracking) {
+          dynamicTracking.dynamicAccesses.push({
+            // When we aren't debugging, we don't need to create another error for the
+            // stack trace.
+            stack: dynamicTracking.isDebugDynamicAccesses ? new Error().stack : void 0,
+            expression
+          });
+        }
+        _react.default.unstable_postpone(createPostponeReason(route, expression));
+      }
+      function createPostponeReason(route, expression) {
+        return `Route ${route} needs to bail out of prerendering at this point because it used ${expression}. React throws this special object to indicate where. It should not be caught by your own try/catch. Learn more: https://nextjs.org/docs/messages/ppr-caught-error`;
+      }
+      function isDynamicPostpone(err) {
+        if (typeof err === "object" && err !== null && typeof err.message === "string") {
+          return isDynamicPostponeReason(err.message);
+        }
+        return false;
+      }
+      function isDynamicPostponeReason(reason) {
+        return reason.includes("needs to bail out of prerendering at this point because it used") && reason.includes("Learn more: https://nextjs.org/docs/messages/ppr-caught-error");
+      }
+      if (isDynamicPostponeReason(createPostponeReason("%%%", "^^^")) === false) {
+        throw Object.defineProperty(new Error("Invariant: isDynamicPostpone misidentified a postpone reason. This is a bug in Next.js"), "__NEXT_ERROR_CODE", {
+          value: "E296",
+          enumerable: false,
+          configurable: true
+        });
+      }
+      const NEXT_PRERENDER_INTERRUPTED = "NEXT_PRERENDER_INTERRUPTED";
+      function createPrerenderInterruptedError(message) {
+        const error = Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
+          value: "E394",
+          enumerable: false,
+          configurable: true
+        });
+        error.digest = NEXT_PRERENDER_INTERRUPTED;
+        return error;
+      }
+      function isPrerenderInterruptedError(error) {
+        return typeof error === "object" && error !== null && error.digest === NEXT_PRERENDER_INTERRUPTED && "name" in error && "message" in error && error instanceof Error;
+      }
+      function accessedDynamicData(dynamicAccesses) {
+        return dynamicAccesses.length > 0;
+      }
+      function consumeDynamicAccess(serverDynamic, clientDynamic) {
+        serverDynamic.dynamicAccesses.push(...clientDynamic.dynamicAccesses);
+        return serverDynamic.dynamicAccesses;
+      }
+      function formatDynamicAPIAccesses(dynamicAccesses) {
+        return dynamicAccesses.filter((access) => typeof access.stack === "string" && access.stack.length > 0).map(({ expression, stack }) => {
+          stack = stack.split("\n").slice(4).filter((line) => {
+            if (line.includes("node_modules/next/")) {
+              return false;
+            }
+            if (line.includes(" (<anonymous>)")) {
+              return false;
+            }
+            if (line.includes(" (node:")) {
+              return false;
+            }
+            return true;
+          }).join("\n");
+          return `Dynamic API Usage Debug - ${expression}:
+${stack}`;
+        });
+      }
+      function assertPostpone() {
+        if (!hasPostpone) {
+          throw Object.defineProperty(new Error(`Invariant: React.unstable_postpone is not defined. This suggests the wrong version of React was loaded. This is a bug in Next.js`), "__NEXT_ERROR_CODE", {
+            value: "E224",
+            enumerable: false,
+            configurable: true
+          });
+        }
+      }
+      function createPostponedAbortSignal(reason) {
+        assertPostpone();
+        const controller = new AbortController();
+        try {
+          _react.default.unstable_postpone(reason);
+        } catch (x2) {
+          controller.abort(x2);
+        }
+        return controller.signal;
+      }
+      function createHangingInputAbortSignal(workUnitStore) {
+        const controller = new AbortController();
+        if (workUnitStore.cacheSignal) {
+          workUnitStore.cacheSignal.inputReady().then(() => {
+            controller.abort();
+          });
+        } else {
+          (0, _scheduler.scheduleOnNextTick)(() => controller.abort());
+        }
+        return controller.signal;
+      }
+      function annotateDynamicAccess(expression, prerenderStore) {
+        const dynamicTracking = prerenderStore.dynamicTracking;
+        if (dynamicTracking) {
+          dynamicTracking.dynamicAccesses.push({
+            stack: dynamicTracking.isDebugDynamicAccesses ? new Error().stack : void 0,
+            expression
+          });
+        }
+      }
+      function useDynamicRouteParams(expression) {
+        const workStore = _workasyncstorageexternal.workAsyncStorage.getStore();
+        if (workStore && workStore.isStaticGeneration && workStore.fallbackRouteParams && workStore.fallbackRouteParams.size > 0) {
+          const workUnitStore = _workunitasyncstorageexternal.workUnitAsyncStorage.getStore();
+          if (workUnitStore) {
+            if (workUnitStore.type === "prerender-client") {
+              _react.default.use((0, _dynamicrenderingutils.makeHangingPromise)(workUnitStore.renderSignal, expression));
+            } else if (workUnitStore.type === "prerender-ppr") {
+              postponeWithTracking(workStore.route, expression, workUnitStore.dynamicTracking);
+            } else if (workUnitStore.type === "prerender-legacy") {
+              throwToInterruptStaticGeneration(expression, workStore, workUnitStore);
+            }
+          }
+        }
+      }
+      const hasSuspenseRegex = /\n\s+at Suspense \(<anonymous>\)/;
+      const hasSuspenseAfterBodyOrHtmlRegex = /\n\s+at (?:body|html) \(<anonymous>\)[\s\S]*?\n\s+at Suspense \(<anonymous>\)/;
+      const hasMetadataRegex = new RegExp(`\\n\\s+at ${_metadataconstants.METADATA_BOUNDARY_NAME}[\\n\\s]`);
+      const hasViewportRegex = new RegExp(`\\n\\s+at ${_metadataconstants.VIEWPORT_BOUNDARY_NAME}[\\n\\s]`);
+      const hasOutletRegex = new RegExp(`\\n\\s+at ${_metadataconstants.OUTLET_BOUNDARY_NAME}[\\n\\s]`);
+      function trackAllowedDynamicAccess(workStore, componentStack, dynamicValidation, clientDynamic) {
+        if (hasOutletRegex.test(componentStack)) {
+          return;
+        } else if (hasMetadataRegex.test(componentStack)) {
+          dynamicValidation.hasDynamicMetadata = true;
+          return;
+        } else if (hasViewportRegex.test(componentStack)) {
+          dynamicValidation.hasDynamicViewport = true;
+          return;
+        } else if (hasSuspenseAfterBodyOrHtmlRegex.test(componentStack)) {
+          dynamicValidation.hasAllowedDynamic = true;
+          dynamicValidation.hasSuspenseAboveBody = true;
+          return;
+        } else if (hasSuspenseRegex.test(componentStack)) {
+          dynamicValidation.hasAllowedDynamic = true;
+          return;
+        } else if (clientDynamic.syncDynamicErrorWithStack) {
+          dynamicValidation.dynamicErrors.push(clientDynamic.syncDynamicErrorWithStack);
+          return;
+        } else {
+          const message = `Route "${workStore.route}": A component accessed data, headers, params, searchParams, or a short-lived cache without a Suspense boundary nor a "use cache" above it. See more info: https://nextjs.org/docs/messages/next-prerender-missing-suspense`;
+          const error = createErrorWithComponentOrOwnerStack(message, componentStack);
+          dynamicValidation.dynamicErrors.push(error);
+          return;
+        }
+      }
+      function createErrorWithComponentOrOwnerStack(message, componentStack) {
+        const error = Object.defineProperty(new Error(message), "__NEXT_ERROR_CODE", {
+          value: "E394",
+          enumerable: false,
+          configurable: true
+        });
+        error.stack = error.name + ": " + message + componentStack;
+        return error;
+      }
+      var PreludeState = /* @__PURE__ */ function(PreludeState2) {
+        PreludeState2[PreludeState2["Full"] = 0] = "Full";
+        PreludeState2[PreludeState2["Empty"] = 1] = "Empty";
+        PreludeState2[PreludeState2["Errored"] = 2] = "Errored";
+        return PreludeState2;
+      }({});
+      function logDisallowedDynamicError(workStore, error) {
+        console.error(error);
+        if (!workStore.dev) {
+          if (workStore.hasReadableErrorStacks) {
+            console.error(`To get a more detailed stack trace and pinpoint the issue, start the app in development mode by running \`next dev\`, then open "${workStore.route}" in your browser to investigate the error.`);
+          } else {
+            console.error(`To get a more detailed stack trace and pinpoint the issue, try one of the following:
+  - Start the app in development mode by running \`next dev\`, then open "${workStore.route}" in your browser to investigate the error.
+  - Rerun the production build with \`next build --debug-prerender\` to generate better stack traces.`);
+          }
+        }
+      }
+      function throwIfDisallowedDynamic(workStore, prelude, dynamicValidation, serverDynamic) {
+        if (workStore.invalidDynamicUsageError) {
+          logDisallowedDynamicError(workStore, workStore.invalidDynamicUsageError);
+          throw new _staticgenerationbailout.StaticGenBailoutError();
+        }
+        if (prelude !== 0) {
+          if (dynamicValidation.hasSuspenseAboveBody) {
+            return;
+          }
+          if (serverDynamic.syncDynamicErrorWithStack) {
+            logDisallowedDynamicError(workStore, serverDynamic.syncDynamicErrorWithStack);
+            throw new _staticgenerationbailout.StaticGenBailoutError();
+          }
+          const dynamicErrors = dynamicValidation.dynamicErrors;
+          if (dynamicErrors.length > 0) {
+            for (let i2 = 0; i2 < dynamicErrors.length; i2++) {
+              logDisallowedDynamicError(workStore, dynamicErrors[i2]);
+            }
+            throw new _staticgenerationbailout.StaticGenBailoutError();
+          }
+          if (dynamicValidation.hasDynamicViewport) {
+            console.error(`Route "${workStore.route}" has a \`generateViewport\` that depends on Request data (\`cookies()\`, etc...) or uncached external data (\`fetch(...)\`, etc...) without explicitly allowing fully dynamic rendering. See more info here: https://nextjs.org/docs/messages/next-prerender-dynamic-viewport`);
+            throw new _staticgenerationbailout.StaticGenBailoutError();
+          }
+          if (prelude === 1) {
+            console.error(`Route "${workStore.route}" did not produce a static shell and Next.js was unable to determine a reason. This is a bug in Next.js.`);
+            throw new _staticgenerationbailout.StaticGenBailoutError();
+          }
+        } else {
+          if (dynamicValidation.hasAllowedDynamic === false && dynamicValidation.hasDynamicMetadata) {
+            console.error(`Route "${workStore.route}" has a \`generateMetadata\` that depends on Request data (\`cookies()\`, etc...) or uncached external data (\`fetch(...)\`, etc...) when the rest of the route does not. See more info here: https://nextjs.org/docs/messages/next-prerender-dynamic-metadata`);
+            throw new _staticgenerationbailout.StaticGenBailoutError();
+          }
+        }
+      }
+    })(dynamicRendering);
+    return dynamicRendering;
+  }
+  var hasRequiredUnstableRethrow_server;
+  function requireUnstableRethrow_server() {
+    if (hasRequiredUnstableRethrow_server) return unstableRethrow_server.exports;
+    hasRequiredUnstableRethrow_server = 1;
+    (function(module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      Object.defineProperty(exports, "unstable_rethrow", {
+        enumerable: true,
+        get: function() {
+          return unstable_rethrow;
+        }
+      });
+      const _dynamicrenderingutils = requireDynamicRenderingUtils();
+      const _ispostpone = requireIsPostpone();
+      const _bailouttocsr = requireBailoutToCsr();
+      const _isnextroutererror = requireIsNextRouterError();
+      const _dynamicrendering = requireDynamicRendering();
+      const _hooksservercontext = requireHooksServerContext();
+      function unstable_rethrow(error) {
+        if ((0, _isnextroutererror.isNextRouterError)(error) || (0, _bailouttocsr.isBailoutToCSRError)(error) || (0, _hooksservercontext.isDynamicServerError)(error) || (0, _dynamicrendering.isDynamicPostpone)(error) || (0, _ispostpone.isPostpone)(error) || (0, _dynamicrenderingutils.isHangingPromiseRejectionError)(error)) {
+          throw error;
+        }
+        if (error instanceof Error && "cause" in error) {
+          unstable_rethrow(error.cause);
+        }
+      }
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(unstableRethrow_server, unstableRethrow_server.exports);
+    return unstableRethrow_server.exports;
+  }
+  var unstableRethrow_browser = { exports: {} };
+  var hasRequiredUnstableRethrow_browser;
+  function requireUnstableRethrow_browser() {
+    if (hasRequiredUnstableRethrow_browser) return unstableRethrow_browser.exports;
+    hasRequiredUnstableRethrow_browser = 1;
+    (function(module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      Object.defineProperty(exports, "unstable_rethrow", {
+        enumerable: true,
+        get: function() {
+          return unstable_rethrow;
+        }
+      });
+      const _bailouttocsr = requireBailoutToCsr();
+      const _isnextroutererror = requireIsNextRouterError();
+      function unstable_rethrow(error) {
+        if ((0, _isnextroutererror.isNextRouterError)(error) || (0, _bailouttocsr.isBailoutToCSRError)(error)) {
+          throw error;
+        }
+        if (error instanceof Error && "cause" in error) {
+          unstable_rethrow(error.cause);
+        }
+      }
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(unstableRethrow_browser, unstableRethrow_browser.exports);
+    return unstableRethrow_browser.exports;
+  }
+  var hasRequiredUnstableRethrow;
+  function requireUnstableRethrow() {
+    if (hasRequiredUnstableRethrow) return unstableRethrow.exports;
+    hasRequiredUnstableRethrow = 1;
+    (function(module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      Object.defineProperty(exports, "unstable_rethrow", {
+        enumerable: true,
+        get: function() {
+          return unstable_rethrow;
+        }
+      });
+      const unstable_rethrow = typeof window === "undefined" ? requireUnstableRethrow_server().unstable_rethrow : requireUnstableRethrow_browser().unstable_rethrow;
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(unstableRethrow, unstableRethrow.exports);
+    return unstableRethrow.exports;
+  }
+  var hasRequiredNavigation_reactServer;
+  function requireNavigation_reactServer() {
+    if (hasRequiredNavigation_reactServer) return navigation_reactServer.exports;
+    hasRequiredNavigation_reactServer = 1;
+    (function(module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        ReadonlyURLSearchParams: function() {
+          return ReadonlyURLSearchParams;
+        },
+        RedirectType: function() {
+          return _redirecterror.RedirectType;
+        },
+        forbidden: function() {
+          return _forbidden.forbidden;
+        },
+        notFound: function() {
+          return _notfound.notFound;
+        },
+        permanentRedirect: function() {
+          return _redirect.permanentRedirect;
+        },
+        redirect: function() {
+          return _redirect.redirect;
+        },
+        unauthorized: function() {
+          return _unauthorized.unauthorized;
+        },
+        unstable_rethrow: function() {
+          return _unstablerethrow.unstable_rethrow;
+        }
+      });
+      const _redirect = requireRedirect();
+      const _redirecterror = requireRedirectError();
+      const _notfound = requireNotFound();
+      const _forbidden = requireForbidden();
+      const _unauthorized = requireUnauthorized();
+      const _unstablerethrow = requireUnstableRethrow();
+      class ReadonlyURLSearchParamsError extends Error {
+        constructor() {
+          super("Method unavailable on `ReadonlyURLSearchParams`. Read more: https://nextjs.org/docs/app/api-reference/functions/use-search-params#updating-searchparams");
+        }
+      }
+      class ReadonlyURLSearchParams extends URLSearchParams {
+        /** @deprecated Method unavailable on `ReadonlyURLSearchParams`. Read more: https://nextjs.org/docs/app/api-reference/functions/use-search-params#updating-searchparams */
+        append() {
+          throw new ReadonlyURLSearchParamsError();
+        }
+        /** @deprecated Method unavailable on `ReadonlyURLSearchParams`. Read more: https://nextjs.org/docs/app/api-reference/functions/use-search-params#updating-searchparams */
+        delete() {
+          throw new ReadonlyURLSearchParamsError();
+        }
+        /** @deprecated Method unavailable on `ReadonlyURLSearchParams`. Read more: https://nextjs.org/docs/app/api-reference/functions/use-search-params#updating-searchparams */
+        set() {
+          throw new ReadonlyURLSearchParamsError();
+        }
+        /** @deprecated Method unavailable on `ReadonlyURLSearchParams`. Read more: https://nextjs.org/docs/app/api-reference/functions/use-search-params#updating-searchparams */
+        sort() {
+          throw new ReadonlyURLSearchParamsError();
+        }
+      }
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(navigation_reactServer, navigation_reactServer.exports);
+    return navigation_reactServer.exports;
+  }
+  var serverInsertedHtml_sharedRuntime = {};
+  var _interop_require_wildcard = {};
+  var hasRequired_interop_require_wildcard;
+  function require_interop_require_wildcard() {
+    if (hasRequired_interop_require_wildcard) return _interop_require_wildcard;
+    hasRequired_interop_require_wildcard = 1;
+    function _getRequireWildcardCache(nodeInterop) {
+      if (typeof WeakMap !== "function") return null;
+      var cacheBabelInterop = /* @__PURE__ */ new WeakMap();
+      var cacheNodeInterop = /* @__PURE__ */ new WeakMap();
+      return (_getRequireWildcardCache = function(nodeInterop2) {
+        return nodeInterop2 ? cacheNodeInterop : cacheBabelInterop;
+      })(nodeInterop);
+    }
+    function _interop_require_wildcard$1(obj, nodeInterop) {
+      if (!nodeInterop && obj && obj.__esModule) return obj;
+      if (obj === null || typeof obj !== "object" && typeof obj !== "function") return { default: obj };
+      var cache = _getRequireWildcardCache(nodeInterop);
+      if (cache && cache.has(obj)) return cache.get(obj);
+      var newObj = { __proto__: null };
+      var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+      for (var key in obj) {
+        if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
+          var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+          if (desc && (desc.get || desc.set)) Object.defineProperty(newObj, key, desc);
+          else newObj[key] = obj[key];
+        }
+      }
+      newObj.default = obj;
+      if (cache) cache.set(obj, newObj);
+      return newObj;
+    }
+    _interop_require_wildcard._ = _interop_require_wildcard$1;
+    return _interop_require_wildcard;
+  }
+  var hasRequiredServerInsertedHtml_sharedRuntime;
+  function requireServerInsertedHtml_sharedRuntime() {
+    if (hasRequiredServerInsertedHtml_sharedRuntime) return serverInsertedHtml_sharedRuntime;
+    hasRequiredServerInsertedHtml_sharedRuntime = 1;
+    (function(exports) {
+      "use client";
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        ServerInsertedHTMLContext: function() {
+          return ServerInsertedHTMLContext;
+        },
+        useServerInsertedHTML: function() {
+          return useServerInsertedHTML;
+        }
+      });
+      const _interop_require_wildcard2 = /* @__PURE__ */ require_interop_require_wildcard();
+      const _react = /* @__PURE__ */ _interop_require_wildcard2._(requireReact());
+      const ServerInsertedHTMLContext = /* @__PURE__ */ _react.default.createContext(null);
+      function useServerInsertedHTML(callback) {
+        const addInsertedServerHTMLCallback = (0, _react.useContext)(ServerInsertedHTMLContext);
+        if (addInsertedServerHTMLCallback) {
+          addInsertedServerHTMLCallback(callback);
+        }
+      }
+    })(serverInsertedHtml_sharedRuntime);
+    return serverInsertedHtml_sharedRuntime;
+  }
+  var bailoutToClientRendering = { exports: {} };
+  var hasRequiredBailoutToClientRendering;
+  function requireBailoutToClientRendering() {
+    if (hasRequiredBailoutToClientRendering) return bailoutToClientRendering.exports;
+    hasRequiredBailoutToClientRendering = 1;
+    (function(module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      Object.defineProperty(exports, "bailoutToClientRendering", {
+        enumerable: true,
+        get: function() {
+          return bailoutToClientRendering2;
+        }
+      });
+      const _bailouttocsr = requireBailoutToCsr();
+      const _workasyncstorageexternal = requireWorkAsyncStorage_external();
+      const _workunitasyncstorageexternal = requireWorkUnitAsyncStorage_external();
+      function bailoutToClientRendering2(reason) {
+        const workStore = _workasyncstorageexternal.workAsyncStorage.getStore();
+        if (workStore == null ? void 0 : workStore.forceStatic) return;
+        const workUnitStore = _workunitasyncstorageexternal.workUnitAsyncStorage.getStore();
+        if (workUnitStore) {
+          switch (workUnitStore.type) {
+            case "prerender":
+            case "prerender-client":
+            case "prerender-ppr":
+            case "prerender-legacy":
+              throw Object.defineProperty(new _bailouttocsr.BailoutToCSRError(reason), "__NEXT_ERROR_CODE", {
+                value: "E394",
+                enumerable: false,
+                configurable: true
+              });
+          }
+        }
+      }
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(bailoutToClientRendering, bailoutToClientRendering.exports);
+    return bailoutToClientRendering.exports;
+  }
+  var hasRequiredNavigation$1;
+  function requireNavigation$1() {
+    if (hasRequiredNavigation$1) return navigation$1.exports;
+    hasRequiredNavigation$1 = 1;
+    (function(module, exports) {
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      function _export(target, all) {
+        for (var name in all) Object.defineProperty(target, name, {
+          enumerable: true,
+          get: all[name]
+        });
+      }
+      _export(exports, {
+        ReadonlyURLSearchParams: function() {
+          return _navigationreactserver.ReadonlyURLSearchParams;
+        },
+        RedirectType: function() {
+          return _navigationreactserver.RedirectType;
+        },
+        ServerInsertedHTMLContext: function() {
+          return _serverinsertedhtmlsharedruntime.ServerInsertedHTMLContext;
+        },
+        forbidden: function() {
+          return _navigationreactserver.forbidden;
+        },
+        notFound: function() {
+          return _navigationreactserver.notFound;
+        },
+        permanentRedirect: function() {
+          return _navigationreactserver.permanentRedirect;
+        },
+        redirect: function() {
+          return _navigationreactserver.redirect;
+        },
+        unauthorized: function() {
+          return _navigationreactserver.unauthorized;
+        },
+        unstable_rethrow: function() {
+          return _navigationreactserver.unstable_rethrow;
+        },
+        useParams: function() {
+          return useParams;
+        },
+        usePathname: function() {
+          return usePathname;
+        },
+        useRouter: function() {
+          return useRouter;
+        },
+        useSearchParams: function() {
+          return useSearchParams;
+        },
+        useSelectedLayoutSegment: function() {
+          return useSelectedLayoutSegment;
+        },
+        useSelectedLayoutSegments: function() {
+          return useSelectedLayoutSegments;
+        },
+        useServerInsertedHTML: function() {
+          return _serverinsertedhtmlsharedruntime.useServerInsertedHTML;
+        }
+      });
+      const _react = requireReact();
+      const _approutercontextsharedruntime = requireAppRouterContext_sharedRuntime();
+      const _hooksclientcontextsharedruntime = requireHooksClientContext_sharedRuntime();
+      const _getsegmentvalue = requireGetSegmentValue();
+      const _segment = requireSegment();
+      const _navigationreactserver = requireNavigation_reactServer();
+      const _serverinsertedhtmlsharedruntime = requireServerInsertedHtml_sharedRuntime();
+      const useDynamicRouteParams = typeof window === "undefined" ? requireDynamicRendering().useDynamicRouteParams : void 0;
+      function useSearchParams() {
+        const searchParams = (0, _react.useContext)(_hooksclientcontextsharedruntime.SearchParamsContext);
+        const readonlySearchParams = (0, _react.useMemo)(() => {
+          if (!searchParams) {
+            return null;
+          }
+          return new _navigationreactserver.ReadonlyURLSearchParams(searchParams);
+        }, [
+          searchParams
+        ]);
+        if (typeof window === "undefined") {
+          const { bailoutToClientRendering: bailoutToClientRendering2 } = requireBailoutToClientRendering();
+          bailoutToClientRendering2("useSearchParams()");
+        }
+        return readonlySearchParams;
+      }
+      function usePathname() {
+        useDynamicRouteParams == null ? void 0 : useDynamicRouteParams("usePathname()");
+        return (0, _react.useContext)(_hooksclientcontextsharedruntime.PathnameContext);
+      }
+      function useRouter() {
+        const router = (0, _react.useContext)(_approutercontextsharedruntime.AppRouterContext);
+        if (router === null) {
+          throw Object.defineProperty(new Error("invariant expected app router to be mounted"), "__NEXT_ERROR_CODE", {
+            value: "E238",
+            enumerable: false,
+            configurable: true
+          });
+        }
+        return router;
+      }
+      function useParams() {
+        useDynamicRouteParams == null ? void 0 : useDynamicRouteParams("useParams()");
+        return (0, _react.useContext)(_hooksclientcontextsharedruntime.PathParamsContext);
+      }
+      function getSelectedLayoutSegmentPath(tree, parallelRouteKey, first, segmentPath) {
+        if (first === void 0) first = true;
+        if (segmentPath === void 0) segmentPath = [];
+        let node;
+        if (first) {
+          node = tree[1][parallelRouteKey];
+        } else {
+          const parallelRoutes = tree[1];
+          var _parallelRoutes_children;
+          node = (_parallelRoutes_children = parallelRoutes.children) != null ? _parallelRoutes_children : Object.values(parallelRoutes)[0];
+        }
+        if (!node) return segmentPath;
+        const segment2 = node[0];
+        let segmentValue = (0, _getsegmentvalue.getSegmentValue)(segment2);
+        if (!segmentValue || segmentValue.startsWith(_segment.PAGE_SEGMENT_KEY)) {
+          return segmentPath;
+        }
+        segmentPath.push(segmentValue);
+        return getSelectedLayoutSegmentPath(node, parallelRouteKey, false, segmentPath);
+      }
+      function useSelectedLayoutSegments(parallelRouteKey) {
+        if (parallelRouteKey === void 0) parallelRouteKey = "children";
+        useDynamicRouteParams == null ? void 0 : useDynamicRouteParams("useSelectedLayoutSegments()");
+        const context2 = (0, _react.useContext)(_approutercontextsharedruntime.LayoutRouterContext);
+        if (!context2) return null;
+        return getSelectedLayoutSegmentPath(context2.parentTree, parallelRouteKey);
+      }
+      function useSelectedLayoutSegment(parallelRouteKey) {
+        if (parallelRouteKey === void 0) parallelRouteKey = "children";
+        useDynamicRouteParams == null ? void 0 : useDynamicRouteParams("useSelectedLayoutSegment()");
+        const selectedLayoutSegments = useSelectedLayoutSegments(parallelRouteKey);
+        if (!selectedLayoutSegments || selectedLayoutSegments.length === 0) {
+          return null;
+        }
+        const selectedLayoutSegment = parallelRouteKey === "children" ? selectedLayoutSegments[0] : selectedLayoutSegments[selectedLayoutSegments.length - 1];
+        return selectedLayoutSegment === _segment.DEFAULT_SEGMENT_KEY ? null : selectedLayoutSegment;
+      }
+      if ((typeof exports.default === "function" || typeof exports.default === "object" && exports.default !== null) && typeof exports.default.__esModule === "undefined") {
+        Object.defineProperty(exports.default, "__esModule", { value: true });
+        Object.assign(exports.default, exports);
+        module.exports = exports.default;
+      }
+    })(navigation$1, navigation$1.exports);
+    return navigation$1.exports;
+  }
+  var navigation;
+  var hasRequiredNavigation;
+  function requireNavigation() {
+    if (hasRequiredNavigation) return navigation;
+    hasRequiredNavigation = 1;
+    navigation = requireNavigation$1();
+    return navigation;
+  }
+  var navigationExports = requireNavigation();
+  const ProductsShowCase = ({ products }) => {
+    const router = navigationExports.useRouter();
+    return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "kds-header", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "kds-header-container", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "kds-logo-section", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "kds-logo-wrapper", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1749337982/Customizer_w0ruf6.png", alt: "" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              className: "kds-menu-button",
+              "aria-label": "Toggle Sidebar",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { className: "kds-menu-icon", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24", children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: 2, d: "M4 6h16M4 12h16M4 18h16" }) })
+            }
+          )
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1749338383/Buttons_klifkp.png", alt: "" })
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "kds-main-container", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "kds-content-wrapper", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "kds-products-grid", children: products.map((product) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "div",
+        {
+          className: "kds-product-card",
+          onClick: () => router.push(`/customizer/${product.id}`),
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: product.image, alt: product.description, className: "kds-product-image" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "kds-product-info", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "kds-product-title kds-reset", children: product.description }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "kds-product-detail kds-reset", children: [
+                "Size: ",
+                product.size
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "kds-product-detail kds-reset", children: [
+                "Color: ",
+                product.color
+              ] })
+            ] })
+          ]
+        },
+        product.id
+      )) }) }) })
+    ] });
+  };
+  const backendProducts = [
+    {
+      id: 5,
+      image: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440017/toplayer_ttxecz.png",
+      size: "L",
+      color: "White",
+      width: 300,
+      description: "Front/Back Sando",
+      textTopRatio: 2.8,
+      type: "sando",
+      productType: "2D",
+      layers: {
+        BASE_COLOR: 0,
+        TOP_GRADIENT: 1,
+        PATTERN: 2,
+        BOTTOM_GRADIENT: 3,
+        DESIGN: 4,
+        TEXT: 5,
+        RIGHT_SIDE_IMAGE: 6,
+        PRODUCT: 7
+      },
+      layersDesigns: {
+        designs: [
+          {
+            id: 1,
+            name: "Angry Doberman",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440608/art1_pv4dwv.png"
+          },
+          {
+            id: 2,
+            name: "Bulldog Growl",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440608/art4_nmtuii.png"
+          },
+          {
+            id: 3,
+            name: "Spiked Bulldog",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440609/art3_iloyql.png"
+          },
+          {
+            id: 4,
+            name: "Roaring Wolf",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440609/art5_cgafaq.png"
+          },
+          {
+            id: 5,
+            name: "Fighter",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440610/art10_hwkter.png"
+          },
+          {
+            id: 6,
+            name: "Husky Dog",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440609/art2_c4jjdq.png"
+          },
+          {
+            id: 7,
+            name: "Bird",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440611/art8_owfxwr.png"
+          },
+          {
+            id: 8,
+            name: "Devil",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440612/art9_tnurnb.png"
+          },
+          {
+            id: 9,
+            name: "Roaring Tiger",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440614/art7_gwljvh.png"
+          },
+          {
+            id: 10,
+            name: "Tiger",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440609/art6_d2kvkv.png"
+          },
+          {
+            id: 11,
+            name: "Bee",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440611/art13_euz0ym.png"
+          },
+          {
+            id: 12,
+            name: "Dragon",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440611/art12_qdjmqt.png"
+          },
+          {
+            id: 13,
+            name: "Pirate Face",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440611/art11_illjvy.png"
+          }
+        ],
+        patterns: [
+          {
+            id: 1,
+            name: "Pattern 1",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440623/fade-bottom14_kglgyi.png"
+          },
+          {
+            id: 2,
+            name: "Pattern 2",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440621/fade-bottom9_l6yx3e.png"
+          },
+          {
+            id: 3,
+            name: "Pattern 3",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440621/fade-bottom13_jntfpl.png"
+          },
+          {
+            id: 4,
+            name: "Pattern 4",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440619/fade-bottom6_ul94yk.png"
+          },
+          {
+            id: 5,
+            name: "Pattern 5",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440619/fade-bottom12_dziteg.png"
+          },
+          {
+            id: 6,
+            name: "Pattern 6",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440619/fade-bottom11_qkxqa8.png"
+          },
+          {
+            id: 7,
+            name: "Pattern 7",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440612/fade-bottom1_kfewad.png"
+          },
+          {
+            id: 8,
+            name: "Pattern 8",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440613/fade-bottom2_qbg5zn.png"
+          },
+          {
+            id: 9,
+            name: "Pattern 9",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440613/fade-bottom3_m5d7kv.png"
+          },
+          {
+            id: 10,
+            name: "Pattern 10",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440613/fade-bottom4_nmvuod.png"
+          },
+          {
+            id: 11,
+            name: "Pattern 11",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440614/fade-bottom7_ebhlzo.png"
+          },
+          {
+            id: 12,
+            name: "Pattern 12",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440618/fade-bottom10_fpmy5o.png"
+          },
+          {
+            id: 13,
+            name: "Pattern 13",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440618/fade-bottom8_q4dyqw.png"
+          },
+          {
+            id: 14,
+            name: "Pattern 14",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440619/fade-bottom5_ocvdzu.png"
+          },
+          {
+            id: 15,
+            name: "Pattern 15",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440619/fade-bottom11_qkxqa8.png"
+          }
+        ]
+      },
+      colors: {
+        topColor: [
+          {
+            id: 1,
+            name: "Color 1",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color1_b9nl0k.png"
+          },
+          {
+            id: 2,
+            name: "Color 2",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color3_xvg4ah.png"
+          },
+          {
+            id: 3,
+            name: "Color 3",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color4_fh2pg0.png"
+          },
+          {
+            id: 4,
+            name: "Color 4",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color2_a4teq2.png"
+          },
+          {
+            id: 5,
+            name: "Color 5",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color5_iyfuwb.png"
+          },
+          {
+            id: 6,
+            name: "Color 6",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color6_fophq5.png"
+          },
+          {
+            id: 7,
+            name: "Color 7",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color8_j9kpin.png"
+          },
+          {
+            id: 8,
+            name: "Color 8",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color9_jfj6hk.png"
+          },
+          {
+            id: 9,
+            name: "Color 9",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color7_yizc6p.png"
+          },
+          {
+            id: 10,
+            name: "Color 10",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color11_eh5h8r.png"
+          },
+          {
+            id: 11,
+            name: "Color 11",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color10_lerdoi.png"
+          },
+          {
+            id: 12,
+            name: "Color 12",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color12_iaj43h.png"
+          },
+          {
+            id: 13,
+            name: "Color 13",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color13_nw7pt0.png"
+          }
+        ],
+        bottomColor: [
+          {
+            id: 1,
+            name: "Color 1",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color1_b9nl0k.png"
+          },
+          {
+            id: 2,
+            name: "Color 2",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color3_xvg4ah.png"
+          },
+          {
+            id: 3,
+            name: "Color 3",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color4_fh2pg0.png"
+          },
+          {
+            id: 4,
+            name: "Color 4",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color2_a4teq2.png"
+          },
+          {
+            id: 5,
+            name: "Color 5",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color5_iyfuwb.png"
+          },
+          {
+            id: 6,
+            name: "Color 6",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color6_fophq5.png"
+          },
+          {
+            id: 7,
+            name: "Color 7",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color8_j9kpin.png"
+          },
+          {
+            id: 8,
+            name: "Color 8",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color9_jfj6hk.png"
+          },
+          {
+            id: 9,
+            name: "Color 9",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color7_yizc6p.png"
+          },
+          {
+            id: 10,
+            name: "Color 10",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color11_eh5h8r.png"
+          },
+          {
+            id: 11,
+            name: "Color 11",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color10_lerdoi.png"
+          },
+          {
+            id: 12,
+            name: "Color 12",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color12_iaj43h.png"
+          },
+          {
+            id: 13,
+            name: "Color 13",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color13_nw7pt0.png"
+          }
+        ]
+      }
+    },
+    {
+      id: 6,
+      image: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753680511/shadow_qpfqm4.png",
+      // Full product shadow image
+      size: "42",
+      color: "White",
+      width: 300,
+      description: "Formal Shoe",
+      type: "shoe",
+      productType: "2D",
+      textTab: false,
+      colorsTab: false,
+      uploadDesignTab: false,
+      defaultLayers: {
+        sole: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534528/sole-brown_dzgwxt.png",
+        // z-index 0
+        surface: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534540/surface-white_jpjzme.png",
+        // z-index 1
+        middle: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/middle-red_phcknz.png",
+        // z-index 2
+        lace: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/lace-white_di72es.png"
+        // z-index 3
+      },
+      layers: {
+        BASE_COLOR: 0,
+        SOLE: 1,
+        SURFACE: 2,
+        MIDDLE: 3,
+        LACE: 4
+      },
+      layersDesigns: {
+        sole: [
+          {
+            id: 1,
+            name: "Brown Sole",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534528/sole-brown_dzgwxt.png",
+            color: "Brown"
+          },
+          {
+            id: 2,
+            name: "Black Sole",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/sole-black_v8dekw.png",
+            color: "Black"
+          }
+        ],
+        surface: [
+          {
+            id: 1,
+            name: "White Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534540/surface-white_jpjzme.png",
+            color: "White"
+          },
+          {
+            id: 2,
+            name: "Mehroon Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534540/surface-red_ltdkea.png",
+            color: "Mehroon"
+          },
+          {
+            id: 3,
+            name: "Green Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534540/surface-darkgreen_z6vbsv.png",
+            color: "Green"
+          },
+          {
+            id: 4,
+            name: "Dark Blue Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534539/surface-darkblue_ebpn98.png",
+            color: "Dark Blue"
+          },
+          {
+            id: 5,
+            name: "Blue Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534528/surface-blue_ug0cip.png",
+            color: "Blue"
+          },
+          {
+            id: 6,
+            name: "Black Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/surface-black_qczd7c.png",
+            color: "Black"
+          }
+        ],
+        middle: [
+          {
+            id: 1,
+            name: "White Middle",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/middle-white_aqyb6l.png",
+            color: "White"
+          },
+          {
+            id: 2,
+            name: "Mehroon Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/middle-red_phcknz.png",
+            color: "Mehroon"
+          },
+          {
+            id: 3,
+            name: "Green Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/middle-darkgreen_g6bfl9.png",
+            color: "Green"
+          },
+          {
+            id: 4,
+            name: "Dark Blue Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/middle-darkblue_brvegt.png",
+            color: "Dark Blue"
+          },
+          {
+            id: 5,
+            name: "Blue Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/middle-blue_qdxgd1.png",
+            color: "Blue"
+          },
+          {
+            id: 6,
+            name: "Black Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/middle-black_rd2onn.png",
+            color: "Black"
+          },
+          {
+            id: 7,
+            name: "Brown Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/middle-brown_m5vj3p.png",
+            color: "Brown"
+          }
+        ],
+        lace: [
+          {
+            id: 1,
+            name: "White Lace",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/lace-white_di72es.png",
+            color: "White"
+          },
+          {
+            id: 2,
+            name: "Mehroon Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/lace-red_gppv2i.png",
+            color: "Mehroon"
+          },
+          {
+            id: 3,
+            name: "Green Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/lace-darkgreen_iqx3ud.png",
+            color: "Green"
+          },
+          {
+            id: 4,
+            name: "Dark Blue Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534525/lace-darkblue_hoogyr.png",
+            color: "Dark Blue"
+          },
+          {
+            id: 5,
+            name: "Blue Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534525/lace-blue_hglfvj.png",
+            color: "Blue"
+          },
+          {
+            id: 6,
+            name: "Black Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534525/lace-black_tndqjk.png",
+            color: "Black"
+          },
+          {
+            id: 7,
+            name: "Brown Surface",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534525/lace-brown_giecdz.png",
+            color: "Brown"
+          }
+        ]
+      }
+    },
+    {
+      id: 7,
+      image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSS3208-01-M26.jpg?v=1730282151&quality=20",
+      // Full product shadow image
+      color: "White",
+      size: "M",
+      description: "white shirt",
+      type: "shirt",
+      productType: "3D",
+      model3D: "/models/brand1.glb",
+      threeDDesigns: {
+        shirtDesign: [
+          {
+            id: 1,
+            name: "Design 1",
+            url: "/shirtdesign/1.webp"
+            // color: "White"
+          },
+          {
+            id: 2,
+            name: "Design 2",
+            url: "/shirtdesign/2.webp"
+            // color: "Mehroon"
+          },
+          {
+            id: 3,
+            name: "Design 3",
+            url: "/shirtdesign/3.webp"
+            // color: "Green"
+          },
+          {
+            id: 4,
+            name: "Design 4",
+            url: "/shirtdesign/4.webp"
+            // color: "Dark Blue"
+          }
+        ]
+      }
+    },
+    {
+      id: 8,
+      image: "https://m.media-amazon.com/images/I/51Selmr85QL._UY1100_.jpg",
+      // Full product shadow image
+      size: "42",
+      color: "White",
+      width: 300,
+      height: 380,
+      description: "Printed T-Shirt",
+      type: "t-Shirt",
+      productType: "2D",
+      defaultLayers: {
+        mid: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1754374874/Middle-Part-White_g6hpnb.png",
+        // z-index 0
+        sleeves: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1754374872/Plain-White-T-Shirt-Free-PNG-Image_ahrfm6.png"
+      },
+      layers: {
+        BASE_COLOR: 0,
+        MID: 1,
+        SLEEVES: 2
+      },
+      layersDesigns: {
+        mid: [
+          {
+            id: 1,
+            name: "Design 1",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1754374878/Middle-Part-Sky_h0s7dv.png"
+            // color: "White"
+          },
+          {
+            id: 2,
+            name: "Design 2",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1754374877/SKyred-Middle_b51dxj.png"
+            // color: "Mehroon"
+          },
+          {
+            id: 3,
+            name: "Design 3",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1754374873/Middle-Part-Red_msponb.png"
+            // color: "Green"
+          },
+          {
+            id: 4,
+            name: "Design 4",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1754374874/Middle-Part-White_g6hpnb.png"
+            // color: "Dark Blue"
+          },
+          {
+            id: 5,
+            name: "Design 5",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1754374872/dark_sky_Middle_i2jzzz.png"
+            // color: "Blue"
+          },
+          {
+            id: 6,
+            name: "Design 6",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1754374872/Middle-Part-1L_mgywgx.png"
+            // color: "Black"
+          }
+        ],
+        sleeves: [
+          {
+            id: 1,
+            name: "Design 1",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1754374873/Sleeve-1-L_cyztgf.png"
+            // color: "White"
+          },
+          {
+            id: 2,
+            name: "Design 2",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1754374873/Skyred-Sleeve_d9tgb3.png"
+            // color: "Mehroon"
+          },
+          {
+            id: 3,
+            name: "Design 3",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1754374872/Plain-White-T-Shirt-Free-PNG-Image_ahrfm6.png"
+            // color: "Green"
+          },
+          {
+            id: 4,
+            name: "Design 4",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1754374871/Sleeve-Red_ixcipj.png"
+            // color: "Dark Blue"
+          },
+          {
+            id: 5,
+            name: "Design 5",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1754374871/Sleeve-Sky_d7mwhg.png"
+            // color: "Blue"
+          },
+          {
+            id: 6,
+            name: "Design 6",
+            url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1754374869/Dark-Sky-Sleeve_qibtvf.png"
+            // color: "Black"
+          }
+        ]
+      }
+    }
+  ];
   if (typeof ReactDOM === "undefined") {
     console.error("ReactDOM not found");
   }
@@ -83855,7 +86662,10 @@ MongoDB ID: ${savedProductId}`;
     if (container) {
       const root = ReactDOM.createRoot(container);
       root.render(
-        /* @__PURE__ */ jsxRuntimeExports.jsx(TwoDProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ThreeDProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CustomizerLayout, { ...props, id: "6" }) }) })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(ProductsShowCase, { products: backendProducts }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(TwoDProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ThreeDProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CustomizerLayout, { ...props, id: "6" }) }) })
+        ] })
       );
     } else {
       console.warn("No mount target found for ProductCustomizer");
