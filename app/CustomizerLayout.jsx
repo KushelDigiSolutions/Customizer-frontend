@@ -14,7 +14,8 @@ import { use3D } from "./context/3DContext";
 import { backendProducts } from "./data/productsData";
 
 const CustomizerLayout = (props) => {
-
+  console.log('props V1')
+  console.log(props)
   // Get all 2D context state and setters
   const {
     customText, setCustomText,
