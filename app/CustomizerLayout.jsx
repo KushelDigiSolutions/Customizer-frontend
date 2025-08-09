@@ -1348,6 +1348,8 @@ const CustomizerLayout = (props) => {
     <div className="kds-layout-container">
 
       <p>This line show perftec</p>
+      <p>showSidebar : {JSON.stringify(showSidebar)}</p>
+      <p>selectedProduct : {JSON.stringify(selectedProduct)}</p>
 
       <Topbar
         setShowSidebar={setShowSidebar}
