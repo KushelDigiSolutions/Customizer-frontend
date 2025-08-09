@@ -15,6 +15,8 @@ import { backendProducts } from "./data/productsData";
 
 const CustomizerLayout = (props) => {
 
+  console.log('DONE V!!!!!!!!!!!!!!!!!!!!!!!!')
+
   // Get all 2D context state and setters
   const {
     customText, setCustomText,

@@ -22,6 +22,7 @@ window.mountProductCustomizer = function (selector = '#customizer-root', props =
       return
     }
 
+    
     root.render(
       <TwoDProvider>
         <ThreeDProvider>
