@@ -48,7 +48,9 @@ const CustomizerLayout = (props) => {
   } = use3D()
 
 
-  if(props?.productId != ""){
+  console.log('props')
+  console.log(props)
+  if(props?.productId != "" && typeof props?.productId != "undefined"){
     const idFromPath = 6;
     const product = backendProducts.find(p => String(p.id) === String(idFromPath))
     setSelectedProduct(product);
