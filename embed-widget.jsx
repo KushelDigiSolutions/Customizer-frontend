@@ -18,6 +18,9 @@ window.mountProductCustomizer = function (selector = '#customizer-root', props =
     const idFromPath = 6;
     const product = backendProducts.find(p => String(p.id) === String(idFromPath))
 
+    console.log('product found')
+    console.log(product)
+
     if (!product) {
       container.innerHTML = '<div>Product not found</div>'
       return
