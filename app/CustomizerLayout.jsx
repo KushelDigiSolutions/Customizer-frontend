@@ -49,7 +49,7 @@ const CustomizerLayout = (props) => {
 
 
   if(props?.productId != "" && typeof props?.productId != "undefined"){
-    const idFromPath = 6;
+    const idFromPath = props?.productId || 6;
     const product = backendProducts.find(p => String(p.id) === String(idFromPath))
     setSelectedProduct(product);
   }
