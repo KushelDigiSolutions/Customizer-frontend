@@ -6,8 +6,10 @@ export default defineConfig({
   plugins: [react()], 
   resolve: {
     alias: {
-      '@': path.resolve(__dirname), // maps "@" to the project root
+      '@': path.resolve(__dirname, './'), // explicit relative path
+      '@context': path.resolve(__dirname, './app/context'), // shortcut if needed
     },
+    extensions: ['.js', '.jsx', '.ts', '.tsx'], // ensures .jsx resolves automatically
   },
   publicDir: false, 
   define: {
