@@ -47,6 +47,7 @@ const ModelViewer = ({ modelUrl, selectedPart }) => {
                     const canvas = document.createElement('canvas');
                     canvas.width = canvas.height = 1024;
                     const ctx = canvas.getContext('2d');
+                    this.clearContext(ctx);
 
                     // Fill base color
                     ctx.fillStyle = threeDcolor && threeDcolor !== '#ffffff' ? threeDcolor : currentColorHex;

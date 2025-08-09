@@ -54,6 +54,7 @@ const TextureUploader = () => {
       const canvas = document.createElement('canvas');
       canvas.width = canvas.height = size;
       const ctx = canvas?.getContext('2d');
+      this.clearContext(ctx);
 
       // Fill base color
       ctx.fillStyle = threeDcolor || "#fff"; 
