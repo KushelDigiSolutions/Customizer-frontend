@@ -1,17 +1,11 @@
 import React from 'react';
-import { use2D } from '../../context/2DContext';
 import { use3D } from '@/app/context/3DContext';
+import { use2D } from '@/app/context/2DContext';
 import './AddTextTab.css';
 
 const AddTextTab = ({ handleAddCustomText, update3DText }) => {
-    const {
-        customText, setCustomText,
-        showAddModal, setShowAddModal
-    } = use2D();
-
-    const {
-        threeDtext, setthreeDText, selectedProduct
-    } = use3D();
+    const { customText, setCustomText, showAddModal, setShowAddModal } = use2D();
+    const { threeDtext, setthreeDText, selectedProduct } = use3D();
 
     return (
         <div className='kds-container'>
@@ -69,10 +63,6 @@ const AddTextTab = ({ handleAddCustomText, update3DText }) => {
                     </>
                 )
             }
-
-
-
-
 
         </div>
     )

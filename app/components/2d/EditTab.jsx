@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import TextureControlsPanel from '../3d/TextureControlsPanel';
 import TextureUploader from '../3d/TextureUploader';
+import TextureControlsPanel from '../3d/TextureControlsPanel';
 import { use3D } from '@/app/context/3DContext';
 import './EditTab.css';
 

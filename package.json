@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build:widget": "vite build"
   },
   "dependencies": {
     "@react-three/drei": "^10.6.1",
@@ -19,5 +20,9 @@
     "react-icons": "^5.5.0",
     "three": "^0.178.0",
     "webfontloader": "^1.6.28"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.0",
+    "vite": "^7.1.1"
   }
 }
