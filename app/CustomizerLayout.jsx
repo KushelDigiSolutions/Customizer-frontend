@@ -11,6 +11,7 @@ import ScreenshotGallery from "./components/3d/ScreenshotGallery";
 import "./CustomizerLayout.css";
 import { use2D } from "./context/2DContext";
 import { use3D } from "./context/3DContext";
+import { backendProducts } from "./data/productsData";
 
 const CustomizerLayout = (props) => {
 

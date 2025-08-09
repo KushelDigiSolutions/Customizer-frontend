@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom/client'
 import CustomizerLayout from './app/CustomizerLayout';
 import { TwoDProvider } from './app/context/2DContext'
 import { ThreeDProvider } from './app/context/3DContext'
-import { backendProducts } from './app/data/productsData';
 import "./app/globals.css"
 
 if (typeof ReactDOM === 'undefined') { console.error('ReactDOM not found'); }
