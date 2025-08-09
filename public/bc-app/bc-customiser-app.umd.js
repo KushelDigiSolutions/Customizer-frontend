@@ -82655,6 +82655,7 @@ void main() {
       layerManager,
       setLayerManager
     } = use2D();
+    setLayerManager(props?.productId);
     const {
       threeDscreenshots,
       setthreeDScreenshots,
