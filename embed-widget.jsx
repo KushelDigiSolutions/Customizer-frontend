@@ -12,7 +12,9 @@ window.mountProductCustomizer = function (selector = '#customizer-root', props =
   const container = document.querySelector(selector)
   if (container) {
     const root = ReactDOM.createRoot(container)
-    root.render(<>Test APP</>)
+    root.render(
+      <CustomizerLayout {...props} id="6" />
+    )
   } else {
     console.warn('No mount target found for ProductCustomizer')
   }
