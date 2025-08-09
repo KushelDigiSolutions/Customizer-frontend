@@ -485,31 +485,31 @@ export const backendProducts = [
         description: "white shirt",
         type: "shirt",
         productType: "3D",
-        model3D: "https://3d-customizer-git-combinesetup-v1-inderpals-projects-412a240f.vercel.app/models/brand1.glb",
+        model3D: "https://3d-customizer-ecru.vercel.app/models/brand1.glb",
         threeDDesigns: {
             shirtDesign: [
                 {
                     id: 1,
                     name: "Design 1",
-                    url: "https://3d-customizer-git-combinesetup-v1-inderpals-projects-412a240f.vercel.app/shirtdesign/1.webp",
+                    url: "https://3d-customizer-ecru.vercel.app/shirtdesign/1.webp",
                     // color: "White"
                 },
                 {
                     id: 2,
                     name: "Design 2",
-                    url: "https://3d-customizer-git-combinesetup-v1-inderpals-projects-412a240f.vercel.app/shirtdesign/2.webp",
+                    url: "https://3d-customizer-ecru.vercel.app/shirtdesign/2.webp",
                     // color: "Mehroon"
                 },
                 {
                     id: 3,
                     name: "Design 3",
-                    url: "https://3d-customizer-git-combinesetup-v1-inderpals-projects-412a240f.vercel.app/shirtdesign/3.webp",
+                    url: "https://3d-customizer-ecru.vercel.app/shirtdesign/3.webp",
                     // color: "Green"
                 },
                 {
                     id: 4,
                     name: "Design 4",
-                    url: "https://3d-customizer-git-combinesetup-v1-inderpals-projects-412a240f.vercel.app/shirtdesign/4.webp",
+                    url: "https://3d-customizer-ecru.vercel.app/shirtdesign/4.webp",
                     // color: "Dark Blue"
                 }
             ]

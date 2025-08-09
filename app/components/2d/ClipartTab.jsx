@@ -30,7 +30,7 @@ const DynamicClipartTab = ({
       const size = 512;
       const canvas = document.createElement('canvas');
       canvas.width = canvas.height = size;
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas?.getContext('2d');
       ctx.fillStyle = threeDcolor || "#fff";
       ctx.fillRect(0, 0, size, size);
       ctx.drawImage(image, 0, 0, size, size);

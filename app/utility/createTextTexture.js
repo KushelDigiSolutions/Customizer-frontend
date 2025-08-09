@@ -13,7 +13,7 @@ export const createTextTexture = ({
   const canvas = document.createElement('canvas');
   const size = 1024; // Match the ModelViewer canvas size
   canvas.width = canvas.height = size;
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas?.getContext('2d');
 
   // Make background transparent for text overlay
   ctx.clearRect(0, 0, size, size);
