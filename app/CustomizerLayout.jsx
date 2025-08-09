@@ -44,6 +44,8 @@ const CustomizerLayout = (props) => {
     layerManager, setLayerManager
   } = use2D();
 
+  setLayerManager(props?.productId)
+
   const {
     threeDscreenshots, setthreeDScreenshots,
     threeDloading, selectedProduct,customizationData
