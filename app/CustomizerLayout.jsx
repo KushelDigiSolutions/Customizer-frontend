@@ -14,7 +14,7 @@ import { use3D } from "./context/3DContext";
 
 const CustomizerLayout = (props) => {
 
-  console.log('props Layout')
+  console.log('props Layout V1')
   console.log(props)
 
   // Get all 2D context state and setters
@@ -44,7 +44,11 @@ const CustomizerLayout = (props) => {
     layerManager, setLayerManager
   } = use2D();
 
-  setLayerManager(props?.productId)
+  if(props?.productId != "") {
+    setCurrentProductId(props?.productId);
+  }
+  console.log('currentProductId')
+  console.log(currentProductId)
 
   const {
     threeDscreenshots, setthreeDScreenshots,

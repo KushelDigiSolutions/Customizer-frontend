@@ -82605,7 +82605,7 @@ void main() {
     ] });
   }
   const CustomizerLayout = (props) => {
-    console.log("props Layout");
+    console.log("props Layout V1");
     console.log(props);
     const {
       customText,
@@ -82655,7 +82655,11 @@ void main() {
       layerManager,
       setLayerManager
     } = use2D();
-    setLayerManager(props?.productId);
+    if (props?.productId != "") {
+      setCurrentProductId(props?.productId);
+    }
+    console.log("currentProductId");
+    console.log(currentProductId);
     const {
       threeDscreenshots,
       setthreeDScreenshots,
