@@ -82471,11 +82471,6 @@ void main() {
       layerManager,
       setLayerManager
     } = use2D();
-    if (props?.productId != "") {
-      setCurrentProductId(props?.productId);
-    }
-    console.log("currentProductId");
-    console.log(currentProductId);
     const {
       threeDscreenshots,
       setthreeDScreenshots,
