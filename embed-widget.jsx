@@ -18,7 +18,7 @@ window.mountProductCustomizer = function (selector = '#customizer-root', props =
     const idFromPath = 6;
     const product = backendProducts.find(p => String(p.id) === String(idFromPath))
 
-    console.log('product V!')
+    console.log('product V3')
     console.log(product)
 
     if (!product) {

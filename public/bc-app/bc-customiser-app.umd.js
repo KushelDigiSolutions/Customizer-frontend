@@ -82605,13 +82605,8 @@ void main() {
     ] });
   }
   const CustomizerLayout = (props) => {
-    console.log("props Layout V2");
+    console.log("props Layout V3");
     console.log(props);
-    if (props?.productId != "") {
-      setCurrentProductId(props?.productId);
-    }
-    console.log("currentProductId");
-    console.log(currentProductId);
     const {
       customText,
       setCustomText,
@@ -82660,6 +82655,8 @@ void main() {
       layerManager,
       setLayerManager
     } = use2D();
+    console.log("customText");
+    console.log(customText);
     const {
       threeDscreenshots,
       setthreeDScreenshots,
@@ -84473,7 +84470,7 @@ MongoDB ID: ${savedProductId}`;
       const root = ReactDOM.createRoot(container);
       const idFromPath = 6;
       const product = backendProducts.find((p2) => String(p2.id) === String(idFromPath));
-      console.log("product V!");
+      console.log("product V3");
       console.log(product);
       if (!product) {
         container.innerHTML = "<div>Product not found</div>";
