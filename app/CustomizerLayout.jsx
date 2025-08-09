@@ -12,7 +12,11 @@ import "./CustomizerLayout.css";
 import { use2D } from "./context/2DContext";
 import { use3D } from "./context/3DContext";
 
-const CustomizerLayout = () => {
+const CustomizerLayout = (props) => {
+
+  console.log('props Layout')
+  console.log(props)
+
   // Get all 2D context state and setters
   const {
     customText, setCustomText,

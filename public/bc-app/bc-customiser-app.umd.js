@@ -82604,7 +82604,9 @@ void main() {
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "kds-controls-container" })
     ] });
   }
-  const CustomizerLayout = () => {
+  const CustomizerLayout = (props) => {
+    console.log("props Layout");
+    console.log(props);
     const {
       customText,
       setCustomText,
@@ -83848,7 +83850,7 @@ MongoDB ID: ${savedProductId}`;
     if (container) {
       const root = ReactDOM.createRoot(container);
       root.render(
-        /* @__PURE__ */ jsxRuntimeExports.jsx(TwoDProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ThreeDProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CustomizerLayout, { ...props }) }) })
+        /* @__PURE__ */ jsxRuntimeExports.jsx(TwoDProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ThreeDProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CustomizerLayout, { ...props, id: "6" }) }) })
       );
     } else {
       console.warn("No mount target found for ProductCustomizer");

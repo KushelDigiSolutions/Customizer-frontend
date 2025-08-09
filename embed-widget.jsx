@@ -15,7 +15,7 @@ window.mountProductCustomizer = function (selector = '#customizer-root', props =
     root.render(
       <TwoDProvider>
         <ThreeDProvider>
-          <CustomizerLayout {...props} />
+          <CustomizerLayout {...props} id="6" />
         </ThreeDProvider>
       </TwoDProvider>
     )

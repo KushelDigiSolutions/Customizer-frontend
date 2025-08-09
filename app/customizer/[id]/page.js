@@ -7,6 +7,7 @@ import { backendProducts } from "../../data/productsData";
 import { use3D } from "@/app/context/3DContext";
 
 export default function CustomizerPage() {
+  console.log('CustomizerPage with id')
   const { id } = useParams();
   const { selectedProduct, setSelectedProduct } = use3D();
 
