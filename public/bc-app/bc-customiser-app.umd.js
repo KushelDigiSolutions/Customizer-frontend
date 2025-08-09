@@ -83705,6 +83705,7 @@ MongoDB ID: ${savedProductId}`;
       }
     };
     return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "kds-layout-container", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This line show perftec" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         Topbar,
         {

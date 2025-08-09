@@ -1347,6 +1347,8 @@ const CustomizerLayout = (props) => {
   return (
     <div className="kds-layout-container">
 
+      <p>This line show perftec</p>
+
       <Topbar
         setShowSidebar={setShowSidebar}
         onSave={handleSave}
