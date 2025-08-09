@@ -1431,20 +1431,22 @@ const CustomizerLayout = (props) => {
         />
       )}
 
-      {selectedProduct && (
-        <div className="kds-controls-bar">
-          <div className="kds-controls-group">
-            <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345256/undo_kp3eto.png" alt="undo" />
-            <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345256/undo_kp3eto.png" alt="redo" className="kds-transform-flip" />
+      {/*
+        {selectedProduct && (
+          <div className="kds-controls-bar">
+            <div className="kds-controls-group">
+              <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345256/undo_kp3eto.png" alt="undo" />
+              <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345256/undo_kp3eto.png" alt="redo" className="kds-transform-flip" />
+            </div>
+            <hr className="kds-controls-divider" />
+              <div className="kds-controls-zoom">
+                <FaMinus />
+                <span className="kds-reset">100%</span>
+                <FaPlus />
+              </div>
           </div>
-          <hr className="kds-controls-divider" />
-            {/* <div className="kds-controls-zoom">
-              <FaMinus />
-              <span className="kds-reset">100%</span>
-              <FaPlus />
-            </div> */}
-        </div>
-      )}
+        )}
+      */}
 
       <LayerContextMenu
         x={contextMenu.x}
