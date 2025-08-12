@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import TextureUploader from '../3d/TextureUploader';
-import TextureControlsPanel from '../3d/TextureControlsPanel';
 import { use3D } from '@/app/context/3DContext';
 import './EditTab.css';
 
@@ -115,7 +114,6 @@ const EditTab = ({ handleAddDesignToCanvas, editor, setShowImageEditModal, setHa
                 selectedProduct?.productType === '3D' && (
                     <>
                         <TextureUploader />
-                        <TextureControlsPanel />
                     </>
                 )
             }

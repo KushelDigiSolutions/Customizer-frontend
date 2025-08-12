@@ -6,7 +6,7 @@ import ModelViewer from './components/3d/ModelViewer';
 import TextureUploader from './components/3d/TextureUploader';
 import ControlsPanel from './components/3d/ControlsPanel';
 import { Suspense, useEffect, useRef } from 'react';
-import TextureControlsPanel from './components/3d/TextureControlsPanel';
+// import TextureControlsPanel from './components/3d/TextureControlsPanel';
 import { createTextTexture } from './utility/createTextTexture';
 import ScreenshotManager from './components/3d/ScreenshotManage';
 import ScreenshotGallery from './components/3d/ScreenshotGallery';

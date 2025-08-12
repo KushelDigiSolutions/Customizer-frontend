@@ -82,7 +82,7 @@ const Topbar = ({
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="kr-navbar-button kr-info-button kr-reset-margin"
+            className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin"
             title="Save design"
           >
             {isSaving ? (
