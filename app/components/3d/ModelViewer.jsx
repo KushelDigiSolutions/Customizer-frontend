@@ -46,7 +46,7 @@ const ModelViewer = ({ modelUrl, selectedPart }) => {
                 if (threeDtexture || threeDtextTexture) {
                     const canvas = document.createElement('canvas');
                     canvas.width = canvas.height = 1024;
-                    const ctx = canvas.getContext('2d');
+                    const ctx = canvas?.getContext('2d');
 
                     // Fill base color
                     ctx.fillStyle = threeDcolor && threeDcolor !== '#ffffff' ? threeDcolor : currentColorHex;

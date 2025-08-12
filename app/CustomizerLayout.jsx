@@ -1,22 +1,21 @@
 "use client";
-
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Topbar from "./components/Topbar";
 import Sidebar from "./components/Sidebar";
-import RightSmallPreview from "./components/2d/RightSmallPreview";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { useFabricJSEditor, FabricJSCanvas } from "fabricjs-react";
 import LayerContextMenu from "./components/2d/LayerContextMenu";
 import useCanvasContextMenu from "./hooks/useCanvasContextMenu";
-import RightSideImageUpload from "./components/2d/RightSideImageComponent";
-import { use2D } from "./context/2DContext";
-import ModelViewer from "./components/3d/ModelViewer";
-import { Canvas } from "@react-three/fiber";
 import ThreeDCustomize from "./3DCustomize";
 import ScreenshotGallery from "./components/3d/ScreenshotGallery";
+import "./CustomizerLayout.css";
+import { use2D } from "./context/2DContext";
 import { use3D } from "./context/3DContext";
+import { backendProducts } from "./data/productsData";
 
-const CustomizerLayout = () => {
+const CustomizerLayout = (props) => {
+  console.log('props V1')
+  console.log(props)
   // Get all 2D context state and setters
   const {
     customText, setCustomText,
@@ -46,9 +45,15 @@ const CustomizerLayout = () => {
 
   const {
     threeDscreenshots, setthreeDScreenshots,
-    threeDloading, selectedProduct,customizationData
+    threeDloading, selectedProduct, setSelectedProduct, customizationData
   } = use3D()
 
+
+  if(props?.productId != "" && typeof props?.productId != "undefined"){
+    const idFromPath = props?.productId || 6;
+    const product = backendProducts.find(p => String(p.id) === String(idFromPath))
+    setSelectedProduct(product);
+  }
 
   class SimpleLayerManager {
     constructor(canvas, layerOrder) {
@@ -1336,7 +1341,7 @@ const CustomizerLayout = () => {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center items-center bg-gray-100 relative max-w-[1720px] mx-auto">
+    <div className="kds-layout-container">
 
       <Topbar
         setShowSidebar={setShowSidebar}
@@ -1399,7 +1404,7 @@ const CustomizerLayout = () => {
 
       {selectedProduct?.productType !== "3D" && (
         <FabricJSCanvas
-          className="canvas-container"
+          className="kds-canvas-container"
           onReady={onReady}
           editor={editor}
           savedProductId={currentProductId}
@@ -1411,10 +1416,10 @@ const CustomizerLayout = () => {
       )}
 
       {selectedProduct?.productType === "3D" && threeDloading && (
-        <div className="fixed inset-0 z-50 bg-[rgba(0,0,0,0.9)] bg-opacity-60 flex items-center justify-center">
-          <div className="flex flex-col items-center">
-            <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin mb-4"></div>
-            <div className="text-white text-lg font-medium">Capturing screenshots...</div>
+        <div className="kds-loading-overlay">
+          <div className="kds-loading-content">
+            <div className="kds-loading-spinner"></div>
+            <div className="kds-loading-text">Capturing screenshots...</div>
           </div>
         </div>
       )}
@@ -1427,20 +1432,22 @@ const CustomizerLayout = () => {
         />
       )}
 
-      {selectedProduct && (
-        <div className="bottom-7 left-1/2 transform -translate-x-1/2 absolute flex items-center gap-2 border border-[#D3DBDF] bg-white p-3.5 rounded-lg">
-          <div className="flex items-center gap-2">
-            <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345256/undo_kp3eto.png" alt="undo" />
-            <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345256/undo_kp3eto.png" alt="redo" className="transform scale-x-[-1]" />
+      {/*
+        {selectedProduct && (
+          <div className="kds-controls-bar">
+            <div className="kds-controls-group">
+              <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345256/undo_kp3eto.png" alt="undo" />
+              <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345256/undo_kp3eto.png" alt="redo" className="kds-transform-flip" />
+            </div>
+            <hr className="kds-controls-divider" />
+              <div className="kds-controls-zoom">
+                <FaMinus />
+                <span className="kds-reset">100%</span>
+                <FaPlus />
+              </div>
           </div>
-          <hr className="rotate-90 border-t border-[#D3DBDF] h-px w-[20px]" />
-          <div className="flex items-center gap-3">
-            <FaMinus />
-            <span>100%</span>
-            <FaPlus />
-          </div>
-        </div>
-      )}
+        )}
+      */}
 
       <LayerContextMenu
         x={contextMenu.x}
@@ -1459,44 +1466,44 @@ const CustomizerLayout = () => {
       />
 
       {saveSuccess && (
-        <div className="fixed top-20 right-7 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-all duration-300">
-          <div className="flex items-center gap-2">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+        <div className="kds-save-success">
+          <div className="kds-save-success-content">
+            <svg className="kds-save-success-icon" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
-            <span>Design saved successfully!</span>
+            <span className="kds-reset">Design saved successfully!</span>
           </div>
         </div>
       )}
 
       {showChatBox && (
-        <div className="w-[350px] h-[430px] absolute right-7 bottom-28 rounded-xl shadow-lg bg-white border border-gray-200 overflow-hidden z-70">
-          <div className="bg-gradient-to-b from-[#1B2653] to-[#192248] text-white px-4 py-3">
-            <div className="flex items-center justify-between">
+        <div className="kds-chat-box">
+          <div className="kds-chat-header">
+            <div className="kds-chat-header-top">
               <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345784/qqchat_jn7bok.png" alt="" />
-              <img onClick={() => setShowChatBox(false)} src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749341803/Vector_hm0yzo.png" alt="" className="cursor-pointer" />
+              <img onClick={() => setShowChatBox(false)} src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749341803/Vector_hm0yzo.png" alt="" className="kds-chat-close-btn" />
             </div>
-            <div className="mt-3 mb-5">
-              <h2 className="text-[22px] font-semibold">Customizer's Help Center</h2>
-              <p className="text-[14px] text-white/70">How can we help you today?</p>
+            <div className="kds-chat-title">
+              <h2 className="kds-reset">Customizer's Help Center</h2>
+              <p className="kds-reset">How can we help you today?</p>
             </div>
           </div>
 
-          <div className="flex flex-col gap-1">
+          <div className="kds-chat-content">
             {[...Array(4)].map((_, i) => (
               <div key={i}>
-                <div className="px-4 py-3 hover:bg-gray-50 flex items-center justify-between cursor-pointer">
-                  <span className="text-[16px] text-gray-800 font-medium">How customizer work?</span>
-                  <span className="text-gray-400">›</span>
+                <div className="kds-chat-item">
+                  <span className="kds-chat-item-text">How customizer work?</span>
+                  <span className="kds-chat-item-arrow">›</span>
                 </div>
-                <hr className="border-t border-[#D3DBDF] h-px" />
+                <hr className="kds-chat-divider" />
               </div>
             ))}
           </div>
         </div>
       )}
 
-      <div onClick={() => setShowChatBox(!showChatBox)} className="flex items-center justify-center p-5 rounded-full bg-[#3559C7] absolute right-7 bottom-7 cursor-pointer">
+      <div onClick={() => setShowChatBox(!showChatBox)} className="kds-chat-button">
         <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345784/qqchat_jn7bok.png" alt="chat" />
       </div>
 
