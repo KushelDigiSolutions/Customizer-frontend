@@ -42,7 +42,7 @@ const Topbar = ({
 
         <div className="kr-logo-section kr-reset-margin-padding">
 
-            <img className='kr-reset-margin-padding' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749337982/Customizer_w0ruf6.png" alt="" />
+            {/* <img className='kr-reset-margin-padding' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749337982/Customizer_w0ruf6.png" alt="" /> */}
 
             <button
               onClick={() => setShowSidebar(prev => !prev)}
@@ -62,14 +62,14 @@ const Topbar = ({
             selectedProduct?.productType === "3D" && (
               <>
                 <button
-                  className="kr-save-views-button kr-reset-margin"
+                  className="kr-navbar-button kr-success-button kr-reset-margin"
                   onClick={handleScreenshot}
                 >
                   Save all Views
                 </button>
 
                 <button
-                  className="kr-clear-part-button kr-reset-margin"
+                  className="kr-navbar-button kr-danger-button kr-reset-margin"
                   onClick={handleClearSelectedPart}
                 >
                   Clear Part
@@ -82,12 +82,11 @@ const Topbar = ({
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="kr-save-button kr-reset-margin"
+            className="kr-navbar-button kr-info-button kr-reset-margin"
             title="Save design"
           >
             {isSaving ? (
               <>
-                <div className="kr-spinner"></div>
                 <span className="kr-reset">Adding...</span>
               </>
             ) : (
@@ -97,7 +96,7 @@ const Topbar = ({
             )}
           </button>
 
-          <img className='kr-user-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749338383/Buttons_klifkp.png" alt="user" />
+          {/* <img className='kr-user-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749338383/Buttons_klifkp.png" alt="user" /> */}
         </div>
       </div>
     </div>

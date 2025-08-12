@@ -114,7 +114,6 @@ const EditTab = ({ handleAddDesignToCanvas, editor, setShowImageEditModal, setHa
             {
                 selectedProduct?.productType === '3D' && (
                     <>
-                        <hr className="kr-edit-divider" />
                         <TextureUploader />
                         <TextureControlsPanel />
                     </>

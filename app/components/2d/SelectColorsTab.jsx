@@ -170,18 +170,6 @@ const SelectColorsTab = () => {
       {
         selectedProduct?.productType === "3D" && (
           <div className="kr-3d-section kr-reset-margin">
-            <label className="kr-part-label kr-reset-margin-padding">Select Part:</label>
-            <div className="kr-parts-grid kr-reset-margin-padding">
-              {parts.map((part) => (
-                <button
-                  key={part}
-                  onClick={() => setthreeDSelectedPart(part)}
-                  className={`kr-part-button kr-reset-margin ${threeDselectedPart === part ? 'active' : ''}`}
-                >
-                  {part} 
-                </button>
-              ))}
-            </div>
 
             <div className="kr-color-picker-section kr-reset-padding">
               <label className="kr-color-picker-label kr-reset-padding">Pick Color:</label>

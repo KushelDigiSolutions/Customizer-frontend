@@ -48,75 +48,63 @@
   gap: 0.75rem;
 }
 
-.kr-save-views-button {
-  background-color: #EBF9EB;
-  color: #1db91d;
-  padding: 0.6rem 1rem;
+.kr-navbar-button {
+  padding: .6rem 1rem;
   white-space: nowrap;
-  border-radius: 0.50rem;
+  border-radius: .5rem;
   font-weight: 500;
   width: 100%;
-  border: 1px solid #1db91d;
   cursor: pointer;
-  font-size: 0.875rem;
-  transition: background-color 0.2s;
+  font-size: .875rem;
+  transition: background-color .2s;
 }
 
-.kr-save-views-button:hover {
+.kr-success-button {
+  background-color: #ebf9eb;
+  color: #1db91d;
+  border: 1px solid #1db91d;
+}
+
+.kr-success-button:hover {
   color: #fff;
   background-color: #20a04f;
 }
 
-.kr-clear-part-button {
+.kr-danger-button {
   background-color: #e9dddd;
   color: #d34f4f;
-  padding: 0.6rem 1rem;
-  height: 100%;
-  border-radius: 0.50rem;
-  white-space: nowrap;
-  width: 100%;
   border: 1px solid #d34f4f;
-  cursor: pointer;
-  font-size: 0.875rem;
-  transition: background-color 0.2s;
 }
 
-.kr-clear-part-button:hover {
-  color: white;
+.kr-danger-button:hover {
+  color: #fff;
   background-color: #b91c1c;
 }
 
-.kr-user-icon {
- cursor: pointer;
-}
-
-.kr-save-button {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1rem;
-  border-radius: 0.5rem;
+.kr-info-button {
+  background-color: #3b82f6;
+  color: white;
   border: 1px solid #3b82f6;
-  font-weight: 500;
-  transition: all 0.2s;
-  white-space: nowrap;
-  cursor: pointer;
-  font-size: 0.875rem;
 }
 
-.kr-save-button:disabled {
+.kr-user-icon {
+  cursor: pointer;
+}
+
+.kr-info-button:disabled {
   background-color: #9ca3af;
   cursor: not-allowed;
   color: white;
+  border: 1px solid #3b82f6;
 }
 
-.kr-save-button:not(:disabled) {
+.kr-info-button:not(:disabled) {
   background-color: #3b82f6;
   color: white;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.kr-save-button:not(:disabled):hover {
+.kr-info-button:not(:disabled):hover {
   background-color: #2563eb;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
@@ -160,14 +148,7 @@
     gap: 0.5rem;
   }
 
-  .kr-save-views-button,
-  .kr-clear-part-button {
-    margin-top: 0;
-    padding: 0.375rem 0.75rem;
-    font-size: 0.75rem;
-  }
-
-  .kr-save-button {
+  .kr-navbar-button {
     padding: 0.375rem 0.75rem;
     font-size: 0.75rem;
   }
@@ -186,14 +167,8 @@
     max-width: 80px;
   }
 
-  .kr-save-views-button,
-  .kr-clear-part-button {
+  .kr-navbar-button {
     padding: 0.25rem 0.5rem;
     font-size: 0.7rem;
   }
-
-  .kr-save-button {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.7rem;
-  }
-} 
+}

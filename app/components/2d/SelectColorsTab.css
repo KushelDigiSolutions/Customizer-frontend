@@ -78,29 +78,6 @@
   gap: 0.5rem; /* gap-2 = 0.5rem */
 }
 
-.kr-part-button {
-  padding: 0.25rem 0.5rem; /* px-2 py-1 */
-  border-radius: 0.25rem; /* rounded */
-  border: 1px solid #d1d5db;
-  background-color: #f3f4f6; /* bg-gray-200 */
-  cursor: pointer;
-  transition: all 0.2s ease;
-  font-size: 0.875rem;
-}
-
-.kr-part-button:hover {
-  background-color: #e5e7eb;
-}
-
-.kr-part-button.active {
-  background-color: #2563eb; /* bg-blue-600 */
-  color: white;
-  border-color: #2563eb;
-}
-
-.kr-color-picker-section {
-  margin-top: 0.75rem; /* mt-3 = 0.75rem */
-}
 
 .kr-color-picker-label {
   display: block;

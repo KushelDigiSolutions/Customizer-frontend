@@ -200,7 +200,6 @@ const DynamicClipartTab = ({
       {
         is3DProduct && shirtDesigns.length > 0 && (
           <div className="kr-3d-section">
-            <h3 className="kr-3d-title">3D Shirt Designs</h3>
             <div className="kr-3d-grid">
               {shirtDesigns.map(design => (
                 <div key={design.id} className="kr-3d-item"
@@ -325,12 +324,12 @@ const DynamicClipartTab = ({
       {view === 'main' ? renderMainView() : renderCategoryView()}
 
       {/* Dynamic info footer */}
-      <div className="kr-footer">
+      {/* <div className="kr-footer">
         {view === 'main'
           ? `Product Type: ${selectedProduct?.type || 'Unknown'} • ${availableCategories.length} categories available`
           : `Select an option to customize your ${selectedProduct?.type || 'product'}`
         }
-      </div>
+      </div> */}
     </div>
   );
 };

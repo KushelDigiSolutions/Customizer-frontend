@@ -195,7 +195,7 @@ const Sidebar = ({
 
   // Determine tab label based on product type
   const getClipartTabLabel = () => {
-    if (!selectedProduct) return "Clipart";
+    if (!selectedProduct) return "Customize";
 
     switch (selectedProduct.type) {
       case "shoe":
@@ -203,7 +203,7 @@ const Sidebar = ({
       case "sando":
         return "Designs";
       default:
-        return "Clipart";
+        return "Customize";
     }
   };
 
@@ -215,8 +215,8 @@ const Sidebar = ({
           { key: "edit", label: "Edit", icon: "pencil-outline_c6lwsj" },
           { key: "text", label: "Text", icon: "text-recognition_emsdp8" },
           { key: "colors", label: "Colors", icon: "invert-colors_bybi8l" },
-          { key: "clipart", label: getClipartTabLabel(), icon: "heart-multiple-outline_rjqkb7" },
-          { key: "rightImage", label: "Right Image", icon: "heart-multiple-outline_rjqkb7" },
+          { key: "clipart", label: "Customize", icon: "heart-multiple-outline_rjqkb7" },
+          // { key: "rightImage", label: "Right Image", icon: "heart-multiple-outline_rjqkb7" },
         ].map(({ key, label, icon }) => (
           <div
             key={key}
@@ -323,14 +323,14 @@ const Sidebar = ({
         />
       )}
 
-      {activeTab === "rightImage" && showrightImage && (
+      {/* {activeTab === "rightImage" && showrightImage && (
         <RightSideImageUpload
           editor={editor}
           selectedProduct={selectedProduct}
           layerManager={layerManager}
           setShowrightImage={setShowrightImage}
         />
-      )}
+      )} */}
     </div>
   );
 };

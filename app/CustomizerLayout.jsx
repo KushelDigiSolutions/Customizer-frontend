@@ -45,15 +45,23 @@ const CustomizerLayout = (props) => {
 
   const {
     threeDscreenshots, setthreeDScreenshots,
+    threeDselectedPart, setthreeDSelectedPart,
     threeDloading, selectedProduct, setSelectedProduct, customizationData
   } = use3D()
 
 
-  if(props?.productId != "" && typeof props?.productId != "undefined"){
+  if (props?.productId != "" && typeof props?.productId != "undefined") {
     const idFromPath = props?.productId || 6;
     const product = backendProducts.find(p => String(p.id) === String(idFromPath))
     setSelectedProduct(product);
   }
+
+  const parts = selectedProduct?.parts || [
+    'Front',
+    'Back',
+    'LeftSleeve',
+    'RightSleeve',
+  ];
 
   class SimpleLayerManager {
     constructor(canvas, layerOrder) {
@@ -1449,6 +1457,18 @@ const CustomizerLayout = (props) => {
         )}
       */}
 
+      <div className="kr-controls-bar">
+        {parts.map((part) => (
+          <button
+            key={part}
+            onClick={() => setthreeDSelectedPart(part)}
+            className={`kr-part-button kr-reset-margin ${threeDselectedPart === part ? 'active' : ''}`}
+          >
+            {part}
+          </button>
+        ))}
+      </div>
+
       <LayerContextMenu
         x={contextMenu.x}
         y={contextMenu.y}
@@ -1503,9 +1523,9 @@ const CustomizerLayout = (props) => {
         </div>
       )}
 
-      <div onClick={() => setShowChatBox(!showChatBox)} className="kr-chat-button kr-reset-margin">
+      {/* <div onClick={() => setShowChatBox(!showChatBox)} className="kr-chat-button kr-reset-margin">
         <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345784/qqchat_jn7bok.png" alt="chat" />
-      </div>
+      </div> */}
 
     </div>
   );

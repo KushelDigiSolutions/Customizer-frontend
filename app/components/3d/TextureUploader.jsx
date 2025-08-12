@@ -103,9 +103,9 @@ const TextureUploader = () => {
   ]);
 
   return (
-    <div className="kds-texture-uploader">
+    <div className="kr-texture-uploader">
       <select
-        className="kds-texture-mode-select"
+        className="kr-texture-mode-select"
         value={threeDtextureMode}
         onChange={(e) => setthreeDTextureMode(e.target.value)}
       >
@@ -113,20 +113,20 @@ const TextureUploader = () => {
         <option value="logo">Logo Only</option>
       </select>
 
-      <div className='kds-texture-upload-container'>
-        <h3 className='kds-texture-upload-title'>Original vector artwork best, if you have?</h3>
-        <label className="kds-texture-upload-area">
+      <div className='kr-texture-upload-container'>
+        <h3 className='kr-texture-upload-title'>Original vector artwork best, if you have?</h3>
+        <label className="kr-texture-upload-area">
           <input
             type="file"
             accept="image/*"
-            className="kds-texture-file-input"
+            className="kr-texture-file-input"
             onChange={handleFileSelect}
           />
-          <div className="kds-texture-upload-content">
-            <div className="kds-texture-upload-btn">
+          <div className="kr-texture-upload-content">
+            <div className="kr-texture-upload-btn">
               {selectedFile ? "Image Uploaded" : "Choose a file"}
             </div>
-            <p className='kds-texture-upload-text'>
+            <p className='kr-texture-upload-text'>
               We support JPG, PNG, EAPS<br />
               An max 5 MB
             </p>
@@ -135,9 +135,9 @@ const TextureUploader = () => {
         <button
           onClick={handleUploadDesign}
           disabled={!selectedFile || isUploading}
-          className={`kds-texture-submit-btn ${selectedFile && !isUploading
-            ? 'kds-texture-submit-btn-enabled'
-            : 'kds-texture-submit-btn-disabled'
+          className={`kr-texture-submit-btn ${selectedFile && !isUploading
+            ? 'kr-texture-submit-btn-enabled'
+            : 'kr-texture-submit-btn-disabled'
             }`}
         >
           {isUploading ? 'Uploading...' : 'Upload'}
@@ -145,14 +145,14 @@ const TextureUploader = () => {
       </div>
 
       {previewUrl && (
-        <div className="kds-texture-preview-container">
+        <div className="kr-texture-preview-container">
           <img
             src={previewUrl}
             alt="Preview"
-            className="kds-texture-preview-image"
+            className="kr-texture-preview-image"
           />
           <button
-            className="kds-texture-remove-btn"
+            className="kr-texture-remove-btn"
             onClick={() => {
               setPreviewUrl(null);
               setSelectedFile(null);
@@ -175,9 +175,9 @@ const TextureUploader = () => {
       )}
 
       {threeDtextureMode === 'logo' && (
-        <div className="kds-texture-logo-controls">
-          <div className="kds-texture-control-group">
-            <label className="kds-texture-logo-label">Logo Scale</label>
+        <div className="kr-texture-logo-controls">
+          <div className="kr-texture-control-group">
+            <label className="kr-texture-logo-label">Logo Scale</label>
             <input
               type="range"
               min={0.1}
@@ -185,15 +185,15 @@ const TextureUploader = () => {
               step={0.05}
               value={threeDlogoScale}
               onChange={(e) => setthreeDLogoScale(parseFloat(e.target.value))}
-              className="kds-texture-logo-slider"
+              className="kr-texture-logo-slider"
             />
-            <div className="kds-texture-logo-labels">
-              <span className="kds-reset">Small</span><span className="kds-reset">Large</span>
+            <div className="kr-texture-logo-labels">
+              <span className="kr-reset">Small</span><span className="kr-reset">Large</span>
             </div>
           </div>
 
-          <div className="kds-texture-control-group">
-            <label className="kds-texture-logo-label">Logo Position X</label>
+          <div className="kr-texture-control-group">
+            <label className="kr-texture-logo-label">Logo Position X</label>
             <input
               type="range"
               min={0}
@@ -201,12 +201,12 @@ const TextureUploader = () => {
               step={0.01}
               value={threeDlogoPosX}
               onChange={(e) => setthreeDLogoPosX(parseFloat(e.target.value))}
-              className="kds-texture-logo-slider"
+              className="kr-texture-logo-slider"
             />
           </div>
 
-          <div className="kds-texture-control-group">
-            <label className="kds-texture-logo-label">Logo Position Y</label>
+          <div className="kr-texture-control-group">
+            <label className="kr-texture-logo-label">Logo Position Y</label>
             <input
               type="range"
               min={0}
@@ -214,7 +214,7 @@ const TextureUploader = () => {
               step={0.01}
               value={threeDlogoPosY}
               onChange={(e) => setthreeDLogoPosY(parseFloat(e.target.value))}
-              className="kds-texture-logo-slider"
+              className="kr-texture-logo-slider"
             />
           </div>
         </div>

@@ -485,6 +485,12 @@ export const backendProducts = [
         description: "white shirt",
         type: "shirt",
         productType: "3D",
+        parts: [
+            'Front',
+            'Back',
+            'LeftSleeve',
+            'RightSleeve',
+        ],
         model3D: "https://3d-customizer-ecru.vercel.app/models/brand1.glb",
         threeDDesigns: {
             shirtDesign: [
