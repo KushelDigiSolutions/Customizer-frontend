@@ -1503,7 +1503,7 @@ const CustomizerLayout = (props) => {
         </div>
       )}
 
-      <div onClick={() => setShowChatBox(!showChatBox)} className="kr-chat-button kr-reset-margin-padding">
+      <div onClick={() => setShowChatBox(!showChatBox)} className="kr-chat-button kr-reset-margin">
         <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345784/qqchat_jn7bok.png" alt="chat" />
       </div>
 

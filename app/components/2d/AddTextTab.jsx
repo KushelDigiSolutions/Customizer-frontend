@@ -9,7 +9,7 @@ const AddTextTab = ({ handleAddCustomText, update3DText }) => {
 
     return (
         <div className='kr-container kr-reset-margin-padding'>
-            <div className='kr-header kr-reset-margin-padding'>
+            <div className='kr-header kr-reset-margin'>
                 <div className='kr-header-left kr-reset-margin-padding'>
                     <h3 className='kr-title kr-reset-margin-padding'>Add text</h3>
                 </div>
