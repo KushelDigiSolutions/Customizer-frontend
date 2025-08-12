@@ -122,7 +122,7 @@ const SelectColorsTab = () => {
       // For background colors, show the solid color
       return (
         <div
-          className="kds-color-preview"
+          className="kr-color-preview"
           style={{ backgroundColor: colorObj.color }}
         />
       );
@@ -130,7 +130,7 @@ const SelectColorsTab = () => {
       // For gradient colors, show the image if available
       if (colorObj.url) {
         return (
-          <div className="kds-color-preview">
+          <div className="kr-color-preview">
             <img
               src={colorObj.url}
               alt={colorObj.name}
@@ -141,7 +141,7 @@ const SelectColorsTab = () => {
         // Fallback to solid color if no URL
         return (
           <div
-            className="kds-color-preview"
+            className="kr-color-preview"
             style={{ backgroundColor: colorObj.color || '#ccc' }}
           />
         );
@@ -156,40 +156,40 @@ const SelectColorsTab = () => {
   const hasGradientColors = selectedProduct?.colors?.topColor || selectedProduct?.colors?.bottomColor;
 
   return (
-    <div className="kds-container">
-      <div className='kds-header'>
-        <div className='kds-header-left'>
-          <h3 className='kds-title'>Select Colors</h3>
+    <div className="kr-container kr-reset-margin-padding">
+      <div className='kr-header kr-reset-margin'>
+        <div className='kr-header-left kr-reset-margin-padding'>
+          <h3 className='kr-title kr-reset-margin-padding'>Select Colors</h3>
         </div>
-        <div onClick={() => setShowBgColorsModal(false)} className="kds-close-button">
+        <div onClick={() => setShowBgColorsModal(false)} className="kr-close-button kr-reset-margin-padding">
           <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749341803/Vector_hm0yzo.png" alt="Close" />
         </div>
       </div>
-      <hr className="kds-divider" />
+      <hr className="kr-divider kr-reset-margin-padding" />
 
       {
         selectedProduct?.productType === "3D" && (
-          <div className="kds-3d-section">
-            <label className="kds-part-label">Select Part:</label>
-            <div className="kds-parts-grid">
+          <div className="kr-3d-section kr-reset-margin">
+            <label className="kr-part-label kr-reset-margin-padding">Select Part:</label>
+            <div className="kr-parts-grid kr-reset-margin-padding">
               {parts.map((part) => (
                 <button
                   key={part}
                   onClick={() => setthreeDSelectedPart(part)}
-                  className={`kds-part-button ${threeDselectedPart === part ? 'active' : ''}`}
+                  className={`kr-part-button kr-reset-margin ${threeDselectedPart === part ? 'active' : ''}`}
                 >
                   {part} 
                 </button>
               ))}
             </div>
 
-            <div className="kds-color-picker-section">
-              <label className="kds-color-picker-label">Pick Color:</label>
+            <div className="kr-color-picker-section kr-reset-padding">
+              <label className="kr-color-picker-label kr-reset-padding">Pick Color:</label>
               <input
                 type="color"
                 value={threeDcolor}
                 onChange={(e) => setthreeDColor(e.target.value)}
-                className="kds-color-picker"
+                className="kr-color-picker kr-reset-margin-padding"
               />
             </div>
           </div>
@@ -200,19 +200,18 @@ const SelectColorsTab = () => {
       {
         selectedProduct?.productType === '2D' && (
           <>
-            <div className="kds-tab-navigation">
+            {/* <div className="kr-tab-navigation kr-reset-margin-padding">
               <button
                 onClick={() => setActiveTab('background')}
-                className={`kds-tab-button ${activeTab === 'background' ? 'active background' : ''}`}
+                className={`kr-tab-button kr-reset-margin ${activeTab === 'background' ? 'active background' : ''}`}
               >
                 Background
               </button>
 
-              {/* Only show gradient tabs if product has gradient colors */}
               {selectedProduct?.colors?.topColor && (
                 <button
                   onClick={() => setActiveTab('topColor')}
-                  className={`kds-tab-button ${activeTab === 'topColor' ? 'active topColor' : ''}`}
+                  className={`kr-tab-button ${activeTab === 'topColor' ? 'active topColor' : ''}`}
                 >
                   Top Color
                 </button>
@@ -221,16 +220,16 @@ const SelectColorsTab = () => {
               {selectedProduct?.colors?.bottomColor && (
                 <button
                   onClick={() => setActiveTab('bottomColor')}
-                  className={`kds-tab-button ${activeTab === 'bottomColor' ? 'active bottomColor' : ''}`}
+                  className={`kr-tab-button ${activeTab === 'bottomColor' ? 'active bottomColor' : ''}`}
                 >
                   Bottom Color
                 </button>
               )}
-            </div>
+            </div> */}
 
             {/* Color Grid */}
-            <div className='kds-colors-container'>
-              <div className='kds-colors-list'>
+            <div className='kr-colors-container kr-reset-margin-padding'>
+              <div className='kr-colors-list kr-reset-margin'>
                 {currentColors.map((colorObj, index) => {
                   const isSelected = currentSelected && (
                     (activeTab === 'background' && currentSelected.color === colorObj.color) ||
@@ -241,13 +240,13 @@ const SelectColorsTab = () => {
                     <div
                       key={`${activeTab}-${index}`}
                       onClick={() => handleColorSelect(colorObj, activeTab)}
-                      className={`kds-color-item ${isSelected ? "selected" : ""}`}
+                      className={`kr-color-item kr-reset-margin ${isSelected ? "selected" : ""}`}
                     >
                       {renderColorPreview(colorObj, activeTab)}
 
-                      <div className='kds-color-info'>
-                        <p className='kds-color-name'>{colorObj.name}</p>
-                        <span className='kds-color-description'>
+                      <div className='kr-color-info kr-reset-margin-padding'>
+                        <p className='kr-color-name kr-reset-margin-padding'>{colorObj.name}</p>
+                        <span className='kr-color-description kr-reset-margin-padding'>
                           {activeTab === 'background' ? '8 sizes in stock' : 'Gradient effect'}
                         </span>
                       </div>
@@ -256,7 +255,7 @@ const SelectColorsTab = () => {
                         <img
                           src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1750146342/check-circle_1_lry4rw.svg"
                           alt="Selected"
-                          className='kds-selected-icon'
+                          className='kr-selected-icon'
                         />
                       )}
                     </div>
@@ -266,7 +265,7 @@ const SelectColorsTab = () => {
             </div>
 
             {/* Info Footer */}
-            <div className="kds-info-footer">
+            <div className="kr-info-footer">
               {activeTab === 'background' && "Background colors change the base canvas color"}
               {activeTab === 'topColor' && "Top colors create gradient effects on the upper part"}
               {activeTab === 'bottomColor' && "Bottom colors create gradient effects on the lower part"}

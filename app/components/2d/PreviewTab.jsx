@@ -330,190 +330,190 @@ const PreviewTab = ({
     }, []);
 
     return (
-        <div className="kds-preview-container">
-            <div className='kds-preview-header'>
-                <div className='kds-preview-title-section'>
-                    <h3 className='kds-preview-title'>Preview</h3>
+        <div className="kr-preview-container kr-reset-margin-padding">
+            <div className='kr-preview-header kr-reset-margin'>
+                <div className='kr-preview-title-section kr-reset-margin-padding'>
+                    <h3 className='kr-preview-title kr-reset-margin-padding'>Preview</h3>
                 </div>
                 <div
                     onClick={() => setShowImageEditModal && setShowImageEditModal(false)}
-                    className='kds-preview-close'
+                    className='kr-preview-close kr-reset-margin-padding'
                 >
                     <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749341803/Vector_hm0yzo.png" alt="Close" />
                 </div>
             </div>
-            <hr className="kds-preview-divider" />
+            <hr className="kr-preview-divider kr-reset-margin-padding" />
 
             {designProps ? (
                 <>
-                    <div className='kds-preview-design-section'>
-                        <div className="kds-preview-design-image">
+                    <div className='kr-preview-design-section kr-reset-margin'>
+                        <div className="kr-preview-design-image kr-reset-margin">
                             {designProps.imageSrc ? (
                                 <img
                                     src={designProps.imageSrc}
                                     alt="Design"
-                                    className="kds-preview-design-img"
+                                    className="kr-preview-design-img kr-reset-margin-padding"
                                 />
                             ) : (
-                                <div className="kds-preview-design-placeholder">
-                                    <span className="kds-preview-design-placeholder-text">Design</span>
+                                <div className="kr-preview-design-placeholder kr-reset-margin-padding">
+                                    <span className="kr-preview-design-placeholder-text kr-reset-margin-padding">Design</span>
                                 </div>
                             )}
                         </div>
-                        <div className="kds-preview-design-info">
-                            <p className="kds-preview-dimensions-label">Width x Height</p>
-                            <div className='kds-preview-dimensions'>
-                                <span className='kds-preview-dimension-badge'>
+                        <div className="kr-preview-design-info kr-reset-margin-padding">
+                            <p className="kr-preview-dimensions-label kr-reset-margin-padding">Width x Height</p>
+                            <div className='kr-preview-dimensions kr-reset-margin-padding'>
+                                <span className='kr-preview-dimension-badge kr-reset-margin'>
                                     {(designProps.width / 50).toFixed(2)} in
                                 </span>
-                                <span className='kds-preview-dimension-badge'>
+                                <span className='kr-preview-dimension-badge kr-reset-margin'>
                                     {(designProps.height / 50).toFixed(2)} in
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <hr className="kds-preview-divider" />
+                    <hr className="kr-preview-divider kr-reset-margin-padding" />
 
-                    <div className='kds-preview-flip-section'>
-                        <h3 className='kds-preview-flip-title'>Flip</h3>
-                        <div className="kds-preview-flip-buttons">
+                    <div className='kr-preview-flip-section kr-reset-margin'>
+                        <h3 className='kr-preview-flip-title kr-reset-margin-padding'>Flip</h3>
+                        <div className="kr-preview-flip-buttons kr-reset-margin-padding">
                             <button
                                 onClick={() => handleFlip('horizontal')}
-                                className={`kds-preview-flip-button ${flipStates.flipX ? 'kds-active' : ''}`}
+                                className={`kr-preview-flip-button kr-reset-margin-padding ${flipStates.flipX ? 'kr-active' : ''}`}
                             >
                                 <img
-                                    className="kds-preview-flip-icon"
+                                    className="kr-preview-flip-icon kr-reset-margin-padding"
                                     src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507255/tune-vertical_ezas8p.png"
                                     alt="Flip Horizontal"
                                 />
                             </button>
                             <button
                                 onClick={() => handleFlip('vertical')}
-                                className={`kds-preview-flip-button ${flipStates.flipY ? 'kds-active' : ''}`}
+                                className={`kr-preview-flip-button kr-reset-margin-padding ${flipStates.flipY ? 'kr-active' : ''}`}
                             >
                                 <img
-                                    className="kds-preview-flip-icon"
+                                    className="kr-preview-flip-icon kr-reset-margin-padding"
                                     src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507254/flip-vertical_ajs5ur.png"
                                     alt="Flip Vertical"
                                 />
                             </button>
                         </div>
                     </div>
-                    <hr className="kds-preview-divider" />
+                    <hr className="kr-preview-divider kr-reset-margin-padding" />
 
-                    <div className='kds-preview-alignment-section'>
-                        <h3 className='kds-preview-alignment-title'>Alignment</h3>
-                        <div className="kds-preview-alignment-grid">
-                            <button onClick={() => handleAlign("left")} className='kds-preview-alignment-button'>
-                                <img className='kds-preview-alignment-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507255/align-horizontal-left_fbsuoo.png" alt="Left" />
+                    <div className='kr-preview-alignment-section kr-reset-margin'>
+                        <h3 className='kr-preview-alignment-title kr-reset-margin-padding'>Alignment</h3>
+                        <div className="kr-preview-alignment-grid">
+                            <button onClick={() => handleAlign("left")} className='kr-preview-alignment-button'>
+                                <img className='kr-preview-alignment-icon kr-reset-padding' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507255/align-horizontal-left_fbsuoo.png" alt="Left" />
                             </button>
-                            <button onClick={() => handleAlign("center")} className='kds-preview-alignment-button'>
-                                <img className='kds-preview-alignment-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507255/Frame_46_rrtm82.png" alt="Center" />
+                            <button onClick={() => handleAlign("center")} className='kr-preview-alignment-button'>
+                                <img className='kr-preview-alignment-icon kr-reset-padding' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507255/Frame_46_rrtm82.png" alt="Center" />
                             </button>
-                            <button onClick={() => handleAlign("right")} className='kds-preview-alignment-button'>
-                                <img className='kds-preview-alignment-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507254/align-horizontal-right_adq5ap.png" alt="Right" />
+                            <button onClick={() => handleAlign("right")} className='kr-preview-alignment-button'>
+                                <img className='kr-preview-alignment-icon kr-reset-padding' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507254/align-horizontal-right_adq5ap.png" alt="Right" />
                             </button>
-                            <button onClick={() => handleAlign("top")} className='kds-preview-alignment-button'>
-                                <img className='kds-preview-alignment-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507254/align-vertical-top_nmalzx.png" alt="Top" />
+                            <button onClick={() => handleAlign("top")} className='kr-preview-alignment-button'>
+                                <img className='kr-preview-alignment-icon kr-reset-padding' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507254/align-vertical-top_nmalzx.png" alt="Top" />
                             </button>
-                            <button onClick={() => handleAlign("middle")} className='kds-preview-alignment-button'>
-                                <img className='kds-preview-alignment-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507254/align-vertical-center_wguxnj.png" alt="Middle" />
+                            <button onClick={() => handleAlign("middle")} className='kr-preview-alignment-button'>
+                                <img className='kr-preview-alignment-icon kr-reset-padding' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507254/align-vertical-center_wguxnj.png" alt="Middle" />
                             </button>
-                            <button onClick={() => handleAlign("bottom")} className='kds-preview-alignment-button'>
-                                <img className='kds-preview-alignment-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507254/align-vertical-bottom_damnnr.png" alt="Bottom" />
+                            <button onClick={() => handleAlign("bottom")} className='kr-preview-alignment-button'>
+                                <img className='kr-preview-alignment-icon kr-reset-padding' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507254/align-vertical-bottom_damnnr.png" alt="Bottom" />
                             </button>
                         </div>
                     </div>
-                    <hr className="kds-preview-divider" />
+                    <hr className="kr-preview-divider kr-reset-margin-padding" />
 
-                    <div className='kds-preview-control-section'>
-                        <label className="kds-preview-control-label">Opacity</label>
-                        <div className='kds-preview-control-input-group'>
+                    <div className='kr-preview-control-section kr-reset-margin'>
+                        <label className="kr-preview-control-label kr-reset-padding">Opacity</label>
+                        <div className='kr-preview-control-input-group kr-reset-margin-padding'>
                             <input
                                 type="range"
                                 min="0"
                                 max="100"
                                 value={designProps?.opacity || 100}
                                 onChange={(e) => handleOpacityChange(parseInt(e.target.value))}
-                                className="kds-preview-slider"
+                                className="kr-preview-slider kr-reset-margin-padding"
                                 style={{
                                     background: `linear-gradient(to right, #3559C7 0%, #3559C7 ${designProps?.opacity || 100}%, #e5e7eb ${designProps?.opacity || 100}%, #e5e7eb 100%)`
                                 }}
                             />
-                            <span className='kds-preview-value-display'>
+                            <span className='kr-preview-value-display kr-reset-margin'>
                                 {designProps?.opacity || 100}%
                             </span>
                         </div>
                     </div>
-                    <hr className="kds-preview-divider" />
+                    <hr className="kr-preview-divider kr-reset-margin-padding" />
 
-                    <div className='kds-preview-control-section'>
-                        <label className="kds-preview-control-label">Rotate</label>
-                        <div className='kds-preview-control-input-group'>
+                    <div className='kr-preview-control-section kr-reset-margin'>
+                        <label className="kr-preview-control-label kr-reset-padding">Rotate</label>
+                        <div className='kr-preview-control-input-group kr-reset-margin-padding'>
                             <input
                                 type="range"
                                 min="0"
                                 max="360"
                                 value={designProps?.rotation || 0}
                                 onChange={(e) => handleRotateChange(parseInt(e.target.value))}
-                                className="kds-preview-slider"
+                                className="kr-preview-slider "
                                 style={{
                                     background: `linear-gradient(to right, #3559C7 0%, #3559C7 ${((designProps?.rotation || 0) / 360) * 100}%, #e5e7eb ${((designProps?.rotation || 0) / 360) * 100}%, #e5e7eb 100%)`
                                 }}
                             />
-                            <span className='kds-preview-value-display'>
+                            <span className='kr-preview-value-display'>
                                 {designProps?.rotation || 0}°
                             </span>
                         </div>
                     </div>
-                    <hr className="kds-preview-divider" />
+                    <hr className="kr-preview-divider kr-reset-margin-padding" />
 
-                    <div className='kds-preview-arrange-section'>
-                        <h3 className='kds-preview-arrange-title'>Arrange</h3>
-                        <div className="kds-preview-arrange-buttons">
-                            <button onClick={() => handleArrange("bringForward")} className='kds-preview-arrange-button'>
-                                <img className='kds-preview-arrange-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-bring-forward_vigco4.png" alt="Forward" />
+                    <div className='kr-preview-arrange-section kr-reset-margin'>
+                        <h3 className='kr-preview-arrange-title kr-reset-margin-padding'>Arrange</h3>
+                        <div className="kr-preview-arrange-buttons kr-reset-margin-padding">
+                            <button onClick={() => handleArrange("bringForward")} className='kr-preview-arrange-button kr-reset-margin-padding'>
+                                <img className='kr-preview-arrange-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-bring-forward_vigco4.png" alt="Forward" />
                             </button>
-                            <button onClick={() => handleArrange("bringToFront")} className='kds-preview-arrange-button'>
-                                <img className='kds-preview-arrange-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-bring-to-front_povosv.png" alt="Front" />
+                            <button onClick={() => handleArrange("bringToFront")} className='kr-preview-arrange-button kr-reset-margin-padding'>
+                                <img className='kr-preview-arrange-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-bring-to-front_povosv.png" alt="Front" />
                             </button>
-                            <button onClick={() => handleArrange("sendBackward")} className='kds-preview-arrange-button'>
-                                <img className='kds-preview-arrange-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-send-backward_buzw6f.png" alt="Backward" />
+                            <button onClick={() => handleArrange("sendBackward")} className='kr-preview-arrange-button kr-reset-margin-padding'>
+                                <img className='kr-preview-arrange-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-send-backward_buzw6f.png" alt="Backward" />
                             </button>
-                            <button onClick={() => handleArrange("sendToBack")} className='kds-preview-arrange-button'>
-                                <img className='kds-preview-arrange-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508121/arrange-send-to-back_bcyzlu.png" alt="Back" />
+                            <button onClick={() => handleArrange("sendToBack")} className='kr-preview-arrange-button kr-reset-margin-padding'>
+                                <img className='kr-preview-arrange-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508121/arrange-send-to-back_bcyzlu.png" alt="Back" />
                             </button>
                         </div>
                     </div>
-                    <hr className="kds-preview-divider" />
+                    <hr className="kr-preview-divider kr-reset-margin-padding" />
 
-                    <div className='kds-preview-tools-section'>
-                        <h3 className='kds-preview-tools-title'>Tools</h3>
+                    <div className='kr-preview-tools-section kr-reset-margin'>
+                        <h3 className='kr-preview-tools-title kr-reset-margin-padding'>Tools</h3>
 
                         <button
-                            className={`kds-preview-tool-button ${isRemovingBg ? 'kds-disabled' : ''}`}
+                            className={`kr-preview-tool-button  ${isRemovingBg ? 'kr-disabled' : ''}`}
                             onClick={handleRemoveBackground}
                             disabled={isRemovingBg}
                         >
-                            <img className="kds-preview-tool-icon" src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508617/circle-opacity_zvwbfk.png" alt="" />
-                            <span className='kds-preview-tool-text'>
+                            <img className="kr-preview-tool-icon" src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508617/circle-opacity_zvwbfk.png" alt="" />
+                            <span className='kr-preview-tool-text'>
                                 {isRemovingBg ? 'Removing...' : 'Remove Background'}
                             </span>
                         </button>
 
                         <button
-                            className='kds-preview-tool-button'
+                            className='kr-preview-tool-button'
                             onClick={handleUpscale}
                         >
-                            <img className="kds-preview-tool-icon" src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508617/move-resize-variant_karpuj.png" alt="" />
-                            <span className='kds-preview-tool-text'>Upscale</span>
+                            <img className="kr-preview-tool-icon" src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508617/move-resize-variant_karpuj.png" alt="" />
+                            <span className='kr-preview-tool-text'>Upscale</span>
                         </button>
                     </div>
                 </>
             ) : (
-                <div className="kds-preview-empty-state">
-                    <p className="kds-preview-empty-text kds-reset">No design selected</p>
-                    <p className="kds-preview-empty-subtext kds-reset">Upload a design to start editing</p>
+                <div className="kr-preview-empty-state">
+                    <p className="kr-preview-empty-text kr-reset">No design selected</p>
+                    <p className="kr-preview-empty-subtext kr-reset">Upload a design to start editing</p>
                 </div>
             )}
         </div>

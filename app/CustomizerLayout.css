@@ -1,6 +1,6 @@
 /* Customizer Layout Styles with kds- prefix */
 
-.kds-layout-container {
+.kr-layout-container {
   width: 100%;
   height: 100vh;
   display: flex;
@@ -12,26 +12,26 @@
   margin: 0 auto;
 }
 
-.kds-loading-overlay {
+.kr-loading-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 50;
+  z-index: 60;
   background-color: rgba(0, 0, 0, 0.9);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.kds-loading-content {
+.kr-loading-content {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.kds-loading-spinner {
+.kr-loading-spinner {
   width: 3rem;
   height: 3rem;
   border: 4px solid white;
@@ -41,7 +41,7 @@
   margin-bottom: 1rem;
 }
 
-.kds-loading-text {
+.kr-loading-text {
   color: white;
   font-size: 1.125rem;
   font-weight: 500;
@@ -53,7 +53,7 @@
   }
 }
 
-.kds-controls-bar {
+.kr-controls-bar {
   position: absolute;
   bottom: 1.75rem;
   left: 50%;
@@ -67,32 +67,32 @@
   border-radius: 0.5rem;
 }
 
-.kds-controls-group {
+.kr-controls-group {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.kds-controls-divider {
+.kr-controls-divider {
   transform: rotate(90deg);
   border-top: 1px solid #D3DBDF;
   height: 1px;
   width: 20px;
 }
 
-.kds-controls-zoom {
+.kr-controls-zoom {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
 /* Transform flip for redo button */
-.kds-transform-flip {
+.kr-transform-flip {
   transform: scaleX(-1);
 }
 
 /* Canvas container */
-.kds-canvas-container {
+.kr-canvas-container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -102,7 +102,7 @@
   z-index: 0;
 }
 
-.kds-save-success {
+.kr-save-success {
   position: fixed;
   top: 5rem;
   right: 1.75rem;
@@ -115,18 +115,18 @@
   transition: all 0.3s ease;
 }
 
-.kds-save-success-content {
+.kr-save-success-content {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.kds-save-success-icon {
+.kr-save-success-icon {
   width: 1.25rem;
   height: 1.25rem;
 }
 
-.kds-chat-box {
+.kr-chat-box {
   width: 350px;
   height: 430px;
   position: absolute;
@@ -140,44 +140,44 @@
   z-index: 70;
 }
 
-.kds-chat-header {
+.kr-chat-header {
   background: linear-gradient(to bottom, #1B2653, #192248);
   color: white;
   padding: 0.75rem 1rem;
 }
 
-.kds-chat-header-top {
+.kr-chat-header-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.kds-chat-close-btn {
+.kr-chat-close-btn {
   cursor: pointer;
 }
 
-.kds-chat-title {
+.kr-chat-title {
   margin-top: 0.75rem;
   margin-bottom: 1.25rem;
 }
 
-.kds-chat-title h2 {
+.kr-chat-title > h2 {
   font-size: 1.375rem;
   font-weight: 600;
 }
 
-.kds-chat-title p {
+.kr-chat-title > p {
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.7);
 }
 
-.kds-chat-content {
+.kr-chat-content {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-.kds-chat-item {
+.kr-chat-item {
   padding: 0.75rem 1rem;
   display: flex;
   align-items: center;
@@ -186,26 +186,25 @@
   transition: background-color 0.2s ease;
 }
 
-.kds-chat-item:hover {
+.kr-chat-item:hover {
   background-color: #f9fafb;
 }
 
-.kds-chat-item-text {
+.kr-chat-item-text {
   font-size: 1rem;
   color: #1f2937;
   font-weight: 500;
 }
 
-.kds-chat-item-arrow {
+.kr-chat-item-arrow {
   color: #9ca3af;
 }
 
-.kds-chat-divider {
+.kr-chat-divider {
   border-top: 1px solid #D3DBDF;
-  height: 1px;
 }
 
-.kds-chat-button {
+.kr-chat-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -219,77 +218,77 @@
   transition: background-color 0.2s ease;
 }
 
-.kds-chat-button:hover {
+.kr-chat-button:hover {
   background-color: #2a47a3;
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .kds-layout-container {
+  .kr-layout-container {
     max-width: 100%;
   }
-  
-  .kds-chat-box {
+
+  .kr-chat-box {
     width: 300px;
     height: 400px;
     right: 1rem;
     bottom: 6rem;
   }
-  
-  .kds-chat-button {
+
+  .kr-chat-button {
     right: 1rem;
     bottom: 1rem;
   }
 }
 
 @media (max-width: 768px) {
-  .kds-layout-container {
+  .kr-layout-container {
     flex-direction: column;
   }
-  
-  .kds-controls-bar {
+
+  .kr-controls-bar {
     bottom: 1rem;
     padding: 0.5rem;
   }
-  
-  .kds-controls-zoom {
+
+  .kr-controls-zoom {
     gap: 0.5rem;
   }
-  
-  .kds-save-success {
+
+  .kr-save-success {
     top: 4rem;
     right: 1rem;
     padding: 0.5rem;
   }
-  
-  .kds-chat-box {
+
+  .kr-chat-box {
     width: 280px;
     height: 350px;
     right: 0.5rem;
     bottom: 5rem;
   }
-  
-  .kds-chat-header {
+
+  .kr-chat-header {
     padding: 0.5rem;
   }
-  
-  .kds-chat-title h2 {
+
+  .kr-chat-title h2 {
     font-size: 1.125rem;
   }
-  
-  .kds-chat-title p {
+
+  .kr-chat-title p {
     font-size: 0.8rem;
   }
-  
-  .kds-chat-item {
+
+  .kr-chat-item {
     padding: 0.5rem;
   }
-  
-  .kds-chat-item-text {
+
+  .kr-chat-item-text {
     font-size: 0.875rem;
   }
-  
-  .kds-chat-button {
+
+  .kr-chat-button {
     right: 0.5rem;
     bottom: 0.5rem;
     padding: 1rem;
@@ -297,34 +296,34 @@
 }
 
 @media (max-width: 480px) {
-  .kds-controls-bar {
+  .kr-controls-bar {
     flex-direction: column;
     gap: 0.25rem;
     padding: 0.5rem;
   }
-  
-  .kds-controls-divider {
+
+  .kr-controls-divider {
     transform: rotate(0deg);
     width: 100%;
     height: 1px;
   }
-  
-  .kds-save-success {
+
+  .kr-save-success {
     top: 3rem;
     right: 0.5rem;
     left: 0.5rem;
     text-align: center;
   }
-  
-  .kds-chat-box {
+
+  .kr-chat-box {
     width: calc(100% - 1rem);
     height: 300px;
     right: 0.5rem;
     left: 0.5rem;
     bottom: 4rem;
   }
-  
-  .kds-chat-button {
+
+  .kr-chat-button {
     right: 0.5rem;
     bottom: 0.5rem;
     padding: 0.75rem;

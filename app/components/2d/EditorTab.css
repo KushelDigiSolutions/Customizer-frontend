@@ -1,6 +1,6 @@
 /* EditorTab Component Styles */
 
-.kds-editor-container {
+.kr-editor-container {
   background-color: white;
   border-radius: 0.5rem; /* rounded-lg */
   border: 1px solid #D3DBDF;
@@ -9,62 +9,61 @@
 }
 
 @media (min-width: 640px) {
-  .kds-editor-container {
+  .kr-editor-container {
     width: 20rem; /* sm:w-80 */
   }
 }
 
-.kds-editor-header {
+.kr-editor-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 0.75rem; /* py-2 px-3 */
 }
 
-.kds-editor-title-section {
+.kr-editor-title-section {
   display: flex;
   align-items: center;
   gap: 0.5rem; /* gap-2 */
 }
 
-.kds-editor-title {
+.kr-editor-title {
   font-size: 16px; /* text-[16px] */
   color: #000000; /* text-black */
   font-weight: 600; /* font-semibold */
 }
 
-.kds-editor-close {
+.kr-editor-close {
   cursor: pointer;
 }
 
-.kds-editor-divider {
+.kr-editor-divider {
   border-top: 1px solid #D3DBDF;
-  height: 1px; /* h-px */
 }
 
-.kds-editor-content {
+.kr-editor-content {
   padding: 0.75rem 1rem; /* py-3 px-4 */
 }
 
-.kds-editor-form {
+.kr-editor-form {
   display: flex;
   flex-direction: column; /* flex-col */
   gap: 0.5rem; /* gap-2 */
 }
 
-.kds-editor-label {
+.kr-editor-label {
   font-size: 14px; /* text-[14px] */
   color: #000000; /* text-black */
 }
 
-.kds-editor-textarea-container {
+.kr-editor-textarea-container {
   position: relative;
   background-color: #E4E9EC; /* bg-[#E4E9EC] */
   border-radius: 0.5rem; /* rounded-lg */
   height: 11.5rem; /* h-46 */
 }
 
-.kds-editor-textarea {
+.kr-editor-textarea {
   padding: 0.5rem; /* p-2 */
   color: #000000; /* text-black */
   resize: none; /* resize-none */
@@ -77,16 +76,16 @@
   background: transparent;
 }
 
-.kds-editor-textarea::placeholder {
+.kr-editor-textarea::placeholder {
   font-size: 13px; /* placeholder:text-[13px] */
   color: #6b7280;
 }
 
-.kds-editor-textarea:focus {
+.kr-editor-textarea:focus {
   border: none; /* focus:border-none */
 }
 
-.kds-editor-prompt-badge {
+.kr-editor-prompt-badge {
   background-color: white;
   display: flex;
   gap: 0.5rem; /* gap-2 */
@@ -97,20 +96,20 @@
   right: 0.5rem; /* right-2 */
 }
 
-.kds-editor-prompt-text {
+.kr-editor-prompt-text {
   font-size: 14px; /* text-[14px] */
   color: #000000; /* text-black */
 }
 
-.kds-editor-tags {
+.kr-editor-tags {
   margin: 0.5rem 0; /* my-2 */
   display: flex;
   align-items: center;
   gap: 0.75rem; /* gap-3 */
 }
 
-.kds-editor-tag {
-  padding: 0 1.25rem 0.375rem; /* px-5 py-1.5 */
+.kr-editor-tag {
+  padding: 0.25rem 1.25rem; /* px-5 py-1.5 */
   font-size: 13px; /* text-[13px] */
   border-radius: 9999px; /* rounded-full */
   border: none;
@@ -118,17 +117,17 @@
   transition: all 0.2s;
 }
 
-.kds-editor-tag.kds-active {
+.kr-editor-tag.kr-active {
   background-color: #f3f4f6; /* bg-gray-100 */
   color: #000000; /* text-black */
 }
 
-.kds-editor-tag.kds-inactive {
+.kr-editor-tag.kr-inactive {
   background-color: #e5e7eb; /* bg-gray-200 */
   color: #4b5563; /* text-gray-600 */
 }
 
-.kds-editor-generate-btn {
+.kr-editor-generate-btn {
   background-color: #2563eb; /* bg-blue-600 */
   color: white;
   border-radius: 0.375rem; /* rounded-md */
@@ -139,11 +138,11 @@
   transition: all 0.2s;
 }
 
-.kds-editor-generate-btn:hover:not(:disabled) {
+.kr-editor-generate-btn:hover:not(:disabled) {
   background-color: #1d4ed8;
 }
 
-.kds-editor-generate-btn:disabled {
+.kr-editor-generate-btn:disabled {
   background-color: #D7DEF4; /* disabled:bg-[#D7DEF4] */
   color: #AEBDEA; /* disabled:text-[#AEBDEA] */
   cursor: not-allowed;
@@ -151,67 +150,67 @@
 
 /* Responsive Design */
 @media (max-width: 640px) {
-  .kds-editor-container {
+  .kr-editor-container {
     width: 100%;
     max-width: none;
   }
-  
-  .kds-editor-content {
+
+  .kr-editor-content {
     padding: 0.5rem 0.75rem;
   }
-  
-  .kds-editor-textarea-container {
+
+  .kr-editor-textarea-container {
     height: 10rem;
   }
-  
-  .kds-editor-textarea {
+
+  .kr-editor-textarea {
     height: 8rem;
   }
-  
-  .kds-editor-tags {
+
+  .kr-editor-tags {
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  
-  .kds-editor-tag {
+
+  .kr-editor-tag {
     padding: 0.25rem 1rem;
     font-size: 12px;
   }
 }
 
 @media (max-width: 480px) {
-  .kds-editor-header {
+  .kr-editor-header {
     padding: 0.375rem 0.5rem;
   }
-  
-  .kds-editor-title {
+
+  .kr-editor-title {
     font-size: 14px;
   }
   
-  .kds-editor-content {
+  .kr-editor-content {
     padding: 0.375rem 0.5rem;
   }
   
-  .kds-editor-textarea-container {
+  .kr-editor-textarea-container {
     height: 8rem;
   }
   
-  .kds-editor-textarea {
+  .kr-editor-textarea {
     height: 6rem;
     font-size: 12px;
   }
   
-  .kds-editor-textarea::placeholder {
+  .kr-editor-textarea::placeholder {
     font-size: 12px;
   }
   
-  .kds-editor-prompt-badge {
+  .kr-editor-prompt-badge {
     bottom: 0.25rem;
     right: 0.25rem;
     padding: 0.125rem 0.375rem;
   }
   
-  .kds-editor-prompt-text {
+  .kr-editor-prompt-text {
     font-size: 12px;
   }
 } 

@@ -332,200 +332,200 @@ const EditTextTab = ({ editor, layerManager }) => {
     return (
         <>
             {shouldShowEditText && (
-                <div className="kds-edit-text-container">
+                <div className="kr-edit-text-container kr-reset-margin-padding">
 
-                    <div className='kds-edit-text-header'>
-                        <div className='kds-edit-text-title-section'>
-                            <h3 className='kds-edit-text-title'>Edit text</h3>
+                    <div className='kr-edit-text-header kr-reset-margin'>
+                        <div className='kr-edit-text-title-section kr-reset-margin-padding'>
+                            <h3 className='kr-edit-text-title kr-reset-margin-padding'>Edit text</h3>
                             {activeTextObject && (
-                                <span className='kds-edit-text-status kds-detected'>
+                                <span className='kr-edit-text-status kr-detected kr-reset-margin-padding'>
                                     ● Auto-detected ({textObjectsCount} text{textObjectsCount !== 1 ? 's' : ''})
                                 </span>
                             )}
                             {!activeTextObject && textObjectsCount === 0 && (
-                                <span className='kds-edit-text-status kds-ready'>
+                                <span className='kr-edit-text-status kr-ready kr-reset-margin-padding'>
                                     ● Ready to create
                                 </span>
                             )}
                         </div>
-                        <div className="kds-edit-text-close" onClick={() => setShowEditModal(false)}>
+                        <div className="kr-edit-text-close kr-reset-margin-padding" onClick={() => setShowEditModal(false)}>
                             <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749341803/Vector_hm0yzo.png" alt="Close" />
                         </div>
                     </div>
-                    <hr className="kds-edit-text-divider" />
+                    <hr className="kr-edit-text-divider kr-reset-margin-padding" />
 
-                    <div className='kds-edit-text-content'>
+                    <div className='kr-edit-text-content kr-reset-margin-padding'>
                         <input
                             type="text"
                             value={customText}
                             onChange={handleTextChange}
                             placeholder="Add Headline"
-                            className="kds-edit-text-input"
+                            className="kr-edit-text-input kr-reset-margin-padding"
                         />
                         {!activeTextObject && (
-                            <p className="kds-edit-text-hint">
+                            <p className="kr-edit-text-hint kr-reset-margin-padding">
                                 💡 Type text above to automatically create a text object
                             </p>
                         )}
                     </div>
 
-                    <hr className="kds-edit-text-divider" />
+                    <hr className="kr-edit-text-divider kr-reset-margin-padding" />
 
-                    <div className='kds-edit-text-section'>
-                        <div className='kds-edit-text-title-section'>
-                            <h3 className='kds-edit-text-section-title'>Flip</h3>
+                    <div className='kr-edit-text-section kr-reset-margin-padding'>
+                        <div className='kr-edit-text-title-section kr-reset-margin-padding'>
+                            <h3 className='kr-edit-text-section-title kr-reset-margin-padding'>Flip</h3>
                         </div>
-                        <div className="kds-edit-text-controls">
+                        <div className="kr-edit-text-controls kr-reset-margin-padding">
                             <img
                                 onClick={handleFlipX}
-                                className='kds-edit-text-control-icon'
+                                className='kr-edit-text-control-icon'
                                 src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507255/tune-vertical_ezas8p.png"
                                 alt="flip horizontal"
                             />
                             <img
                                 onClick={handleFlipY}
-                                className='kds-edit-text-control-icon'
+                                className='kr-edit-text-control-icon'
                                 src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507254/flip-vertical_ajs5ur.png"
                                 alt="flip vertical"
                             />
                         </div>
                     </div>
 
-                    <hr className="kds-edit-text-divider" />
+                    <hr className="kr-edit-text-divider kr-reset-margin-padding" />
 
-                    <div className='kds-edit-text-font-section'>
-                        <div className='kds-edit-text-font-header'>
-                            <h3 className='kds-edit-text-section-title'>Font</h3>
+                    <div className='kr-edit-text-font-section kr-reset-margin-padding'>
+                        <div className='kr-edit-text-font-header kr-reset-margin-padding'>
+                            <h3 className='kr-edit-text-section-title kr-reset-margin-padding'>Font</h3>
                         </div>
-                        <div className="kds-edit-text-font-controls">
+                        <div className="kr-edit-text-font-controls kr-reset-margin-padding">
                             <div
                                 onClick={() => setShowTextSelectTab(true)}
-                                className='kds-edit-text-font-selector'
+                                className='kr-edit-text-font-selector kr-reset-margin-padding'
                             >
-                                <span className='kds-edit-text-font-name'>
+                                <span className='kr-edit-text-font-name kr-reset-margin-padding' >
                                     {currentFont}
                                 </span>
-                                <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1750138078/chevron-right_p6kmcp.svg" alt="arrow" className="kds-edit-text-font-arrow" />
+                                <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1750138078/chevron-right_p6kmcp.svg" alt="arrow" className="kr-edit-text-font-arrow" />
                             </div>
 
                             <img
-                                className='kds-edit-text-style-icon'
+                                className='kr-edit-text-style-icon kr-reset-margin-padding'
                                 onClick={() => handleFontStyleChange('bold')}
                                 src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1750137959/alpha-b_aygypw.svg"
                                 alt="bold"
                             />
                             <img
-                                className='kds-edit-text-style-icon'
+                                className='kr-edit-text-style-icon kr-reset-margin-padding'
                                 onClick={() => handleFontStyleChange('italic')}
                                 src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1750137959/format-italic_d9ndma.svg"
                                 alt="italic"
                             />
 
                             <div
-                                className="kds-edit-text-color-swatch"
+                                className="kr-edit-text-color-swatch kr-reset-margin-padding"
                                 style={{ backgroundColor: currentColor }}
                                 onClick={() => setShowColorTab(true)}
                             />
                         </div>
                     </div>
 
-                    <hr className="kds-edit-text-divider" />
+                    <hr className="kr-edit-text-divider kr-reset-margin-padding" />
 
-                    <div className="kds-edit-text-3d-section">
-                        <div className="kds-edit-text-3d-controls">
-                            <div className="kds-edit-text-3d-control">
-                                <label className="kds-edit-text-3d-label">3D Text Scale: {threeDtextScale.toFixed(2)}</label>
-                                <input type="range" min="0.2" max="2" step="0.05" value={threeDtextScale} onChange={(e) => setthreeDTextScale(parseFloat(e.target.value))} className="kds-edit-text-3d-range" />
+                    <div className="kr-edit-text-3d-section kr-reset-margin-padding">
+                        <div className="kr-edit-text-3d-controls kr-reset-margin-padding">
+                            <div className="kr-edit-text-3d-control kr-reset-margin-padding">
+                                <label className="kr-edit-text-3d-label kr-reset-margin-padding">3D Text Scale: {threeDtextScale.toFixed(2)}</label>
+                                <input type="range" min="0.2" max="2" step="0.05" value={threeDtextScale} onChange={(e) => setthreeDTextScale(parseFloat(e.target.value))} className="kr-edit-text-3d-range" />
                             </div>
-                            <div className="kds-edit-text-3d-control">
-                                <label className="kds-edit-text-3d-label">3D Text Position X: {threeDtextPosX.toFixed(2)}</label>
-                                <input type="range" min="0" max="1" step="0.01" value={threeDtextPosX} onChange={(e) => setthreeDTextPosX(parseFloat(e.target.value))} className="kds-edit-text-3d-range" />
+                            <div className="kr-edit-text-3d-control kr-reset-margin-padding">
+                                <label className="kr-edit-text-3d-label kr-reset-margin-padding">3D Text Position X: {threeDtextPosX.toFixed(2)}</label>
+                                <input type="range" min="0" max="1" step="0.01" value={threeDtextPosX} onChange={(e) => setthreeDTextPosX(parseFloat(e.target.value))} className="kr-edit-text-3d-range" />
                             </div>
-                            <div className="kds-edit-text-3d-control">
-                                <label className="kds-edit-text-3d-label">3D Text Position Y: {threeDtextPosY.toFixed(2)}</label>
-                                <input type="range" min="0" max="1" step="0.01" value={threeDtextPosY} onChange={(e) => setthreeDTextPosY(parseFloat(e.target.value))} className="kds-edit-text-3d-range" />
+                            <div className="kr-edit-text-3d-control kr-reset-margin-padding" >
+                                <label className="kr-edit-text-3d-label kr-reset-margin-padding">3D Text Position Y: {threeDtextPosY.toFixed(2)}</label>
+                                <input type="range" min="0" max="1" step="0.01" value={threeDtextPosY} onChange={(e) => setthreeDTextPosY(parseFloat(e.target.value))} className="kr-edit-text-3d-range" />
                             </div>
                         </div>
                     </div>
 
-                    <div className="kds-edit-text-3d-color-section">
-                        <div className="kds-edit-text-3d-color-controls">
-                            <label className="kds-edit-text-3d-color-label">Text Color:</label>
+                    <div className="kr-edit-text-3d-color-section kr-reset-margin-padding">
+                        <div className="kr-edit-text-3d-color-controls kr-reset-margin-padding">
+                            <label className="kr-edit-text-3d-color-label kr-reset-margin-padding">Text Color:</label>
                             <input
                                 type="color"
                                 value={threeDtextColor}
                                 onChange={(e) => setthreeDTextColor(e.target.value)}
-                                className="kds-edit-text-3d-color-input"
+                                className="kr-edit-text-3d-color-input kr-reset-margin-padding"
                             />
 
-                            <label className="kds-edit-text-3d-color-label">Outline Color:</label>
+                            <label className="kr-edit-text-3d-color-label kr-reset-margin-padding">Outline Color:</label>
                             <input
                                 type="color"
                                 value={threeDoutlineColor}
                                 onChange={(e) => setthreeDOutlineColor(e.target.value)}
-                                className="kds-edit-text-3d-color-input"
+                                className="kr-edit-text-3d-color-input kr-reset-margin-padding"
                             />
                         </div>
                     </div>
 
-                    <div className='kds-edit-text-sliders'>
-                        <label className="kds-edit-text-slider-label">Size</label>
+                    <div className='kr-edit-text-sliders kr-reset-margin-padding'>
+                        <label className="kr-edit-text-slider-label kr-reset-margin-padding">Size</label>
                         <input
                             type="range"
                             min={23}
                             max={40}
                             value={textSize}
                             onChange={handleSizeChange}
-                            className="kds-edit-text-slider"
+                            className="kr-edit-text-slider kr-reset-margin-padding"
                         />
 
-                        <label className="kds-edit-text-slider-label">Spacing</label>
+                        <label className="kr-edit-text-slider-label kr-reset-margin-padding">Spacing</label>
                         <input
                             type="range"
                             min={-10}
                             max={100}
                             value={textSpacing}
                             onChange={handleSpacingChange}
-                            className="kds-edit-text-slider"
+                            className="kr-edit-text-slider kr-reset-margin-padding"
                         />
                     </div>
 
-                    <hr className="kds-edit-text-divider" />
+                    <hr className="kr-edit-text-divider kr-reset-margin-padding" />
 
-                    <div className='kds-edit-text-arrange'>
-                        <h3 className='kds-edit-text-arrange-title'>Arrange</h3>
-                        <div className="kds-edit-text-arrange-controls">
+                    <div className='kr-edit-text-arrange kr-reset-margin-padding'>
+                        <h3 className='kr-edit-text-arrange-title kr-reset-margin-padding'>Arrange</h3>
+                        <div className="kr-edit-text-arrange-controls kr-reset-margin-padding">
                             <img
                                 onClick={handleBringForward}
-                                className='kds-edit-text-arrange-icon'
+                                className='kr-edit-text-arrange-icon kr-reset-margin-padding'
                                 src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-bring-forward_vigco4.png"
                                 alt="bring forward"
                                 title="Bring Forward"
                             />
                             <img
                                 onClick={() => handleArrangeAction('bringToFront')}
-                                className='kds-edit-text-arrange-icon'
+                                className='kr-edit-text-arrange-icon kr-reset-margin-padding'
                                 src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-bring-to-front_povosv.png"
                                 alt="bring to front"
                                 title="Bring to Front"
                             />
                             <img
                                 onClick={() => handleArrangeAction('sendBackward')}
-                                className='kds-edit-text-arrange-icon'
+                                className='kr-edit-text-arrange-icon kr-reset-margin-padding'
                                 src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-send-backward_buzw6f.png"
                                 alt="send backward"
                                 title="Send Backward"
                             />
                             <img
                                 onClick={() => handleArrangeAction('sendToBack')}
-                                className='kds-edit-text-arrange-icon'
+                                className='kr-edit-text-arrange-icon kr-reset-margin-padding'
                                 src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508121/arrange-send-to-back_bcyzlu.png"
                                 alt="send to back"
                                 title="Send to Back"
                             />
                         </div>
                         {layerManager && (
-                            <p className="kds-edit-text-layer-info">
+                            <p className="kr-edit-text-layer-info">
                                 ⚡ Layer system active - TEXT layer (zIndex: 5)
                             </p>
                         )}

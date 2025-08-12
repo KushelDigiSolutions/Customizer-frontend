@@ -1341,7 +1341,7 @@ const CustomizerLayout = (props) => {
   };
 
   return (
-    <div className="kds-layout-container">
+    <div className="kr-layout-container kr-reset-margin">
 
       <Topbar
         setShowSidebar={setShowSidebar}
@@ -1404,7 +1404,7 @@ const CustomizerLayout = (props) => {
 
       {selectedProduct?.productType !== "3D" && (
         <FabricJSCanvas
-          className="kds-canvas-container"
+          className="kr-canvas-container"
           onReady={onReady}
           editor={editor}
           savedProductId={currentProductId}
@@ -1416,10 +1416,10 @@ const CustomizerLayout = (props) => {
       )}
 
       {selectedProduct?.productType === "3D" && threeDloading && (
-        <div className="kds-loading-overlay">
-          <div className="kds-loading-content">
-            <div className="kds-loading-spinner"></div>
-            <div className="kds-loading-text">Capturing screenshots...</div>
+        <div className="kr-loading-overlay kr-reset-margin-padding">
+          <div className="kr-loading-content kr-reset-margin-padding">
+            <div className="kr-loading-spinner "></div>
+            <div className="kr-loading-text">Capturing screenshots...</div>
           </div>
         </div>
       )}
@@ -1466,44 +1466,44 @@ const CustomizerLayout = (props) => {
       />
 
       {saveSuccess && (
-        <div className="kds-save-success">
-          <div className="kds-save-success-content">
-            <svg className="kds-save-success-icon" fill="currentColor" viewBox="0 0 20 20">
+        <div className="kr-save-success kr-reset-margin">
+          <div className="kr-save-success-content kr-reset-margin-padding">
+            <svg className="kr-save-success-icon kr-reset-margin-padding" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
-            <span className="kds-reset">Design saved successfully!</span>
+            <span className="kr-reset">Design saved successfully!</span>
           </div>
         </div>
       )}
 
       {showChatBox && (
-        <div className="kds-chat-box">
-          <div className="kds-chat-header">
-            <div className="kds-chat-header-top">
+        <div className="kr-chat-box kr-reset-margin-padding">
+          <div className="kr-chat-header kr-reset-margin">
+            <div className="kr-chat-header-top kr-reset-margin-padding">
               <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345784/qqchat_jn7bok.png" alt="" />
-              <img onClick={() => setShowChatBox(false)} src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749341803/Vector_hm0yzo.png" alt="" className="kds-chat-close-btn" />
+              <img onClick={() => setShowChatBox(false)} src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749341803/Vector_hm0yzo.png" alt="" className="kr-chat-close-btn" />
             </div>
-            <div className="kds-chat-title">
-              <h2 className="kds-reset">Customizer's Help Center</h2>
-              <p className="kds-reset">How can we help you today?</p>
+            <div className="kr-chat-title kr-reset-padding">
+              <h2 className="kr-reset-margin-padding">Customizer's Help Center</h2>
+              <p className="kr-reset-margin-padding">How can we help you today?</p>
             </div>
           </div>
 
-          <div className="kds-chat-content">
+          <div className="kr-chat-content kr-reset-margin-padding">
             {[...Array(4)].map((_, i) => (
               <div key={i}>
-                <div className="kds-chat-item">
-                  <span className="kds-chat-item-text">How customizer work?</span>
-                  <span className="kds-chat-item-arrow">›</span>
+                <div className="kr-chat-item kr-reset-margin">
+                  <span className="kr-chat-item-text kr-reset-margin-padding">How customizer work?</span>
+                  <span className="kr-chat-item-arrow kr-reset-margin-padding">›</span>
                 </div>
-                <hr className="kds-chat-divider" />
+                <hr className="kr-chat-divider kr-reset-margin-padding" />
               </div>
             ))}
           </div>
         </div>
       )}
 
-      <div onClick={() => setShowChatBox(!showChatBox)} className="kds-chat-button">
+      <div onClick={() => setShowChatBox(!showChatBox)} className="kr-chat-button kr-reset-margin-padding">
         <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345784/qqchat_jn7bok.png" alt="chat" />
       </div>
 

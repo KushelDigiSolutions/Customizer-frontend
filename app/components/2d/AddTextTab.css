@@ -1,6 +1,6 @@
-/* AddTextTab.css - Converted from Tailwind CSS with kds- prefix */
+/* AddTextTab.css - Converted from Tailwind CSS with kr- prefix */
 
-.kds-container {
+.kr-container {
   background-color: white;
   border-radius: 0.5rem;
   border: 1px solid #D3DBDF;
@@ -10,63 +10,62 @@
 
 /* Responsive container */
 @media (max-width: 768px) {
-  .kds-container {
+  .kr-container {
     width: 100%;
     max-width: 20rem;
   }
 }
 
 @media (max-width: 640px) {
-  .kds-container {
+  .kr-container {
     width: 100%;
     max-width: 18rem;
   }
 }
 
-.kds-header {
+.kr-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 0.75rem; /* py-2 px-3 */
 }
 
-.kds-header-left {
+.kr-header-left {
   display: flex;
   align-items: center;
   gap: 0.5rem; /* gap-2 = 0.5rem */
 }
 
-.kds-title {
+.kr-title {
   font-size: 16px;
   color: black;
   font-weight: 600; /* font-semibold */
 }
 
-.kds-close-button {
+.kr-close-button {
   cursor: pointer;
   transition: opacity 0.2s ease;
 }
 
-.kds-close-button:hover {
+.kr-close-button:hover {
   opacity: 0.7;
 }
 
-.kds-divider {
+.kr-divider {
   border-top: 1px solid #D3DBDF;
-  height: 1px;
 }
 
-.kds-content {
+.kr-content {
   padding: 0.75rem 1rem; /* py-3 px-4 */
 }
 
-.kds-input-container {
+.kr-input-container {
   display: flex;
   flex-direction: column;
   gap: 0.5rem; /* gap-2 = 0.5rem */
 }
 
-.kds-text-input {
+.kr-text-input {
   border: 1px solid #D3DBDF;
   color: black;
   border-radius: 0.5rem; /* rounded-lg */
@@ -79,17 +78,17 @@
   transition: border-color 0.2s ease;
 }
 
-.kds-text-input:focus {
+.kr-text-input:focus {
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.kds-text-input::placeholder {
+.kr-text-input::placeholder {
   font-weight: 600; /* placeholder:font-semibold */
   color: #6b7280;
 }
 
-.kds-add-button {
+.kr-add-button {
   border-radius: 0.375rem; /* rounded-md */
   margin-top: 0.75rem; /* mt-3 = 0.75rem */
   padding: 0.75rem; /* py-3 = 0.75rem */
@@ -101,61 +100,61 @@
   transition: all 0.2s ease;
 }
 
-.kds-add-button.active {
+.kr-add-button.active {
   color: white;
   background-color: #2563eb; /* bg-blue-600 */
 }
 
-.kds-add-button.active:hover {
+.kr-add-button.active:hover {
   background-color: #1d4ed8;
 }
 
-.kds-add-button.inactive {
+.kr-add-button.inactive {
   background-color: #D7DEF4;
   color: #AEBDEA;
   cursor: not-allowed;
 }
 
-.kds-add-button.inactive:hover {
+.kr-add-button.inactive:hover {
   background-color: #c7d1f0;
 }
 
 /* Responsive adjustments */
 @media (max-width: 480px) {
-  .kds-container {
+  .kr-container {
     padding: 0.5rem;
   }
   
-  .kds-title {
+  .kr-title {
     font-size: 14px;
   }
   
-  .kds-header {
+  .kr-header {
     padding: 0.375rem 0.5rem;
   }
   
-  .kds-content {
+  .kr-content {
     padding: 0.5rem 0.75rem;
   }
   
-  .kds-text-input {
+  .kr-text-input {
     min-height: 4rem;
     font-size: 0.75rem;
   }
   
-  .kds-add-button {
+  .kr-add-button {
     padding: 0.625rem;
     font-size: 14px;
   }
 }
 
 /* Focus states for accessibility */
-.kds-text-input:focus-visible {
+.kr-text-input:focus-visible {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }
 
-.kds-add-button:focus-visible {
+.kr-add-button:focus-visible {
   outline: 2px solid #3b82f6;
   outline-offset: 2px;
 }

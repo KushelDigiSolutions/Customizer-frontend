@@ -37,19 +37,19 @@ const FontSelector = ({ setSelectedFont, selectedFont, setShowTextSelectTab }) =
   };
 
   return (
-    <div className="kds-fontselector-container">
-      <div className='kds-fontselector-header'>
-        <h3 className='kds-fontselector-title'>Typeface</h3>
-        <div className="kds-fontselector-close" onClick={() => setShowTextSelectTab(false)}>
+    <div className="kr-fontselector-container kr-reset-margin-padding">
+      <div className='kr-fontselector-header kr-reset-margin'>
+        <h3 className='kr-fontselector-title kr-reset-margin-padding'>Typeface</h3>
+        <div className="kr-fontselector-close kr-reset-margin-padding" onClick={() => setShowTextSelectTab(false)}>
           <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749341803/Vector_hm0yzo.png" alt="Close" />
         </div>
       </div>
-      <hr className="kds-fontselector-divider" />
+      <hr className="kr-fontselector-divider kr-reset-margin-padding" />
       
-      <div className="kds-fontselector-content">
+      <div className="kr-fontselector-content kr-reset-margin">
         {families.map((font) => (
-          <div key={font} className="kds-fontselector-item" onClick={() => handleFontClick(font)}>
-            <p className="kds-fontselector-font" style={{ fontFamily: font }}>
+          <div key={font} className="kr-fontselector-item kr-reset-margin" onClick={() => handleFontClick(font)}>
+            <p className="kr-fontselector-font kr-reset-margin-padding" style={{ fontFamily: font }}>
               {font}
             </p>
           </div>

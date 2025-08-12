@@ -8,31 +8,31 @@ const AddTextTab = ({ handleAddCustomText, update3DText }) => {
     const { threeDtext, setthreeDText, selectedProduct } = use3D();
 
     return (
-        <div className='kds-container'>
-            <div className='kds-header'>
-                <div className='kds-header-left'>
-                    <h3 className='kds-title'>Add text</h3>
+        <div className='kr-container kr-reset-margin-padding'>
+            <div className='kr-header kr-reset-margin-padding'>
+                <div className='kr-header-left kr-reset-margin-padding'>
+                    <h3 className='kr-title kr-reset-margin-padding'>Add text</h3>
                 </div>
-                <div className="kds-close-button" onClick={() => setShowAddModal(false)}>
+                <div className="kr-close-button kr-reset-margin-padding" onClick={() => setShowAddModal(false)}>
                     <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749341803/Vector_hm0yzo.png" alt="Close" />
                 </div>
             </div>
             {
                 selectedProduct?.productType === "2D" && (
                     <>
-                        <hr className="kds-divider" />
-                        <div className='kds-content'>
-                            <div className='kds-input-container'>
+                        <hr className="kr-divider kr-reset-margin-padding" />
+                        <div className='kr-content kr-reset-margin'>
+                            <div className='kr-input-container kr-reset-margin-padding'>
                                 <textarea 
                                     value={customText}
                                     onChange={(e) => setCustomText(e.target.value)} 
                                     placeholder="Add Headline" 
-                                    className="kds-text-input" 
+                                    className="kr-text-input kr-reset-margin" 
                                 />
                             </div>
                             <button 
                                 onClick={handleAddCustomText} 
-                                className={`kds-add-button ${customText.trim() !== "" ? "active" : "inactive"}`}
+                                className={`kr-add-button ${customText.trim() !== "" ? "active" : "inactive"}`}
                             >
                                 Add text
                             </button>
@@ -43,19 +43,19 @@ const AddTextTab = ({ handleAddCustomText, update3DText }) => {
             {
                 selectedProduct?.productType === "3D" && (
                     <>
-                        <hr className="kds-divider" />
-                        <div className='kds-content'>
-                            <div className='kds-input-container'>
+                        <hr className="kr-divider kr-reset-margin-padding" />
+                        <div className='kr-content kr-reset-margin'>
+                            <div className='kr-input-container kr-reset-margin-padding'>
                                 <textarea
                                     placeholder="Enter text"
                                     value={threeDtext}
                                     onChange={(e) => setthreeDText(e.target.value)}
-                                    className="kds-text-input"
+                                    className="kr-text-input kr-reset-margin"
                                 />
                             </div>
                             <button 
                                 onClick={update3DText} 
-                                className={`kds-add-button ${threeDtext.trim() !== "" ? "active" : "inactive"}`}
+                                className={`kr-add-button ${threeDtext.trim() !== "" ? "active" : "inactive"}`}
                             >
                                 Add text
                             </button>

@@ -1,6 +1,4 @@
-/* Topbar Component Styles */
-
-.kds-topbar {
+.kr-topbar {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,7 +8,7 @@
   z-index: 50;
 }
 
-.kds-topbar-container {
+.kr-topbar-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -19,19 +17,13 @@
   margin: 0 auto;
 }
 
-.kds-left-section {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.kds-logo-section {
+.kr-logo-section {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-.kds-menu-button {
+.kr-menu-button {
   padding: 0.5rem;
   border-radius: 0.5rem;
   transition: background-color 0.2s;
@@ -40,89 +32,96 @@
   background: none;
 }
 
-.kds-menu-button:hover {
+.kr-menu-button:hover {
   background-color: #f3f4f6;
 }
 
-.kds-menu-icon {
+.kr-menu-icon {
   width: 1.25rem;
   height: 1.25rem;
   color: #4b5563;
 }
 
-.kds-right-section {
+.kr-right-section {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-.kds-save-views-button {
-  background-color: #16a34a;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  margin-top: 0.5rem;
+.kr-save-views-button {
+  background-color: #EBF9EB;
+  color: #1db91d;
+  padding: 0.6rem 1rem;
+  white-space: nowrap;
+  border-radius: 0.50rem;
+  font-weight: 500;
   width: 100%;
-  border: none;
+  border: 1px solid #1db91d;
   cursor: pointer;
   font-size: 0.875rem;
   transition: background-color 0.2s;
 }
 
-.kds-save-views-button:hover {
-  background-color: #15803d;
+.kr-save-views-button:hover {
+  color: #fff;
+  background-color: #20a04f;
 }
 
-.kds-clear-part-button {
-  background-color: #dc2626;
-  color: white;
-  padding: 0.5rem 1rem;
+.kr-clear-part-button {
+  background-color: #e9dddd;
+  color: #d34f4f;
+  padding: 0.6rem 1rem;
   height: 100%;
-  border-radius: 0.25rem;
-  margin-top: 0.5rem;
+  border-radius: 0.50rem;
   white-space: nowrap;
   width: 100%;
-  border: none;
+  border: 1px solid #d34f4f;
   cursor: pointer;
   font-size: 0.875rem;
   transition: background-color 0.2s;
 }
 
-.kds-clear-part-button:hover {
+.kr-clear-part-button:hover {
+  color: white;
   background-color: #b91c1c;
 }
 
-.kds-save-button {
+.kr-user-icon {
+ cursor: pointer;
+}
+
+.kr-save-button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1rem;
   border-radius: 0.5rem;
+  border: 1px solid #3b82f6;
   font-weight: 500;
   transition: all 0.2s;
-  border: none;
+  white-space: nowrap;
   cursor: pointer;
   font-size: 0.875rem;
 }
 
-.kds-save-button:disabled {
+.kr-save-button:disabled {
   background-color: #9ca3af;
   cursor: not-allowed;
   color: white;
 }
 
-.kds-save-button:not(:disabled) {
+.kr-save-button:not(:disabled) {
   background-color: #3b82f6;
   color: white;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.kds-save-button:not(:disabled):hover {
+.kr-save-button:not(:disabled):hover {
   background-color: #2563eb;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-.kds-spinner {
+.kr-spinner {
   animation: spin 1s linear infinite;
   height: 1rem;
   width: 1rem;
@@ -131,7 +130,7 @@
   border-radius: 50%;
 }
 
-.kds-save-icon {
+.kr-save-icon {
   width: 1rem;
   height: 1rem;
 }
@@ -144,56 +143,56 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .kds-topbar-container {
+  .kr-topbar-container {
     padding: 0.5rem 1rem;
     flex-direction: column;
     gap: 0.75rem;
   }
-  
-  .kds-left-section {
+
+  .kr-left-section {
     width: 100%;
     justify-content: space-between;
   }
-  
-  .kds-right-section {
+
+  .kr-right-section {
     width: 100%;
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  
-  .kds-save-views-button,
-  .kds-clear-part-button {
+
+  .kr-save-views-button,
+  .kr-clear-part-button {
     margin-top: 0;
     padding: 0.375rem 0.75rem;
     font-size: 0.75rem;
   }
-  
-  .kds-save-button {
+
+  .kr-save-button {
     padding: 0.375rem 0.75rem;
     font-size: 0.75rem;
   }
 }
 
 @media (max-width: 480px) {
-  .kds-topbar-container {
+  .kr-topbar-container {
     padding: 0.375rem 0.75rem;
   }
-  
-  .kds-logo-section img {
+
+  .kr-logo-section img {
     max-width: 120px;
   }
-  
-  .kds-right-section img {
+
+  .kr-right-section img {
     max-width: 80px;
   }
-  
-  .kds-save-views-button,
-  .kds-clear-part-button {
+
+  .kr-save-views-button,
+  .kr-clear-part-button {
     padding: 0.25rem 0.5rem;
     font-size: 0.7rem;
   }
-  
-  .kds-save-button {
+
+  .kr-save-button {
     padding: 0.25rem 0.5rem;
     font-size: 0.7rem;
   }

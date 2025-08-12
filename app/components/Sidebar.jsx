@@ -208,8 +208,8 @@ const Sidebar = ({
   };
 
   return (
-    <div className="kds-sidebar">
-      <div className="kds-sidebar-menu">
+    <div className="kr-sidebar kr-reset-margin-padding">
+      <div className="kr-sidebar-menu kr-reset-margin">
         {[
           { key: "editor", label: "Editor", icon: "Frame_4_vzkhrn" },
           { key: "edit", label: "Edit", icon: "pencil-outline_c6lwsj" },
@@ -221,14 +221,14 @@ const Sidebar = ({
           <div
             key={key}
             onClick={() => handleTabClick(key)}
-            className="kds-tab"
+            className="kr-tab kr-reset-margin-padding"
           >
             <img
               src={`https://res.cloudinary.com/dd9tagtiw/image/upload/v1749641805/${icon}.svg`}
               alt={label}
-              className="kds-tab-icon"
+              className="kr-tab-icon kr-reset-margin-padding"
             />
-            <p className={`kds-tab-label ${activeTab === key ? "kds-active" : ""}`}>
+            <p className={`kr-tab-label kr-reset-margin-padding ${activeTab === key ? "kr-active" : ""}`}>
               {label}
             </p>
           </div>

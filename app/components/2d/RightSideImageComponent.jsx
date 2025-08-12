@@ -191,30 +191,30 @@ const RightSideImageUpload = ({
   };
 
   return (
-    <div className="kds-container">
+    <div className="kr-right-container kr-reset-margin">
       {/* Header */}
-      <div className="kds-header">
-        <h3 className="kds-title">Right Side Upload</h3>
-        <div className="kds-spacer"></div> {/* Spacer for balance */}
+      <div className="kr-right-header kr-reset-margin-padding">
+        <h3 className="kr-title kr-reset-margin-padding">Right Side Upload</h3>
+        <div className="kr-spacer kr-reset-margin-padding"></div> {/* Spacer for balance */}
       </div>
       
       {/* Upload Section */}
-      <div className="kds-upload-section">
+      <div className="kr-upload-section kr-reset-padding">
         <input
           ref={fileInputRef}
           type="file"
           accept="image/*"
           onChange={handleFileUpload}
-          className="kds-file-input"
+          className="kr-file-input"
         />
         
         <button
           onClick={() => fileInputRef.current?.click()}
           disabled={isUploading}
-          className="kds-upload-button"
+          className="kr-uploadright-button kr-reset-margin"
         >
-          <FaUpload className="kds-upload-icon" />
-          <span className="kds-upload-text">
+          <FaUpload className="kr-upload-icon" />
+          <span className="kr-upload-text">
             {isUploading ? 'Uploading...' : 'Upload for Right Side'}
           </span>
         </button>
@@ -222,34 +222,34 @@ const RightSideImageUpload = ({
 
       {/* Controls - Only show when image is uploaded */}
       {rightSideImage && (
-        <div className="kds-controls">
+        <div className="kr-controls">
           {/* Preview */}
-          <div className="kds-preview">
+          <div className="kr-preview">
             <img 
               src={rightSideImage} 
               alt="Right side preview" 
-              className="kds-preview-image"
+              className="kr-preview-image"
             />
-            <span className="kds-preview-text">Uploaded Image</span>
+            <span className="kr-preview-text">Uploaded Image</span>
             <button
               onClick={removeRightSideImage}
-              className="kds-remove-button"
+              className="kr-remove-button"
             >
               <FaTimes />
             </button>
           </div>
 
           {/* Scale Controls */}
-          <div className="kds-scale-section">
-            <label className="kds-scale-label">
+          <div className="kr-scale-section">
+            <label className="kr-scale-label">
               Size: {Math.round(imageScale * 100)}%
             </label>
-            <div className="kds-scale-controls">
+            <div className="kr-scale-controls">
               <button
                 onClick={() => handleScaleChange(Math.max(0.2, imageScale - 0.1))}
-                className="kds-scale-button"
+                className="kr-scale-button"
               >
-                <FaSearchMinus className="kds-icon" />
+                <FaSearchMinus className="kr-icon" />
               </button>
               <input
                 type="range"
@@ -258,63 +258,63 @@ const RightSideImageUpload = ({
                 step="0.1"
                 value={imageScale}
                 onChange={(e) => handleScaleChange(parseFloat(e.target.value))}
-                className="kds-scale-slider"
+                className="kr-scale-slider"
               />
               <button
                 onClick={() => handleScaleChange(Math.min(3, imageScale + 0.1))}
-                className="kds-scale-button"
+                className="kr-scale-button"
               >
-                <FaSearchPlus className="kds-icon" />
+                <FaSearchPlus className="kr-icon" />
               </button>
             </div>
           </div>
 
           {/* Position Controls */}
-          <div className="kds-position-section">
-            <label className="kds-position-label">
+          <div className="kr-position-section">
+            <label className="kr-position-label">
               Position Controls
             </label>
-            <div className="kds-position-grid">
+            <div className="kr-position-grid">
               <div></div>
               <button
                 onClick={() => handlePositionChange('up')}
-                className="kds-position-button"
+                className="kr-position-button"
               >
-                <FaArrowUp className="kds-icon" />
+                <FaArrowUp className="kr-icon" />
               </button>
               <div></div>
               
               <button
                 onClick={() => handlePositionChange('left')}
-                className="kds-position-button"
+                className="kr-position-button"
               >
-                <FaArrowLeft className="kds-icon" />
+                <FaArrowLeft className="kr-icon" />
               </button>
-              <div className="kds-position-center">
-                <FaArrowsAlt className="kds-center-icon" />
+              <div className="kr-position-center">
+                <FaArrowsAlt className="kr-center-icon" />
               </div>
               <button
                 onClick={() => handlePositionChange('right')}
-                className="kds-position-button"
+                className="kr-position-button"
               >
-                <FaArrowRight className="kds-icon" />
+                <FaArrowRight className="kr-icon" />
               </button>
               
               <div></div>
               <button
                 onClick={() => handlePositionChange('down')}
-                className="kds-position-button"
+                className="kr-position-button"
               >
-                <FaArrowDown className="kds-icon" />
+                <FaArrowDown className="kr-icon" />
               </button>
               <div></div>
             </div>
           </div>
 
           {/* Fine Position Controls */}
-          <div className="kds-fine-position">
-            <div className="kds-fine-position-item">
-              <label className="kds-fine-position-label">X: {imagePosition.x}</label>
+          <div className="kr-fine-position">
+            <div className="kr-fine-position-item">
+              <label className="kr-fine-position-label">X: {imagePosition.x}</label>
               <input
                 type="range"
                 min="-100"
@@ -325,11 +325,11 @@ const RightSideImageUpload = ({
                   setImagePosition(newPos);
                   updateRightSideImage({ position: newPos });
                 }}
-                className="kds-fine-position-slider"
+                className="kr-fine-position-slider"
               />
             </div>
-            <div className="kds-fine-position-item">
-              <label className="kds-fine-position-label">Y: {imagePosition.y}</label>
+            <div className="kr-fine-position-item">
+              <label className="kr-fine-position-label">Y: {imagePosition.y}</label>
               <input
                 type="range"
                 min="-100"
@@ -340,13 +340,13 @@ const RightSideImageUpload = ({
                   setImagePosition(newPos);
                   updateRightSideImage({ position: newPos });
                 }}
-                className="kds-fine-position-slider"
+                className="kr-fine-position-slider"
               />
             </div>
           </div>
 
           {/* Info */}
-          <div className="kds-info">
+          <div className="kr-info">
             💡 Image appears behind product on right 50% - shows through transparent areas
           </div>
         </div>

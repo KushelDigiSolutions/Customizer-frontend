@@ -18,39 +18,39 @@ export default function CustomColorSwatch({setTextColor, setChangeTextColor, sel
     };
 
     return (
-        <div className="kds-color-container">
+        <div className="kr-color-container kr-reset-margin-padding">
             
-            <div className='kds-color-header'>
-                <div className='kds-color-title-section'>
-                    <h3 className='kds-color-title'>Choose Color</h3>
+            <div className='kr-color-header kr-reset-margin'>
+                <div className='kr-color-title-section kr-reset-margin-padding'>
+                    <h3 className='kr-color-title kr-reset-margin-padding'>Choose Color</h3>
                 </div>
-                <div className="kds-color-close" onClick={() => setShowColorTab(false)}>
+                <div className="kr-color-close kr-reset-margin-padding" onClick={() => setShowColorTab(false)}>
                     <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749341803/Vector_hm0yzo.png" alt="Close" />
                 </div>
             </div>
-            <hr className="kds-color-divider" />
+            <hr className="kr-color-divider kr-reset-margin-padding" />
             
-            <div className="kds-color-content">
-                <div className="kds-used-colors-section">
+            <div className="kr-color-content kr-reset-margin">
+                <div className="kr-used-colors-section kr-reset-margin-padding">
                     <h3>USED IN YOUR DESIGN</h3>
-                    <div className="kds-used-color-display">
+                    <div className="kr-used-color-display kr-reset-margin-padding">
                         <div 
-                            className="kds-used-color-swatch" 
+                            className="kr-used-color-swatch" 
                             style={{ backgroundColor: setTextColor }} 
                             onClick={() => handleColorClick(setTextColor)}
                         />
-                        <span className="kds-used-color-text">{setTextColor}</span>
+                        <span className="kr-used-color-text">{setTextColor}</span>
                     </div>
                 </div>
                 
-                <div className="kds-all-colors-section">
+                <div className="kr-all-colors-section">
                     <h3>ALL COLORS</h3>
-                    <div className="kds-color-grid">
+                    <div className="kr-color-grid">
                         {colorOptions.map((color) => (
                             <div
                                 key={color}
-                                className={`kds-color-swatch ${
-                                    selectedColor === color ? "kds-selected" : "kds-unselected"
+                                className={`kr-color-swatch ${
+                                    selectedColor === color ? "kr-selected" : "kr-unselected"
                                 }`}
                                 style={{ backgroundColor: color }}
                                 onClick={() => handleColorClick(color)}

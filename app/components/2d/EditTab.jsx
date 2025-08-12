@@ -62,35 +62,35 @@ const EditTab = ({ handleAddDesignToCanvas, editor, setShowImageEditModal, setHa
 
 
     return (
-        <div className="kds-edit-container">
-            <div className='kds-edit-header'>
-                <div className='kds-edit-title-section'>
-                    <h3 className='kds-edit-title'>Edit</h3>
+        <div className="kr-edit-container kr-reset-margin-padding">
+            <div className='kr-edit-header kr-reset-margin'>
+                <div className='kr-edit-title-section kr-reset-margin-padding'>
+                    <h3 className='kr-edit-title kr-reset-margin-padding'>Edit</h3>
                 </div>
-                <div className='kds-edit-close'>
+                <div className='kr-edit-close kr-reset-margin-padding'>
                     <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749341803/Vector_hm0yzo.png" alt="Close" />
                 </div>
             </div>
-            <hr className="kds-edit-divider" />
+            <hr className="kr-edit-divider kr-reset-margin-padding" />
 
             {
                 selectedProduct?.productType === '2D' && (
-                    <div className='kds-edit-body'>
-                        <div className='kds-edit-form'>
-                            <h3 className='kds-edit-subtitle'>Original vector artwork best, if you have?</h3>
+                    <div className='kr-edit-body kr-reset-margin'>
+                        <div className='kr-edit-form kr-reset-margin-padding'>
+                            <h3 className='kr-edit-subtitle kr-reset-margin-padding'>Original vector artwork best, if you have?</h3>
 
-                            <label className="kds-upload-label">
+                            <label className="kr-upload-label kr-reset-margin">
                                 <input
                                     type="file"
                                     accept="image/*"
-                                    className="kds-hidden"
+                                    className="kr-hidden kr-reset-margin-padding"
                                     onChange={handleFileSelect}
                                 />
-                                <div className="kds-upload-helper">
-                                    <div className="kds-upload-cta">
+                                <div className="kr-upload-helper kr-reset-margin-padding">
+                                    <div className="kr-upload-cta">
                                         {selectedFile ? "Image Uploaded" : "Choose a file"}
                                     </div>
-                                    <p className='kds-upload-note'>
+                                    <p className='kr-upload-note kr-reset-margin-padding'>
                                         We support JPG, PNG, EAPS<br />
                                         An max 5 MB
                                     </p>
@@ -100,7 +100,7 @@ const EditTab = ({ handleAddDesignToCanvas, editor, setShowImageEditModal, setHa
                             <button
                                 onClick={handleUploadDesign}
                                 disabled={!selectedFile || isUploading || !editor?.canvas}
-                                className="kds-upload-button"
+                                className="kr-upload-button kr-reset-margin"
                             >
                                 {isUploading ? 'Uploading...' : 'Upload'}
                             </button>
@@ -114,7 +114,7 @@ const EditTab = ({ handleAddDesignToCanvas, editor, setShowImageEditModal, setHa
             {
                 selectedProduct?.productType === '3D' && (
                     <>
-                        <hr className="kds-edit-divider" />
+                        <hr className="kr-edit-divider" />
                         <TextureUploader />
                         <TextureControlsPanel />
                     </>

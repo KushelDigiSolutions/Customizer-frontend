@@ -37,44 +37,42 @@ const Topbar = ({
 
 
   return (
-    <div className="kds-topbar">
-      <div className="kds-topbar-container">
+    <div className="kr-topbar kr-reset-margin-padding">
+      <div className="kr-topbar-container">
 
-        <div className="kds-left-section">
-          <div className="kds-logo-section">
+        <div className="kr-logo-section kr-reset-margin-padding">
 
-            <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749337982/Customizer_w0ruf6.png" alt="" />
+            <img className='kr-reset-margin-padding' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749337982/Customizer_w0ruf6.png" alt="" />
 
             <button
               onClick={() => setShowSidebar(prev => !prev)}
-              className="kds-menu-button"
+              className="kr-menu-button kr-reset-margin"
               aria-label="Toggle Sidebar"
             >
-              <svg className="kds-menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="kr-menu-icon kr-reset-margin-padding" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
           </div>
-        </div>
 
         {/* Right Section - Action Buttons */}
-        <div className="kds-right-section">
+        <div className="kr-right-section kr-reset-margin-padding">
 
           {
             selectedProduct?.productType === "3D" && (
               <>
                 <button
-                  className="kds-save-views-button"
+                  className="kr-save-views-button kr-reset-margin"
                   onClick={handleScreenshot}
                 >
-                  Save All Views
+                  Save all Views
                 </button>
 
                 <button
-                  className="kds-clear-part-button"
+                  className="kr-clear-part-button kr-reset-margin"
                   onClick={handleClearSelectedPart}
                 >
-                  Clear Selected Part
+                  Clear Part
                 </button>
               </>
             )
@@ -84,25 +82,22 @@ const Topbar = ({
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="kds-save-button"
+            className="kr-save-button kr-reset-margin"
             title="Save design"
           >
             {isSaving ? (
               <>
-                <div className="kds-spinner"></div>
-                <span className="kds-reset">Saving...</span>
+                <div className="kr-spinner"></div>
+                <span className="kr-reset">Adding...</span>
               </>
             ) : (
               <>
-                <svg className="kds-save-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3-3m0 0l-3 3m3-3v12" />
-                </svg>
-                <span className="kds-reset">Save</span>
+                <span className="kr-reset">Add to Cart</span>
               </>
             )}
           </button>
 
-          <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749338383/Buttons_klifkp.png" alt="" />
+          <img className='kr-user-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749338383/Buttons_klifkp.png" alt="user" />
         </div>
       </div>
     </div>
