@@ -137,7 +137,7 @@
   background-color: white;
   border: 1px solid #e5e7eb;
   overflow: hidden;
-  z-index: 70;
+  z-index: 30;
 }
 
 .kr-chat-header {
@@ -164,6 +164,7 @@
 .kr-chat-title > h2 {
   font-size: 1.375rem;
   font-weight: 600;
+  color: white  ;
 }
 
 .kr-chat-title > p {
