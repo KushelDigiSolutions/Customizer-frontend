@@ -9,6 +9,7 @@ import SelectColorsTab from "./2d/SelectColorsTab";
 import DynamicClipartTab from "./2d/ClipartTab"; // Updated import
 import RightSideImageUpload from "./2d/RightSideImageComponent";
 import "./Sidebar.css";
+import { use3D } from '@/app/context/3DContext'; // Add this at the top
 
 const Sidebar = ({
   editor,
@@ -63,6 +64,7 @@ const Sidebar = ({
 
   const [hasUploadedImage, setHasUploadedImage] = useState(false);
   const [hasAddedText, setHasAddedText] = useState(false);
+  const { threeDtext } = use3D(); // Add this line
 
   const checkForDesignOnCanvas = () => {
     if (!editor?.canvas) return false;
@@ -79,6 +81,11 @@ const Sidebar = ({
 
   const checkForTextOnCanvas = () => {
     if (!editor?.canvas) return false;
+
+    if (selectedProduct?.productType === "3D") {
+      // Only return true if 3D text is not empty
+      return !!threeDtext && threeDtext.trim() !== "";
+    }
 
     const objects = editor.canvas.getObjects();
     const textObjects = objects.filter(obj => obj.type === "i-text");
@@ -177,9 +184,11 @@ const Sidebar = ({
       if (textExists) {
         setHasAddedText(true);
         setShowEditModal(true);
+        setShowAddModal(false);
       } else {
         setHasAddedText(false);
         setShowAddModal(true);
+        setShowEditModal(false);
       }
     }
     if (key === "colors") {

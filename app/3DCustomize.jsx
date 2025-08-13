@@ -58,6 +58,10 @@ export default function ThreeDCustomize() {
     setCustomizationData,
     screenshotRef,
     selectedProduct,
+    threeDtextFontFamily, // ADD THIS
+    setthreeDTextFontFamily,
+    threeDtextFontStyle,
+    threeDtextFontWeight // (if needed elsewhere)
   } = use3D();
 
   // const screenshotRef = useRef();
@@ -81,6 +85,9 @@ export default function ThreeDCustomize() {
         textScale: threeDtextScale,
         textPosX: threeDtextPosX,
         textPosY: threeDtextPosY,
+        fontWeight: threeDtextFontWeight,
+        fontStyle: threeDtextFontStyle,
+        fontFamily: threeDtextFontFamily || 'Arial', // PASS FONT FAMILY
       });
       setthreeDTextTexture(texture);
 
@@ -96,6 +103,9 @@ export default function ThreeDCustomize() {
               outline: threeDoutlineColor,
               scale: threeDtextScale,
               position: { x: threeDtextPosX, y: threeDtextPosY },
+              fontFamily: threeDtextFontFamily || 'Arial', // SAVE FONT FAMILY
+               fontWeight: threeDtextFontWeight,    // <-- Save fontWeight
+            fontStyle: threeDtextFontStyle,  
             },
           },
         },
@@ -111,6 +121,9 @@ export default function ThreeDCustomize() {
     threeDtextPosX,
     threeDtextPosY,
     threeDselectedPart,
+    threeDtextFontFamily,
+    threeDtextFontWeight,   // <-- Add as dependency
+    threeDtextFontStyle     // <-- Add as dependency
   ]);
 
   // Get model URL from product data
@@ -136,7 +149,7 @@ export default function ThreeDCustomize() {
       </div>
 
       <div className="kds-controls-container">
-        
+
 
         {/* <ControlsPanel
           onScreenshot={handleScreenshot}

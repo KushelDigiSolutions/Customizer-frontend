@@ -21,11 +21,17 @@ const EditTextTab = ({ editor, layerManager }) => {
     } = use2D();
 
     const {
+        threeDtext, setthreeDText,
+        threeDtextFontFamily, setthreeDTextFontFamily,
+        threeDtextColor, setthreeDTextColor,
+        threeDoutlineColor, setthreeDOutlineColor,
         threeDtextScale, setthreeDTextScale,
         threeDtextPosX, setthreeDTextPosX,
         threeDtextPosY, setthreeDTextPosY,
-        threeDtextColor, setthreeDTextColor,
-        threeDoutlineColor, setthreeDOutlineColor,
+        selectedProduct, threeDtextFontWeight,
+        setthreeDTextFontWeight,
+        threeDtextFontStyle,
+        setthreeDTextFontStyle,
     } = use3D();
 
     const [showColorTab, setShowColorTab] = useState(false);
@@ -201,41 +207,49 @@ const EditTextTab = ({ editor, layerManager }) => {
     };
 
     const handleFontSelection = (font) => {
-        setFontFamily(font);
-        setCurrentFont(font);
-
-        applyToTextObject((textObj) => {
-            textObj.set('fontFamily', font);
-        });
-
+        if (is3D) {
+            setthreeDTextFontFamily(font);
+        } else {
+            setFontFamily(font);
+            setCurrentFont(font);
+        }
         setShowTextSelectTab(false);
     };
 
     const handleColorSelection = (color) => {
-        setTextColor(color);
-        setCurrentColor(color);
-
-        applyToTextObject((textObj) => {
-            textObj.set('fill', color);
-        });
-
+        if (is3D) {
+            setthreeDTextColor(color);
+        } else {
+            setTextColor(color);
+            setCurrentColor(color);
+        }
         setShowColorTab(false);
     };
 
     const handleFontStyleChange = (styleType) => {
-        applyToTextObject((textObj) => {
+        if (is3D) {
+            // For 3D, update context state for fontWeight/fontStyle
             if (styleType === 'bold') {
-                const currentWeight = textObj.fontWeight;
-                const newWeight = currentWeight === 'bold' ? 'normal' : 'bold';
-                textObj.set('fontWeight', newWeight);
-                setFontStyle(newWeight);
+                setthreeDTextFontWeight(prev => prev === 'bold' ? 'normal' : 'bold');
             } else if (styleType === 'italic') {
-                const currentStyle = textObj.fontStyle;
-                const newStyle = currentStyle === 'italic' ? 'normal' : 'italic';
-                textObj.set('fontStyle', newStyle);
-                setFontStyle(newStyle);
+                setthreeDTextFontStyle(prev => prev === 'italic' ? 'normal' : 'italic');
             }
-        });
+        } else {
+            // 2D logic (fabric.js)
+            applyToTextObject((textObj) => {
+                if (styleType === 'bold') {
+                    const currentWeight = textObj.fontWeight;
+                    const newWeight = currentWeight === 'bold' ? 'normal' : 'bold';
+                    textObj.set('fontWeight', newWeight);
+                    setFontStyle(newWeight);
+                } else if (styleType === 'italic') {
+                    const currentStyle = textObj.fontStyle;
+                    const newStyle = currentStyle === 'italic' ? 'normal' : 'italic';
+                    textObj.set('fontStyle', newStyle);
+                    setFontStyle(newStyle);
+                }
+            });
+        }
     };
 
     const handleFlipX = () => {
@@ -327,6 +341,10 @@ const EditTextTab = ({ editor, layerManager }) => {
         }
     };
 
+    const is3D = selectedProduct?.productType === "3D";
+    const fontValue = is3D ? threeDtextFontFamily : currentFont;
+    const colorValue = is3D ? threeDtextColor : currentColor;
+
     const shouldShowEditText = !showTextSelectTab && !showColorTab;
 
     return (
@@ -369,27 +387,35 @@ const EditTextTab = ({ editor, layerManager }) => {
                         )}
                     </div>
 
-                    <hr className="kr-edit-text-divider kr-reset-margin-padding" />
+                    {
+                        selectedProduct.productType === "2D" && (
+                            <>
+                                <hr className="kr-edit-text-divider kr-reset-margin-padding" />
 
-                    <div className='kr-edit-text-section kr-reset-margin-padding'>
-                        <div className='kr-edit-text-title-section kr-reset-margin-padding'>
-                            <h3 className='kr-edit-text-section-title kr-reset-margin-padding'>Flip</h3>
-                        </div>
-                        <div className="kr-edit-text-controls kr-reset-margin-padding">
-                            <img
-                                onClick={handleFlipX}
-                                className='kr-edit-text-control-icon'
-                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507255/tune-vertical_ezas8p.png"
-                                alt="flip horizontal"
-                            />
-                            <img
-                                onClick={handleFlipY}
-                                className='kr-edit-text-control-icon'
-                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507254/flip-vertical_ajs5ur.png"
-                                alt="flip vertical"
-                            />
-                        </div>
-                    </div>
+                                <div className='kr-edit-text-section kr-reset-margin-padding'>
+                                    <div className='kr-edit-text-title-section kr-reset-margin-padding'>
+                                        <h3 className='kr-edit-text-section-title kr-reset-margin-padding'>Flip</h3>
+                                    </div>
+                                    <div className="kr-edit-text-controls kr-reset-margin-padding">
+                                        <img
+                                            onClick={handleFlipX}
+                                            className='kr-edit-text-control-icon'
+                                            src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507255/tune-vertical_ezas8p.png"
+                                            alt="flip horizontal"
+                                        />
+                                        <img
+                                            onClick={handleFlipY}
+                                            className='kr-edit-text-control-icon'
+                                            src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749507254/flip-vertical_ajs5ur.png"
+                                            alt="flip vertical"
+                                        />
+                                    </div>
+                                </div>
+
+                            </>
+                        )
+                    }
+
 
                     <hr className="kr-edit-text-divider kr-reset-margin-padding" />
 
@@ -403,10 +429,11 @@ const EditTextTab = ({ editor, layerManager }) => {
                                 className='kr-edit-text-font-selector kr-reset-margin-padding'
                             >
                                 <span className='kr-edit-text-font-name kr-reset-margin-padding' >
-                                    {currentFont}
+                                    {fontValue}
                                 </span>
                                 <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1750138078/chevron-right_p6kmcp.svg" alt="arrow" className="kr-edit-text-font-arrow" />
                             </div>
+
 
                             <img
                                 className='kr-edit-text-style-icon kr-reset-margin-padding'
@@ -423,9 +450,10 @@ const EditTextTab = ({ editor, layerManager }) => {
 
                             <div
                                 className="kr-edit-text-color-swatch kr-reset-margin-padding"
-                                style={{ backgroundColor: currentColor }}
+                                style={{ backgroundColor: colorValue }}
                                 onClick={() => setShowColorTab(true)}
                             />
+
                         </div>
                     </div>
 
@@ -468,89 +496,95 @@ const EditTextTab = ({ editor, layerManager }) => {
                         </div>
                     </div>
 
-                    <div className='kr-edit-text-sliders kr-reset-margin-padding'>
-                        <label className="kr-edit-text-slider-label kr-reset-margin-padding">Size</label>
-                        <input
-                            type="range"
-                            min={23}
-                            max={40}
-                            value={textSize}
-                            onChange={handleSizeChange}
-                            className="kr-edit-text-slider kr-reset-margin-padding"
-                        />
+                    {
+                        selectedProduct.productType === "2D" && (
+                            <>
+                                <div className='kr-edit-text-sliders kr-reset-margin-padding'>
+                                    <label className="kr-edit-text-slider-label kr-reset-margin-padding">Size</label>
+                                    <input
+                                        type="range"
+                                        min={23}
+                                        max={40}
+                                        value={textSize}
+                                        onChange={handleSizeChange}
+                                        className="kr-edit-text-slider kr-reset-margin-padding"
+                                    />
 
-                        <label className="kr-edit-text-slider-label kr-reset-margin-padding">Spacing</label>
-                        <input
-                            type="range"
-                            min={-10}
-                            max={100}
-                            value={textSpacing}
-                            onChange={handleSpacingChange}
-                            className="kr-edit-text-slider kr-reset-margin-padding"
-                        />
-                    </div>
+                                    <label className="kr-edit-text-slider-label kr-reset-margin-padding">Spacing</label>
+                                    <input
+                                        type="range"
+                                        min={-10}
+                                        max={100}
+                                        value={textSpacing}
+                                        onChange={handleSpacingChange}
+                                        className="kr-edit-text-slider kr-reset-margin-padding"
+                                    />
+                                </div>
 
-                    <hr className="kr-edit-text-divider kr-reset-margin-padding" />
+                                <hr className="kr-edit-text-divider kr-reset-margin-padding" />
 
-                    <div className='kr-edit-text-arrange kr-reset-margin-padding'>
-                        <h3 className='kr-edit-text-arrange-title kr-reset-margin-padding'>Arrange</h3>
-                        <div className="kr-edit-text-arrange-controls kr-reset-margin-padding">
-                            <img
-                                onClick={handleBringForward}
-                                className='kr-edit-text-arrange-icon kr-reset-margin-padding'
-                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-bring-forward_vigco4.png"
-                                alt="bring forward"
-                                title="Bring Forward"
-                            />
-                            <img
-                                onClick={() => handleArrangeAction('bringToFront')}
-                                className='kr-edit-text-arrange-icon kr-reset-margin-padding'
-                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-bring-to-front_povosv.png"
-                                alt="bring to front"
-                                title="Bring to Front"
-                            />
-                            <img
-                                onClick={() => handleArrangeAction('sendBackward')}
-                                className='kr-edit-text-arrange-icon kr-reset-margin-padding'
-                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-send-backward_buzw6f.png"
-                                alt="send backward"
-                                title="Send Backward"
-                            />
-                            <img
-                                onClick={() => handleArrangeAction('sendToBack')}
-                                className='kr-edit-text-arrange-icon kr-reset-margin-padding'
-                                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508121/arrange-send-to-back_bcyzlu.png"
-                                alt="send to back"
-                                title="Send to Back"
-                            />
-                        </div>
-                        {layerManager && (
-                            <p className="kr-edit-text-layer-info">
-                                ⚡ Layer system active - TEXT layer (zIndex: 5)
-                            </p>
-                        )}
-                    </div>
+                                <div className='kr-edit-text-arrange kr-reset-margin-padding'>
+                                    <h3 className='kr-edit-text-arrange-title kr-reset-margin-padding'>Arrange</h3>
+                                    <div className="kr-edit-text-arrange-controls kr-reset-margin-padding">
+                                        <img
+                                            onClick={handleBringForward}
+                                            className='kr-edit-text-arrange-icon kr-reset-margin-padding'
+                                            src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-bring-forward_vigco4.png"
+                                            alt="bring forward"
+                                            title="Bring Forward"
+                                        />
+                                        <img
+                                            onClick={() => handleArrangeAction('bringToFront')}
+                                            className='kr-edit-text-arrange-icon kr-reset-margin-padding'
+                                            src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-bring-to-front_povosv.png"
+                                            alt="bring to front"
+                                            title="Bring to Front"
+                                        />
+                                        <img
+                                            onClick={() => handleArrangeAction('sendBackward')}
+                                            className='kr-edit-text-arrange-icon kr-reset-margin-padding'
+                                            src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508122/arrange-send-backward_buzw6f.png"
+                                            alt="send backward"
+                                            title="Send Backward"
+                                        />
+                                        <img
+                                            onClick={() => handleArrangeAction('sendToBack')}
+                                            className='kr-edit-text-arrange-icon kr-reset-margin-padding'
+                                            src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508121/arrange-send-to-back_bcyzlu.png"
+                                            alt="send to back"
+                                            title="Send to Back"
+                                        />
+                                    </div>
+
+                                </div>
+                            </>
+                        )
+                    }
 
                 </div>
             )}
 
+
             {showTextSelectTab && (
                 <FontSelector
-                    selectedFont={currentFont}
+                    selectedFont={fontValue}
                     setShowTextSelectTab={setShowTextSelectTab}
                     setSelectedFont={handleFontSelection}
                 />
             )}
 
+
             {showColorTab && (
                 <CustomColorSwatch
-                    setTextColor={setTextColor}
+                    setTextColor={is3D ? setthreeDTextColor : setTextColor}
                     setChangeTextColor={handleColorSelection}
+                    selectedColor={colorValue}
+                    setSelectedColor={is3D ? setthreeDTextColor : setCurrentColor}
                     setShowColorTab={setShowColorTab}
                 />
             )}
         </>
-    )
-}
+    );
+};
 
 export default EditTextTab;

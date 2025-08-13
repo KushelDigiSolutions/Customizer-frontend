@@ -9,6 +9,8 @@ export const ThreeDProvider = ({ children }) => {
   const [threeDtexture, setthreeDTexture] = useState(null);
   const [threeDselectedPart, setthreeDSelectedPart] = useState('Front');
 
+  const [threeDtextFontFamily, setthreeDTextFontFamily] = useState('Arial');
+
   const [threeDzoom, setthreeDZoom] = useState(1);
   const [threeDoffsetX, setthreeDOffsetX] = useState(0);
   const [threeDoffsetY, setthreeDOffsetY] = useState(0);
@@ -29,6 +31,9 @@ export const ThreeDProvider = ({ children }) => {
   const [threeDlogoScale, setthreeDLogoScale] = useState(0.5);
   const [threeDlogoPosX, setthreeDLogoPosX] = useState(0.5);
   const [threeDlogoPosY, setthreeDLogoPosY] = useState(0.5);
+
+  const [threeDtextFontWeight, setthreeDTextFontWeight] = useState('normal');
+  const [threeDtextFontStyle, setthreeDTextFontStyle] = useState('normal');
 
   const [customizationData, setCustomizationData] = useState({});
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -66,9 +71,9 @@ export const ThreeDProvider = ({ children }) => {
     setCustomizationData(prev => {
       const newParts = { ...prev.parts };
       delete newParts[threeDselectedPart];
-      return { 
-        ...prev, 
-        parts: newParts 
+      return {
+        ...prev,
+        parts: newParts
       };
     });
 
@@ -106,7 +111,13 @@ export const ThreeDProvider = ({ children }) => {
       threeDlogoPosY, setthreeDLogoPosY,
       customizationData, setCustomizationData,
       handleScreenshot, handleClearSelectedPart,
-      screenshotRef, selectedProduct, setSelectedProduct
+      screenshotRef, selectedProduct, setSelectedProduct,
+      threeDtextFontFamily,
+      threeDtextFontWeight,
+      setthreeDTextFontWeight,
+      threeDtextFontStyle,
+      setthreeDTextFontStyle,
+      setthreeDTextFontFamily,
     }}>
       {children}
     </threeDcontext.Provider>
