@@ -12,6 +12,7 @@ const DynamicClipartTab = ({
   handleAddDesignToCanvas,
   handleAddPatternToCanvas,
   handleDynamicLayerChange,
+  currencyCode,
   editor
 }) => {
   const [view, setView] = useState('main');
@@ -24,7 +25,7 @@ const DynamicClipartTab = ({
     : null;
 
   const shirtDesigns = layerDesignKey
-    ? selectedProduct.layerDesign[layerDesignKey] || []
+    ? selectedProduct?.layerDesign[layerDesignKey] || []
     : [];
 
   const { setthreeDTexture, threeDcolor, setCustomizationData, threeDselectedPart } = use3D();
@@ -221,7 +222,7 @@ const DynamicClipartTab = ({
                 />
                 <div className="kr-3d-info">
                   <div className="kr-3d-name">{design.title}</div>
-                  <div className="kr-3d-price">₹{design.price}</div>
+                  <div className="kr-3d-price">{currencyCode}{design?.price}</div>
                 </div>
               </div>
             ))}

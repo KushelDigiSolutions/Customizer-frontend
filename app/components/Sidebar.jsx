@@ -54,6 +54,7 @@ const Sidebar = ({
   handleDynamicLayerChange,
   selectedLayers,
   handleDynamicColorChange,
+  currencyCode
 }) => {
   const [activeTab, setActiveTab] = useState("editor");
   const [showClipartTab, setShowClipartTab] = useState(false);
@@ -401,6 +402,7 @@ const Sidebar = ({
           handleAddPatternToCanvas={handleAddPatternToCanvas}
           handleDynamicLayerChange={handleDynamicLayerChange}
           selectedLayers={selectedLayers}
+          currencyCode={currencyCode}
         />
       )}
 

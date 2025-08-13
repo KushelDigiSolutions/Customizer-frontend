@@ -1387,6 +1387,7 @@ const CustomizerLayout = (props) => {
       {(showSidebar && selectedProduct) && (
         <Sidebar
           bringForward={() => updateArrange('bringForward')}
+          currencyCode={props?.currencyCode}
           editor={editor}
           layerManager={layerManager}
           selectedProduct={selectedProduct}
