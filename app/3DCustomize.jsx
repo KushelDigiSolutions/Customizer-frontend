@@ -127,7 +127,7 @@ export default function ThreeDCustomize() {
   ]);
 
   // Get model URL from product data
-  const modelUrl = selectedProduct?.model3D || '/models/brand1.glb';
+  const modelUrl = selectedProduct?.modelFile || '/models/brand1.glb';
 
   return (
     <main className="kds-main">
