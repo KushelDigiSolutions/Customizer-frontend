@@ -49,12 +49,38 @@ const CustomizerLayout = (props) => {
     threeDloading, selectedProduct, setSelectedProduct, customizationData
   } = use3D()
 
+  console.log("productId", props.productId)
+  console.log("storeHash", props.storeHash)
 
-  if (props?.productId != "" && typeof props?.productId != "undefined") {
-    const idFromPath = props?.productId || 6;
-    const product = backendProducts.find(p => String(p.id) === String(idFromPath))
-    setSelectedProduct(product);
-  }
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!props.productId || !props.storeHash) return;
+
+    setLoading(true);
+    fetch(
+      `https://customise.shikharjobs.com/api/developer/product?productId=${props.productId}&storeHash=${props.storeHash}`
+    )
+      .then(res => res.json())
+      .then(data => {
+        setProduct(data?.data || null);
+        setSelectedProduct(data?.data || null);
+        console.log("Selected Product:", data?.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setProduct(null);
+        setLoading(false);
+      });
+  }, [props.productId, props.storeHash, setSelectedProduct]);
+
+
+  // if (props?.productId != "" && typeof props?.productId != "undefined") {
+  //   const idFromPath = props?.productId || 6;
+  //   const product = backendProducts.find(p => String(p.id) === String(idFromPath))
+  //   setSelectedProduct(product);
+  // }
 
   const parts = selectedProduct?.parts || [
     'Front',
