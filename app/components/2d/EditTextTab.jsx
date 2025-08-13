@@ -378,7 +378,7 @@ const EditTextTab = ({ editor, layerManager }) => {
                             value={customText}
                             onChange={handleTextChange}
                             placeholder="Add Headline"
-                            className="kr-edit-text-input kr-reset-margin-padding"
+                            className="kr-edit-text-input kr-reset-margin"
                         />
                         {!activeTextObject && (
                             <p className="kr-edit-text-hint kr-reset-margin-padding">
@@ -426,9 +426,9 @@ const EditTextTab = ({ editor, layerManager }) => {
                         <div className="kr-edit-text-font-controls kr-reset-margin-padding">
                             <div
                                 onClick={() => setShowTextSelectTab(true)}
-                                className='kr-edit-text-font-selector kr-reset-margin-padding'
+                                className='kr-edit-text-font-selector kr-reset-margin'
                             >
-                                <span className='kr-edit-text-font-name kr-reset-margin-padding' >
+                                <span className='kr-edit-text-font-name kr-reset-margin' >
                                     {fontValue}
                                 </span>
                                 <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1750138078/chevron-right_p6kmcp.svg" alt="arrow" className="kr-edit-text-font-arrow" />

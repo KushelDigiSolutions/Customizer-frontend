@@ -4,7 +4,7 @@
   position: absolute;
   top: 6rem; 
   left: 1.75rem; 
-  width: 35%;
+  width: 450px;
   display: flex;
   gap: 1.25rem; 
   z-index: 40; 
@@ -66,8 +66,25 @@
 
 /* Small screens: consider wider sidebar for usability */
 @media (max-width: 480px) {
+
+  .kr-sidebar-menu {
+    padding: 0.75rem;
+  }
+
   .kr-sidebar {
     left: 1rem;
     width: calc(100% - 2rem);
+    top: 5rem;
+  }
+
+  .kr-tab {
+    gap: 0.5rem;
+  }
+
+  .kr-tab-label {
+    font-size: 0.7rem;
+    color: #000000;
+    text-align: center;
+    font-weight: 600;
   }
 }

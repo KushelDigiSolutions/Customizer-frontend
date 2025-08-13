@@ -133,9 +133,11 @@
 @media (max-width: 768px) {
   .kr-topbar-container {
     padding: 0.5rem 1rem;
-    flex-direction: column;
+    /* flex-direction: column; */
+    justify-content: space-between;
     gap: 0.75rem;
   }
+
 
   .kr-left-section {
     width: 100%;
@@ -143,8 +145,8 @@
   }
 
   .kr-right-section {
-    width: 100%;
-    flex-wrap: wrap;
+    /* width: 100%; */
+    /* flex-wrap: wrap; */
     gap: 0.5rem;
   }
 
