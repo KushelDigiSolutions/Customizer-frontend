@@ -55,6 +55,7 @@ export default function CustomizerPage() {
       .then(data => {
         setProduct(data?.data || null);
         setSelectedProduct(data?.data || null);
+        console.log("Selected Product:", data?.data);
         setLoading(false);
       })
       .catch(() => {
