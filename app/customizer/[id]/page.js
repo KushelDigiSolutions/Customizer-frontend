@@ -28,18 +28,28 @@
 
 "use client";
 
-import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useParams, useSearchParams } from "next/navigation";
 import CustomizerLayout from "../../CustomizerLayout";
 import { use3D } from "@/app/context/3DContext";
 
-export default function CustomizerPage() {
-  const { id } = useParams();
-  const searchParams = useSearchParams();
-  const { setSelectedProduct } = use3D();
+export default function CustomizerPage(props) {
 
-  const productId = searchParams.get("productId") || id;
-  const storeHash = searchParams.get("storeHash");
+  const params = useParams();
+  const searchParams = useSearchParams();
+
+  console.log("props from CustomizerPage:", props);
+
+  const productId =
+    props.productId ||
+    params?.id ||
+    searchParams?.get("productId");
+
+  const storeHash =
+    props.storeHash ||
+    searchParams?.get("storeHash");
+
+  const { setSelectedProduct } = use3D();
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -55,7 +65,7 @@ export default function CustomizerPage() {
       .then(data => {
         setProduct(data?.data || null);
         setSelectedProduct(data?.data || null);
-        console.log("Selected Product:", data?.data);
+        console.log("Fetched Product:", data?.data);
         setLoading(false);
       })
       .catch(() => {
