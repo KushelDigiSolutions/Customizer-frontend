@@ -6,10 +6,10 @@ import EditTab from "./2d/EditTab";
 import AddTextTab from "./2d/AddTextTab";
 import EditTextTab from "./2d/EditTextTab";
 import SelectColorsTab from "./2d/SelectColorsTab";
-import DynamicClipartTab from "./2d/ClipartTab"; // Updated import
+import DynamicClipartTab from "./2d/ClipartTab";
 import RightSideImageUpload from "./2d/RightSideImageComponent";
 import "./Sidebar.css";
-import { use3D } from '@/app/context/3DContext'; // Add this at the top
+import { use3D } from '@/app/context/3DContext';
 
 const Sidebar = ({
   editor,
@@ -51,9 +51,9 @@ const Sidebar = ({
   selectedBottomColor,
   setTextFlipX,
   setTextFlipY,
-  handleDynamicLayerChange, // NEW: For dynamic shoe layers
-  selectedLayers, // NEW: Current selected layers for shoes
-  handleDynamicColorChange
+  handleDynamicLayerChange,
+  selectedLayers,
+  handleDynamicColorChange,
 }) => {
   const [activeTab, setActiveTab] = useState("editor");
   const [showClipartTab, setShowClipartTab] = useState(false);
@@ -64,7 +64,78 @@ const Sidebar = ({
 
   const [hasUploadedImage, setHasUploadedImage] = useState(false);
   const [hasAddedText, setHasAddedText] = useState(false);
-  const { threeDtext } = use3D(); // Add this line
+  const { threeDtext } = use3D();
+
+  // Get tab settings from selectedProduct, with fallback defaults
+  const tabSettings = selectedProduct?.tabSettings || {
+    aiEditor: true,
+    imageEdit: true,
+    textEdit: true,
+    colors: true,
+    clipart: true
+  };
+
+  // Define all possible tabs with their configurations
+  const allTabs = [
+    { 
+      key: "editor", 
+      label: "Editor", 
+      icon: "Frame_4_vzkhrn",
+      enabled: tabSettings.aiEditor,
+      fallbackKey: "aiEditor" // Alternative key name mapping
+    },
+    { 
+      key: "edit", 
+      label: "Edit", 
+      icon: "pencil-outline_c6lwsj",
+      enabled: tabSettings.imageEdit,
+      fallbackKey: "imageEdit"
+    },
+    { 
+      key: "text", 
+      label: "Text", 
+      icon: "text-recognition_emsdp8",
+      enabled: tabSettings.textEdit,
+      fallbackKey: "textEdit"
+    },
+    { 
+      key: "colors", 
+      label: "Colors", 
+      icon: "invert-colors_bybi8l",
+      enabled: tabSettings.colors,
+      fallbackKey: "colors"
+    },
+    { 
+      key: "clipart", 
+      label: "Customize", 
+      icon: "heart-multiple-outline_rjqkb7",
+      enabled: tabSettings.clipart,
+      fallbackKey: "clipart"
+    },
+    // Uncomment if you want to use rightImage tab
+    // { 
+    //   key: "rightImage", 
+    //   label: "Right Image", 
+    //   icon: "heart-multiple-outline_rjqkb7",
+    //   enabled: true // Add this to tabSettings if needed
+    // },
+  ];
+
+  // Filter tabs based on database settings
+  const visibleTabs = allTabs.filter(tab => tab.enabled === true);
+
+  // Set default active tab to the first visible tab
+  useEffect(() => {
+    if (visibleTabs.length > 0 && !visibleTabs.find(tab => tab.key === activeTab)) {
+      const firstVisibleTab = visibleTabs[0];
+      setActiveTab(firstVisibleTab.key);
+      
+      // Set appropriate modal based on first tab
+      if (firstVisibleTab.key === "editor") {
+        setShowEditorModal(true);
+      }
+    }
+  }, [selectedProduct, visibleTabs.length]);
 
   const checkForDesignOnCanvas = () => {
     if (!editor?.canvas) return false;
@@ -82,8 +153,7 @@ const Sidebar = ({
   const checkForTextOnCanvas = () => {
     if (!editor?.canvas) return false;
 
-    if (selectedProduct?.productType === "3D") {
-      // Only return true if 3D text is not empty
+    if (selectedProduct?.ProductType === "3d") {
       return !!threeDtext && threeDtext.trim() !== "";
     }
 
@@ -158,75 +228,76 @@ const Sidebar = ({
   }
 
   const handleTabClick = (key) => {
+    // Reset all modal states
     setShowEditorModal(false);
     setShowImageEditModal(false);
     setShowAddModal(false);
     setShowEditModal(false);
     setShowBgColorsModal(false);
     setShowClipartTab(false);
-    setShowrightImage(false)
+    setShowrightImage(false);
     setActiveTab(key);
 
-    if (key === "editor") {
-      setShowEditorModal(true);
-    }
-    if (key === "edit") {
-      const designExists = checkForDesignOnCanvas();
-      if (designExists) {
-        setHasUploadedImage(true);
-        setShowImageEditModal(true);
-      } else {
-        setHasUploadedImage(false);
-      }
-    }
-    if (key === "text") {
-      const textExists = checkForTextOnCanvas();
-      if (textExists) {
-        setHasAddedText(true);
-        setShowEditModal(true);
-        setShowAddModal(false);
-      } else {
-        setHasAddedText(false);
-        setShowAddModal(true);
-        setShowEditModal(false);
-      }
-    }
-    if (key === "colors") {
-      setShowBgColorsModal(true);
-    }
-    if (key === "clipart") {
-      setShowClipartTab(true);
-    }
-    if (key === "rightImage") {
-      setShowrightImage(true);
+    // Set appropriate modal based on tab
+    switch (key) {
+      case "editor":
+        setShowEditorModal(true);
+        break;
+      case "edit":
+        const designExists = checkForDesignOnCanvas();
+        if (designExists) {
+          setHasUploadedImage(true);
+          setShowImageEditModal(true);
+        } else {
+          setHasUploadedImage(false);
+        }
+        break;
+      case "text":
+        const textExists = checkForTextOnCanvas();
+        if (textExists) {
+          setHasAddedText(true);
+          setShowEditModal(true);
+          setShowAddModal(false);
+        } else {
+          setHasAddedText(false);
+          setShowAddModal(true);
+          setShowEditModal(false);
+        }
+        break;
+      case "colors":
+        setShowBgColorsModal(true);
+        break;
+      case "clipart":
+        setShowClipartTab(true);
+        break;
+      case "rightImage":
+        setShowrightImage(true);
+        break;
     }
   };
 
-  // Determine tab label based on product type
-  const getClipartTabLabel = () => {
-    if (!selectedProduct) return "Customize";
+  // Debug logging
+  useEffect(() => {
+    console.log('📋 Tab Settings:', tabSettings);
+    console.log('👁️ Visible Tabs:', visibleTabs.map(tab => tab.key));
+    console.log('✨ Active Tab:', activeTab);
+  }, [tabSettings, visibleTabs, activeTab]);
 
-    switch (selectedProduct.type) {
-      case "shoe":
-        return "Customize";
-      case "sando":
-        return "Designs";
-      default:
-        return "Customize";
-    }
-  };
+  // Show message if no tabs are enabled
+  if (visibleTabs.length === 0) {
+    return (
+      <div className="kr-sidebar kr-reset-margin-padding">
+        <div className="kr-sidebar-empty kr-reset-margin">
+          <p className="kr-reset-margin-padding">No customization options available for this product.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="kr-sidebar kr-reset-margin-padding">
       <div className="kr-sidebar-menu kr-reset-margin">
-        {[
-          { key: "editor", label: "Editor", icon: "Frame_4_vzkhrn" },
-          { key: "edit", label: "Edit", icon: "pencil-outline_c6lwsj" },
-          { key: "text", label: "Text", icon: "text-recognition_emsdp8" },
-          { key: "colors", label: "Colors", icon: "invert-colors_bybi8l" },
-          { key: "clipart", label: "Customize", icon: "heart-multiple-outline_rjqkb7" },
-          // { key: "rightImage", label: "Right Image", icon: "heart-multiple-outline_rjqkb7" },
-        ].map(({ key, label, icon }) => (
+        {visibleTabs.map(({ key, label, icon }) => (
           <div
             key={key}
             onClick={() => handleTabClick(key)}
@@ -244,11 +315,12 @@ const Sidebar = ({
         ))}
       </div>
 
-      {activeTab === "editor" && showEditorModal && (
+      {/* Tab Content - Only render if the tab is enabled */}
+      {activeTab === "editor" && tabSettings.aiEditor && showEditorModal && (
         <EditorTab setShowEditorModal={setShowEditorModal} />
       )}
 
-      {activeTab === "edit" && (
+      {activeTab === "edit" && tabSettings.imageEdit && (
         <>
           {!hasUploadedImage && (
             <EditTab
@@ -271,7 +343,7 @@ const Sidebar = ({
         </>
       )}
 
-      {activeTab === "text" && (
+      {activeTab === "text" && tabSettings.textEdit && (
         <>
           {!hasAddedText && showAddModal && (
             <AddTextTab
@@ -279,7 +351,7 @@ const Sidebar = ({
               customText={customText}
               setCustomText={setCustomText}
               handleAddCustomText={handleAddCustomTextWithTracking}
-              update3DText={update3DText} // NEW: Pass update function
+              update3DText={update3DText}
             />
           )}
           {hasAddedText && showEditModal && (
@@ -304,7 +376,7 @@ const Sidebar = ({
         </>
       )}
 
-      {activeTab === "colors" && showBgColorsModal && (
+      {activeTab === "colors" && tabSettings.colors && showBgColorsModal && (
         <SelectColorsTab
           handleColorChange={handleColorChange}
           selectedColor={selectedColor}
@@ -318,7 +390,7 @@ const Sidebar = ({
         />
       )}
 
-      {activeTab === "clipart" && showClipartTab && (
+      {activeTab === "clipart" && tabSettings.clipart && showClipartTab && (
         <DynamicClipartTab
           addEmojiTextToCanvas={addEmojiTextToCanvas}
           setShowClipartTab={setShowClipartTab}
@@ -327,11 +399,12 @@ const Sidebar = ({
           addIconToCanvas={addIconToCanvas}
           editor={editor}
           handleAddPatternToCanvas={handleAddPatternToCanvas}
-          handleDynamicLayerChange={handleDynamicLayerChange} // NEW: Pass dynamic layer handler
-          selectedLayers={selectedLayers} // NEW: Pass selected layers
+          handleDynamicLayerChange={handleDynamicLayerChange}
+          selectedLayers={selectedLayers}
         />
       )}
 
+      {/* Uncomment if you want to use rightImage tab */}
       {/* {activeTab === "rightImage" && showrightImage && (
         <RightSideImageUpload
           editor={editor}

@@ -16,7 +16,7 @@ import { backendProducts } from "./data/productsData";
 const CustomizerLayout = (props) => {
   console.log('props V1')
   console.log(props)
-  // Get all 2D context state and setters
+  // Get all 2d context state and setters
   const {
     customText, setCustomText,
     textSize, setTextSize,
@@ -1085,7 +1085,7 @@ const CustomizerLayout = (props) => {
       return;
     }
 
-    if (selectedProduct.productType === "3D") {
+    if (selectedProduct.ProductType === "3d") {
       setIsSaving(true);
 
       try {
@@ -1129,7 +1129,7 @@ const CustomizerLayout = (props) => {
             appliedImageCloudUrl
           },
           screenshots: cloudinaryScreenshots,
-          productType: "3D"
+          ProductType: "3d"
         };
 
         // Save to backend
@@ -1142,7 +1142,7 @@ const CustomizerLayout = (props) => {
         if (response.ok) {
           setSaveSuccess(true);
           setTimeout(() => setSaveSuccess(false), 3000);
-          alert("3D design saved! 📸");
+          alert("3d design saved! 📸");
         } else {
           throw new Error("Save failed");
         }
@@ -1154,7 +1154,7 @@ const CustomizerLayout = (props) => {
       return;
     }
 
-    if (selectedProduct.productType === "2D") {
+    if (selectedProduct.ProductType === "2d") {
       setIsSaving(true);
 
       try {
@@ -1410,7 +1410,7 @@ const CustomizerLayout = (props) => {
         />
       )}
 
-      {selectedProduct?.productType !== "3D" && (
+      {selectedProduct?.ProductType !== "3d" && (
         <FabricJSCanvas
           className="kr-canvas-container"
           onReady={onReady}
@@ -1419,11 +1419,11 @@ const CustomizerLayout = (props) => {
         />
       )}
 
-      {selectedProduct?.productType === "3D" && (
+      {selectedProduct?.ProductType === "3d" && (
         <ThreeDCustomize />
       )}
 
-      {selectedProduct?.productType === "3D" && threeDloading && (
+      {selectedProduct?.ProductType === "3d" && threeDloading && (
         <div className="kr-loading-overlay kr-reset-margin-padding">
           <div className="kr-loading-content kr-reset-margin-padding">
             <div className="kr-loading-spinner "></div>
@@ -1432,7 +1432,7 @@ const CustomizerLayout = (props) => {
         </div>
       )}
 
-      {selectedProduct?.productType === "3D" && threeDscreenshots.length > 0 && (
+      {selectedProduct?.ProductType === "3d" && threeDscreenshots.length > 0 && (
         <ScreenshotGallery
           screenshots={threeDscreenshots}
           onClose={() => setthreeDScreenshots([])}

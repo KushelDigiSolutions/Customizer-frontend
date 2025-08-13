@@ -1,4 +1,4 @@
-// Simplified Topbar.jsx without 3D functionality
+// Simplified Topbar.jsx without 3d functionality
 
 import React from 'react';
 import { use3D } from '../context/3DContext';
@@ -12,9 +12,9 @@ const Topbar = ({
 }) => {
   const { handleScreenshot, handleClearSelectedPart, selectedProduct, threeDscreenshots } = use3D();
 
-  // Handle save for both 2D and 3D
+  // Handle save for both 2d and 3d
   const handleSave = async () => {
-    if (selectedProduct?.productType === "3D") {
+    if (selectedProduct?.ProductType === "3d") {
       // Wait for screenshots to finish
       const screenshots = await handleScreenshot();
 
@@ -59,7 +59,7 @@ const Topbar = ({
         <div className="kr-right-section kr-reset-margin-padding">
 
           {
-            selectedProduct?.productType === "3D" && (
+            selectedProduct?.ProductType === "3d" && (
               <>
                 <button
                   className="kr-navbar-button kr-success-button kr-reset-margin"

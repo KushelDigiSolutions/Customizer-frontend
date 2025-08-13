@@ -17,8 +17,15 @@ const DynamicClipartTab = ({
   const [view, setView] = useState('main');
   const [availableCategories, setAvailableCategories] = useState([]);
 
-  const is3DProduct = selectedProduct?.productType === '3D';
-  const shirtDesigns = selectedProduct?.threeDDesigns?.shirtDesign || [];
+  const is3DProduct = selectedProduct?.ProductType === '3d';
+   // ✅ Get first layer key dynamically (since it may not always be "Designs")
+  const layerDesignKey = selectedProduct?.layerDesign
+    ? Object.keys(selectedProduct.layerDesign)[0]
+    : null;
+
+  const shirtDesigns = layerDesignKey
+    ? selectedProduct.layerDesign[layerDesignKey] || []
+    : [];
 
   const { setthreeDTexture, threeDcolor, setCustomizationData, threeDselectedPart } = use3D();
 
@@ -157,12 +164,13 @@ const DynamicClipartTab = ({
         break;
     }
   };
+  
 
   // Render main category selection
   const renderMainView = () => (
     <>
       {
-        selectedProduct.productType === '2D' && (
+        selectedProduct.ProductType === '2d' && (
           <div className="kr-clipart-content kr-clipart-space-y-2">
             {availableCategories.length === 0 ? (
               <div className="kr-empty-state">
@@ -197,21 +205,29 @@ const DynamicClipartTab = ({
         )
       }
 
-      {
-        is3DProduct && shirtDesigns.length > 0 && (
-          <div className="kr-3d-section">
-            <div className="kr-3d-grid">
-              {shirtDesigns.map(design => (
-                <div key={design.id} className="kr-3d-item"
-                  onClick={() => handleApply3DDesign(design.url)}>
-                  <img src={design.url} alt={design.name} className="kr-3d-image" />
-                  <div className="kr-3d-name">{design.name}</div>
+      {is3DProduct && shirtDesigns.length > 0 && (
+        <div className="kr-3d-section">
+          <div className="kr-3d-grid">
+            {shirtDesigns.map((design, idx) => (
+              <div
+                key={idx}
+                className="kr-3d-item"
+                onClick={() => handleApply3DDesign(design.files?.[0])}
+              >
+                <img
+                  src={design.files?.[0]}
+                  alt={design.title}
+                  className="kr-3d-image"
+                />
+                <div className="kr-3d-info">
+                  <div className="kr-3d-name">{design.title}</div>
+                  <div className="kr-3d-price">₹{design.price}</div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        )
-      }
+        </div>
+      )}
     </>
   );
 

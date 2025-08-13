@@ -168,7 +168,7 @@ const SelectColorsTab = () => {
       <hr className="kr-divider kr-reset-margin-padding" />
 
       {
-        selectedProduct?.productType === "3D" && (
+        selectedProduct?.ProductType === "3d" && (
           <div className="kr-3d-section kr-reset-margin">
 
             <div className="kr-color-picker-section kr-reset-padding">
@@ -186,7 +186,7 @@ const SelectColorsTab = () => {
 
       {/* Tab Navigation - Only show if there are gradient colors */}
       {
-        selectedProduct?.productType === '2D' && (
+        selectedProduct?.ProductType === '2d' && (
           <>
             {/* <div className="kr-tab-navigation kr-reset-margin-padding">
               <button

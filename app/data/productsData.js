@@ -8,7 +8,7 @@ export const backendProducts = [
         description: "Front/Back Sando",
         textTopRatio: 2.8,
         type: "sando",
-        productType: "2D",
+        ProductType: "2d",
 
         layers: {
             BASE_COLOR: 0,
@@ -313,7 +313,7 @@ export const backendProducts = [
         width: 300,
         description: "Formal Shoe",
         type: "shoe",
-        productType: "2D",
+        ProductType: "2d",
         textTab: false,
         colorsTab: false,
         uploadDesignTab: false,
@@ -484,7 +484,7 @@ export const backendProducts = [
         size: "M",
         description: "white shirt",
         type: "shirt",
-        productType: "3D",
+        ProductType: "3d",
         parts: [
             'Front',
             'Back',
@@ -492,31 +492,43 @@ export const backendProducts = [
             'RightSleeve',
         ],
         model3D: "https://3d-customizer-ecru.vercel.app/models/brand1.glb",
-        threeDDesigns: {
-            shirtDesign: [
+        layerDesign: {
+            Designs: [
                 {
                     id: 1,
-                    name: "Design 1",
-                    url: "https://3d-customizer-ecru.vercel.app/shirtdesign/1.webp",
-                    // color: "White"
+                    title: "Design 1",
+                    shortDescription: "Shirt Design 1",
+                    price: 23.88,
+                    files: [
+                        "https://res.cloudinary.com/dgif730br/image/upload/v1755068265/customizer/qfm7hdwzefyvtq4bdjul.webp"
+                    ]
                 },
                 {
                     id: 2,
-                    name: "Design 2",
-                    url: "https://3d-customizer-ecru.vercel.app/shirtdesign/2.webp",
-                    // color: "Mehroon"
+                    title: "Design 2",
+                    shortDescription: "Shirt Design 2",
+                    price: 19.66,
+                    files: [
+                        "https://res.cloudinary.com/dgif730br/image/upload/v1755068290/customizer/o6218jgziz4yonthsbup.webp"
+                    ]
                 },
                 {
                     id: 3,
-                    name: "Design 3",
-                    url: "https://3d-customizer-ecru.vercel.app/shirtdesign/3.webp",
-                    // color: "Green"
+                    title: "Design 3",
+                    shortDescription: "Shirt Design 3",
+                    price: 21.4,
+                    files: [
+                        "https://res.cloudinary.com/dgif730br/image/upload/v1755068385/customizer/vsxvvcaqfuf84yapnae9.webp"
+                    ]
                 },
                 {
                     id: 4,
-                    name: "Design 4",
-                    url: "https://3d-customizer-ecru.vercel.app/shirtdesign/4.webp",
-                    // color: "Dark Blue"
+                    title: "Design 4",
+                    shortDescription: "Shirt Design 4",
+                    price: 25,
+                    files: [
+                        "https://res.cloudinary.com/dgif730br/image/upload/v1755068437/customizer/vbngf2pbv35hwrqzzmnq.webp"
+                    ]
                 }
             ]
         }
@@ -530,7 +542,7 @@ export const backendProducts = [
         height: 380,
         description: "Printed T-Shirt",
         type: "t-Shirt",
-        productType: "2D",
+        ProductType: "2d",
 
         defaultLayers: {
             mid: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1754374874/Middle-Part-White_g6hpnb.png", // z-index 0
@@ -622,5 +634,60 @@ export const backendProducts = [
             ],
         }
 
+    },
+    {
+        ProductType: "3d",
+        tabSettings: {
+            aiEditor: false,
+            imageEdit: true,
+            textEdit: true,
+            colors: true,
+            clipart: true
+        },
+        customizableData: [],
+        customizerImage: "https://res.cloudinary.com/dgif730br/image/upload/v1755068550/customizer-images/eiyrawqmqhntvzvjznjx.png",
+        modelFile: "https://res.cloudinary.com/dgif730br/raw/upload/v1755068581/3d-models/1755068579390_brand1.glb",
+        designName: null,
+        layerDesign: {
+            Designs: [
+                {
+                    id: 1,
+                    title: "Design 1",
+                    shortDescription: "Shirt Design 1",
+                    price: 23.88,
+                    files: [
+                        "https://res.cloudinary.com/dgif730br/image/upload/v1755068265/customizer/qfm7hdwzefyvtq4bdjul.webp"
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "Design 2",
+                    shortDescription: "Shirt Design 2",
+                    price: 19.66,
+                    files: [
+                        "https://res.cloudinary.com/dgif730br/image/upload/v1755068290/customizer/o6218jgziz4yonthsbup.webp"
+                    ]
+                },
+                {
+                    id: 3,
+                    title: "Design 3",
+                    shortDescription: "Shirt Design 3",
+                    price: 21.4,
+                    files: [
+                        "https://res.cloudinary.com/dgif730br/image/upload/v1755068385/customizer/vsxvvcaqfuf84yapnae9.webp"
+                    ]
+                },
+                {
+                    id: 4,
+                    title: "Design 4",
+                    shortDescription: "Shirt Design 4",
+                    price: 25,
+                    files: [
+                        "https://res.cloudinary.com/dgif730br/image/upload/v1755068437/customizer/vbngf2pbv35hwrqzzmnq.webp"
+                    ]
+                }
+            ]
+        }
     }
+
 ];

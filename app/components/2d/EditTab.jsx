@@ -73,7 +73,7 @@ const EditTab = ({ handleAddDesignToCanvas, editor, setShowImageEditModal, setHa
             <hr className="kr-edit-divider kr-reset-margin-padding" />
 
             {
-                selectedProduct?.productType === '2D' && (
+                selectedProduct?.ProductType === '2d' && (
                     <div className='kr-edit-body kr-reset-margin'>
                         <div className='kr-edit-form kr-reset-margin-padding'>
                             <h3 className='kr-edit-subtitle kr-reset-margin-padding'>Original vector artwork best, if you have?</h3>
@@ -111,7 +111,7 @@ const EditTab = ({ handleAddDesignToCanvas, editor, setShowImageEditModal, setHa
 
 
             {
-                selectedProduct?.productType === '3D' && (
+                selectedProduct?.ProductType === '3d' && (
                     <>
                         <TextureUploader />
                     </>

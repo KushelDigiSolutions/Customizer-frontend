@@ -228,14 +228,14 @@ const EditTextTab = ({ editor, layerManager }) => {
 
     const handleFontStyleChange = (styleType) => {
         if (is3D) {
-            // For 3D, update context state for fontWeight/fontStyle
+            // For 3d, update context state for fontWeight/fontStyle
             if (styleType === 'bold') {
                 setthreeDTextFontWeight(prev => prev === 'bold' ? 'normal' : 'bold');
             } else if (styleType === 'italic') {
                 setthreeDTextFontStyle(prev => prev === 'italic' ? 'normal' : 'italic');
             }
         } else {
-            // 2D logic (fabric.js)
+            // 2d logic (fabric.js)
             applyToTextObject((textObj) => {
                 if (styleType === 'bold') {
                     const currentWeight = textObj.fontWeight;
@@ -341,7 +341,7 @@ const EditTextTab = ({ editor, layerManager }) => {
         }
     };
 
-    const is3D = selectedProduct?.productType === "3D";
+    const is3D = selectedProduct?.ProductType === "3d";
     const fontValue = is3D ? threeDtextFontFamily : currentFont;
     const colorValue = is3D ? threeDtextColor : currentColor;
 
@@ -388,7 +388,7 @@ const EditTextTab = ({ editor, layerManager }) => {
                     </div>
 
                     {
-                        selectedProduct.productType === "2D" && (
+                        selectedProduct.ProductType === "2d" && (
                             <>
                                 <hr className="kr-edit-text-divider kr-reset-margin-padding" />
 
@@ -462,15 +462,15 @@ const EditTextTab = ({ editor, layerManager }) => {
                     <div className="kr-edit-text-3d-section kr-reset-margin">
                         <div className="kr-edit-text-3d-controls kr-reset-margin-padding">
                             <div className="kr-edit-text-3d-control kr-reset-margin-padding">
-                                <label className="kr-edit-text-3d-label kr-reset-margin-padding">3D Text Scale: {threeDtextScale.toFixed(2)}</label>
+                                <label className="kr-edit-text-3d-label kr-reset-margin-padding">3d Text Scale: {threeDtextScale.toFixed(2)}</label>
                                 <input type="range" min="0.2" max="2" step="0.05" value={threeDtextScale} onChange={(e) => setthreeDTextScale(parseFloat(e.target.value))} className="kr-edit-text-3d-range" />
                             </div>
                             <div className="kr-edit-text-3d-control kr-reset-margin-padding">
-                                <label className="kr-edit-text-3d-label kr-reset-margin-padding">3D Text Position X: {threeDtextPosX.toFixed(2)}</label>
+                                <label className="kr-edit-text-3d-label kr-reset-margin-padding">3d Text Position X: {threeDtextPosX.toFixed(2)}</label>
                                 <input type="range" min="0" max="1" step="0.01" value={threeDtextPosX} onChange={(e) => setthreeDTextPosX(parseFloat(e.target.value))} className="kr-edit-text-3d-range" />
                             </div>
                             <div className="kr-edit-text-3d-control kr-reset-margin-padding" >
-                                <label className="kr-edit-text-3d-label kr-reset-margin-padding">3D Text Position Y: {threeDtextPosY.toFixed(2)}</label>
+                                <label className="kr-edit-text-3d-label kr-reset-margin-padding">3d Text Position Y: {threeDtextPosY.toFixed(2)}</label>
                                 <input type="range" min="0" max="1" step="0.01" value={threeDtextPosY} onChange={(e) => setthreeDTextPosY(parseFloat(e.target.value))} className="kr-edit-text-3d-range" />
                             </div>
                         </div>
@@ -497,7 +497,7 @@ const EditTextTab = ({ editor, layerManager }) => {
                     </div>
 
                     {
-                        selectedProduct.productType === "2D" && (
+                        selectedProduct.ProductType === "2d" && (
                             <>
                                 <div className='kr-edit-text-sliders kr-reset-margin'>
                                     <label className="kr-edit-text-slider-label kr-reset-margin-padding">Size</label>

@@ -27,6 +27,20 @@
   cursor: pointer;
 }
 
+.kr-design-title {
+  font-weight: 600; /* font-semibold */
+  font-size: 0.875rem; /* text-sm */
+  color: #1f2937; /* text-gray-800 */
+  text-align: center;
+}
+
+.kr-design-price {
+  font-weight: 500; /* font-semibold */
+  font-size: 0.75rem; /* text-sm */
+  color: #1f2937; /* text-gray-800 */
+  text-align: center;
+}
+
 .kr-clipart-divider {
   border-top: 1px solid #D3DBDF;
 }
@@ -156,9 +170,16 @@
 }
 
 .kr-3d-name {
-  font-size: 0.75rem; /* text-xs */
+  font-size: 0.95rem; /* text-xs */
   margin-top: 0.25rem; /* mt-1 */
   text-align: center;
+}
+
+.kr-3d-price {
+  font-size: 0.85rem; /* text-xs */
+  color: #6b7280; /* text-gray-500 */
+  text-align: center;
+  margin-top: 0.25rem;
 }
 
 .kr-category-content {

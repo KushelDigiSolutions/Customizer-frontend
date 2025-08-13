@@ -18,7 +18,7 @@ const AddTextTab = ({ handleAddCustomText, update3DText }) => {
                 </div>
             </div>
             {
-                selectedProduct?.productType === "2D" && (
+                selectedProduct?.ProductType === "2d" && (
                     <>
                         <hr className="kr-divider kr-reset-margin-padding" />
                         <div className='kr-content kr-reset-margin'>
@@ -41,7 +41,7 @@ const AddTextTab = ({ handleAddCustomText, update3DText }) => {
                 )
             }
             {
-                selectedProduct?.productType === "3D" && (
+                selectedProduct?.ProductType === "3d" && (
                     <>
                         <hr className="kr-divider kr-reset-margin-padding" />
                         <div className='kr-content kr-reset-margin'>
