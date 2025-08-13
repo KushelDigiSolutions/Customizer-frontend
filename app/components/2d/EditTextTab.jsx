@@ -372,7 +372,7 @@ const EditTextTab = ({ editor, layerManager }) => {
                     </div>
                     <hr className="kr-edit-text-divider kr-reset-margin-padding" />
 
-                    <div className='kr-edit-text-content kr-reset-margin-padding'>
+                    <div className='kr-edit-text-content kr-reset-margin'>
                         <input
                             type="text"
                             value={customText}
@@ -419,7 +419,7 @@ const EditTextTab = ({ editor, layerManager }) => {
 
                     <hr className="kr-edit-text-divider kr-reset-margin-padding" />
 
-                    <div className='kr-edit-text-font-section kr-reset-margin-padding'>
+                    <div className='kr-edit-text-font-section kr-reset-margin'>
                         <div className='kr-edit-text-font-header kr-reset-margin-padding'>
                             <h3 className='kr-edit-text-section-title kr-reset-margin-padding'>Font</h3>
                         </div>
@@ -459,7 +459,7 @@ const EditTextTab = ({ editor, layerManager }) => {
 
                     <hr className="kr-edit-text-divider kr-reset-margin-padding" />
 
-                    <div className="kr-edit-text-3d-section kr-reset-margin-padding">
+                    <div className="kr-edit-text-3d-section kr-reset-margin">
                         <div className="kr-edit-text-3d-controls kr-reset-margin-padding">
                             <div className="kr-edit-text-3d-control kr-reset-margin-padding">
                                 <label className="kr-edit-text-3d-label kr-reset-margin-padding">3D Text Scale: {threeDtextScale.toFixed(2)}</label>
@@ -476,7 +476,7 @@ const EditTextTab = ({ editor, layerManager }) => {
                         </div>
                     </div>
 
-                    <div className="kr-edit-text-3d-color-section kr-reset-margin-padding">
+                    <div className="kr-edit-text-3d-color-section kr-reset-margin">
                         <div className="kr-edit-text-3d-color-controls kr-reset-margin-padding">
                             <label className="kr-edit-text-3d-color-label kr-reset-margin-padding">Text Color:</label>
                             <input
@@ -499,7 +499,7 @@ const EditTextTab = ({ editor, layerManager }) => {
                     {
                         selectedProduct.productType === "2D" && (
                             <>
-                                <div className='kr-edit-text-sliders kr-reset-margin-padding'>
+                                <div className='kr-edit-text-sliders kr-reset-margin'>
                                     <label className="kr-edit-text-slider-label kr-reset-margin-padding">Size</label>
                                     <input
                                         type="range"
@@ -523,7 +523,7 @@ const EditTextTab = ({ editor, layerManager }) => {
 
                                 <hr className="kr-edit-text-divider kr-reset-margin-padding" />
 
-                                <div className='kr-edit-text-arrange kr-reset-margin-padding'>
+                                <div className='kr-edit-text-arrange kr-reset-margin'>
                                     <h3 className='kr-edit-text-arrange-title kr-reset-margin-padding'>Arrange</h3>
                                     <div className="kr-edit-text-arrange-controls kr-reset-margin-padding">
                                         <img

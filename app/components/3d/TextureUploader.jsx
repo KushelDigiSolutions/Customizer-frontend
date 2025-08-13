@@ -197,7 +197,7 @@ const TextureUploader = () => {
   // Show preview and controls after upload
   return (
     <>
-      <div className="kr-texture-uploader kr-reset-margin-padding">
+      <div className="kr-texture-uploader kr-reset-margin">
         {/* Preview Header */}
         {/* <div className='kr-preview-header kr-reset-margin'>
           <div className='kr-preview-title-section kr-reset-margin-padding'>
@@ -216,7 +216,7 @@ const TextureUploader = () => {
         <hr className="kr-preview-divider kr-reset-margin-padding" /> */}
 
         {/* Image Preview Section */}
-        <div className="kr-preview-section kr-reset-margin">
+        <div className="kr-preview-section kr-reset">
           <div className="kr-preview-design-image kr-reset-margin">
             <img
               src={previewUrl}
