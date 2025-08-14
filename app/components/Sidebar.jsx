@@ -278,11 +278,11 @@ const Sidebar = ({
   };
 
   // Debug logging
-  useEffect(() => {
-    console.log('📋 Tab Settings:', tabSettings);
-    console.log('👁️ Visible Tabs:', visibleTabs.map(tab => tab.key));
-    console.log('✨ Active Tab:', activeTab);
-  }, [tabSettings, visibleTabs, activeTab]);
+  // useEffect(() => {
+  //   console.log('📋 Tab Settings:', tabSettings);
+  //   console.log('👁️ Visible Tabs:', visibleTabs.map(tab => tab.key));
+  //   console.log('✨ Active Tab:', activeTab);
+  // }, [tabSettings, visibleTabs, activeTab]);
 
   // Show message if no tabs are enabled
   if (visibleTabs.length === 0) {

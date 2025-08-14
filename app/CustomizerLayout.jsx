@@ -40,14 +40,92 @@ const CustomizerLayout = (props) => {
     saveSuccess, setSaveSuccess,
     isSaving, setIsSaving,
     currentProductId, setCurrentProductId,
-    layerManager, setLayerManager
+    layerManager, setLayerManager,
+    showAddToCart: showAddToCart2D, setShowAddToCart: setShowAddToCart2D,
+    isDesignSaved: isDesignSaved2D, setIsDesignSaved: setIsDesignSaved2D,
+    setSavedDesignData: setSavedDesignData2D
   } = use2D();
 
   const {
     threeDscreenshots, setthreeDScreenshots,
     threeDselectedPart, setthreeDSelectedPart,
-    threeDloading, selectedProduct, setSelectedProduct, customizationData
+    threeDloading, selectedProduct, setSelectedProduct, customizationData,
+    showAddToCart, setShowAddToCart, isDesignSaved, setIsDesignSaved, setSavedDesignData,
+    threeDtextFontFamily,
+    threeDzoom,
+    threeDoffsetX,
+    threeDoffsetY,
+    threeDtext,
+    threeDtextTexture,
+    threeDtextColor,
+    threeDoutlineColor,
+    threeDtextScale,
+    threeDtextPosX,
+    threeDtextPosY,
+    threeDtextureMode,
+    threeDlogoScale,
+    threeDlogoPosX,
+    threeDlogoPosY,
+    threeDtextFontWeight,
+    threeDtextFontStyle,
+    threeDcolor,
+    threeDtexture,
   } = use3D()
+
+  // Function to handle design modifications and hide add to cart button
+  const handleDesignModification = () => {
+    if (selectedProduct?.ProductType === "3d") {
+      if (isDesignSaved || showAddToCart) {
+        setIsDesignSaved(false);
+        setShowAddToCart(false);
+      }
+    } else {
+      if (isDesignSaved2D || showAddToCart2D) {
+        setIsDesignSaved2D(false);
+        setShowAddToCart2D(false);
+      }
+    }
+  };
+
+  // Watch for changes in 2D customization data
+  // Temporarily disabled to fix Add to Cart button issue
+  useEffect(() => {
+    if (selectedProduct?.ProductType === "2d") {
+      handleDesignModification();
+    }
+  }, [customText, textSize, textSpacing, textArc, textColor, fontFamily, fontStyle, textFlipX, textFlipY, flipX, flipY, selectedColor, selectedTopColor, selectedBottomColor, selectedLayers]);
+
+  // Watch for changes in 3D customization data
+  // Temporarily disabled to fix Add to Cart button issue
+  useEffect(() => {
+    if (selectedProduct?.ProductType === "3d") {
+      handleDesignModification();
+    }
+  }, [
+    customizationData,
+    threeDcolor,
+    threeDtexture,
+    threeDselectedPart,
+    threeDtextFontFamily,
+    threeDzoom,
+    threeDoffsetX,
+    threeDoffsetY,
+    threeDtext,
+    threeDtextTexture,
+    threeDtextColor,
+    threeDoutlineColor,
+    threeDtextScale,
+    threeDtextPosX,
+    threeDtextPosY,
+    threeDtextureMode,
+    threeDlogoScale,
+    threeDlogoPosX,
+    threeDlogoPosY,
+    threeDtextFontWeight,
+    threeDtextFontStyle
+  ]);
+
+
 
   console.log("productId", props.productId)
   console.log("storeHash", props.storeHash)
@@ -1103,12 +1181,12 @@ const CustomizerLayout = (props) => {
   const handleSave = async (screenshotsFrom3D = null) => {
     if (!editor?.canvas) {
       alert('Canvas not ready!');
-      return;
+      return { success: false, error: 'Canvas not ready' };
     }
 
     if (!selectedProduct) {
       alert('No product selected!');
-      return;
+      return { success: false, error: 'No product selected' };
     }
 
     if (selectedProduct.ProductType === "3d") {
@@ -1138,7 +1216,8 @@ const CustomizerLayout = (props) => {
           appliedImageCloudUrl = cloudinaryResponse.url;
         }
 
-        // Prepare save payload
+        // Prepare save payload - exclude screenshots from customizations
+        const { screenshots: _, ...customizationsWithoutScreenshots } = customizationData;
         const saveData = {
           timestamp: new Date().toISOString(),
           product: {
@@ -1151,134 +1230,125 @@ const CustomizerLayout = (props) => {
             model3D: selectedProduct.model3D,
           },
           customizations: {
-            ...customizationData,
+            ...customizationsWithoutScreenshots,
             appliedImageCloudUrl
           },
           screenshots: cloudinaryScreenshots,
           ProductType: "3d"
         };
 
-        // Save to backend
-        const response = await fetch('https://customizer-backend-ttv5.onrender.com/api/save-product', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(saveData)
-        });
+        let savedProductId = null;
+        let savedData = null;
 
-        if (response.ok) {
-          setSaveSuccess(true);
-          setTimeout(() => setSaveSuccess(false), 3000);
-          alert("3d design saved! 📸");
-        } else {
-          throw new Error("Save failed");
+        try {
+          // Save to backend
+          const response = await fetch('https://customise.shikharjobs.com/api/save-product', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(saveData)
+          });
+
+          if (response.ok) {
+            const result = await response.json();
+            console.log('3D Save API response:', result);
+            // Extract product ID from the correct path in response
+            savedProductId = result.product?.id || result._id || result.data?._id || result.product?._id;
+            console.log('3D Saved Product ID:', savedProductId);
+            savedData = {
+              krDesignId: savedProductId, // Store actual database ID
+              krImageURL: cloudinaryScreenshots.map(s => s.url), // Store all Cloudinary links
+              krDesignArea: customizationData, // Store all customizations
+              customizationData: customizationData,
+              screenshots: cloudinaryScreenshots
+            };
+
+            // Store in localStorage
+            localStorage.setItem('krDesignData', JSON.stringify(savedData));
+
+            // Store designs in an object
+            const existingDesigns = JSON.parse(localStorage.getItem('krDesigns') || '{}');
+            existingDesigns[savedProductId] = savedData;
+            localStorage.setItem('krDesigns', JSON.stringify(existingDesigns));
+
+            setSaveSuccess(true);
+            setTimeout(() => setSaveSuccess(false), 3000);
+            console.log("3d design saved! 📸");
+
+          } else {
+            throw new Error("Save failed");
+          }
+          setSavedDesignData({ customizationData });
+          setIsDesignSaved(true);
+          setShowAddToCart(true);
+        } catch (apiError) {
+          console.error("Database save error:", apiError);
+
+          // Even if API fails, store in localStorage with local ID
+          const localId = `local_${Date.now()}`;
+          console.log('3D API failed, using local ID:', localId);
+          savedData = {
+            krDesignId: localId, // Use local ID when API fails
+            krImageURL: cloudinaryScreenshots.map(s => s.url), // Store all Cloudinary links
+            krDesignArea: customizationData, // Store all customizations
+            customizationData: customizationData,
+            screenshots: cloudinaryScreenshots
+          };
+
+          localStorage.setItem('krDesignData', JSON.stringify(savedData));
+
+          const existingDesigns = JSON.parse(localStorage.getItem('krDesigns') || '{}');
+          existingDesigns[savedData.krDesignId] = savedData;
+          localStorage.setItem('krDesigns', JSON.stringify(existingDesigns));
         }
+
+        return {
+          success: true,
+          productId: savedProductId,
+          savedData: savedData
+        };
+
       } catch (error) {
         alert('Save failed: ' + error.message);
+        return { success: false, error: error.message };
       } finally {
         setIsSaving(false);
-      }
-      return;
-    }
 
-    if (selectedProduct.ProductType === "2d") {
+      }
+    } else if (selectedProduct.ProductType === "2d") {
       setIsSaving(true);
 
       try {
-        const screenshotDataURL = editor.canvas.toDataURL('image/png', 0.8);
-
-        if (!screenshotDataURL || screenshotDataURL === 'data:,') {
-          throw new Error('Failed to capture design screenshot');
-        }
-
-        let screenshotCloudinaryUrl = screenshotDataURL;
-
-        try {
-          const response = await fetch(screenshotDataURL);
-          const blob = await response.blob();
-          const file = new File([blob], `design-screenshot-${Date.now()}.png`, {
-            type: 'image/png'
-          });
-
-          const cloudinaryResponse = await uploadToCloudinaryImg({ image: file });
-
-          if (cloudinaryResponse && cloudinaryResponse.url) {
-            screenshotCloudinaryUrl = cloudinaryResponse.url;
-          }
-        } catch (uploadError) {
-          console.error("Screenshot upload failed:", uploadError);
-        }
-
-        // Upload applied design/image/logo to Cloudinary (if present)
-        let appliedImageCloudUrl = null;
-        const appliedDesignObj = editor.canvas.getObjects().find(obj => obj.name === "design-image" || obj.name === "logo-image");
-        if (appliedDesignObj && appliedDesignObj.getSrc) {
-          const appliedImageUrl = appliedDesignObj.getSrc();
-          const blob = await (await fetch(appliedImageUrl)).blob();
-          const file = new File([blob], `2d-applied-image-${Date.now()}.png`, { type: 'image/png' });
-          const cloudinaryResponse = await uploadToCloudinaryImg({ image: file });
-          appliedImageCloudUrl = cloudinaryResponse.url;
-        }
-
-        const canvasObjects = editor.canvas.getObjects().map(obj => {
-          const baseData = {
-            type: obj.type,
-            left: obj.left,
-            top: obj.top,
-            scaleX: obj.scaleX,
-            scaleY: obj.scaleY,
-            angle: obj.angle,
-            opacity: obj.opacity,
-            flipX: obj.flipX,
-            flipY: obj.flipY,
-            originX: obj.originX,
-            originY: obj.originY,
-            selectable: obj.selectable,
-            evented: obj.evented,
-            visible: obj.visible,
-            zIndex: obj.zIndex || 0
-          };
-
-          if (obj.type === 'i-text') {
-            return {
-              ...baseData,
-              text: obj.text,
-              fontSize: obj.fontSize,
-              fontFamily: obj.fontFamily,
-              fontStyle: obj.fontStyle,
-              fontWeight: obj.fontWeight,
-              fill: obj.fill,
-              textAlign: obj.textAlign,
-              charSpacing: obj.charSpacing,
-              lineHeight: obj.lineHeight,
-              isEmoji: obj.isEmoji || false,
-              editable: obj.editable
-            };
-          } else if (obj.type === 'image') {
-            return {
-              ...baseData,
-              src: obj.getSrc ? obj.getSrc() : obj._originalElement?.src,
-              isTshirtBase: obj.isTshirtBase || false,
-              isPattern: obj.isPattern || false,
-              isTopGradient: obj.isTopGradient || false,
-              isBottomGradient: obj.isBottomGradient || false,
-              layerType: obj.layerType || null,
-              name: obj.name,
-              isIcon: obj.isIcon || false,
-              hasControls: obj.hasControls,
-              hasBorders: obj.hasBorders,
-              lockMovementX: obj.lockMovementX,
-              lockMovementY: obj.lockMovementY,
-              lockScalingX: obj.lockScalingX,
-              lockScalingY: obj.lockScalingY,
-              lockRotation: obj.lockRotation
-            };
-          }
-
-          return baseData;
+        // Take screenshot of canvas
+        const canvasDataURL = editor.canvas.toDataURL({
+          format: 'png',
+          quality: 1
         });
 
-        const currentProduct = getCurrentProductData();
+        // Upload canvas screenshot to Cloudinary
+        const blob = await (await fetch(canvasDataURL)).blob();
+        const file = new File([blob], `2d-design-${Date.now()}.png`, { type: 'image/png' });
+        const cloudinaryResponse = await uploadToCloudinaryImg({ image: file });
 
+        // Get current 2D customization data
+        const current2DData = {
+          customText,
+          textSize,
+          textSpacing,
+          textArc,
+          textColor,
+          fontFamily,
+          fontStyle,
+          textFlipX,
+          textFlipY,
+          flipX,
+          flipY,
+          selectedColor,
+          selectedTopColor,
+          selectedBottomColor,
+          selectedLayers
+        };
+
+        // Prepare save payload for 2D
         const saveData = {
           timestamp: new Date().toISOString(),
           product: {
@@ -1287,85 +1357,88 @@ const CustomizerLayout = (props) => {
             description: selectedProduct.description,
             size: selectedProduct.size,
             type: selectedProduct.type,
-            color: selectedColor.color,
-            width: selectedProduct.width,
-            textTopRatio: selectedProduct.textTopRatio,
-            hasDefaultLayers: !!selectedProduct.defaultLayers
+            color: selectedProduct.color,
           },
-          canvas: {
-            width: editor.canvas.getWidth(),
-            height: editor.canvas.getHeight(),
-            objects: canvasObjects,
-            backgroundColor: editor.canvas.backgroundColor || selectedColor.color
-          },
-          customizations: {
-            text: customText,
-            textSize: textSize,
-            textSpacing: textSpacing,
-            textArc: textArc,
-            textColor: textColor,
-            fontFamily: fontFamily,
-            fontStyle: fontStyle,
-            textFlipX: textFlipX,
-            textFlipY: textFlipY,
-            flipX: flipX,
-            flipY: flipY,
-            selectedColor: selectedColor,
-            selectedTopColor: selectedTopColor,
-            selectedBottomColor: selectedBottomColor,
-            selectedLayers: selectedLayers
-          },
-          screenshot: screenshotCloudinaryUrl,
-          clippingSystemUsed: 'none',
-          layerSystemUsed: selectedProduct.defaultLayers ? 'dynamic-layer-system' : 'gradient-layer-system'
+          customizations: current2DData,
+          canvas: editor.canvas.toJSON(),
+          ProductType: "2d"
         };
 
         let savedProductId = null;
+        let savedData = null;
 
         try {
-          const response = await fetch('https://customizer-backend-ttv5.onrender.com/api/save-product', {
+          // Save to backend
+          const response = await fetch('https://customise.shikharjobs.com/api/save-product', {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(saveData)
           });
 
           if (response.ok) {
             const result = await response.json();
-            savedProductId = result._id || result.data?._id || result.product?._id;
+            console.log('2D Save API response:', result);
+            // Extract product ID from the correct path in response
+            savedProductId = result.product?.id || result._id || result.data?._id || result.product?._id;
+            console.log('2D Saved Product ID:', savedProductId);
+            savedData = {
+              krDesignId: savedProductId, // Store actual database ID
+              krImageURL: [cloudinaryResponse.url], // Store as array for consistency
+              krDesignArea: current2DData, // Store all customizations
+              customizationData: current2DData,
+              canvas: editor.canvas.toJSON()
+            };
 
-            if (savedProductId) {
-              setCurrentProductId(savedProductId);
-            }
+            // Store in localStorage
+            localStorage.setItem('krDesignData', JSON.stringify(savedData));
+
+            // Store designs in an object
+            const existingDesigns = JSON.parse(localStorage.getItem('krDesigns') || '{}');
+            existingDesigns[savedProductId] = savedData;
+            localStorage.setItem('krDesigns', JSON.stringify(existingDesigns));
+
+            setSaveSuccess(true);
+            setTimeout(() => setSaveSuccess(false), 3000);
+            console.log("2D design saved! 📸");
+            // setIsDesignSaved(true);
+            // setShowAddToCart(true);
+          } else {
+            throw new Error("Save failed");
           }
+          // setSavedDesignData({ customizationData: current2DData });
+          // setIsDesignSaved(true);
+          // setShowAddToCart(true);
+          setSavedDesignData({ customizationData: current2DData }); // <-- update first
+          setIsDesignSaved2D(true);
+          setShowAddToCart2D(true);
         } catch (apiError) {
           console.error("Database save error:", apiError);
+
+          // Even if API fails, store in localStorage with local ID
+          const localId = `local_${Date.now()}`;
+          console.log('2D API failed, using local ID:', localId);
+          savedData = {
+            krDesignId: localId, // Use local ID when API fails
+            krImageURL: [cloudinaryResponse.url], // Store as array for consistency
+            krDesignArea: current2DData, // Store all customizations
+            customizationData: current2DData,
+            canvas: editor.canvas.toJSON()
+          };
+
+          localStorage.setItem('krDesignData', JSON.stringify(savedData));
+
+          const existingDesigns = JSON.parse(localStorage.getItem('krDesigns') || '{}');
+          existingDesigns[savedData.krDesignId] = savedData;
+          localStorage.setItem('krDesigns', JSON.stringify(existingDesigns));
         }
-
-        try {
-          const response = await fetch(screenshotDataURL);
-          const blob = await response.blob();
-          const viewableURL = URL.createObjectURL(blob);
-          window.open(viewableURL, '_blank');
-        } catch (err) {
-          console.log("Screenshot preview failed:", err);
-        }
-
-        setSaveSuccess(true);
-        setTimeout(() => setSaveSuccess(false), 3000);
-
-        const systemType = selectedProduct.defaultLayers ? 'Dynamic layer' : 'Gradient layer';
-        const successMessage = `${systemType} design saved! 📸\n\nMongoDB ID: ${savedProductId}`;
-        alert(successMessage);
 
         return {
           success: true,
-          productId: savedProductId
+          productId: savedProductId,
+          savedData: savedData
         };
 
       } catch (error) {
-        console.error('Save error:', error);
         alert('Save failed: ' + error.message);
         return { success: false, error: error.message };
       } finally {

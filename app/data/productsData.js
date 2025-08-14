@@ -478,7 +478,7 @@ export const backendProducts = [
 
     },
     {
-        id: 7,
+        id: 8,
         image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSS3208-01-M26.jpg?v=1730282151&quality=20", // Full product shadow image
         color: "White",
         size: "M",
@@ -534,7 +534,7 @@ export const backendProducts = [
         }
     },
     {
-        id: 8,
+        id: 9,
         image: "https://m.media-amazon.com/images/I/51Selmr85QL._UY1100_.jpg", // Full product shadow image
         size: "42",
         color: "White",

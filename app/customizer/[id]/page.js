@@ -18,7 +18,7 @@
 //     }
 //   }, [product, setSelectedProduct]);
 
-//   console.log("Selected Product:", selectedProduct);
+//   // console.log("Selected Product:", selectedProduct);
 
 //   if (!product) return <div>Product not found</div>;
 

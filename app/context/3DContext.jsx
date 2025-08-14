@@ -38,7 +38,61 @@ export const ThreeDProvider = ({ children }) => {
   const [customizationData, setCustomizationData] = useState({});
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  // New state for add to cart functionality
+  const [showAddToCart, setShowAddToCart] = useState(false);
+  const [isDesignSaved, setIsDesignSaved] = useState(false);
+  const [savedDesignData, setSavedDesignData] = useState(null);
+
   const screenshotRef = useRef();
+
+  // Function to check if design has been modified after save
+  const checkDesignModification = () => {
+    if (!isDesignSaved) return false;
+
+    // Compare current customization data with saved data
+    const currentData = JSON.stringify(customizationData);
+    const savedData = JSON.stringify(savedDesignData?.customizationData);
+
+    return currentData !== savedData;
+  };
+
+  // Function to handle design modifications
+ const handleDesignModification = () => {
+  if (isDesignSaved && checkDesignModification()) {
+    setIsDesignSaved(false);
+    setShowAddToCart(false);
+  }
+
+};
+
+  // Watch for changes in customization data
+  // Temporarily disabled to fix Add to Cart button issue
+  React.useEffect(() => {
+    handleDesignModification();
+  }, [
+    customizationData,
+    isDesignSaved,
+    threeDcolor,
+    threeDtexture,
+    threeDselectedPart,
+    threeDtextFontFamily,
+    threeDzoom,
+    threeDoffsetX,
+    threeDoffsetY,
+    threeDtext,
+    threeDtextTexture,
+    threeDtextColor,
+    threeDoutlineColor,
+    threeDtextScale,
+    threeDtextPosX,
+    threeDtextPosY,
+    threeDtextureMode,
+    threeDlogoScale,
+    threeDlogoPosX,
+    threeDlogoPosY,
+    threeDtextFontWeight,
+    threeDtextFontStyle
+  ]);
 
   const handleScreenshot = async () => {
     if (screenshotRef.current) {
@@ -88,6 +142,13 @@ export const ThreeDProvider = ({ children }) => {
     setthreeDOutlineColor('#ffffff');
   };
 
+  React.useEffect(() => {
+    if (savedDesignData) {
+        setIsDesignSaved(true);
+        setShowAddToCart(true);
+    }
+}, [savedDesignData]);
+
   return (
     <threeDcontext.Provider value={{
       threeDcolor, setthreeDColor,
@@ -118,6 +179,11 @@ export const ThreeDProvider = ({ children }) => {
       threeDtextFontStyle,
       setthreeDTextFontStyle,
       setthreeDTextFontFamily,
+      // New state for add to cart functionality
+      showAddToCart, setShowAddToCart,
+      isDesignSaved, setIsDesignSaved,
+      savedDesignData, setSavedDesignData,
+      handleDesignModification,
     }}>
       {children}
     </threeDcontext.Provider>

@@ -29,9 +29,9 @@ const ProductsShowCase = ({ products }) => {
             <div className="kds-main-container">
                 <div className="kds-content-wrapper">
                     <div className="kds-products-grid">
-                        {products.map((product) => (
+                        {products.map((product,index) => (
                             <div
-                                key={product.id}
+                                key={index}
                                 className="kds-product-card"
                                 onClick={() => router.push(`/customizer/${product.id}`)}
                             >
