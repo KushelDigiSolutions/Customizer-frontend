@@ -164,7 +164,7 @@ const Topbar = ({
               )}</button>
           )}
           {is3D && isDesignSaved && showAddToCart && (
-            <button onClick={handleAddToCart}
+            <button 
               className="kr-navbar-button kr-addtocart-handel kr-success-button kr-reset-margin"
               title="Add design to cart"
             >
