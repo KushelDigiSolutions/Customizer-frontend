@@ -5,6 +5,8 @@ import React, { createContext, useContext, useRef, useState } from "react";
 const threeDcontext = createContext();
 
 export const ThreeDProvider = ({ children }) => {
+  // State to control screenshots modal
+  const [showScreenshotsModal, setShowScreenshotsModal] = useState(false);
   const [threeDcolor, setthreeDColor] = useState("#ffffff");
   const [threeDtexture, setthreeDTexture] = useState(null);
   const [threeDselectedPart, setthreeDSelectedPart] = useState("Front");
@@ -151,6 +153,7 @@ export const ThreeDProvider = ({ children }) => {
     if (savedDesignData) {
       setIsDesignSaved(true);
       setShowAddToCart(true);
+      setShowScreenshotsModal(true); // Show screenshots modal after save
     }
   }, [savedDesignData]);
 
@@ -218,6 +221,7 @@ export const ThreeDProvider = ({ children }) => {
         handleDesignModification,
         previewUrl, setPreviewUrl,
         selectedFile, setSelectedFile,
+        showScreenshotsModal, setShowScreenshotsModal,
       }}
     >
       {children}

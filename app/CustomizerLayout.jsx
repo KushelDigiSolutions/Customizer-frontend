@@ -14,43 +14,77 @@ import { use3D } from "./context/3DContext";
 import { backendProducts } from "./data/productsData";
 
 const CustomizerLayout = (props) => {
-  console.log('props V1')
-  console.log(props)
+  console.log("props V1");
+  console.log(props);
   // Get all 2d context state and setters
   const {
-    customText, setCustomText,
-    textSize, setTextSize,
-    textSpacing, setTextSpacing,
-    textArc, setTextArc,
-    textColor, setTextColor,
-    fontFamily, setFontFamily,
-    fontStyle, setFontStyle,
-    textFlipX, setTextFlipX,
-    textFlipY, setTextFlipY,
-    flipX, setFlipX,
-    flipY, setFlipY,
-    selectedColor, setSelectedColor,
-    selectedTopColor, setSelectedTopColor,
-    selectedBottomColor, setSelectedBottomColor,
-    selectedLayers, setSelectedLayers,
-    showAddModal, setShowAddModal,
-    showEditModal, setShowEditModal,
-    showSidebar, setShowSidebar,
-    showChatBox, setShowChatBox,
-    saveSuccess, setSaveSuccess,
-    isSaving, setIsSaving,
-    currentProductId, setCurrentProductId,
-    layerManager, setLayerManager,
-    showAddToCart: showAddToCart2D, setShowAddToCart: setShowAddToCart2D,
-    isDesignSaved: isDesignSaved2D, setIsDesignSaved: setIsDesignSaved2D,
-    setSavedDesignData: setSavedDesignData2D
+    customText,
+    setCustomText,
+    textSize,
+    setTextSize,
+    textSpacing,
+    setTextSpacing,
+    textArc,
+    setTextArc,
+    textColor,
+    setTextColor,
+    fontFamily,
+    setFontFamily,
+    fontStyle,
+    setFontStyle,
+    textFlipX,
+    setTextFlipX,
+    textFlipY,
+    setTextFlipY,
+    flipX,
+    setFlipX,
+    flipY,
+    setFlipY,
+    selectedColor,
+    setSelectedColor,
+    selectedTopColor,
+    setSelectedTopColor,
+    selectedBottomColor,
+    setSelectedBottomColor,
+    selectedLayers,
+    setSelectedLayers,
+    showAddModal,
+    setShowAddModal,
+    showEditModal,
+    setShowEditModal,
+    showSidebar,
+    setShowSidebar,
+    showChatBox,
+    setShowChatBox,
+    saveSuccess,
+    setSaveSuccess,
+    isSaving,
+    setIsSaving,
+    currentProductId,
+    setCurrentProductId,
+    layerManager,
+    setLayerManager,
+    showAddToCart: showAddToCart2D,
+    setShowAddToCart: setShowAddToCart2D,
+    isDesignSaved: isDesignSaved2D,
+    setIsDesignSaved: setIsDesignSaved2D,
+    setSavedDesignData: setSavedDesignData2D,
   } = use2D();
 
   const {
-    threeDscreenshots, setthreeDScreenshots,
-    threeDselectedPart, setthreeDSelectedPart,
-    threeDloading, selectedProduct, setSelectedProduct, customizationData,
-    showAddToCart, setShowAddToCart, isDesignSaved, setIsDesignSaved, setSavedDesignData,
+    threeDscreenshots,
+    setthreeDScreenshots,
+    threeDselectedPart,
+    setthreeDSelectedPart,
+    threeDloading,
+    selectedProduct,
+    setSelectedProduct,
+    customizationData,
+    showAddToCart,
+    setShowAddToCart,
+    isDesignSaved,
+    setIsDesignSaved,
+    setSavedDesignData,
     threeDtextFontFamily,
     threeDzoom,
     threeDoffsetX,
@@ -70,7 +104,8 @@ const CustomizerLayout = (props) => {
     threeDtextFontStyle,
     threeDcolor,
     threeDtexture,
-  } = use3D()
+    showScreenshotsModal,
+  } = use3D();
 
   // Function to handle design modifications and hide add to cart button
   const handleDesignModification = () => {
@@ -93,7 +128,23 @@ const CustomizerLayout = (props) => {
     if (selectedProduct?.ProductType === "2d") {
       handleDesignModification();
     }
-  }, [customText, textSize, textSpacing, textArc, textColor, fontFamily, fontStyle, textFlipX, textFlipY, flipX, flipY, selectedColor, selectedTopColor, selectedBottomColor, selectedLayers]);
+  }, [
+    customText,
+    textSize,
+    textSpacing,
+    textArc,
+    textColor,
+    fontFamily,
+    fontStyle,
+    textFlipX,
+    textFlipY,
+    flipX,
+    flipY,
+    selectedColor,
+    selectedTopColor,
+    selectedBottomColor,
+    selectedLayers,
+  ]);
 
   // Watch for changes in 3D customization data
   // Temporarily disabled to fix Add to Cart button issue
@@ -122,13 +173,11 @@ const CustomizerLayout = (props) => {
     threeDlogoPosX,
     threeDlogoPosY,
     threeDtextFontWeight,
-    threeDtextFontStyle
+    threeDtextFontStyle,
   ]);
 
-
-
-  console.log("productId", props.productId)
-  console.log("storeHash", props.storeHash)
+  console.log("productId", props.productId);
+  console.log("storeHash", props.storeHash);
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -153,18 +202,19 @@ const CustomizerLayout = (props) => {
       });
   }, [props.productId, props.storeHash, setSelectedProduct]);
 
-
   // if (props?.productId != "" && typeof props?.productId != "undefined") {
   //   const idFromPath = props?.productId || 6;
-  //   const product = backendProducts.find(p => String(p.id) === String(idFromPath))
+  //   const product = backendProducts.find(
+  //     (p) => String(p.id) === String(idFromPath)
+  //   );
   //   setSelectedProduct(product);
   // }
 
   const parts = selectedProduct?.parts || [
-    'Front',
-    'Back',
-    'LeftSleeve',
-    'RightSleeve',
+    "Front",
+    "Back",
+    "LeftSleeve",
+    "RightSleeve",
   ];
 
   class SimpleLayerManager {
@@ -181,29 +231,62 @@ const CustomizerLayout = (props) => {
       // Dynamically assign zIndex based on product's layerOrder
       if (obj.isTshirtBase && this.layerOrder.PRODUCT !== undefined) {
         zIndex = this.layerOrder.PRODUCT;
-      } else if (obj.isRightSideImage && this.layerOrder.RIGHT_SIDE_IMAGE !== undefined) {
+      } else if (
+        obj.isRightSideImage &&
+        this.layerOrder.RIGHT_SIDE_IMAGE !== undefined
+      ) {
         zIndex = this.layerOrder.RIGHT_SIDE_IMAGE;
-      } else if (obj.type === 'i-text' && this.layerOrder.TEXT !== undefined) {
+      } else if (obj.type === "i-text" && this.layerOrder.TEXT !== undefined) {
         zIndex = this.layerOrder.TEXT;
-      } else if (obj.type === 'image' && obj.isTopGradient && this.layerOrder.TOP_GRADIENT !== undefined) {
+      } else if (
+        obj.type === "image" &&
+        obj.isTopGradient &&
+        this.layerOrder.TOP_GRADIENT !== undefined
+      ) {
         zIndex = this.layerOrder.TOP_GRADIENT;
-      } else if (obj.type === 'image' && obj.isPattern && this.layerOrder.PATTERN !== undefined) {
+      } else if (
+        obj.type === "image" &&
+        obj.isPattern &&
+        this.layerOrder.PATTERN !== undefined
+      ) {
         zIndex = this.layerOrder.PATTERN;
-      } else if (obj.type === 'image' && obj.isBottomGradient && this.layerOrder.BOTTOM_GRADIENT !== undefined) {
+      } else if (
+        obj.type === "image" &&
+        obj.isBottomGradient &&
+        this.layerOrder.BOTTOM_GRADIENT !== undefined
+      ) {
         zIndex = this.layerOrder.BOTTOM_GRADIENT;
-      } else if ((obj.isBottomGradientFade || obj.isBottomGradientTopTransparent) && this.layerOrder.BOTTOM_GRADIENT !== undefined) {
+      } else if (
+        (obj.isBottomGradientFade || obj.isBottomGradientTopTransparent) &&
+        this.layerOrder.BOTTOM_GRADIENT !== undefined
+      ) {
         zIndex = this.layerOrder.BOTTOM_GRADIENT + 0.1;
-      } else if (obj.type === 'image' && obj.layerType && this.layerOrder[obj.layerType?.toUpperCase()] !== undefined) {
+      } else if (
+        obj.type === "image" &&
+        obj.layerType &&
+        this.layerOrder[obj.layerType?.toUpperCase()] !== undefined
+      ) {
         // Dynamic layers (e.g., shoes, t-shirts)
         zIndex = this.layerOrder[obj.layerType.toUpperCase()];
-      } else if (obj.type === 'image' && !obj.isTshirtBase && this.layerOrder.DESIGN !== undefined) {
+      } else if (
+        obj.type === "image" &&
+        !obj.isTshirtBase &&
+        this.layerOrder.DESIGN !== undefined
+      ) {
         zIndex = this.layerOrder.DESIGN;
-      } else if (obj.isColorEffect && this.layerOrder.BASE_COLOR !== undefined) {
+      } else if (
+        obj.isColorEffect &&
+        this.layerOrder.BASE_COLOR !== undefined
+      ) {
         zIndex = this.layerOrder.BASE_COLOR;
       }
 
       obj.zIndex = zIndex;
-      console.log(`✅ Object assigned layer: ${obj.type} -> zIndex: ${zIndex}${obj.layerType ? ` (${obj.layerType})` : ''}${obj.isRightSideImage ? ' (Right Side Image)' : ''}`);
+      console.log(
+        `✅ Object assigned layer: ${obj.type} -> zIndex: ${zIndex}${
+          obj.layerType ? ` (${obj.layerType})` : ""
+        }${obj.isRightSideImage ? " (Right Side Image)" : ""}`
+      );
     }
 
     arrangeCanvasLayers() {
@@ -218,12 +301,14 @@ const CustomizerLayout = (props) => {
 
       // Clear and re-add in correct order
       this.canvas._objects = [];
-      objects.forEach(obj => {
+      objects.forEach((obj) => {
         this.canvas._objects.push(obj);
       });
 
       this.canvas.renderAll();
-      console.log('✅ Layer arrangement complete - Updated with dynamic layers support');
+      console.log(
+        "✅ Layer arrangement complete - Updated with dynamic layers support"
+      );
     }
   }
 
@@ -250,15 +335,18 @@ const CustomizerLayout = (props) => {
     handleBringToFront,
     handleBringForward,
     handleSendBackward,
-    handleSendToBack
+    handleSendToBack,
   } = useCanvasContextMenu(editor);
 
   // Initialize layer manager when canvas is ready
   useEffect(() => {
     if (editor?.canvas && !layerManager && selectedProduct?.layers) {
-      const manager = new SimpleLayerManager(editor.canvas, selectedProduct.layers);
+      const manager = new SimpleLayerManager(
+        editor.canvas,
+        selectedProduct.layers
+      );
       setLayerManager(manager);
-      console.log('🎯 Layer Manager initialized with dynamic layers system');
+      console.log("🎯 Layer Manager initialized with dynamic layers system");
     }
   }, [editor?.canvas, selectedProduct?.layers]);
 
@@ -311,9 +399,9 @@ const CustomizerLayout = (props) => {
     console.log(`🔄 Changing layer: ${layerType} to ${item.name}`);
 
     // Update selected layers state
-    setSelectedLayers(prev => ({
+    setSelectedLayers((prev) => ({
       ...prev,
-      [layerType]: item
+      [layerType]: item,
     }));
 
     // Add the layer to canvas
@@ -323,17 +411,17 @@ const CustomizerLayout = (props) => {
   // Canvas background color change
   const updateCanvasColor = (color) => {
     if (!editor?.canvas) {
-      console.error('❌ Canvas not available for color change');
+      console.error("❌ Canvas not available for color change");
       return;
     }
 
-    console.log('🎨 Changing canvas background color to:', color);
+    console.log("🎨 Changing canvas background color to:", color);
 
     const canvas = editor.canvas;
 
     canvas.setBackgroundColor(color, () => {
       canvas.renderAll();
-      console.log('✅ Canvas background color changed to:', color);
+      console.log("✅ Canvas background color changed to:", color);
     });
   };
 
@@ -349,14 +437,18 @@ const CustomizerLayout = (props) => {
       imgElement.src = url;
 
       imgElement.onload = () => {
-        const productImage = canvas.getObjects().find((obj) => obj.isTshirtBase);
+        const productImage = canvas
+          .getObjects()
+          .find((obj) => obj.isTshirtBase);
         if (!productImage) return;
 
         const productBounds = productImage.getBoundingRect();
 
         // Remove existing layer of the same type
-        const existingLayers = canvas.getObjects().filter(obj => obj.layerType === layerType);
-        existingLayers.forEach(layer => {
+        const existingLayers = canvas
+          .getObjects()
+          .filter((obj) => obj.layerType === layerType);
+        existingLayers.forEach((layer) => {
           canvas.remove(layer);
         });
 
@@ -379,7 +471,7 @@ const CustomizerLayout = (props) => {
           lockMovementY: true,
           lockScalingX: true,
           lockScalingY: true,
-          lockRotation: true
+          lockRotation: true,
         });
 
         canvas.add(imgInstance);
@@ -398,19 +490,19 @@ const CustomizerLayout = (props) => {
   const loadDefaultLayers = () => {
     if (!selectedProduct?.defaultLayers || !editor?.canvas) return;
 
-    console.log('🔧 Loading default layers for product:', selectedProduct.id);
+    console.log("🔧 Loading default layers for product:", selectedProduct.id);
 
     const defaultLayers = selectedProduct.defaultLayers;
     const initialLayers = {};
 
-    Object.keys(defaultLayers).forEach(layerType => {
+    Object.keys(defaultLayers).forEach((layerType) => {
       const url = defaultLayers[layerType];
       if (url) {
         // Find the corresponding item in layersDesigns
         const layerDesigns = selectedProduct.layersDesigns?.[layerType];
         if (layerDesigns) {
-          const defaultItem = layerDesigns.find(item => item.url === url) ||
-            layerDesigns[0]; // Fallback to first item
+          const defaultItem =
+            layerDesigns.find((item) => item.url === url) || layerDesigns[0]; // Fallback to first item
 
           if (defaultItem) {
             initialLayers[layerType] = defaultItem;
@@ -421,7 +513,7 @@ const CustomizerLayout = (props) => {
     });
 
     setSelectedLayers(initialLayers);
-    console.log('✅ Default layers loaded:', Object.keys(initialLayers));
+    console.log("✅ Default layers loaded:", Object.keys(initialLayers));
   };
 
   // NEW: Add bottom gradient function - FIXED
@@ -436,25 +528,30 @@ const CustomizerLayout = (props) => {
       imgElement.src = url;
 
       imgElement.onload = () => {
-        const productImage = canvas.getObjects().find((obj) => obj.isTshirtBase);
+        const productImage = canvas
+          .getObjects()
+          .find((obj) => obj.isTshirtBase);
         if (!productImage) return;
 
         const productBounds = productImage.getBoundingRect();
 
         // Remove existing bottom gradient and all its overlays
-        const existingBottomElements = canvas.getObjects().filter(obj =>
-          obj.isBottomGradient === true ||
-          obj.isBottomGradientFade === true ||
-          obj.isBottomGradientTopTransparent === true
-        );
-        existingBottomElements.forEach(element => {
+        const existingBottomElements = canvas
+          .getObjects()
+          .filter(
+            (obj) =>
+              obj.isBottomGradient === true ||
+              obj.isBottomGradientFade === true ||
+              obj.isBottomGradientTopTransparent === true
+          );
+        existingBottomElements.forEach((element) => {
           canvas.remove(element);
         });
 
         // Create bottom gradient image that only covers the BOTTOM 50% with fade effect
         const imgInstance = new fabric.Image(imgElement, {
           left: productBounds.left,
-          top: productBounds.top + (productBounds.height * 0.5), // Start from 50% height
+          top: productBounds.top + productBounds.height * 0.5, // Start from 50% height
           originX: "left",
           originY: "top",
           opacity: 0.5,
@@ -471,7 +568,7 @@ const CustomizerLayout = (props) => {
           lockMovementY: true,
           lockScalingX: true,
           lockScalingY: true,
-          lockRotation: true
+          lockRotation: true,
         });
 
         // Add the image to canvas first
@@ -480,25 +577,25 @@ const CustomizerLayout = (props) => {
         // Create fade effect overlay that makes the top part of bottom gradient transparent
         const fadeOverlay = new fabric.Rect({
           left: productBounds.left,
-          top: productBounds.top + (productBounds.height * 0.5), // Start from 50% height
+          top: productBounds.top + productBounds.height * 0.5, // Start from 50% height
           width: productBounds.width,
           height: productBounds.height * 0.5, // Bottom 50%
           originX: "left",
           originY: "top",
           fill: new fabric.Gradient({
-            type: 'linear',
-            gradientUnits: 'pixels',
+            type: "linear",
+            gradientUnits: "pixels",
             coords: {
               x1: 0,
               y1: 0,
               x2: 0,
-              y2: productBounds.height * 0.5 // Gradient in bottom 50%
+              y2: productBounds.height * 0.5, // Gradient in bottom 50%
             },
             colorStops: [
-              { offset: 0, color: 'rgba(0,0,0,1)' },     // Fully opaque at 50% mark (hides image)
-              { offset: 0.3, color: 'rgba(0,0,0,0.7)' }, // Quick fade transition
-              { offset: 1, color: 'rgba(0,0,0,0)' }      // Fully transparent at bottom (shows image)
-            ]
+              { offset: 0, color: "rgba(0,0,0,1)" }, // Fully opaque at 50% mark (hides image)
+              { offset: 0.3, color: "rgba(0,0,0,0.7)" }, // Quick fade transition
+              { offset: 1, color: "rgba(0,0,0,0)" }, // Fully transparent at bottom (shows image)
+            ],
           }),
           name: "bottom-gradient-fade-overlay",
           isBottomGradientFade: true,
@@ -512,7 +609,7 @@ const CustomizerLayout = (props) => {
           lockScalingX: true,
           lockScalingY: true,
           lockRotation: true,
-          globalCompositeOperation: 'destination-out' // This removes parts of the bottom gradient
+          globalCompositeOperation: "destination-out", // This removes parts of the bottom gradient
         });
 
         // Add the fade overlay
@@ -525,7 +622,9 @@ const CustomizerLayout = (props) => {
           layerManager.arrangeCanvasLayers();
         }
 
-        console.log('✅ Bottom gradient added - Only covers bottom 50% with fade effect, top 50% remains transparent');
+        console.log(
+          "✅ Bottom gradient added - Only covers bottom 50% with fade effect, top 50% remains transparent"
+        );
       };
     });
   };
@@ -542,14 +641,18 @@ const CustomizerLayout = (props) => {
       imgElement.src = url;
 
       imgElement.onload = () => {
-        const productImage = canvas.getObjects().find((obj) => obj.isTshirtBase);
+        const productImage = canvas
+          .getObjects()
+          .find((obj) => obj.isTshirtBase);
         if (!productImage) return;
 
         const productBounds = productImage.getBoundingRect();
 
         // Remove existing top gradient
-        const existingTopGradient = canvas.getObjects().filter(obj => obj.isTopGradient === true);
-        existingTopGradient.forEach(gradient => {
+        const existingTopGradient = canvas
+          .getObjects()
+          .filter((obj) => obj.isTopGradient === true);
+        existingTopGradient.forEach((gradient) => {
           canvas.remove(gradient);
         });
 
@@ -572,7 +675,7 @@ const CustomizerLayout = (props) => {
           lockMovementY: true,
           lockScalingX: true,
           lockScalingY: true,
-          lockRotation: true
+          lockRotation: true,
         });
 
         canvas.add(imgInstance);
@@ -583,7 +686,7 @@ const CustomizerLayout = (props) => {
           layerManager.arrangeCanvasLayers();
         }
 
-        console.log('✅ Top gradient added (zIndex: 2) - Top color applied');
+        console.log("✅ Top gradient added (zIndex: 2) - Top color applied");
       };
     });
   };
@@ -591,19 +694,23 @@ const CustomizerLayout = (props) => {
   const handleAddCustomText = () => {
     if (!editor || !customText.trim()) return;
 
-    console.log('🔤 Adding custom text:', customText);
+    console.log("🔤 Adding custom text:", customText);
 
     import("fabric").then((fabric) => {
       const canvas = editor.canvas;
 
       // Remove existing text objects (but not emojis)
-      const existingText = canvas.getObjects().filter(obj => obj.type === "i-text" && !obj.isEmoji);
-      existingText.forEach(obj => canvas.remove(obj));
+      const existingText = canvas
+        .getObjects()
+        .filter((obj) => obj.type === "i-text" && !obj.isEmoji);
+      existingText.forEach((obj) => canvas.remove(obj));
 
-      const imageObj = canvas.getObjects().find((obj) => obj.type === "image" && obj.isTshirtBase);
+      const imageObj = canvas
+        .getObjects()
+        .find((obj) => obj.type === "image" && obj.isTshirtBase);
       if (!imageObj) {
-        console.error('❌ No base product image found');
-        alert('Error: Product not loaded properly. Please refresh the page.');
+        console.error("❌ No base product image found");
+        alert("Error: Product not loaded properly. Please refresh the page.");
         return;
       }
 
@@ -629,10 +736,10 @@ const CustomizerLayout = (props) => {
         lockScalingX: false,
         lockScalingY: false,
         lockRotation: false,
-        editable: true
+        editable: true,
       });
 
-      console.log('✅ Text object created:', textObject);
+      console.log("✅ Text object created:", textObject);
 
       canvas.add(textObject);
 
@@ -642,7 +749,7 @@ const CustomizerLayout = (props) => {
         layerManager.arrangeCanvasLayers();
       }
 
-      console.log('✅ Text added with proper layer (zIndex: 5) - Non-moveable');
+      console.log("✅ Text added with proper layer (zIndex: 5) - Non-moveable");
 
       setCustomText("");
       setShowAddModal(false);
@@ -718,9 +825,9 @@ const CustomizerLayout = (props) => {
       const productImage = canvas.getObjects().find((obj) => obj.isTshirtBase);
       if (!productImage) return;
 
-      const existingEmoji = canvas.getObjects().find(
-        (obj) => obj.isEmoji === true
-      );
+      const existingEmoji = canvas
+        .getObjects()
+        .find((obj) => obj.isEmoji === true);
       if (existingEmoji) {
         canvas.remove(existingEmoji);
       }
@@ -744,7 +851,7 @@ const CustomizerLayout = (props) => {
         lockScalingX: true,
         lockScalingY: true,
         lockRotation: true,
-        editable: false
+        editable: false,
       });
 
       emojiText.isEmoji = true;
@@ -757,12 +864,19 @@ const CustomizerLayout = (props) => {
         layerManager.arrangeCanvasLayers();
       }
 
-      console.log('✅ Emoji added with proper layer (zIndex: 5) - Non-moveable');
+      console.log(
+        "✅ Emoji added with proper layer (zIndex: 5) - Non-moveable"
+      );
     });
   };
 
   // Design function - Perfect merge with equal dimensions
-  const handleAddDesignToCanvas = (url, position = "center", offsetX = 0, offsetY = 0) => {
+  const handleAddDesignToCanvas = (
+    url,
+    position = "center",
+    offsetX = 0,
+    offsetY = 0
+  ) => {
     if (!editor || !url) return;
 
     import("fabric").then((fabric) => {
@@ -779,7 +893,9 @@ const CustomizerLayout = (props) => {
         const productBounds = productImage.getBoundingRect();
 
         // Remove existing design before adding new one
-        const existingDesign = canvas.getObjects().find(obj => obj.name === "design-image");
+        const existingDesign = canvas
+          .getObjects()
+          .find((obj) => obj.name === "design-image");
         if (existingDesign) {
           canvas.remove(existingDesign);
         }
@@ -803,7 +919,7 @@ const CustomizerLayout = (props) => {
           lockMovementY: true,
           lockScalingX: true,
           lockScalingY: true,
-          lockRotation: true
+          lockRotation: true,
         });
 
         canvas.add(imgInstance);
@@ -814,7 +930,9 @@ const CustomizerLayout = (props) => {
           layerManager.arrangeCanvasLayers();
         }
 
-        console.log('✅ Design added with perfect merge dimensions (zIndex: 4) - Non-moveable');
+        console.log(
+          "✅ Design added with perfect merge dimensions (zIndex: 4) - Non-moveable"
+        );
       };
     });
   };
@@ -832,14 +950,18 @@ const CustomizerLayout = (props) => {
 
       imgElement.onload = () => {
         // Get product dimensions for perfect matching
-        const productImage = canvas.getObjects().find((obj) => obj.isTshirtBase);
+        const productImage = canvas
+          .getObjects()
+          .find((obj) => obj.isTshirtBase);
         if (!productImage) return;
 
         const productBounds = productImage.getBoundingRect();
 
         // Remove existing patterns before adding new one
-        const existingPatterns = canvas.getObjects().filter(obj => obj.isPattern === true);
-        existingPatterns.forEach(pattern => {
+        const existingPatterns = canvas
+          .getObjects()
+          .filter((obj) => obj.isPattern === true);
+        existingPatterns.forEach((pattern) => {
           canvas.remove(pattern);
         });
 
@@ -863,7 +985,7 @@ const CustomizerLayout = (props) => {
           lockMovementY: true,
           lockScalingX: true,
           lockScalingY: true,
-          lockRotation: true
+          lockRotation: true,
         });
 
         canvas.add(imgInstance);
@@ -874,7 +996,9 @@ const CustomizerLayout = (props) => {
           layerManager.arrangeCanvasLayers();
         }
 
-        console.log('✅ Pattern added with perfect merge dimensions (zIndex: 3) - Non-moveable');
+        console.log(
+          "✅ Pattern added with perfect merge dimensions (zIndex: 3) - Non-moveable"
+        );
       };
     });
   };
@@ -883,14 +1007,18 @@ const CustomizerLayout = (props) => {
     if (!editor || !editor.canvas) return;
 
     try {
-      const response = await fetch(`https://api.iconify.design/${iconData.name}.svg?color=%23000000&width=64&height=64`);
+      const response = await fetch(
+        `https://api.iconify.design/${iconData.name}.svg?color=%23000000&width=64&height=64`
+      );
       const svgText = await response.text();
-      const svgBlob = new Blob([svgText], { type: 'image/svg+xml' });
+      const svgBlob = new Blob([svgText], { type: "image/svg+xml" });
       const svgUrl = URL.createObjectURL(svgBlob);
 
       import("fabric").then(({ Image }) => {
         const canvas = editor.canvas;
-        const productImage = canvas.getObjects().find((obj) => obj.isTshirtBase);
+        const productImage = canvas
+          .getObjects()
+          .find((obj) => obj.isTshirtBase);
         if (!productImage) return;
 
         const productBounds = productImage.getBoundingRect();
@@ -912,7 +1040,7 @@ const CustomizerLayout = (props) => {
             lockMovementY: true,
             lockScalingX: true,
             lockScalingY: true,
-            lockRotation: true
+            lockRotation: true,
           });
 
           img.isIcon = true;
@@ -927,21 +1055,22 @@ const CustomizerLayout = (props) => {
             layerManager.arrangeCanvasLayers();
           }
 
-          console.log('✅ Icon added with proper layer (zIndex: 4) - Non-moveable');
+          console.log(
+            "✅ Icon added with proper layer (zIndex: 4) - Non-moveable"
+          );
 
           URL.revokeObjectURL(svgUrl);
         });
       });
-
     } catch (error) {
-      console.error('Failed to load icon:', error);
+      console.error("Failed to load icon:", error);
     }
   };
 
   const applySelectedDesign = (designData) => {
     if (!designData || !editor?.canvas) return;
 
-    console.log('🎨 Applying user-selected design:', designData.name);
+    console.log("🎨 Applying user-selected design:", designData.name);
 
     handleAddDesignToCanvas(
       designData.url,
@@ -955,7 +1084,9 @@ const CustomizerLayout = (props) => {
   useEffect(() => {
     if (!selectedProduct || !editor?.canvas) return;
 
-    console.log(`🆕 Initializing canvas for product ${selectedProduct.id} (${selectedProduct.type})`);
+    console.log(
+      `🆕 Initializing canvas for product ${selectedProduct.id} (${selectedProduct.type})`
+    );
 
     const initializeCanvas = () => {
       import("fabric").then(({ Image }) => {
@@ -972,7 +1103,8 @@ const CustomizerLayout = (props) => {
 
           img.onload = () => {
             const targetWidth = selectedProduct.width || 300;
-            const targetHeight = selectedProduct.height || (targetWidth * (img.height / img.width));
+            const targetHeight =
+              selectedProduct.height || targetWidth * (img.height / img.width);
 
             const scaleX = targetWidth / img.width;
             const scaleY = targetHeight / img.height;
@@ -995,7 +1127,7 @@ const CustomizerLayout = (props) => {
               lockScalingY: true,
               lockRotation: true,
               flipX: flipX,
-              flipY: flipY
+              flipY: flipY,
             });
 
             fabricImg.customId = selectedProduct.id;
@@ -1008,11 +1140,16 @@ const CustomizerLayout = (props) => {
 
             fabricImg.setCoords();
             editor.canvas.renderAll();
-            console.log(`✅ Product loaded with dimensions: ${targetWidth}x${targetHeight}`);
+            console.log(
+              `✅ Product loaded with dimensions: ${targetWidth}x${targetHeight}`
+            );
           };
 
           img.onerror = () => {
-            console.error('Failed to load product image:', selectedProduct.image);
+            console.error(
+              "Failed to load product image:",
+              selectedProduct.image
+            );
           };
         } else {
           // For products with defaultLayers (shoes), create invisible base
@@ -1029,8 +1166,8 @@ const CustomizerLayout = (props) => {
               isTshirtBase: true,
               originX: "center",
               originY: "center",
-              fill: 'transparent',
-              stroke: 'transparent',
+              fill: "transparent",
+              stroke: "transparent",
               selectable: false,
               evented: false,
               hasControls: false,
@@ -1040,7 +1177,7 @@ const CustomizerLayout = (props) => {
               lockScalingX: true,
               lockScalingY: true,
               lockRotation: true,
-              visible: false // Make it invisible but keep for bounds calculation
+              visible: false, // Make it invisible but keep for bounds calculation
             });
 
             baseRect.customId = selectedProduct.id;
@@ -1051,7 +1188,9 @@ const CustomizerLayout = (props) => {
               layerManager.arrangeCanvasLayers();
             }
 
-            console.log(`✅ Invisible base created for layered product: ${targetWidth}x${targetHeight}`);
+            console.log(
+              `✅ Invisible base created for layered product: ${targetWidth}x${targetHeight}`
+            );
 
             // Load default layers after base is created
             setTimeout(() => {
@@ -1074,15 +1213,15 @@ const CustomizerLayout = (props) => {
 
     // Disable selection completely
     canvas.selection = false;
-    canvas.hoverCursor = 'default';
-    canvas.defaultCursor = 'default';
+    canvas.hoverCursor = "default";
+    canvas.defaultCursor = "default";
 
     const handleObjectMoving = (e) => {
       // Product should stay in center
       if (e.target.isTshirtBase) {
         e.target.set({
           left: canvas.getWidth() / 2,
-          top: canvas.getHeight() / 2
+          top: canvas.getHeight() / 2,
         });
         e.target.setCoords();
         return;
@@ -1115,22 +1254,22 @@ const CustomizerLayout = (props) => {
       }
     };
 
-    canvas.on('object:moving', handleObjectMoving);
-    canvas.on('object:scaling', handleObjectMoving);
-    canvas.on('object:rotating', handleObjectMoving);
-    canvas.on('object:modified', handleObjectModified);
-    canvas.on('selection:created', handleSelectionCreated);
-    canvas.on('selection:updated', handleSelectionCreated);
-    canvas.on('mouse:down', handleCanvasClick);
+    canvas.on("object:moving", handleObjectMoving);
+    canvas.on("object:scaling", handleObjectMoving);
+    canvas.on("object:rotating", handleObjectMoving);
+    canvas.on("object:modified", handleObjectModified);
+    canvas.on("selection:created", handleSelectionCreated);
+    canvas.on("selection:updated", handleSelectionCreated);
+    canvas.on("mouse:down", handleCanvasClick);
 
     return () => {
-      canvas.off('object:moving', handleObjectMoving);
-      canvas.off('object:scaling', handleObjectMoving);
-      canvas.off('object:rotating', handleObjectMoving);
-      canvas.off('object:modified', handleObjectModified);
-      canvas.off('selection:created', handleSelectionCreated);
-      canvas.off('selection:updated', handleSelectionCreated);
-      canvas.off('mouse:down', handleCanvasClick);
+      canvas.off("object:moving", handleObjectMoving);
+      canvas.off("object:scaling", handleObjectMoving);
+      canvas.off("object:rotating", handleObjectMoving);
+      canvas.off("object:modified", handleObjectModified);
+      canvas.off("selection:created", handleSelectionCreated);
+      canvas.off("selection:updated", handleSelectionCreated);
+      canvas.off("mouse:down", handleCanvasClick);
     };
   }, [editor, selectedProduct?.id, layerManager]);
 
@@ -1147,7 +1286,7 @@ const CustomizerLayout = (props) => {
         fontFamily: fontFamily,
         fontStyle: fontStyle,
         flipX: textFlipX,
-        flipY: textFlipY
+        flipY: textFlipY,
       });
       canvas.renderAll();
     }
@@ -1166,27 +1305,28 @@ const CustomizerLayout = (props) => {
       });
 
       if (!response.ok) {
-        throw new Error(`Upload failed: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `Upload failed: ${response.status} ${response.statusText}`
+        );
       }
 
       const data = await response.json();
       return data;
-
     } catch (error) {
-      console.error('Upload error:', error);
+      console.error("Upload error:", error);
       throw error;
     }
   };
 
   const handleSave = async (screenshotsFrom3D = null) => {
     if (!editor?.canvas) {
-      alert('Canvas not ready!');
-      return { success: false, error: 'Canvas not ready' };
+      alert("Canvas not ready!");
+      return { success: false, error: "Canvas not ready" };
     }
 
     if (!selectedProduct) {
-      alert('No product selected!');
-      return { success: false, error: 'No product selected' };
+      alert("No product selected!");
+      return { success: false, error: "No product selected" };
     }
 
     if (selectedProduct.ProductType === "3d") {
@@ -1195,29 +1335,41 @@ const CustomizerLayout = (props) => {
       try {
         // Upload screenshots to Cloudinary
         let cloudinaryScreenshots = [];
-        const screenshots = screenshotsFrom3D || customizationData?.screenshots || [];
+        const screenshots =
+          screenshotsFrom3D || customizationData?.screenshots || [];
         for (const screenshot of screenshots) {
           const blob = await (await fetch(screenshot.image)).blob();
-          const file = new File([blob], `3d-screenshot-${Date.now()}.png`, { type: 'image/png' });
-          const cloudinaryResponse = await uploadToCloudinaryImg({ image: file });
+          const file = new File([blob], `3d-screenshot-${Date.now()}.png`, {
+            type: "image/png",
+          });
+          const cloudinaryResponse = await uploadToCloudinaryImg({
+            image: file,
+          });
           cloudinaryScreenshots.push({
             angle: screenshot.angle,
-            url: cloudinaryResponse.url
+            url: cloudinaryResponse.url,
           });
         }
 
         // Upload applied design/image/logo to Cloudinary (if present)
         let appliedImageCloudUrl = null;
-        const appliedImageUrl = customizationData?.parts?.[customizationData?.selectedPart]?.image?.url;
+        const appliedImageUrl =
+          customizationData?.parts?.[customizationData?.selectedPart]?.image
+            ?.url;
         if (appliedImageUrl) {
           const blob = await (await fetch(appliedImageUrl)).blob();
-          const file = new File([blob], `3d-applied-image-${Date.now()}.png`, { type: 'image/png' });
-          const cloudinaryResponse = await uploadToCloudinaryImg({ image: file });
+          const file = new File([blob], `3d-applied-image-${Date.now()}.png`, {
+            type: "image/png",
+          });
+          const cloudinaryResponse = await uploadToCloudinaryImg({
+            image: file,
+          });
           appliedImageCloudUrl = cloudinaryResponse.url;
         }
 
         // Prepare save payload - exclude screenshots from customizations
-        const { screenshots: _, ...customizationsWithoutScreenshots } = customizationData;
+        const { screenshots: _, ...customizationsWithoutScreenshots } =
+          customizationData;
         const saveData = {
           timestamp: new Date().toISOString(),
           product: {
@@ -1231,10 +1383,10 @@ const CustomizerLayout = (props) => {
           },
           customizations: {
             ...customizationsWithoutScreenshots,
-            appliedImageCloudUrl
+            appliedImageCloudUrl,
           },
           screenshots: cloudinaryScreenshots,
-          ProductType: "3d"
+          ProductType: "3d",
         };
 
         let savedProductId = null;
@@ -1242,38 +1394,46 @@ const CustomizerLayout = (props) => {
 
         try {
           // Save to backend
-          const response = await fetch('https://customise.shikharjobs.com/api/save-product', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(saveData)
-          });
+          const response = await fetch(
+            "https://customise.shikharjobs.com/api/save-product",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(saveData),
+            }
+          );
 
           if (response.ok) {
             const result = await response.json();
-            console.log('3D Save API response:', result);
+            console.log("3D Save API response:", result);
             // Extract product ID from the correct path in response
-            savedProductId = result.product?.id || result._id || result.data?._id || result.product?._id;
-            console.log('3D Saved Product ID:', savedProductId);
+            savedProductId =
+              result.product?.id ||
+              result._id ||
+              result.data?._id ||
+              result.product?._id;
+            console.log("3D Saved Product ID:", savedProductId);
             savedData = {
               krDesignId: savedProductId, // Store actual database ID
-              krImageURL: cloudinaryScreenshots.map(s => s.url), // Store all Cloudinary links
+              krImageURL: cloudinaryScreenshots.map((s) => s.url), // Store all Cloudinary links
               krDesignArea: customizationData, // Store all customizations
               customizationData: customizationData,
-              screenshots: cloudinaryScreenshots
+              screenshots: cloudinaryScreenshots,
             };
 
             // Store in localStorage
-            localStorage.setItem('krDesignData', JSON.stringify(savedData));
+            localStorage.setItem("krDesignData", JSON.stringify(savedData));
 
             // Store designs in an object
-            const existingDesigns = JSON.parse(localStorage.getItem('krDesigns') || '{}');
+            const existingDesigns = JSON.parse(
+              localStorage.getItem("krDesigns") || "{}"
+            );
             existingDesigns[savedProductId] = savedData;
-            localStorage.setItem('krDesigns', JSON.stringify(existingDesigns));
+            localStorage.setItem("krDesigns", JSON.stringify(existingDesigns));
 
             setSaveSuccess(true);
             setTimeout(() => setSaveSuccess(false), 3000);
             console.log("3d design saved! 📸");
-
           } else {
             throw new Error("Save failed");
           }
@@ -1285,34 +1445,34 @@ const CustomizerLayout = (props) => {
 
           // Even if API fails, store in localStorage with local ID
           const localId = `local_${Date.now()}`;
-          console.log('3D API failed, using local ID:', localId);
+          console.log("3D API failed, using local ID:", localId);
           savedData = {
             krDesignId: localId, // Use local ID when API fails
-            krImageURL: cloudinaryScreenshots.map(s => s.url), // Store all Cloudinary links
+            krImageURL: cloudinaryScreenshots.map((s) => s.url), // Store all Cloudinary links
             krDesignArea: customizationData, // Store all customizations
             customizationData: customizationData,
-            screenshots: cloudinaryScreenshots
+            screenshots: cloudinaryScreenshots,
           };
 
-          localStorage.setItem('krDesignData', JSON.stringify(savedData));
+          localStorage.setItem("krDesignData", JSON.stringify(savedData));
 
-          const existingDesigns = JSON.parse(localStorage.getItem('krDesigns') || '{}');
+          const existingDesigns = JSON.parse(
+            localStorage.getItem("krDesigns") || "{}"
+          );
           existingDesigns[savedData.krDesignId] = savedData;
-          localStorage.setItem('krDesigns', JSON.stringify(existingDesigns));
+          localStorage.setItem("krDesigns", JSON.stringify(existingDesigns));
         }
 
         return {
           success: true,
           productId: savedProductId,
-          savedData: savedData
+          savedData: savedData,
         };
-
       } catch (error) {
-        alert('Save failed: ' + error.message);
+        alert("Save failed: " + error.message);
         return { success: false, error: error.message };
       } finally {
         setIsSaving(false);
-
       }
     } else if (selectedProduct.ProductType === "2d") {
       setIsSaving(true);
@@ -1320,13 +1480,15 @@ const CustomizerLayout = (props) => {
       try {
         // Take screenshot of canvas
         const canvasDataURL = editor.canvas.toDataURL({
-          format: 'png',
-          quality: 1
+          format: "png",
+          quality: 1,
         });
 
         // Upload canvas screenshot to Cloudinary
         const blob = await (await fetch(canvasDataURL)).blob();
-        const file = new File([blob], `2d-design-${Date.now()}.png`, { type: 'image/png' });
+        const file = new File([blob], `2d-design-${Date.now()}.png`, {
+          type: "image/png",
+        });
         const cloudinaryResponse = await uploadToCloudinaryImg({ image: file });
 
         // Get current 2D customization data
@@ -1345,7 +1507,7 @@ const CustomizerLayout = (props) => {
           selectedColor,
           selectedTopColor,
           selectedBottomColor,
-          selectedLayers
+          selectedLayers,
         };
 
         // Prepare save payload for 2D
@@ -1361,7 +1523,7 @@ const CustomizerLayout = (props) => {
           },
           customizations: current2DData,
           canvas: editor.canvas.toJSON(),
-          ProductType: "2d"
+          ProductType: "2d",
         };
 
         let savedProductId = null;
@@ -1369,33 +1531,42 @@ const CustomizerLayout = (props) => {
 
         try {
           // Save to backend
-          const response = await fetch('https://customise.shikharjobs.com/api/save-product', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(saveData)
-          });
+          const response = await fetch(
+            "https://customise.shikharjobs.com/api/save-product",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(saveData),
+            }
+          );
 
           if (response.ok) {
             const result = await response.json();
-            console.log('2D Save API response:', result);
+            console.log("2D Save API response:", result);
             // Extract product ID from the correct path in response
-            savedProductId = result.product?.id || result._id || result.data?._id || result.product?._id;
-            console.log('2D Saved Product ID:', savedProductId);
+            savedProductId =
+              result.product?.id ||
+              result._id ||
+              result.data?._id ||
+              result.product?._id;
+            console.log("2D Saved Product ID:", savedProductId);
             savedData = {
               krDesignId: savedProductId, // Store actual database ID
               krImageURL: [cloudinaryResponse.url], // Store as array for consistency
               krDesignArea: current2DData, // Store all customizations
               customizationData: current2DData,
-              canvas: editor.canvas.toJSON()
+              canvas: editor.canvas.toJSON(),
             };
 
             // Store in localStorage
-            localStorage.setItem('krDesignData', JSON.stringify(savedData));
+            localStorage.setItem("krDesignData", JSON.stringify(savedData));
 
             // Store designs in an object
-            const existingDesigns = JSON.parse(localStorage.getItem('krDesigns') || '{}');
+            const existingDesigns = JSON.parse(
+              localStorage.getItem("krDesigns") || "{}"
+            );
             existingDesigns[savedProductId] = savedData;
-            localStorage.setItem('krDesigns', JSON.stringify(existingDesigns));
+            localStorage.setItem("krDesigns", JSON.stringify(existingDesigns));
 
             setSaveSuccess(true);
             setTimeout(() => setSaveSuccess(false), 3000);
@@ -1416,30 +1587,31 @@ const CustomizerLayout = (props) => {
 
           // Even if API fails, store in localStorage with local ID
           const localId = `local_${Date.now()}`;
-          console.log('2D API failed, using local ID:', localId);
+          console.log("2D API failed, using local ID:", localId);
           savedData = {
             krDesignId: localId, // Use local ID when API fails
             krImageURL: [cloudinaryResponse.url], // Store as array for consistency
             krDesignArea: current2DData, // Store all customizations
             customizationData: current2DData,
-            canvas: editor.canvas.toJSON()
+            canvas: editor.canvas.toJSON(),
           };
 
-          localStorage.setItem('krDesignData', JSON.stringify(savedData));
+          localStorage.setItem("krDesignData", JSON.stringify(savedData));
 
-          const existingDesigns = JSON.parse(localStorage.getItem('krDesigns') || '{}');
+          const existingDesigns = JSON.parse(
+            localStorage.getItem("krDesigns") || "{}"
+          );
           existingDesigns[savedData.krDesignId] = savedData;
-          localStorage.setItem('krDesigns', JSON.stringify(existingDesigns));
+          localStorage.setItem("krDesigns", JSON.stringify(existingDesigns));
         }
 
         return {
           success: true,
           productId: savedProductId,
-          savedData: savedData
+          savedData: savedData,
         };
-
       } catch (error) {
-        alert('Save failed: ' + error.message);
+        alert("Save failed: " + error.message);
         return { success: false, error: error.message };
       } finally {
         setIsSaving(false);
@@ -1449,7 +1621,6 @@ const CustomizerLayout = (props) => {
 
   return (
     <div className="kr-layout-container kr-reset-margin">
-
       <Topbar
         setShowSidebar={setShowSidebar}
         onSave={handleSave}
@@ -1457,9 +1628,9 @@ const CustomizerLayout = (props) => {
         selectedProduct={selectedProduct}
       />
 
-      {(showSidebar && selectedProduct) && (
+      {showSidebar && selectedProduct && (
         <Sidebar
-          bringForward={() => updateArrange('bringForward')}
+          bringForward={() => updateArrange("bringForward")}
           currencyCode={props?.currencyCode}
           editor={editor}
           layerManager={layerManager}
@@ -1519,9 +1690,7 @@ const CustomizerLayout = (props) => {
         />
       )}
 
-      {selectedProduct?.ProductType === "3d" && (
-        <ThreeDCustomize />
-      )}
+      {selectedProduct?.ProductType === "3d" && <ThreeDCustomize />}
 
       {selectedProduct?.ProductType === "3d" && threeDloading && (
         <div className="kr-loading-overlay kr-reset-margin-padding">
@@ -1532,13 +1701,15 @@ const CustomizerLayout = (props) => {
         </div>
       )}
 
-      {selectedProduct?.ProductType === "3d" && threeDscreenshots.length > 0 && (
-        <ScreenshotGallery
-          screenshots={threeDscreenshots}
-          onClose={() => setthreeDScreenshots([])}
-          onDownloadAll={() => console.log('All downloaded')}
-        />
-      )}
+      {selectedProduct?.ProductType === "3d" &&
+        threeDscreenshots.length > 0 &&
+        showScreenshotsModal && (
+          <ScreenshotGallery
+            screenshots={threeDscreenshots}
+            onClose={() => setthreeDScreenshots([])}
+            onDownloadAll={() => console.log("All downloaded")}
+          />
+        )}
 
       {/*
         {selectedProduct && (
@@ -1557,17 +1728,21 @@ const CustomizerLayout = (props) => {
         )}
       */}
 
-      <div className="kr-controls-bar">
-        {parts.map((part) => (
-          <button
-            key={part}
-            onClick={() => setthreeDSelectedPart(part)}
-            className={`kr-part-button kr-reset-margin ${threeDselectedPart === part ? 'active' : ''}`}
-          >
-            {part}
-          </button>
-        ))}
-      </div>
+      {selectedProduct?.ProductType === "3d" && (
+        <div className="kr-controls-bar">
+          {parts.map((part) => (
+            <button
+              key={part}
+              onClick={() => setthreeDSelectedPart(part)}
+              className={`kr-part-button kr-reset-margin ${
+                threeDselectedPart === part ? "active" : ""
+              }`}
+            >
+              {part}
+            </button>
+          ))}
+        </div>
+      )}
 
       <LayerContextMenu
         x={contextMenu.x}
@@ -1588,8 +1763,16 @@ const CustomizerLayout = (props) => {
       {saveSuccess && (
         <div className="kr-save-success kr-reset-margin">
           <div className="kr-save-success-content kr-reset-margin-padding">
-            <svg className="kr-save-success-icon kr-reset-margin-padding" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            <svg
+              className="kr-save-success-icon kr-reset-margin-padding"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clipRule="evenodd"
+              />
             </svg>
             <span className="kr-reset">Design saved successfully!</span>
           </div>
@@ -1600,12 +1783,24 @@ const CustomizerLayout = (props) => {
         <div className="kr-chat-box kr-reset-margin-padding">
           <div className="kr-chat-header kr-reset-margin">
             <div className="kr-chat-header-top kr-reset-margin-padding">
-              <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345784/qqchat_jn7bok.png" alt="" />
-              <img onClick={() => setShowChatBox(false)} src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749341803/Vector_hm0yzo.png" alt="" className="kr-chat-close-btn" />
+              <img
+                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345784/qqchat_jn7bok.png"
+                alt=""
+              />
+              <img
+                onClick={() => setShowChatBox(false)}
+                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749341803/Vector_hm0yzo.png"
+                alt=""
+                className="kr-chat-close-btn"
+              />
             </div>
             <div className="kr-chat-title kr-reset-padding">
-              <h2 className="kr-reset-margin-padding">Customizer's Help Center</h2>
-              <p className="kr-reset-margin-padding">How can we help you today?</p>
+              <h2 className="kr-reset-margin-padding">
+                Customizer's Help Center
+              </h2>
+              <p className="kr-reset-margin-padding">
+                How can we help you today?
+              </p>
             </div>
           </div>
 
@@ -1613,8 +1808,12 @@ const CustomizerLayout = (props) => {
             {[...Array(4)].map((_, i) => (
               <div key={i}>
                 <div className="kr-chat-item kr-reset-margin">
-                  <span className="kr-chat-item-text kr-reset-margin-padding">How customizer work?</span>
-                  <span className="kr-chat-item-arrow kr-reset-margin-padding">›</span>
+                  <span className="kr-chat-item-text kr-reset-margin-padding">
+                    How customizer work?
+                  </span>
+                  <span className="kr-chat-item-arrow kr-reset-margin-padding">
+                    ›
+                  </span>
                 </div>
                 <hr className="kr-chat-divider kr-reset-margin-padding" />
               </div>
@@ -1626,7 +1825,6 @@ const CustomizerLayout = (props) => {
       {/* <div onClick={() => setShowChatBox(!showChatBox)} className="kr-chat-button kr-reset-margin">
         <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345784/qqchat_jn7bok.png" alt="chat" />
       </div> */}
-
     </div>
   );
 };

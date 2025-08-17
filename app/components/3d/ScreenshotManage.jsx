@@ -1,5 +1,68 @@
+// import { useThree } from '@react-three/fiber';
+// import { useImperativeHandle, forwardRef } from 'react';
+// import * as THREE from 'three';
+
+// const ScreenshotManager = forwardRef((props, ref) => {
+//   const { gl, camera, scene } = useThree();
+
+//   useImperativeHandle(ref, () => ({
+//     captureAll: async () => {
+//       try {
+//         const views = [
+//           { name: 'front', position: [0, 0, 5] },
+//           { name: 'back', position: [0, 0, -5] },
+//           { name: 'left', position: [-5, 0, 0] },
+//           { name: 'right', position: [5, 0, 0] }
+//         ];
+
+//         const originalPosition = camera.position.clone();
+//         const originalRotation = camera.rotation.clone();
+
+//         const capturedImages = [];
+
+//         for (const view of views) {
+//           // Move camera to position
+//           camera.position.set(...view.position);
+
+//           // Look at scene center (0,0,0) or model center if you have bounding box
+//           camera.lookAt(new THREE.Vector3(0, 0, 0));
+//           camera.updateProjectionMatrix();
+
+//           // Render
+//           gl.render(scene, camera);
+
+//           // Wait a frame
+//           await new Promise(resolve => setTimeout(resolve, 100));
+
+//           // Capture
+//           const dataUrl = gl.domElement.toDataURL('image/png');
+//           capturedImages.push({ angle: view.name, image: dataUrl });
+//         }
+
+//         // Reset camera back
+//         camera.position.copy(originalPosition);
+//         camera.rotation.copy(originalRotation);
+//         camera.updateProjectionMatrix();
+
+//         console.log("Captured Screenshots:", capturedImages);
+//         return capturedImages;
+//       } catch (error) {
+//         console.error("Error capturing screenshots:", error);
+//       }
+//     }
+//   }), [gl, camera, scene]);
+
+//   return null;
+// });
+
+// ScreenshotManager.displayName = 'ScreenshotManager';
+
+// export default ScreenshotManager;
+
+
 import { useThree } from '@react-three/fiber';
 import { useImperativeHandle, forwardRef } from 'react';
+import * as THREE from 'three';
 
 const ScreenshotManager = forwardRef((props, ref) => {
   const { gl, camera, scene } = useThree();
@@ -7,37 +70,52 @@ const ScreenshotManager = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => ({
     captureAll: async () => {
       try {
+        // Compute bounding box of the model
+        const box = new THREE.Box3().setFromObject(scene);
+        const center = new THREE.Vector3();
+        const size = new THREE.Vector3();
+        box.getCenter(center);
+        box.getSize(size);
+
+        // Pick the largest dimension for framing
+        const maxDim = Math.max(size.x, size.y, size.z);
+
+        // Distance formula for perspective camera (so model fits nicely)
+        const fov = camera.fov * (Math.PI / 180); // vertical fov in radians
+        let distance = maxDim / (2 * Math.tan(fov / 2));
+
+        // Add a little padding
+        distance *= 1.2;
+
         const views = [
-          { name: 'front', rotation: [0, 0, 0] },
-          { name: 'back', rotation: [0, Math.PI, 0] },
-          { name: 'left', rotation: [0, -Math.PI / 2, 0] },
-          { name: 'right', rotation: [0, Math.PI / 2, 0] }
+          { name: 'front', position: [0, 0, distance] },
+          { name: 'back', position: [0, 0, -distance] },
+          { name: 'left', position: [-distance, 0, 0] },
+          { name: 'right', position: [distance, 0, 0] }
         ];
 
-        const originalRotation = scene.rotation.clone();
+        const originalPosition = camera.position.clone();
+        const originalRotation = camera.rotation.clone();
+
         const capturedImages = [];
 
         for (const view of views) {
-          // Set the scene rotation
-          scene.rotation.set(...view.rotation);
-          
-          // Force a render
+          camera.position.set(...view.position).add(center); // move relative to center
+          camera.lookAt(center);
+          camera.updateProjectionMatrix();
+
           gl.render(scene, camera);
-          
-          // Wait a frame to ensure render is complete
           await new Promise(resolve => setTimeout(resolve, 100));
-          
-          // Capture the screenshot
+
           const dataUrl = gl.domElement.toDataURL('image/png');
           capturedImages.push({ angle: view.name, image: dataUrl });
-          
-          // Store the screenshot data
-          // We'll handle downloading in the UI component
         }
 
-        // Reset to original rotation
-        scene.rotation.copy(originalRotation);
-        
+        // Reset camera back
+        camera.position.copy(originalPosition);
+        camera.rotation.copy(originalRotation);
+        camera.updateProjectionMatrix();
+
         console.log("Captured Screenshots:", capturedImages);
         return capturedImages;
       } catch (error) {

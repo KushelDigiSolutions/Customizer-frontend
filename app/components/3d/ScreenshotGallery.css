@@ -1,6 +1,6 @@
-/* Screenshot Gallery Styles with kds- prefix */
+/* Screenshot Gallery Styles with kr- prefix */
 
-.kds-gallery-overlay {
+.kr-gallery-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@
   z-index: 50;
 }
 
-.kds-gallery-modal {
+.kr-gallery-modal {
   background-color: white;
   border-radius: 0.5rem;
   padding: 1.5rem;
@@ -23,20 +23,20 @@
   overflow: auto;
 }
 
-.kds-gallery-header {
+.kr-gallery-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
 }
 
-.kds-gallery-title {
+.kr-gallery-title {
   font-size: 1.5rem;
   font-weight: 700;
   color: #1f2937;
 }
 
-.kds-gallery-close-btn {
+.kr-gallery-close-btn {
   color: #6b7280;
   font-size: 1.5rem;
   font-weight: 700;
@@ -46,22 +46,22 @@
   transition: color 0.2s ease;
 }
 
-.kds-gallery-close-btn:hover {
+.kr-gallery-close-btn:hover {
   color: #374151;
 }
 
-.kds-gallery-preview-container {
+.kr-gallery-preview-container {
   margin-bottom: 1.5rem;
   display: flex;
   justify-content: center;
 }
 
-.kds-gallery-preview-wrapper {
+.kr-gallery-preview-wrapper {
   position: relative;
 }
 
-.kds-gallery-preview-image {
-  width: 24rem;
+.kr-gallery-preview-image {
+  width: 40rem;
   height: 24rem;
   object-fit: contain;
   border: 1px solid #d1d5db;
@@ -70,7 +70,7 @@
   background-color: #f9fafb;
 }
 
-.kds-gallery-preview-label {
+.kr-gallery-preview-label {
   position: absolute;
   bottom: 0.5rem;
   left: 0.5rem;
@@ -82,14 +82,14 @@
   text-transform: capitalize;
 }
 
-.kds-gallery-thumbnails {
+.kr-gallery-thumbnails {
   display: flex;
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
-.kds-gallery-thumbnail {
+.kr-gallery-thumbnail {
   position: relative;
   cursor: pointer;
   border: 2px solid transparent;
@@ -98,23 +98,23 @@
   transition: border-color 0.2s ease;
 }
 
-.kds-gallery-thumbnail:hover {
+.kr-gallery-thumbnail:hover {
   border-color: #3b82f6;
 }
 
-.kds-gallery-thumbnail-active {
+.kr-gallery-thumbnail-active {
   border-color: #3b82f6;
 }
 
-.kds-gallery-thumbnail-image {
-  width: 6rem;
+.kr-gallery-thumbnail-image {
+  width: 8rem;
   height: 6rem;
   object-fit: contain;
   background-color: #f9fafb;
   border-radius: 0.375rem;
 }
 
-.kds-gallery-thumbnail-label {
+.kr-gallery-thumbnail-label {
   position: absolute;
   bottom: 0.25rem;
   left: 0.25rem;
@@ -126,13 +126,15 @@
   text-transform: capitalize;
 }
 
-.kds-gallery-actions {
+.kr-gallery-actions {
   display: flex;
   justify-content: center;
   gap: 1rem;
+  width: 280px;
+  margin: 0 auto;
 }
 
-.kds-gallery-btn {
+.kr-gallery-btn {
   padding: 0.5rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: 600;
@@ -141,67 +143,67 @@
   transition: background-color 0.2s ease;
 }
 
-.kds-gallery-btn-primary {
+.kr-gallery-btn-primary {
   background-color: #16a34a;
   color: white;
 }
 
-.kds-gallery-btn-primary:hover {
+.kr-gallery-btn-primary:hover {
   background-color: #15803d;
 }
 
-.kds-gallery-btn-secondary {
+.kr-gallery-btn-secondary {
   background-color: #4b5563;
   color: white;
 }
 
-.kds-gallery-btn-secondary:hover {
+.kr-gallery-btn-secondary:hover {
   background-color: #374151;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .kds-gallery-modal {
+  .kr-gallery-modal {
     margin: 1rem;
     padding: 1rem;
   }
   
-  .kds-gallery-preview-image {
+  .kr-gallery-preview-image {
     width: 100%;
     height: auto;
     max-height: 20rem;
   }
   
-  .kds-gallery-thumbnails {
+  .kr-gallery-thumbnails {
     flex-wrap: wrap;
     gap: 0.5rem;
   }
   
-  .kds-gallery-thumbnail-image {
+  .kr-gallery-thumbnail-image {
     width: 4rem;
     height: 4rem;
   }
   
-  .kds-gallery-actions {
+  .kr-gallery-actions {
     flex-direction: column;
     gap: 0.5rem;
   }
   
-  .kds-gallery-btn {
+  .kr-gallery-btn {
     width: 100%;
   }
 }
 
 @media (max-width: 480px) {
-  .kds-gallery-title {
+  .kr-gallery-title {
     font-size: 1.25rem;
   }
   
-  .kds-gallery-preview-image {
+  .kr-gallery-preview-image {
     max-height: 15rem;
   }
   
-  .kds-gallery-thumbnail-image {
+  .kr-gallery-thumbnail-image {
     width: 3rem;
     height: 3rem;
   }
