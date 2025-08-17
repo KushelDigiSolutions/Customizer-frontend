@@ -3,15 +3,23 @@ import { use2D } from '../../context/2DContext';
 import { use3D } from '@/app/context/3DContext';
 import './SelectColorsTab.css';
 
-const SelectColorsTab = () => {
+const SelectColorsTab = ({
+  handleColorChange,
+  selectedColor,
+  setShowBgColorsModal,
+  handleTopColorChange,
+  handleBottomColorChange,
+  selectedTopColor,
+  selectedBottomColor,
+  handleDynamicColorChange
+}) => {
   const {
-    selectedColor, setSelectedColor,
-    selectedTopColor, setSelectedTopColor,
-    selectedBottomColor, setSelectedBottomColor,
+    setSelectedColor,
+    setSelectedTopColor,
+    setSelectedBottomColor,
     showSidebar, setShowSidebar,
     showAddModal, setShowAddModal,
-    showEditModal, setShowEditModal,
-    setShowBgColorsModal
+    showEditModal, setShowEditModal
   } = use2D();
 
   const {
@@ -161,7 +169,7 @@ const SelectColorsTab = () => {
         <div className='kr-header-left kr-reset-margin-padding'>
           <h3 className='kr-title kr-reset-margin-padding'>Select Colors</h3>
         </div>
-        <div onClick={() => setShowBgColorsModal(false)} className="kr-close-button kr-reset-margin-padding">
+  <div onClick={() => setShowBgColorsModal(false)} className="kr-close-button kr-reset-margin-padding">
           <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749341803/Vector_hm0yzo.png" alt="Close" />
         </div>
       </div>

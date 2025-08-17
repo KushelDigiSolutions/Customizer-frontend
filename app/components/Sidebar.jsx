@@ -79,39 +79,44 @@ const Sidebar = ({
   // Define all possible tabs with their configurations
   const allTabs = [
     { 
-      key: "editor", 
-      label: "Editor", 
-      icon: "Frame_4_vzkhrn",
-      enabled: tabSettings.aiEditor,
-      fallbackKey: "aiEditor" // Alternative key name mapping
+  key: "editor", 
+  label: "Editor", 
+  iconInactive: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755419667/Frame_4_1_qksveu.svg",
+  iconActive: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1749641805/Frame_4_vzkhrn.svg",
+  enabled: tabSettings.aiEditor,
+  fallbackKey: "aiEditor" // Alternative key name mapping
     },
     { 
-      key: "edit", 
-      label: "Edit", 
-      icon: "pencil-outline_c6lwsj",
-      enabled: tabSettings.imageEdit,
-      fallbackKey: "imageEdit"
+  key: "edit", 
+  label: "Edit", 
+  iconActive: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755419580/pencil-outline_vwjaxg.svg",
+  iconInactive: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1749641805/pencil-outline_c6lwsj.svg",
+  enabled: tabSettings.imageEdit,
+  fallbackKey: "imageEdit"
     },
     { 
-      key: "text", 
-      label: "Text", 
-      icon: "text-recognition_emsdp8",
-      enabled: tabSettings.textEdit,
-      fallbackKey: "textEdit"
+  key: "text", 
+  label: "Text", 
+  iconActive: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755419580/text-recognition_zcj3e3.svg",
+  iconInactive: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1749641805/text-recognition_emsdp8.svg",
+  enabled: tabSettings.textEdit,
+  fallbackKey: "textEdit"
     },
     { 
-      key: "colors", 
-      label: "Colors", 
-      icon: "invert-colors_bybi8l",
-      enabled: tabSettings.colors,
-      fallbackKey: "colors"
+  key: "colors", 
+  label: "Colors", 
+  iconActive: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755419579/invert-colors_zidv8o.svg",
+  iconInactive: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1749641805/invert-colors_bybi8l.svg",
+  enabled: tabSettings.colors,
+  fallbackKey: "colors"
     },
     { 
-      key: "clipart", 
-      label: "Customize", 
-      icon: "heart-multiple-outline_rjqkb7",
-      enabled: tabSettings.clipart,
-      fallbackKey: "clipart"
+  key: "clipart", 
+  label: "Customize", 
+  iconActive: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755419579/heart-multiple-outline_ru3ina.svg",
+  iconInactive: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1749641805/heart-multiple-outline_rjqkb7.svg",
+  enabled: tabSettings.clipart,
+  fallbackKey: "clipart"
     },
     // Uncomment if you want to use rightImage tab
     // { 
@@ -298,14 +303,14 @@ const Sidebar = ({
   return (
     <div className="kr-sidebar kr-reset-margin-padding">
       <div className="kr-sidebar-menu kr-reset-margin">
-        {visibleTabs.map(({ key, label, icon }) => (
+        {visibleTabs.map(({ key, label, iconActive, iconInactive }) => (
           <div
             key={key}
             onClick={() => handleTabClick(key)}
             className="kr-tab kr-reset-margin-padding"
           >
             <img
-              src={`https://res.cloudinary.com/dd9tagtiw/image/upload/v1749641805/${icon}.svg`}
+              src={activeTab === key ? iconActive : iconInactive}
               alt={label}
               className="kr-tab-icon kr-reset-margin-padding"
             />

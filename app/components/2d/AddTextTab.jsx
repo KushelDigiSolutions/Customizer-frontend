@@ -6,6 +6,7 @@ import './AddTextTab.css';
 const AddTextTab = ({ handleAddCustomText, update3DText }) => {
     const { customText, setCustomText, showAddModal, setShowAddModal } = use2D();
     const { threeDtext, setthreeDText, selectedProduct } = use3D();
+    const [threeDInput, setThreeDInput] = React.useState("");
 
     return (
         <div className='kr-container kr-reset-margin-padding'>
@@ -48,14 +49,17 @@ const AddTextTab = ({ handleAddCustomText, update3DText }) => {
                             <div className='kr-input-container kr-reset-margin-padding'>
                                 <textarea
                                     placeholder="Enter text"
-                                    value={threeDtext}
-                                    onChange={(e) => setthreeDText(e.target.value)}
+                                    value={threeDInput}
+                                    onChange={(e) => setThreeDInput(e.target.value)}
                                     className="kr-text-input kr-reset-margin"
                                 />
                             </div>
                             <button 
-                                onClick={update3DText} 
-                                className={`kr-add-button ${threeDtext.trim() !== "" ? "active" : "inactive"}`}
+                                onClick={() => {
+                                    setthreeDText(threeDInput);
+                                    update3DText();
+                                }} 
+                                className={`kr-add-button ${threeDInput.trim() !== "" ? "active" : "inactive"}`}
                             >
                                 Add text
                             </button>

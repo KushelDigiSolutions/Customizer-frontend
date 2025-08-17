@@ -66,7 +66,7 @@ const EditTab = ({ handleAddDesignToCanvas, editor, setShowImageEditModal, setHa
                 <div className='kr-edit-title-section kr-reset-margin-padding'>
                     <h3 className='kr-edit-title kr-reset-margin-padding'>Edit</h3>
                 </div>
-                <div className='kr-edit-close kr-reset-margin-padding'>
+                <div className='kr-edit-close kr-reset-margin-padding' onClick={() => setShowImageEditModal && setShowImageEditModal(false)}>
                     <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749341803/Vector_hm0yzo.png" alt="Close" />
                 </div>
             </div>
