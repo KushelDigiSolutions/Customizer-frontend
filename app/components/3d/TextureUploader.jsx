@@ -27,10 +27,12 @@ const TextureUploader = () => {
     setthreeDOffsetX,
     threeDoffsetY,
     setthreeDOffsetY,
+    previewUrl, setPreviewUrl,
+    selectedFile, setSelectedFile,
   } = use3D();
 
-  const [previewUrl, setPreviewUrl] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null);
+  // const [previewUrl, setPreviewUrl] = useState(null);
+  // const [selectedFile, setSelectedFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
 

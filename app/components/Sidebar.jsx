@@ -282,6 +282,11 @@ const Sidebar = ({
     }
   };
 
+  console.log("Active Tab:", activeTab);
+  console.log( "showImageEditModal",showImageEditModal);
+  console.log("Has Uploaded Image:", hasUploadedImage);
+
+
   // Debug logging
   // useEffect(() => {
   //   console.log('📋 Tab Settings:', tabSettings);
@@ -335,6 +340,7 @@ const Sidebar = ({
               setShowImageEditModal={setShowImageEditModal}
               setHasUploadedImage={setHasUploadedImage}
               selectedProduct={selectedProduct}
+              setActiveTab={setActiveTab}
             />
           )}
           {hasUploadedImage && showImageEditModal && (

@@ -1,24 +1,24 @@
-'use client'
+"use client";
 
 import React, { createContext, useContext, useRef, useState } from "react";
 
 const threeDcontext = createContext();
 
 export const ThreeDProvider = ({ children }) => {
-  const [threeDcolor, setthreeDColor] = useState('#ffffff');
+  const [threeDcolor, setthreeDColor] = useState("#ffffff");
   const [threeDtexture, setthreeDTexture] = useState(null);
-  const [threeDselectedPart, setthreeDSelectedPart] = useState('Front');
+  const [threeDselectedPart, setthreeDSelectedPart] = useState("Front");
 
-  const [threeDtextFontFamily, setthreeDTextFontFamily] = useState('Arial');
+  const [threeDtextFontFamily, setthreeDTextFontFamily] = useState("Arial");
 
   const [threeDzoom, setthreeDZoom] = useState(1);
   const [threeDoffsetX, setthreeDOffsetX] = useState(0);
   const [threeDoffsetY, setthreeDOffsetY] = useState(0);
 
-  const [threeDtext, setthreeDText] = useState('');
+  const [threeDtext, setthreeDText] = useState("");
   const [threeDtextTexture, setthreeDTextTexture] = useState(null);
-  const [threeDtextColor, setthreeDTextColor] = useState('#000000');
-  const [threeDoutlineColor, setthreeDOutlineColor] = useState('#ffffff');
+  const [threeDtextColor, setthreeDTextColor] = useState("#000000");
+  const [threeDoutlineColor, setthreeDOutlineColor] = useState("#ffffff");
 
   const [threeDtextScale, setthreeDTextScale] = useState(1);
   const [threeDtextPosX, setthreeDTextPosX] = useState(0.5);
@@ -27,16 +27,19 @@ export const ThreeDProvider = ({ children }) => {
   const [threeDscreenshots, setthreeDScreenshots] = useState([]);
   const [threeDloading, setthreeDLoading] = useState(false);
 
-  const [threeDtextureMode, setthreeDTextureMode] = useState('full');
+  const [threeDtextureMode, setthreeDTextureMode] = useState("full");
   const [threeDlogoScale, setthreeDLogoScale] = useState(0.5);
   const [threeDlogoPosX, setthreeDLogoPosX] = useState(0.5);
   const [threeDlogoPosY, setthreeDLogoPosY] = useState(0.5);
 
-  const [threeDtextFontWeight, setthreeDTextFontWeight] = useState('normal');
-  const [threeDtextFontStyle, setthreeDTextFontStyle] = useState('normal');
+  const [threeDtextFontWeight, setthreeDTextFontWeight] = useState("normal");
+  const [threeDtextFontStyle, setthreeDTextFontStyle] = useState("normal");
 
   const [customizationData, setCustomizationData] = useState({});
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   // New state for add to cart functionality
   const [showAddToCart, setShowAddToCart] = useState(false);
@@ -57,13 +60,12 @@ export const ThreeDProvider = ({ children }) => {
   };
 
   // Function to handle design modifications
- const handleDesignModification = () => {
-  if (isDesignSaved && checkDesignModification()) {
-    setIsDesignSaved(false);
-    setShowAddToCart(false);
-  }
-
-};
+  const handleDesignModification = () => {
+    if (isDesignSaved && checkDesignModification()) {
+      setIsDesignSaved(false);
+      setShowAddToCart(false);
+    }
+  };
 
   // Watch for changes in customization data
   // Temporarily disabled to fix Add to Cart button issue
@@ -91,7 +93,7 @@ export const ThreeDProvider = ({ children }) => {
     threeDlogoPosX,
     threeDlogoPosY,
     threeDtextFontWeight,
-    threeDtextFontStyle
+    threeDtextFontStyle,
   ]);
 
   const handleScreenshot = async () => {
@@ -102,12 +104,12 @@ export const ThreeDProvider = ({ children }) => {
         const capturedImages = await screenshotRef.current.captureAll();
         setthreeDScreenshots(capturedImages);
 
-        setCustomizationData(prev => ({
+        setCustomizationData((prev) => ({
           ...prev,
-          screenshots: capturedImages.map(img => ({
+          screenshots: capturedImages.map((img) => ({
             angle: img.angle,
-            image: img.image
-          }))
+            image: img.image,
+          })),
         }));
 
         return capturedImages;
@@ -122,69 +124,102 @@ export const ThreeDProvider = ({ children }) => {
   };
 
   const handleClearSelectedPart = () => {
-    setCustomizationData(prev => {
+    setCustomizationData((prev) => {
       const newParts = { ...prev.parts };
       delete newParts[threeDselectedPart];
       return {
         ...prev,
-        parts: newParts
+        parts: newParts,
       };
     });
 
     // Get base color for selected part from customizationData
-    const baseColor = customizationData?.baseColors?.[threeDselectedPart] || '#ffffff';
+    const baseColor =
+      customizationData?.baseColors?.[threeDselectedPart] || "#ffffff";
     setthreeDColor(baseColor);
 
     setthreeDTexture(null);
-    setthreeDText('');
+    setthreeDText("");
     setthreeDTextTexture(null);
-    setthreeDTextColor('#000000');
-    setthreeDOutlineColor('#ffffff');
+    setthreeDTextColor("#000000");
+    setthreeDOutlineColor("#ffffff");
+    setPreviewUrl(null);
+    setSelectedFile(null);
   };
 
   React.useEffect(() => {
     if (savedDesignData) {
-        setIsDesignSaved(true);
-        setShowAddToCart(true);
+      setIsDesignSaved(true);
+      setShowAddToCart(true);
     }
-}, [savedDesignData]);
+  }, [savedDesignData]);
 
   return (
-    <threeDcontext.Provider value={{
-      threeDcolor, setthreeDColor,
-      threeDtexture, setthreeDTexture,
-      threeDselectedPart, setthreeDSelectedPart,
-      threeDzoom, setthreeDZoom,
-      threeDoffsetX, setthreeDOffsetX,
-      threeDoffsetY, setthreeDOffsetY,
-      threeDtext, setthreeDText,
-      threeDtextTexture, setthreeDTextTexture,
-      threeDtextColor, setthreeDTextColor,
-      threeDoutlineColor, setthreeDOutlineColor,
-      threeDtextScale, setthreeDTextScale,
-      threeDtextPosX, setthreeDTextPosX,
-      threeDtextPosY, setthreeDTextPosY,
-      threeDscreenshots, setthreeDScreenshots,
-      threeDloading, setthreeDLoading,
-      threeDtextureMode, setthreeDTextureMode,
-      threeDlogoScale, setthreeDLogoScale,
-      threeDlogoPosX, setthreeDLogoPosX,
-      threeDlogoPosY, setthreeDLogoPosY,
-      customizationData, setCustomizationData,
-      handleScreenshot, handleClearSelectedPart,
-      screenshotRef, selectedProduct, setSelectedProduct,
-      threeDtextFontFamily,
-      threeDtextFontWeight,
-      setthreeDTextFontWeight,
-      threeDtextFontStyle,
-      setthreeDTextFontStyle,
-      setthreeDTextFontFamily,
-      // New state for add to cart functionality
-      showAddToCart, setShowAddToCart,
-      isDesignSaved, setIsDesignSaved,
-      savedDesignData, setSavedDesignData,
-      handleDesignModification,
-    }}>
+    <threeDcontext.Provider
+      value={{
+        threeDcolor,
+        setthreeDColor,
+        threeDtexture,
+        setthreeDTexture,
+        threeDselectedPart,
+        setthreeDSelectedPart,
+        threeDzoom,
+        setthreeDZoom,
+        threeDoffsetX,
+        setthreeDOffsetX,
+        threeDoffsetY,
+        setthreeDOffsetY,
+        threeDtext,
+        setthreeDText,
+        threeDtextTexture,
+        setthreeDTextTexture,
+        threeDtextColor,
+        setthreeDTextColor,
+        threeDoutlineColor,
+        setthreeDOutlineColor,
+        threeDtextScale,
+        setthreeDTextScale,
+        threeDtextPosX,
+        setthreeDTextPosX,
+        threeDtextPosY,
+        setthreeDTextPosY,
+        threeDscreenshots,
+        setthreeDScreenshots,
+        threeDloading,
+        setthreeDLoading,
+        threeDtextureMode,
+        setthreeDTextureMode,
+        threeDlogoScale,
+        setthreeDLogoScale,
+        threeDlogoPosX,
+        setthreeDLogoPosX,
+        threeDlogoPosY,
+        setthreeDLogoPosY,
+        customizationData,
+        setCustomizationData,
+        handleScreenshot,
+        handleClearSelectedPart,
+        screenshotRef,
+        selectedProduct,
+        setSelectedProduct,
+        threeDtextFontFamily,
+        threeDtextFontWeight,
+        setthreeDTextFontWeight,
+        threeDtextFontStyle,
+        setthreeDTextFontStyle,
+        setthreeDTextFontFamily,
+        // New state for add to cart functionality
+        showAddToCart,
+        setShowAddToCart,
+        isDesignSaved,
+        setIsDesignSaved,
+        savedDesignData,
+        setSavedDesignData,
+        handleDesignModification,
+        previewUrl, setPreviewUrl,
+        selectedFile, setSelectedFile,
+      }}
+    >
       {children}
     </threeDcontext.Provider>
   );
