@@ -11,7 +11,10 @@ const SelectColorsTab = ({
   handleBottomColorChange,
   selectedTopColor,
   selectedBottomColor,
-  handleDynamicColorChange
+  handleDynamicColorChange,
+  editor,
+  handleApplyTextColor,
+  handleApplyFontFamily
 }) => {
   const {
     setSelectedColor,
@@ -115,6 +118,10 @@ const SelectColorsTab = ({
     switch (tab) {
       case 'background':
         setSelectedColor(colorObj);
+        // If 2D and text object exists, apply color
+        if (selectedProduct?.ProductType === "2d" && handleApplyTextColor) {
+          handleApplyTextColor(colorObj.color);
+        }
         break;
       case 'topColor':
         setSelectedTopColor(colorObj);

@@ -312,7 +312,7 @@ const Sidebar = ({
           <div
             key={key}
             onClick={() => handleTabClick(key)}
-            className="kr-tab kr-reset-margin-padding"
+            className="kr-tab kr-reset-margin"
           >
             <img
               src={activeTab === key ? iconActive : iconInactive}
@@ -399,6 +399,26 @@ const Sidebar = ({
           selectedBottomColor={selectedBottomColor}
           selectedProduct={selectedProduct}
           handleDynamicColorChange={handleDynamicColorChange}
+          editor={editor}
+          handleApplyTextColor={(color) => {
+            // Find active text object and apply color
+            if (!editor?.canvas) return;
+            const textObj = editor.canvas.getObjects().find(obj => obj.type === "i-text");
+            if (textObj) {
+              textObj.set("fill", color);
+              editor.canvas.renderAll();
+            }
+            setTextColor(color); // update context
+          }}
+          handleApplyFontFamily={(font) => {
+            if (!editor?.canvas) return;
+            const textObj = editor.canvas.getObjects().find(obj => obj.type === "i-text");
+            if (textObj) {
+              textObj.set("fontFamily", font);
+              editor.canvas.renderAll();
+            }
+            setTextFontFamily(font); // update context
+          }}
         />
       )}
 

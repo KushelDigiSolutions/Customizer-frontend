@@ -11,10 +11,30 @@ const colorOptions = [
     "#388e3c", "#004d40", "#006064", "#e0f2f1", "#ffffff"
 ];
 
-export default function CustomColorSwatch({setTextColor, setChangeTextColor, selectedColor, setSelectedColor, setShowColorTab }) {
-    
+export default function CustomColorSwatch({
+    setTextColor,
+    setChangeTextColor,
+    selectedColor,
+    setSelectedColor,
+    setShowColorTab,
+    editor // <-- add editor prop
+}) {
+
+    // Helper to update canvas text color for 2D
+    const applyTextColorToCanvas = (color) => {
+        if (editor?.canvas) {
+            const textObj = editor.canvas.getObjects().find(obj => obj.type === "i-text");
+            if (textObj) {
+                textObj.set("fill", color);
+                editor.canvas.renderAll();
+            }
+        }
+    };
+
     const handleColorClick = (color) => {
-        setChangeTextColor(color); 
+        setChangeTextColor(color);
+        setSelectedColor(color);
+        applyTextColorToCanvas(color); // <-- update canvas text object
     };
 
     return (

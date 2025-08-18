@@ -657,6 +657,7 @@ const EditTextTab = ({ editor, layerManager }) => {
           selectedFont={fontValue}
           setShowTextSelectTab={setShowTextSelectTab}
           setSelectedFont={handleFontSelection}
+          editor={editor}
         />
       )}
 
@@ -667,6 +668,7 @@ const EditTextTab = ({ editor, layerManager }) => {
           selectedColor={colorValue}
           setSelectedColor={is3D ? setthreeDTextColor : setCurrentColor}
           setShowColorTab={setShowColorTab}
+          editor={editor}
         />
       )}
     </>

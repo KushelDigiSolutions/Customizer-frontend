@@ -16,7 +16,7 @@ const families = [
   "Sora", "Syne", "Tajawal", "Zilla Slab"
 ]
 
-const FontSelector = ({ setSelectedFont, selectedFont, setShowTextSelectTab }) => {
+const FontSelector = ({ setSelectedFont, selectedFont, setShowTextSelectTab, editor }) => {
   useEffect(() => {
     const loadFont = async () => {
       if (typeof window !== "undefined") {
@@ -28,12 +28,24 @@ const FontSelector = ({ setSelectedFont, selectedFont, setShowTextSelectTab }) =
         });
       }
     };
-    
+
     loadFont();
   }, []);
 
+  // Helper to update canvas text font for 2D
+  const applyFontToCanvas = (font) => {
+    if (editor?.canvas) {
+      const textObj = editor.canvas.getObjects().find(obj => obj.type === "i-text");
+      if (textObj) {
+        textObj.set("fontFamily", font);
+        editor.canvas.renderAll();
+      }
+    }
+  };
+
   const handleFontClick = (font) => {
-    setSelectedFont(font); 
+    setSelectedFont(font);
+    applyFontToCanvas(font); // <-- update canvas text object
   };
 
   return (
@@ -45,7 +57,7 @@ const FontSelector = ({ setSelectedFont, selectedFont, setShowTextSelectTab }) =
         </div>
       </div>
       <hr className="kr-fontselector-divider kr-reset-margin-padding" />
-      
+
       <div className="kr-fontselector-content kr-reset-margin">
         {families.map((font) => (
           <div key={font} className="kr-fontselector-item kr-reset-margin" onClick={() => handleFontClick(font)}>

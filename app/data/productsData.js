@@ -637,6 +637,7 @@ export const backendProducts = [
     },
     {
         ProductType: "3d",
+        id: 10,
         tabSettings: {
             aiEditor: false,
             imageEdit: true,
@@ -647,6 +648,61 @@ export const backendProducts = [
         customizableData: [],
         customizerImage: "https://res.cloudinary.com/dgif730br/image/upload/v1755068550/customizer-images/eiyrawqmqhntvzvjznjx.png",
         modelFile: "https://res.cloudinary.com/dgif730br/raw/upload/v1755068581/3d-models/1755068579390_brand1.glb",
+        designName: null,
+        layerDesign: {
+            Designs: [
+                {
+                    id: 1,
+                    title: "Design 1",
+                    shortDescription: "Shirt Design 1",
+                    price: 23.88,
+                    files: [
+                        "https://res.cloudinary.com/dgif730br/image/upload/v1755068265/customizer/qfm7hdwzefyvtq4bdjul.webp"
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "Design 2",
+                    shortDescription: "Shirt Design 2",
+                    price: 19.66,
+                    files: [
+                        "https://res.cloudinary.com/dgif730br/image/upload/v1755068290/customizer/o6218jgziz4yonthsbup.webp"
+                    ]
+                },
+                {
+                    id: 3,
+                    title: "Design 3",
+                    shortDescription: "Shirt Design 3",
+                    price: 21.4,
+                    files: [
+                        "https://res.cloudinary.com/dgif730br/image/upload/v1755068385/customizer/vsxvvcaqfuf84yapnae9.webp"
+                    ]
+                },
+                {
+                    id: 4,
+                    title: "Design 4",
+                    shortDescription: "Shirt Design 4",
+                    price: 25,
+                    files: [
+                        "https://res.cloudinary.com/dgif730br/image/upload/v1755068437/customizer/vbngf2pbv35hwrqzzmnq.webp"
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        ProductType: "3d",
+        id: 11,
+        tabSettings: {
+            aiEditor: false,
+            imageEdit: false,
+            textEdit: false,
+            colors: false,
+            clipart: true
+        },
+        customizableData: [],
+        customizerImage: "https://res.cloudinary.com/dgif730br/image/upload/v1755068550/customizer-images/eiyrawqmqhntvzvjznjx.png",
+        modelFile: "/models/car.glb",
         designName: null,
         layerDesign: {
             Designs: [
