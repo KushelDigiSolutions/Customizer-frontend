@@ -55,9 +55,8 @@ const ScreenshotGallery = ({ screenshots, onClose, onDownloadAll }) => {
             <div
               key={index}
               onClick={() => setSelected(screenshot)}
-              className={`kr-gallery-thumbnail ${
-                selected.view === screenshot.view ? 'kr-gallery-thumbnail-active' : ''
-              }`}
+              className={`kr-gallery-thumbnail ${selected.view === screenshot.view ? 'kr-gallery-thumbnail-active' : ''
+                }`}
             >
               <img
                 src={screenshot?.image}
@@ -74,6 +73,12 @@ const ScreenshotGallery = ({ screenshots, onClose, onDownloadAll }) => {
         {/* Action buttons */}
         <div className="kr-gallery-actions">
           <button
+            className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin"
+            title="Add design to cart"
+          >
+            <span className="kr-reset">Add to Cart</span>
+          </button>
+          <button
             onClick={downloadAll}
             className="kr-navbar-button kr-gallery-btn-primary"
           >
@@ -85,12 +90,7 @@ const ScreenshotGallery = ({ screenshots, onClose, onDownloadAll }) => {
           >
             Close
           </button>
-          <button
-              className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin"
-              title="Add design to cart"
-            >
-              <span className="kr-reset">Add to Cart</span>
-            </button>
+
         </div>
       </div>
     </div>

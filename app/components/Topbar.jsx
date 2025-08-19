@@ -165,7 +165,7 @@ const Topbar = ({
           )}
           {is3D && isDesignSaved && showAddToCart && (
             <button 
-              className="kr-navbar-button kr-addtocart-handel kr-success-button kr-reset-margin"
+              className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin"
               title="Add design to cart"
             >
               <span className="kr-reset">Add to Cart</span>

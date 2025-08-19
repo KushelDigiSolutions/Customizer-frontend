@@ -1,4 +1,4 @@
-// Updated ClipartTab.js - Completely Dynamic Based on Product Data
+// Updated ClipartTab.js - Combined LayerDesign and Variants
 'use client'
 
 import { use3D } from '@/app/context/3DContext';
@@ -17,20 +17,30 @@ const DynamicClipartTab = ({
 }) => {
   const [view, setView] = useState('main');
   const [availableCategories, setAvailableCategories] = useState([]);
+  const [selectedVariantGroup, setSelectedVariantGroup] = useState(null);
+
+  useEffect(() => {
+    console.log("🛠 selectedProduct:", selectedProduct);
+  }, [selectedProduct]);
 
   const is3DProduct = selectedProduct?.ProductType === '3d';
-   // ✅ Get first layer key dynamically (since it may not always be "Designs")
-  const layerDesignKey = selectedProduct?.layerDesign
+
+  // ✅ Get first layer key dynamically (since it may not always be "Designs")
+  const layerDesignKey = selectedProduct?.layerDesign && typeof selectedProduct.layerDesign === 'object'
     ? Object.keys(selectedProduct.layerDesign)[0]
     : null;
 
-  const shirtDesigns = layerDesignKey
-    ? selectedProduct?.layerDesign[layerDesignKey] || []
+  const shirtDesigns = layerDesignKey && selectedProduct?.layerDesign?.[layerDesignKey]
+    ? selectedProduct.layerDesign[layerDesignKey]
     : [];
 
-  const { setthreeDTexture, threeDcolor, setCustomizationData, threeDselectedPart } = use3D();
+  const { setthreeDTexture, threeDcolor, setCustomizationData, threeDselectedPart, activeVariants, setActiveVariants, setthreeDselectedPart, customizationData } = use3D();
 
-  const handleApply3DDesign = (designUrl) => {
+  const handleApply3DDesign = (designUrl, price) => {
+    if (!threeDselectedPart) {
+      alert("Please select a part to apply the texture.");
+      return;
+    }
     const image = new window.Image();
     image.crossOrigin = "anonymous";
     image.src = designUrl;
@@ -52,10 +62,11 @@ const DynamicClipartTab = ({
         parts: {
           ...prev.parts,
           [threeDselectedPart]: {
-            ...prev.parts[threeDselectedPart],
+            ...(prev.parts?.[threeDselectedPart] || {}),
             image: {
               mode: "full",
-              url: designUrl
+              url: designUrl,
+              price: price 
             }
           }
         }
@@ -69,14 +80,30 @@ const DynamicClipartTab = ({
 
     const categories = [];
 
-    // Check what data is available in the product
+    // Check layersDesigns (for 2D products)
     if (selectedProduct.layersDesigns) {
       Object.keys(selectedProduct.layersDesigns).forEach(category => {
         if (selectedProduct.layersDesigns[category] && selectedProduct.layersDesigns[category].length > 0) {
           categories.push({
             key: category,
             name: getCategoryDisplayName(category),
-            items: selectedProduct.layersDesigns[category]
+            items: selectedProduct.layersDesigns[category],
+            type: 'layer'
+          });
+        }
+      });
+    }
+
+    // Check variants (for 3D products with customizable parts)
+    if (selectedProduct.variants && Array.isArray(selectedProduct.variants) && selectedProduct.variants.length > 0) {
+      selectedProduct.variants.forEach(variantGroup => {
+        if (variantGroup.options && variantGroup.options.length > 0) {
+          categories.push({
+            key: variantGroup.category,
+            name: variantGroup.name,
+            items: variantGroup.options,
+            type: 'variant',
+            variantGroup: variantGroup
           });
         }
       });
@@ -135,85 +162,95 @@ const DynamicClipartTab = ({
   };
 
   // Handle item selection based on category type
-  const handleItemSelect = (item, categoryKey) => {
-    console.log(`🎨 Selected item from ${categoryKey}:`, item.name);
+  const handleItemSelect = (item, category) => {
+    console.log(`🎨 Selected item from ${category.key}:`, item.name);
 
-    switch (categoryKey) {
-      case 'designs':
-        handleAddDesignToCanvas(item.url, item.position, item.offsetX, item.offsetY);
-        break;
+    if (category.type === 'variant') {
+      // Handle variant selection
+      setActiveVariants(prev => ({
+        ...prev,
+        [category.key]: item.id
+      }));
 
-      case 'patterns':
-        handleAddPatternToCanvas(item.url);
-        break;
-
-      // Handle dynamic layer types (shoe parts, etc.)
-      case 'sole':
-      case 'surface':
-      case 'middle':
-      case 'lace':
-        handleDynamicLayerChange && handleDynamicLayerChange(categoryKey, item);
-        break;
-
-      // Handle any other custom categories
-      default:
-        if (handleDynamicLayerChange) {
-          handleDynamicLayerChange(categoryKey, item);
-        } else {
-          console.log(`No handler for category: ${categoryKey}`);
+      // Update customizationData with selected variant info
+      setCustomizationData(prev => ({
+        ...prev,
+        selectedVariants: {
+          ...(prev.selectedVariants || {}),
+          [category.key]: {
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            image: item.thumbnail || item.url || null
+          }
         }
-        break;
+      }));
+
+      if (item.meshName) {
+        setthreeDselectedPart(item.meshName);
+      }
+      console.log('🔧 Updated variant:', category.key, '→', item.id);
+    } else {
+      // Handle layer design selection
+      switch (category.key) {
+        case 'designs':
+          handleAddDesignToCanvas(item.url, item.position, item.offsetX, item.offsetY);
+          break;
+
+        case 'patterns':
+          handleAddPatternToCanvas(item.url);
+          break;
+
+        // Handle dynamic layer types (shoe parts, etc.)
+        case 'sole':
+        case 'surface':
+        case 'middle':
+        case 'lace':
+          handleDynamicLayerChange && handleDynamicLayerChange(category.key, item);
+          break;
+
+        // Handle any other custom categories
+        default:
+          if (handleDynamicLayerChange) {
+            handleDynamicLayerChange(category.key, item);
+          } else {
+            console.log(`No handler for category: ${category.key}`);
+          }
+          break;
+      }
     }
   };
-  
+
+  // Check if there are any customization options available
+  const hasAnyCustomizations = () => {
+    const hasLayerDesigns = selectedProduct?.layersDesigns &&
+      Object.keys(selectedProduct.layersDesigns).some(key =>
+        selectedProduct.layersDesigns[key] && selectedProduct.layersDesigns[key].length > 0
+      );
+
+    const hasVariants = selectedProduct?.variants &&
+      Array.isArray(selectedProduct.variants) &&
+      selectedProduct.variants.length > 0 &&
+      selectedProduct.variants.some(variant => variant.options && variant.options.length > 0);
+
+    const has3DDesigns = is3DProduct && shirtDesigns.length > 0;
+
+    return hasLayerDesigns || hasVariants || has3DDesigns;
+  };
 
   // Render main category selection
   const renderMainView = () => (
     <>
-      {
-        selectedProduct.ProductType === '2d' && (
-          <div className="kr-clipart-content kr-clipart-space-y-2">
-            {availableCategories.length === 0 ? (
-              <div className="kr-empty-state">
-                <div className="kr-empty-icon">📦</div>
-                <p className="kr-empty-text kr-reset">No customization options available</p>
-                <p className="kr-empty-subtext kr-reset">This product doesn't have configurable layers</p>
-              </div>
-            ) : (
-              availableCategories.map((category) => (
-                <div
-                  key={category.key}
-                  onClick={() => setView(category.key)}
-                  className="kr-category-item"
-                >
-                  <div className="kr-category-left">
-                    <div className="kr-category-badge">
-                      {category.items.length}
-                    </div>
-                    <div className="kr-category-info">
-                      <h4 className="kr-reset kr-reset-margin-padding">{category.name}</h4>
-                      <p className="kr-reset kr-reset-margin-padding">{category.items.length} options available</p>
-                    </div>
-                  </div>
-                  <img
-                    src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1750138078/chevron-right_p6kmcp.svg"
-                    className="kr-chevron-icon"
-                  />
-                </div>
-              ))
-            )}
-          </div>
-        )
-      }
-
+      {/* Show 3D Designs for 3D products */}
       {is3DProduct && shirtDesigns.length > 0 && (
         <div className="kr-3d-section">
+          <h4 className="kr-section-title kr-reset kr-reset-margin-padding">3D Designs</h4>
           <div className="kr-3d-grid">
             {shirtDesigns.map((design, idx) => (
               <div
                 key={idx}
                 className="kr-3d-item"
-                onClick={() => handleApply3DDesign(design.files?.[0])}
+                onClick={() => handleApply3DDesign(design.files?.[0], design.price)}
               >
                 <img
                   src={design.files?.[0]}
@@ -229,6 +266,45 @@ const DynamicClipartTab = ({
           </div>
         </div>
       )}
+
+      {/* Show all available categories (both layer designs and variants) */}
+      {availableCategories.length > 0 && (
+        <div className="kr-clipart-content kr-clipart-space-y-2">
+          {availableCategories.map((category) => (
+            <div
+              key={category.key}
+              onClick={() => setView(category.key)}
+              className="kr-category-item"
+            >
+              <div className="kr-category-left">
+                <div className="kr-category-badge">
+                  {category.items.length}
+                </div>
+                <div className="kr-category-info">
+                  <h4 className="kr-reset kr-reset-margin-padding">{category.name}</h4>
+                  <p className="kr-reset kr-reset-margin-padding">
+                    {category.items.length} options available
+                    {category.type === 'variant' && ' (Variant)'}
+                  </p>
+                </div>
+              </div>
+              <img
+                src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1750138078/chevron-right_p6kmcp.svg"
+                className="kr-chevron-icon"
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Show empty state if no customizations available */}
+      {!hasAnyCustomizations() && (
+        <div className="kr-empty-state">
+          <div className="kr-empty-icon">📦</div>
+          <p className="kr-empty-text kr-reset">No customization options available</p>
+          <p className="kr-empty-subtext kr-reset">This product doesn't have configurable layers or variants</p>
+        </div>
+      )}
     </>
   );
 
@@ -237,17 +313,17 @@ const DynamicClipartTab = ({
     const currentCategory = availableCategories.find(cat => cat.key === view);
     if (!currentCategory) return null;
 
-    const isShoeCategory = ['sole', 'surface', 'middle', 'lace'].includes(view);
-    const isDesignCategory = ['designs', 'patterns'].includes(view);
+    const isVariantCategory = currentCategory.type === 'variant';
+    const isDesignCategory = ['designs', 'patterns'].includes(currentCategory.key);
 
     return (
       <div className="kr-category-content kr-reset-margin">
         {isDesignCategory ? (
           // Grid layout for designs and patterns
-          <div className={view === 'designs' ? 'kr-design-grid-3 kr-reset-margin-padding' : 'kr-design-grid-2 kr-reset-margin-padding'}>
+          <div className={currentCategory.key === 'designs' ? 'kr-design-grid-3 kr-reset-margin-padding' : 'kr-design-grid-2 kr-reset-margin-padding'}>
             {currentCategory.items.map((item, index) => (
               <div key={item.id || index} className="kr-design-item kr-reset-margin-padding">
-                {view === 'patterns' ? (
+                {currentCategory.key === 'patterns' ? (
                   // Special layout for patterns
                   <div className="kr-pattern-container kr-reset-margin">
                     <img
@@ -256,7 +332,7 @@ const DynamicClipartTab = ({
                       className="kr-pattern-image kr-reset-padding"
                     />
                     <button
-                      onClick={() => handleItemSelect(item, view)}
+                      onClick={() => handleItemSelect(item, currentCategory)}
                       className="kr-add-pattern-btn kr-reset-margin"
                     >
                       ADD PATTERN
@@ -266,7 +342,7 @@ const DynamicClipartTab = ({
                 ) : (
                   // Simple grid for designs
                   <div
-                    onClick={() => handleItemSelect(item, view)}
+                    onClick={() => handleItemSelect(item, currentCategory)}
                     className="kr-design-simple kr-reset-margin"
                   >
                     <img
@@ -280,19 +356,22 @@ const DynamicClipartTab = ({
             ))}
           </div>
         ) : (
-          // List layout for shoe parts and other categories
+          // List layout for variants and other categories
           <div className="kr-clipart-space-y-2 kr-reset-padding">
             {currentCategory.items.map((item, index) => (
               <div
                 key={item.id || index}
-                onClick={() => handleItemSelect(item, view)}
-                className="kr-shoe-item kr-reset-margin"
+                onClick={() => handleItemSelect(item, currentCategory)}
+                className={`kr-shoe-item kr-reset-margin ${isVariantCategory && activeVariants?.[currentCategory.key] === item.id ? 'kr-active' : ''
+                  }`}
               >
                 <div className="kr-shoe-thumbnail kr-reset-margin-padding">
-                  <img
-                    src={item.url}
-                    alt={item.name}
-                  />
+                  {(item.url || item.thumbnail) && (
+                    <img
+                      src={item.url || item.thumbnail}
+                      alt={item.name}
+                    />
+                  )}
                 </div>
                 <div className="kr-shoe-info kr-reset-margin-padding">
                   <h4 className="kr-shoe-name kr-reset-margin-padding">{item.name}</h4>
@@ -301,6 +380,14 @@ const DynamicClipartTab = ({
                   )}
                   {item.description && (
                     <p className="kr-shoe-detail kr-reset-margin-padding">{item.description}</p>
+                  )}
+                  {item.meshName && (
+                    <p className="kr-shoe-detail kr-reset-margin-padding">Mesh: {item.meshName}</p>
+                  )}
+                  {isVariantCategory && activeVariants?.[currentCategory.key] === item.id && (
+                    <p className="kr-shoe-detail kr-reset-margin-padding" style={{ color: '#007bff', fontWeight: 'bold' }}>
+                      ✓ Selected
+                    </p>
                   )}
                 </div>
                 <div className="kr-shoe-arrow kr-reset-margin-padding">
@@ -315,7 +402,7 @@ const DynamicClipartTab = ({
 
         {/* Empty state for categories with no items */}
         {currentCategory.items.length === 0 && (
-          <div className="kr-empty-state ">
+          <div className="kr-empty-state">
             <div className="kr-empty-icon">🎨</div>
             <p className="kr-empty-text kr-reset">No {currentCategory.name.toLowerCase()} available</p>
             <p className="kr-empty-subtext kr-reset">This category is empty</p>
@@ -324,7 +411,6 @@ const DynamicClipartTab = ({
       </div>
     );
   };
-
 
   return (
     <div className="kr-clipart-container kr-reset-margin-padding">
@@ -343,8 +429,8 @@ const DynamicClipartTab = ({
       {/* Dynamic info footer */}
       {/* <div className="kr-footer">
         {view === 'main'
-          ? `Product Type: ${selectedProduct?.type || 'Unknown'} • ${availableCategories.length} categories available`
-          : `Select an option to customize your ${selectedProduct?.type || 'product'}`
+          ? `Product Type: ${selectedProduct?.ProductType || 'Unknown'} • ${availableCategories.length} categories available`
+          : `Select an option to customize your ${selectedProduct?.ProductType || 'product'}`
         }
       </div> */}
     </div>

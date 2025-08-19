@@ -3,65 +3,34 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment } from '@react-three/drei';
 import ModelViewer from './components/3d/ModelViewer';
-import TextureUploader from './components/3d/TextureUploader';
-import ControlsPanel from './components/3d/ControlsPanel';
 import { Suspense, useEffect, useRef } from 'react';
 // import TextureControlsPanel from './components/3d/TextureControlsPanel';
 import { createTextTexture } from './utility/createTextTexture';
-import ScreenshotManager from './components/3d/ScreenshotManage';
-import ScreenshotGallery from './components/3d/ScreenshotGallery';
-import TextControlsPanel from './components/3d/TextControlsPanel';
 import { use3D } from './context/3DContext';
 import './3DCustomize.css';
+import ScreenshotManager from './components/3d/ScreenshotManage';
 
 export default function ThreeDCustomize() {
   const {
-    threeDcolor,
-    setthreeDColor,
-    threeDtexture,
-    setthreeDTexture,
     threeDselectedPart,
-    setthreeDSelectedPart,
-    threeDzoom,
-    setthreeDZoom,
-    threeDoffsetX,
-    setthreeDOffsetX,
-    threeDoffsetY,
-    setthreeDOffsetY,
     threeDtext,
     setthreeDText,
-    threeDtextTexture,
     setthreeDTextTexture,
     threeDtextColor,
-    setthreeDTextColor,
     threeDoutlineColor,
-    setthreeDOutlineColor,
     threeDtextScale,
-    setthreeDTextScale,
     threeDtextPosX,
     setthreeDTextPosX,
     threeDtextPosY,
     setthreeDTextPosY,
-    threeDscreenshots,
-    setthreeDScreenshots,
-    threeDloading,
-    setthreeDLoading,
-    threeDtextureMode,
-    setthreeDTextureMode,
-    threeDlogoScale,
-    setthreeDLogoScale,
-    threeDlogoPosX,
-    setthreeDLogoPosX,
-    threeDlogoPosY,
-    setthreeDLogoPosY,
-    customizationData,
     setCustomizationData,
     screenshotRef,
     selectedProduct,
     threeDtextFontFamily, // ADD THIS
-    setthreeDTextFontFamily,
     threeDtextFontStyle,
-    threeDtextFontWeight // (if needed elsewhere)
+    threeDtextFontWeight,
+    activeVariants,
+    setActiveVariants,
   } = use3D();
 
   // const screenshotRef = useRef();
@@ -104,8 +73,8 @@ export default function ThreeDCustomize() {
               scale: threeDtextScale,
               position: { x: threeDtextPosX, y: threeDtextPosY },
               fontFamily: threeDtextFontFamily || 'Arial', // SAVE FONT FAMILY
-               fontWeight: threeDtextFontWeight,    // <-- Save fontWeight
-            fontStyle: threeDtextFontStyle,  
+              fontWeight: threeDtextFontWeight,    // <-- Save fontWeight
+              fontStyle: threeDtextFontStyle,
             },
           },
         },
@@ -122,11 +91,10 @@ export default function ThreeDCustomize() {
     threeDtextPosY,
     threeDselectedPart,
     threeDtextFontFamily,
-    threeDtextFontWeight,   // <-- Add as dependency
-    threeDtextFontStyle     // <-- Add as dependency
+    threeDtextFontWeight,
+    threeDtextFontStyle
   ]);
 
-  // Get model URL from product data
   const modelUrl = selectedProduct?.modelFile || '/models/brand1.glb';
 
   return (
@@ -148,55 +116,31 @@ export default function ThreeDCustomize() {
         </Canvas>
       </div>
 
-      <div className="kds-controls-container">
-
-
-        {/* <ControlsPanel
-          onScreenshot={handleScreenshot}
-        />
-
-        <TextControlsPanel
-        />
-
-        <TextureUploader
-        />
-
-        <TextureControlsPanel
-        /> */}
-
-        {/* {customizationData?.parts && Object.keys(customizationData.parts).length > 0 && (
-          <button
-            className="kds-btn kds-btn-primary kds-btn-mt-2"
-            onClick={() => console.log('Customization Data:', customizationData)}
-          >
-            Save Customization
-          </button>
-        )}
-
-        {threeDloading && (
-          <div className="kds-loading-overlay">
-            <div className="kds-loading-content">
-              <div className="kds-spinner"></div>
-              <div className="kds-loading-text">Capturing screenshots...</div>
+      {/* <div className="kds-controls-container">
+        {selectedProduct?.variants?.map(group => (
+          <div key={group.id} className="kds-variant-group">
+            <h3 className="kds-variant-title">{group.name}</h3>
+            <div className="kds-variant-options">
+              {group.options.map(opt => (
+                <button
+                  key={opt.id}
+                  className={
+                    activeVariants?.[group.category] === opt.id
+                      ? 'kds-variant-btn kds-active'
+                      : 'kds-variant-btn'
+                  }
+                  onClick={() =>
+                    setActiveVariants(prev => ({ ...prev, [group.category]: opt.id }))
+                  }
+                >
+                  {opt.name}
+                </button>
+              ))}
             </div>
           </div>
-        )}
+        ))}
 
-        {threeDscreenshots.length > 0 && (
-          <ScreenshotGallery
-            screenshots={threeDscreenshots}
-            onClose={() => setthreeDScreenshots([])}
-            onDownloadAll={() => console.log('All downloaded')}
-          />
-        )}
-
-        <button
-          className="kds-btn kds-btn-danger kds-btn-full kds-btn-mt-2"
-          onClick={handleClearSelectedPart}
-        >
-          Clear Selected Part
-        </button> */}
-      </div>
+      </div> */}
     </main>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useRef, useState } from "react";
+import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 
 const threeDcontext = createContext();
 
@@ -47,6 +47,21 @@ export const ThreeDProvider = ({ children }) => {
   const [showAddToCart, setShowAddToCart] = useState(false);
   const [isDesignSaved, setIsDesignSaved] = useState(false);
   const [savedDesignData, setSavedDesignData] = useState(null);
+
+  const [activeVariants, setActiveVariants] = useState({});
+
+  // Initialize from selectedProduct defaults whenever product changes
+  useEffect(() => {
+    if (selectedProduct?.variants) {
+      const defaults = {};
+      selectedProduct.variants.forEach(group => {
+        const def = group.options.find(o => o.isDefault) || group.options[0];
+        defaults[group.category] = def.id;
+      });
+      setActiveVariants(defaults);
+    }
+  }, [selectedProduct]);
+
 
   const screenshotRef = useRef();
 
@@ -222,6 +237,8 @@ export const ThreeDProvider = ({ children }) => {
         previewUrl, setPreviewUrl,
         selectedFile, setSelectedFile,
         showScreenshotsModal, setShowScreenshotsModal,
+        activeVariants,
+        setActiveVariants
       }}
     >
       {children}

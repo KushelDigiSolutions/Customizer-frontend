@@ -69,6 +69,7 @@ const CustomizerLayout = (props) => {
     isDesignSaved: isDesignSaved2D,
     setIsDesignSaved: setIsDesignSaved2D,
     setSavedDesignData: setSavedDesignData2D,
+    handleDesignSaved
   } = use2D();
 
   const {
@@ -105,7 +106,10 @@ const CustomizerLayout = (props) => {
     threeDcolor,
     threeDtexture,
     showScreenshotsModal,
+    activeVariants
   } = use3D();
+
+
 
   // Function to handle design modifications and hide add to cart button
   const handleDesignModification = () => {
@@ -124,27 +128,27 @@ const CustomizerLayout = (props) => {
 
   // Watch for changes in 2D customization data
   // Temporarily disabled to fix Add to Cart button issue
-  useEffect(() => {
-    if (selectedProduct?.ProductType === "2d") {
-      handleDesignModification();
-    }
-  }, [
-    customText,
-    textSize,
-    textSpacing,
-    textArc,
-    textColor,
-    fontFamily,
-    fontStyle,
-    textFlipX,
-    textFlipY,
-    flipX,
-    flipY,
-    selectedColor,
-    selectedTopColor,
-    selectedBottomColor,
-    selectedLayers,
-  ]);
+  // useEffect(() => {
+  //   if (selectedProduct?.ProductType === "2d") {
+  //     handleDesignModification();
+  //   }
+  // }, [
+  //   customText,
+  //   textSize,
+  //   textSpacing,
+  //   textArc,
+  //   textColor,
+  //   fontFamily,
+  //   fontStyle,
+  //   textFlipX,
+  //   textFlipY,
+  //   flipX,
+  //   flipY,
+  //   selectedColor,
+  //   selectedTopColor,
+  //   selectedBottomColor,
+  //   selectedLayers,
+  // ]);
 
   // Watch for changes in 3D customization data
   // Temporarily disabled to fix Add to Cart button issue
@@ -210,12 +214,7 @@ const CustomizerLayout = (props) => {
   //   setSelectedProduct(product);
   // }
 
-  const parts = selectedProduct?.parts || [
-    "Front",
-    "Back",
-    "LeftSleeve",
-    "RightSleeve",
-  ];
+  const parts = selectedProduct?.parts || [];
 
   class SimpleLayerManager {
     constructor(canvas, layerOrder) {
@@ -283,8 +282,7 @@ const CustomizerLayout = (props) => {
 
       obj.zIndex = zIndex;
       console.log(
-        `✅ Object assigned layer: ${obj.type} -> zIndex: ${zIndex}${
-          obj.layerType ? ` (${obj.layerType})` : ""
+        `✅ Object assigned layer: ${obj.type} -> zIndex: ${zIndex}${obj.layerType ? ` (${obj.layerType})` : ""
         }${obj.isRightSideImage ? " (Right Side Image)" : ""}`
       );
     }
@@ -483,6 +481,7 @@ const CustomizerLayout = (props) => {
 
         console.log(`✅ ${layerType} layer added - Dynamic layer system`);
       };
+      console.log("🎨 Image element created:", imgElement);
     });
   };
 
@@ -707,7 +706,7 @@ const CustomizerLayout = (props) => {
 
       const imageObj = canvas
         .getObjects()
-        .find((obj) => obj.type === "image" && obj.isTshirtBase);
+        .find((obj) => obj.isTshirtBase && (obj.type === "image" || obj.type === "rect"));
       if (!imageObj) {
         console.error("❌ No base product image found");
         alert("Error: Product not loaded properly. Please refresh the page.");
@@ -1318,6 +1317,26 @@ const CustomizerLayout = (props) => {
     }
   };
 
+  const getSelectedVariantsData = () => {
+    if (!selectedProduct?.variants || !activeVariants) return [];
+    return selectedProduct.variants.map(variantGroup => {
+      const selectedId = activeVariants[variantGroup.category];
+      const selectedOption = variantGroup.options.find(opt => opt.id === selectedId);
+      if (!selectedOption) return null;
+      return {
+        category: variantGroup.category,
+        name: variantGroup.name,
+        id: selectedOption.id,
+        price: selectedOption.price,
+        image: selectedOption.thumbnail || selectedOption.url || null
+      };
+    }).filter(Boolean);
+  };
+
+  const getSelectedVariantsTotalPrice = (selectedVariantsData) => {
+    return selectedVariantsData.reduce((sum, v) => sum + (Number(v.price) || 0), 0);
+  };
+
   const handleSave = async (screenshotsFrom3D = null) => {
     if (!editor?.canvas) {
       alert("Canvas not ready!");
@@ -1367,9 +1386,17 @@ const CustomizerLayout = (props) => {
           appliedImageCloudUrl = cloudinaryResponse.url;
         }
 
+        // NEW: Get selected variants data
+        const selectedVariantsData = getSelectedVariantsData();
+        const selectedVariantsTotalPrice = getSelectedVariantsTotalPrice(selectedVariantsData);
+        const totalPatternPrice = getTotalPatternPrice();
+
+        // Combine prices
+        const krCustomizedPrice = Number(totalPatternPrice) + Number(selectedVariantsTotalPrice);
+
         // Prepare save payload - exclude screenshots from customizations
-        const { screenshots: _, ...customizationsWithoutScreenshots } =
-          customizationData;
+        const { screenshots: _, ...customizationsWithoutScreenshots } = customizationData;
+
         const saveData = {
           timestamp: new Date().toISOString(),
           product: {
@@ -1384,6 +1411,8 @@ const CustomizerLayout = (props) => {
           customizations: {
             ...customizationsWithoutScreenshots,
             appliedImageCloudUrl,
+            krCustomizedPrice, // <-- Only this price now
+            selectedVariants: selectedVariantsData
           },
           screenshots: cloudinaryScreenshots,
           ProductType: "3d",
@@ -1405,26 +1434,18 @@ const CustomizerLayout = (props) => {
 
           if (response.ok) {
             const result = await response.json();
-            console.log("3D Save API response:", result);
-            // Extract product ID from the correct path in response
             savedProductId =
               result.product?.id ||
               result._id ||
               result.data?._id ||
               result.product?._id;
-            console.log("3D Saved Product ID:", savedProductId);
             savedData = {
-              krDesignId: savedProductId, // Store actual database ID
-              krImageURL: cloudinaryScreenshots.map((s) => s.url), // Store all Cloudinary links
-              krDesignArea: customizationData, // Store all customizations
-              customizationData: customizationData,
-              screenshots: cloudinaryScreenshots,
+              krDesignId: savedProductId,
+              krCustomizedPrice, // <-- Only this price now
+              selectedVariants: selectedVariantsData,
             };
 
-            // Store in localStorage
             localStorage.setItem("krDesignData", JSON.stringify(savedData));
-
-            // Store designs in an object
             const existingDesigns = JSON.parse(
               localStorage.getItem("krDesigns") || "{}"
             );
@@ -1433,7 +1454,6 @@ const CustomizerLayout = (props) => {
 
             setSaveSuccess(true);
             setTimeout(() => setSaveSuccess(false), 3000);
-            console.log("3d design saved! 📸");
           } else {
             throw new Error("Save failed");
           }
@@ -1441,21 +1461,14 @@ const CustomizerLayout = (props) => {
           setIsDesignSaved(true);
           setShowAddToCart(true);
         } catch (apiError) {
-          console.error("Database save error:", apiError);
-
-          // Even if API fails, store in localStorage with local ID
           const localId = `local_${Date.now()}`;
-          console.log("3D API failed, using local ID:", localId);
           savedData = {
-            krDesignId: localId, // Use local ID when API fails
-            krImageURL: cloudinaryScreenshots.map((s) => s.url), // Store all Cloudinary links
-            krDesignArea: customizationData, // Store all customizations
-            customizationData: customizationData,
-            screenshots: cloudinaryScreenshots,
+            krDesignId: localId,
+            krCustomizedPrice, // <-- Only this price now
+            selectedVariants: selectedVariantsData,
           };
 
           localStorage.setItem("krDesignData", JSON.stringify(savedData));
-
           const existingDesigns = JSON.parse(
             localStorage.getItem("krDesigns") || "{}"
           );
@@ -1542,14 +1555,12 @@ const CustomizerLayout = (props) => {
 
           if (response.ok) {
             const result = await response.json();
-            console.log("2D Save API response:", result);
             // Extract product ID from the correct path in response
             savedProductId =
               result.product?.id ||
               result._id ||
               result.data?._id ||
               result.product?._id;
-            console.log("2D Saved Product ID:", savedProductId);
             savedData = {
               krDesignId: savedProductId, // Store actual database ID
               krImageURL: [cloudinaryResponse.url], // Store as array for consistency
@@ -1570,7 +1581,6 @@ const CustomizerLayout = (props) => {
 
             setSaveSuccess(true);
             setTimeout(() => setSaveSuccess(false), 3000);
-            console.log("2D design saved! 📸");
             // setIsDesignSaved(true);
             // setShowAddToCart(true);
           } else {
@@ -1579,9 +1589,10 @@ const CustomizerLayout = (props) => {
           // setSavedDesignData({ customizationData: current2DData });
           // setIsDesignSaved(true);
           // setShowAddToCart(true);
-          setSavedDesignData({ customizationData: current2DData }); // <-- update first
-          setIsDesignSaved2D(true);
-          setShowAddToCart2D(true);
+          // setSavedDesignData({ customizationData: current2DData }); // <-- update first
+          // setIsDesignSaved2D(true);
+          // setShowAddToCart2D(true);
+          handleDesignSaved({ customizationData: current2DData });
         } catch (apiError) {
           console.error("Database save error:", apiError);
 
@@ -1603,6 +1614,7 @@ const CustomizerLayout = (props) => {
           );
           existingDesigns[savedData.krDesignId] = savedData;
           localStorage.setItem("krDesigns", JSON.stringify(existingDesigns));
+          handleDesignSaved({ customizationData: current2DData });
         }
 
         return {
@@ -1617,6 +1629,21 @@ const CustomizerLayout = (props) => {
         setIsSaving(false);
       }
     }
+  };
+
+  console.log("🔍 Debug threeDselectedPart:", threeDselectedPart);
+  console.log("🔍 Debug activeVariants:", activeVariants);
+  console.log("🔍 Debug prev.parts:", parts);
+
+  const getTotalPatternPrice = () => {
+    if (!customizationData?.parts) return 0;
+    let total = 0;
+    Object.values(customizationData.parts).forEach(part => {
+      if (part?.image?.price) {
+        total += Number(part.image.price);
+      }
+    });
+    return total;
   };
 
   return (
@@ -1728,15 +1755,14 @@ const CustomizerLayout = (props) => {
         )}
       */}
 
-      {selectedProduct?.ProductType === "3d" && (
+      {selectedProduct?.ProductType === "3d" && parts.length > 0 && (
         <div className="kr-controls-bar">
           {parts.map((part) => (
             <button
               key={part}
               onClick={() => setthreeDSelectedPart(part)}
-              className={`kr-part-button kr-reset-margin ${
-                threeDselectedPart === part ? "active" : ""
-              }`}
+              className={`kr-part-button kr-reset-margin ${threeDselectedPart === part ? "active" : ""
+                }`}
             >
               {part}
             </button>
@@ -1823,7 +1849,7 @@ const CustomizerLayout = (props) => {
       )}
 
       {/* <div onClick={() => setShowChatBox(!showChatBox)} className="kr-chat-button kr-reset-margin">
-        <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749345784/qqchat_jn7bok.png" alt="chat" />
+        <img src="https://res.cloudinary.com/dd9tagtiw/image/upload_v1749345784/qqchat_jn7bok.png" alt="chat" />
       </div> */}
     </div>
   );

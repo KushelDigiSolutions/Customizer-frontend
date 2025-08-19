@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useRef } from "react";
 
 const twoDcontext = createContext();
 
@@ -50,13 +50,13 @@ export const TwoDProvider = ({ children }) => {
     const [showAddToCart, setShowAddToCart] = useState(false);
     const [isDesignSaved, setIsDesignSaved] = useState(false);
     const [savedDesignData, setSavedDesignData] = useState(null);
+    
+    // Store the design state at the time of saving
+    const savedDesignSnapshot = useRef(null);
 
-    // Function to check if design has been modified after save
-    const checkDesignModification = () => {
-        if (!isDesignSaved) return false;
-
-        // Compare current customization data with saved data
-        const currentData = JSON.stringify({
+    // Function to get current design state
+    const getCurrentDesignState = () => {
+        return {
             customText,
             textSize,
             textSpacing,
@@ -72,33 +72,58 @@ export const TwoDProvider = ({ children }) => {
             selectedTopColor,
             selectedBottomColor,
             selectedLayers
-        });
-        const savedData = JSON.stringify(savedDesignData?.customizationData);
+        };
+    };
 
-        return currentData !== savedData;
+    // Function to compare current state with saved state
+    const hasDesignChanged = () => {
+        if (!savedDesignSnapshot.current) return false;
+        
+        const currentState = getCurrentDesignState();
+        const savedState = savedDesignSnapshot.current;
+        
+        return JSON.stringify(currentState) !== JSON.stringify(savedState);
     };
 
     // Function to handle design modifications
     const handleDesignModification = () => {
-        if (isDesignSaved && checkDesignModification()) {
+        // Only hide Add to Cart if design was saved and has actually changed
+        if (isDesignSaved && hasDesignChanged()) {
+            console.log('🔄 Design modified after save, hiding Add to Cart button');
             setIsDesignSaved(false);
             setShowAddToCart(false);
+            savedDesignSnapshot.current = null; // Clear the snapshot
         }
-
     };
 
-    React.useEffect(() => {
-        if (savedDesignData) {
-            setIsDesignSaved(true);
-            setShowAddToCart(true);
-        }
-    }, [savedDesignData]);
+    // Function to call when design is successfully saved
+    const handleDesignSaved = (designData) => {
+        console.log('💾 Design saved successfully, showing Add to Cart button');
+        
+        // Take a snapshot of current state
+        savedDesignSnapshot.current = getCurrentDesignState();
+        
+        // Set the saved states
+        setSavedDesignData(designData);
+        setIsDesignSaved(true);
+        setShowAddToCart(true);
+    };
 
-    // Watch for changes in customization data
-    // Temporarily disabled to fix Add to Cart button issue
+    // Watch for changes in customization data - but only trigger if design was actually saved
     React.useEffect(() => {
-        handleDesignModification();
-    }, [customText, textSize, textSpacing, textArc, textColor, fontFamily, fontStyle, textFlipX, textFlipY, flipX, flipY, selectedColor, selectedTopColor, selectedBottomColor, selectedLayers, isDesignSaved]);
+        if (isDesignSaved) {
+            // Use a small delay to avoid rapid state changes during save process
+            const timeoutId = setTimeout(() => {
+                handleDesignModification();
+            }, 100);
+            
+            return () => clearTimeout(timeoutId);
+        }
+    }, [
+        customText, textSize, textSpacing, textArc, textColor, fontFamily, fontStyle,
+        textFlipX, textFlipY, flipX, flipY, selectedColor, selectedTopColor,
+        selectedBottomColor, selectedLayers, isDesignSaved
+    ]);
 
     return (
         <twoDcontext.Provider value={{
@@ -132,6 +157,8 @@ export const TwoDProvider = ({ children }) => {
             isDesignSaved, setIsDesignSaved,
             savedDesignData, setSavedDesignData,
             handleDesignModification,
+            handleDesignSaved, // Export the new function
+            getCurrentDesignState, // Export for external use
         }}>
             {children}
         </twoDcontext.Provider>
