@@ -1,4 +1,5 @@
-// Updated ClipartTab.js - Combined LayerDesign and Variants
+// Updated ClipartTab.js with proper price tracking
+
 'use client'
 
 import { use3D } from '@/app/context/3DContext';
@@ -12,7 +13,7 @@ const DynamicClipartTab = ({
   handleAddDesignToCanvas,
   handleAddPatternToCanvas,
   handleDynamicLayerChange,
-  currencyCode,
+  currencyCode = '$',
   editor
 }) => {
   const [view, setView] = useState('main');
@@ -36,11 +37,15 @@ const DynamicClipartTab = ({
 
   const { setthreeDTexture, threeDcolor, setCustomizationData, threeDselectedPart, activeVariants, setActiveVariants, setthreeDselectedPart, customizationData } = use3D();
 
+  // Enhanced 3D design application with proper price tracking
   const handleApply3DDesign = (designUrl, price) => {
     if (!threeDselectedPart) {
       alert("Please select a part to apply the texture.");
       return;
     }
+    
+    console.log(`🎨 Applying 3D Design: ${designUrl} with price: ${price}`);
+    
     const image = new window.Image();
     image.crossOrigin = "anonymous";
     image.src = designUrl;
@@ -57,20 +62,26 @@ const DynamicClipartTab = ({
       texture.needsUpdate = true;
       setthreeDTexture(texture);
 
-      setCustomizationData(prev => ({
-        ...prev,
-        parts: {
-          ...prev.parts,
-          [threeDselectedPart]: {
-            ...(prev.parts?.[threeDselectedPart] || {}),
-            image: {
-              mode: "full",
-              url: designUrl,
-              price: price 
+      // Update customization data with proper price tracking
+      setCustomizationData(prev => {
+        console.log('💰 Updating customizationData with design price:', price);
+        return {
+          ...prev,
+          parts: {
+            ...prev.parts,
+            [threeDselectedPart]: {
+              ...(prev.parts?.[threeDselectedPart] || {}),
+              image: {
+                mode: "full",
+                url: designUrl,
+                price: Number(price) || 0 // Ensure price is stored as number
+              }
             }
           }
-        }
-      }));
+        };
+      });
+      
+      console.log('✅ 3D Design applied with price tracking');
     };
   };
 
@@ -161,44 +172,59 @@ const DynamicClipartTab = ({
     );
   };
 
-  // Handle item selection based on category type
+  // Enhanced item selection with proper price tracking
   const handleItemSelect = (item, category) => {
-    console.log(`🎨 Selected item from ${category.key}:`, item.name);
+    console.log(`🎨 Selected item from ${category.key}:`, item.name, 'Price:', item.price);
 
     if (category.type === 'variant') {
-      // Handle variant selection
-      setActiveVariants(prev => ({
-        ...prev,
-        [category.key]: item.id
-      }));
+      // Handle variant selection with price tracking
+      setActiveVariants(prev => {
+        const updated = {
+          ...prev,
+          [category.key]: item.id
+        };
+        console.log('🔧 Updated activeVariants:', updated);
+        return updated;
+      });
 
-      // Update customizationData with selected variant info
-      setCustomizationData(prev => ({
-        ...prev,
-        selectedVariants: {
-          ...(prev.selectedVariants || {}),
-          [category.key]: {
-            id: item.id,
-            name: item.name,
-            price: item.price,
-            image: item.thumbnail || item.url || null
+      // Update customizationData with selected variant info including price
+      setCustomizationData(prev => {
+        console.log('💰 Updating variant price:', category.key, '→', item.price);
+        return {
+          ...prev,
+          selectedVariants: {
+            ...(prev.selectedVariants || {}),
+            [category.key]: {
+              id: item.id,
+              name: item.name,
+              price: Number(item.price) || 0, // Ensure price is stored as number
+              image: item.thumbnail || item.url || null
+            }
           }
-        }
-      }));
+        };
+      });
 
       if (item.meshName) {
         setthreeDselectedPart(item.meshName);
       }
-      console.log('🔧 Updated variant:', category.key, '→', item.id);
+      console.log('✅ Updated variant with price tracking:', category.key, '→', item.id, 'Price:', item.price);
     } else {
       // Handle layer design selection
       switch (category.key) {
         case 'designs':
           handleAddDesignToCanvas(item.url, item.position, item.offsetX, item.offsetY);
+          // If design has a price, we might want to track it too
+          if (item.price) {
+            console.log('💰 Design applied with price:', item.price);
+          }
           break;
 
         case 'patterns':
           handleAddPatternToCanvas(item.url);
+          // If pattern has a price, we might want to track it too
+          if (item.price) {
+            console.log('💰 Pattern applied with price:', item.price);
+          }
           break;
 
         // Handle dynamic layer types (shoe parts, etc.)
@@ -207,6 +233,9 @@ const DynamicClipartTab = ({
         case 'middle':
         case 'lace':
           handleDynamicLayerChange && handleDynamicLayerChange(category.key, item);
+          if (item.price) {
+            console.log('💰 Layer applied with price:', item.price);
+          }
           break;
 
         // Handle any other custom categories
@@ -215,6 +244,9 @@ const DynamicClipartTab = ({
             handleDynamicLayerChange(category.key, item);
           } else {
             console.log(`No handler for category: ${category.key}`);
+          }
+          if (item.price) {
+            console.log('💰 Custom layer applied with price:', item.price);
           }
           break;
       }
@@ -259,7 +291,9 @@ const DynamicClipartTab = ({
                 />
                 <div className="kr-3d-info">
                   <div className="kr-3d-name">{design.title}</div>
-                  <div className="kr-3d-price">{currencyCode}{design?.price}</div>
+                  <div className="kr-3d-price">
+                    {currencyCode}{Number(design?.price).toFixed(2)}
+                  </div>
                 </div>
               </div>
             ))}
@@ -308,7 +342,7 @@ const DynamicClipartTab = ({
     </>
   );
 
-  // Render category items
+  // Render category items with price display
   const renderCategoryView = () => {
     const currentCategory = availableCategories.find(cat => cat.key === view);
     if (!currentCategory) return null;
@@ -336,6 +370,11 @@ const DynamicClipartTab = ({
                       className="kr-add-pattern-btn kr-reset-margin"
                     >
                       ADD PATTERN
+                      {item.price && (
+                        <span className="kr-pattern-price">
+                          {currencyCode}{Number(item.price).toFixed(2)}
+                        </span>
+                      )}
                     </button>
                     <p className="kr-pattern-name kr-reset-padding">{item.name}</p>
                   </div>
@@ -350,6 +389,11 @@ const DynamicClipartTab = ({
                       alt={item.name}
                       className="kr-design-image kr-reset-margin-padding"
                     />
+                    {item.price && (
+                      <div className="kr-design-price">
+                        {currencyCode}{Number(item.price).toFixed(2)}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -383,6 +427,11 @@ const DynamicClipartTab = ({
                   )}
                   {item.meshName && (
                     <p className="kr-shoe-detail kr-reset-margin-padding">Mesh: {item.meshName}</p>
+                  )}
+                  {item.price && (
+                    <p className="kr-shoe-price kr-reset-margin-padding">
+                      Price: {currencyCode}{Number(item.price).toFixed(2)}
+                    </p>
                   )}
                   {isVariantCategory && activeVariants?.[currentCategory.key] === item.id && (
                     <p className="kr-shoe-detail kr-reset-margin-padding" style={{ color: '#007bff', fontWeight: 'bold' }}>
@@ -425,14 +474,6 @@ const DynamicClipartTab = ({
       <hr className="kr-clipart-divider kr-reset-margin-padding" />
 
       {view === 'main' ? renderMainView() : renderCategoryView()}
-
-      {/* Dynamic info footer */}
-      {/* <div className="kr-footer">
-        {view === 'main'
-          ? `Product Type: ${selectedProduct?.ProductType || 'Unknown'} • ${availableCategories.length} categories available`
-          : `Select an option to customize your ${selectedProduct?.ProductType || 'product'}`
-        }
-      </div> */}
     </div>
   );
 };

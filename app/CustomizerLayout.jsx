@@ -16,6 +16,8 @@ import { backendProducts } from "./data/productsData";
 const CustomizerLayout = (props) => {
   console.log("props V1");
   console.log(props);
+  console.log(props?.productPrice);
+  console.log(props?.pageLoading);
   // Get all 2d context state and setters
   const {
     customText,
@@ -109,7 +111,7 @@ const CustomizerLayout = (props) => {
     activeVariants
   } = use3D();
 
-
+  const [pageLoading, setPageLoading] = useState(props?.pageLoading || false);
 
   // Function to handle design modifications and hide add to cart button
   const handleDesignModification = () => {
@@ -1400,7 +1402,8 @@ const CustomizerLayout = (props) => {
         const saveData = {
           timestamp: new Date().toISOString(),
           product: {
-            id: selectedProduct.id,
+            productId: selectedProduct.id,
+            storeHash: selectedProduct.storeHash,
             image: selectedProduct.image,
             description: selectedProduct.description,
             size: selectedProduct.size,
@@ -1527,7 +1530,9 @@ const CustomizerLayout = (props) => {
         const saveData = {
           timestamp: new Date().toISOString(),
           product: {
-            id: selectedProduct.id,
+            // id: selectedProduct.id,
+            productId: selectedProduct.id,
+            storeHash: selectedProduct.storeHash,
             image: selectedProduct.image,
             description: selectedProduct.description,
             size: selectedProduct.size,
@@ -1537,6 +1542,12 @@ const CustomizerLayout = (props) => {
           customizations: current2DData,
           canvas: editor.canvas.toJSON(),
           ProductType: "2d",
+          screenshots: [
+            {
+              angle: "finalProduct", 
+              url: cloudinaryResponse.url,
+            },
+          ],
         };
 
         let savedProductId = null;
@@ -1646,13 +1657,21 @@ const CustomizerLayout = (props) => {
     return total;
   };
 
+  useEffect(() => {
+    setPageLoading(props?.pageLoading || false);
+  }, [props?.pageLoading]);
+
   return (
     <div className="kr-layout-container kr-reset-margin">
+      {pageLoading && <div className="kr-loading-overlay">
+        <div className="kr-spinner"></div></div>}
       <Topbar
         setShowSidebar={setShowSidebar}
         onSave={handleSave}
         isSaving={isSaving}
         selectedProduct={selectedProduct}
+        productPrice={props?.productPrice || 0}
+        currencyCode={props?.currencyCode || '$'}
       />
 
       {showSidebar && selectedProduct && (

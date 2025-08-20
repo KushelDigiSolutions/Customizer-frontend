@@ -22,7 +22,7 @@
 
 //   if (!product) return <div>Product not found</div>;
 
-//   return <CustomizerLayout />;
+//   return <CustomizerLayout  />;
 // }
 
 "use client";

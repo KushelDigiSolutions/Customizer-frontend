@@ -175,3 +175,13 @@
     font-size: 0.7rem;
   }
 }
+
+
+.kr-total-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 0.25rem 1rem;
+}

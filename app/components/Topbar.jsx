@@ -1,6 +1,6 @@
-// Simplified Topbar.jsx without 3d functionality
+// Enhanced Topbar.jsx with Real-time Pricing
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { use3D } from '../context/3DContext';
 import { use2D } from '../context/2DContext';
 import './Topbar.css';
@@ -9,13 +9,140 @@ const Topbar = ({
   setShowSidebar,
   onSave,
   isSaving,
-  selectedProduct
+  selectedProduct,
+  productPrice, // Base product price from props
+  currencyCode = '$' // Currency symbol
 }) => {
-  const { handleScreenshot, handleClearSelectedPart, isDesignSaved, showAddToCart } = use3D();
-  const { isDesignSaved: isDesignSaved2D, showAddToCart: showAddToCart2D } = use2D();
+  const {
+    handleScreenshot,
+    handleClearSelectedPart,
+    isDesignSaved,
+    showAddToCart,
+    customizationData,
+    activeVariants
+  } = use3D();
+
+  const {
+    isDesignSaved: isDesignSaved2D,
+    showAddToCart: showAddToCart2D,
+    selectedLayers
+  } = use2D();
+
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [priceBreakdown, setPriceBreakdown] = useState({
+    basePrice: 0,
+    designPrice: 0,
+    variantPrice: 0
+  });
 
   const is3D = selectedProduct?.ProductType === "3d";
   const is2D = selectedProduct?.ProductType === "2d";
+
+  // Calculate total price for 3D products
+  const calculate3DPrice = () => {
+    let designPrice = 0;
+    let variantPrice = 0;
+    const basePrice = Number(productPrice) || 0;
+
+    // Calculate design/pattern prices from customizationData
+    if (customizationData?.parts) {
+      Object.values(customizationData.parts).forEach(part => {
+        if (part?.image?.price) {
+          designPrice += Number(part.image.price) || 0;
+        }
+      });
+    }
+
+    // Calculate variant prices
+    if (selectedProduct?.variants && activeVariants) {
+      selectedProduct.variants.forEach(variantGroup => {
+        const selectedVariantId = activeVariants[variantGroup.category];
+        if (selectedVariantId) {
+          const selectedOption = variantGroup.options.find(opt => opt.id === selectedVariantId);
+          if (selectedOption?.price) {
+            variantPrice += Number(selectedOption.price) || 0;
+          }
+        }
+      });
+    }
+
+    return {
+      basePrice,
+      designPrice,
+      variantPrice,
+      totalPrice: basePrice + designPrice + variantPrice
+    };
+  };
+
+  // Calculate total price for 2D products
+  const calculate2DPrice = () => {
+    let designPrice = 0;
+    let layerPrice = 0;
+    const basePrice = Number(productPrice) || 0;
+
+    // Calculate design prices from layerDesign
+    if (selectedProduct?.layerDesign) {
+      Object.values(selectedProduct.layerDesign).forEach(designGroup => {
+        if (Array.isArray(designGroup)) {
+          // This would need to track which designs are currently applied
+          // For now, we'll use a different approach based on selectedLayers
+        }
+      });
+    }
+
+    // Calculate layer prices (if any layers have associated prices)
+    if (selectedLayers && typeof selectedLayers === 'object') {
+      Object.values(selectedLayers).forEach(layer => {
+        if (layer?.price) {
+          layerPrice += Number(layer.price) || 0;
+        }
+      });
+    }
+
+    return {
+      basePrice,
+      designPrice,
+      variantPrice: layerPrice, // Using variantPrice for layers in 2D
+      totalPrice: basePrice + designPrice + layerPrice
+    };
+  };
+
+  // Update pricing whenever relevant data changes
+  useEffect(() => {
+    let breakdown;
+
+    if (is3D) {
+      breakdown = calculate3DPrice();
+    } else if (is2D) {
+      breakdown = calculate2DPrice();
+    } else {
+      breakdown = {
+        basePrice: Number(productPrice) || 0,
+        designPrice: 0,
+        variantPrice: 0,
+        totalPrice: Number(productPrice) || 0
+      };
+    }
+
+    setPriceBreakdown(breakdown);
+    setTotalPrice(breakdown.totalPrice);
+
+    console.log('💰 Price Update:', {
+      productType: selectedProduct?.ProductType,
+      breakdown,
+      activeVariants,
+      customizationData: customizationData?.parts
+    });
+
+  }, [
+    productPrice,
+    customizationData,
+    activeVariants,
+    selectedLayers,
+    selectedProduct,
+    is3D,
+    is2D
+  ]);
 
   // Debug logging
   useEffect(() => {
@@ -23,9 +150,11 @@ const Topbar = ({
       is3D,
       showAddToCart,
       isDesignSaved,
-      selectedProduct: selectedProduct?.ProductType
+      selectedProduct: selectedProduct?.ProductType,
+      totalPrice,
+      priceBreakdown
     });
-  }, [ showAddToCart, isDesignSaved]);
+  }, [showAddToCart, isDesignSaved, totalPrice]);
 
   // Handle save for both 2d and 3d
   const handleSave = async () => {
@@ -64,29 +193,17 @@ const Topbar = ({
     }
   };
 
-  // // Handle add to cart
-  // const handleAddToCart = () => {
-  //   // Get saved design data from localStorage
-  //   const savedData = localStorage.getItem('krDesignData');
-  //   if (savedData) {
-  //     const designData = JSON.parse(savedData);
-  //     console.log('Adding to cart:', designData);
-  //     // Here you can implement the actual add to cart logic
-  //     alert('Design added to cart!');
-  //   } else {
-  //     console.log('No saved design data found in localStorage');
-  //     alert('No design data found. Please save your design first.');
-  //   }
-  // };
+  // Format price for display
+  const formatPrice = (price) => {
+    return `${currencyCode}${Number(price).toFixed(2)}`;
+  };
+
 
   return (
     <div className="kr-topbar kr-reset-margin-padding">
       <div className="kr-topbar-container">
 
         <div className="kr-logo-section kr-reset-margin-padding">
-
-          {/* <img className='kr-reset-margin-padding' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749337982/Customizer_w0ruf6.png" alt="" /> */}
-
           <button
             onClick={() => setShowSidebar(prev => !prev)}
             className="kr-menu-button kr-reset-margin"
@@ -98,102 +215,70 @@ const Topbar = ({
           </button>
         </div>
 
+
         {/* Right Section - Action Buttons */}
         <div className="kr-right-section kr-reset-margin-padding">
 
-          {
-            selectedProduct?.ProductType === "3d" && (
-              <>
-                {/* <button
-                  className="kr-navbar-button kr-success-button kr-reset-margin"
-                  onClick={handleScreenshot}
-                >
-                  Save all Views
-                </button> */}
+          {selectedProduct?.ProductType === "3d" && (
+            <button
+              className="kr-navbar-button kr-danger-button kr-reset-margin"
+              onClick={handleClearSelectedPart}
+            >
+              Clear Part
+            </button>
+          )}
 
-                <button
-                  className="kr-navbar-button kr-danger-button kr-reset-margin"
-                  onClick={handleClearSelectedPart}
-                >
-                  Clear Part
-                </button>
-              </>
-            )
-          }
-
-          {/* Show Save & Review button initially, Add to Cart after save */}
-          {/* {console.log('Button render debug - currentShowAddToCart:', currentShowAddToCart)}
-          {!currentShowAddToCart ? (
+          {/* Save & Review / Add to Cart buttons */}
+          {is3D && !isDesignSaved && (
             <button
               onClick={handleSave}
               disabled={isSaving}
               className="kr-navbar-button kr-success-button kr-reset-margin"
-              title="Save and review design"
             >
               {isSaving ? (
-                <>
-                  <span className="kr-reset">Saving...</span>
-                </>
+                <span className="kr-reset">Saving...</span>
               ) : (
-                <>
-                  <span className="kr-reset">Save & Review</span>
-                </>
+                <span className="kr-reset">Save & Review</span>
               )}
             </button>
-          ) : (
-            <button
-              onClick={handleAddToCart}
-              className="kr-navbar-button kr-addtocart-handel kr-success-button kr-reset-margin"
-              title="Add design to cart"
-            >
-              <span className="kr-reset">Add to Cart</span>
-            </button>
-          )} */}
+          )}
 
-          {is3D && !isDesignSaved && (
-            <button onClick={handleSave}
-              disabled={isSaving}
-              className="kr-navbar-button kr-success-button kr-reset-margin">{isSaving ? (
-                <>
-                  <span className="kr-reset">Saving...</span>
-                </>
-              ) : (
-                <>
-                  <span className="kr-reset">Save & Review</span>
-                </>
-              )}</button>
-          )}
           {is3D && isDesignSaved && showAddToCart && (
-            <button 
+            <button
               className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin"
-              title="Add design to cart"
+              title={`Add design to cart - Total: ${formatPrice(totalPrice)}`}
             >
               <span className="kr-reset">Add to Cart</span>
             </button>
           )}
+
           {is2D && !isDesignSaved2D && (
-            <button onClick={handleSave}
+            <button
+              onClick={handleSave}
               disabled={isSaving}
-              className="kr-navbar-button kr-success-button kr-reset-margin">{isSaving ? (
-                <>
-                  <span className="kr-reset">Saving...</span>
-                </>
+              className="kr-navbar-button kr-success-button kr-reset-margin"
+            >
+              {isSaving ? (
+                <span className="kr-reset">Saving...</span>
               ) : (
-                <>
-                  <span className="kr-reset">Save & Review</span>
-                </>
-              )}</button>
+                <span className="kr-reset">Save & Review</span>
+              )}
+            </button>
           )}
+
           {is2D && isDesignSaved2D && showAddToCart2D && (
             <button
               className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin"
-              title="Add design to cart"
+              title={`Add design to cart - Total: ${formatPrice(totalPrice)}`}
             >
               <span className="kr-reset">Add to Cart</span>
             </button>
           )}
 
-          {/* <img className='kr-user-icon' src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749338383/Buttons_klifkp.png" alt="user" /> */}
+          <div className="kr-total-price kr-reset-margin">
+            {formatPrice(totalPrice)}
+          </div>
+
         </div>
       </div>
     </div>

@@ -485,6 +485,7 @@ export const backendProducts = [
         description: "white shirt",
         type: "shirt",
         ProductType: "3d",
+        modelSize: 0.03,
         parts: [
             'Front',
             'Back',
@@ -695,6 +696,7 @@ export const backendProducts = [
     {
         ProductType: "3d",
         id: 11,
+        storeHash: "vl5e5n6g4x",
         tabSettings: {
             aiEditor: false,
             imageEdit: false,
@@ -704,178 +706,67 @@ export const backendProducts = [
         },
         customizableData: [],
         customizerImage: "https://res.cloudinary.com/dgif730br/image/upload/v1755068550/customizer-images/eiyrawqmqhntvzvjznjx.png",
-        modelFile: "/models/Gun_GLB.glb",
+        modelFile: "/models/GUN.glb",
         designName: null,
+        modelSize: 0.3,
         variants: [
             {
                 id: 1,
                 name: "Grip",
-                description: "Grip Options",
                 category: "grip",
                 options: [
-                    {
-                        id: "grip1",
-                        name: "Small Grip",
-                        meshName: "Grip",
-                        price: 20000,
-                        thumbnail: null,
-                        isDefault: true
-                    },
-                    {
-                        id: "grip2",
-                        name: "Medium Grip",
-                        meshName: "Grip.001",
-                        price: 30000,
-                        thumbnail: null,
-                        isDefault: false
-                    },
-                    {
-                        id: "grip3",
-                        name: "Large Grip",
-                        meshName: "Grip.002",
-                        price: 25000,
-                        thumbnail: null,
-                        isDefault: false
-                    },
-                    {
-                        id: "grip4",
-                        name: "Extra Large Grip",
-                        meshName: "Grip.003",
-                        price: 31000,
-                        thumbnail: null,
-                        isDefault: false
-                    },
-
+                    { id: "grip1", name: "Small Grip", meshName: "Grip", price: 20000, isDefault: true },
+                    { id: "grip0", name: "Grip", meshName: "Grip001", price: 20000, isDefault: false },
+                    { id: "grip2", name: "Medium Grip", meshName: "Grip002", price: 30000, isDefault: false },
+                    { id: "grip3", name: "Large Grip", meshName: "Grip003", price: 25000, isDefault: false }
                 ]
             },
             {
                 id: 2,
                 name: "Lower Receiver",
-                description: "Lower Receiver Options",
                 category: "lower_receiver",
                 options: [
-                    {
-                        id: "lower_receiver1",
-                        name: "Standard Lower Receiver",
-                        meshName: "Lower_Receiver",
-                        price: 20000,
-                        thumbnail: null,
-                        isDefault: true
-                    },
-                    {
-                        id: "lower_receiver2",
-                        name: "LED Lower Receiver",
-                        meshName: "Lower_Receiver.001",
-                        price: 25000,
-                        thumbnail: null,
-                        isDefault: false
-                    },
-                    {
-                        id: "lower_receiver3",
-                        name: "Custom Lower Receiver",
-                        meshName: "Lower_Receiver.002",
-                        price: 30000,
-                        thumbnail: null,
-                        isDefault: false
-                    },
-                    {
-                        id: "lower_receiver4",
-                        name: "Extra Large Lower Receiver",
-                        meshName: "Lower_Receiver.003",
-                        price: 35000,
-                        thumbnail: null,
-                        isDefault: false
-                    }
+                    { id: "lower_receiver1", name: "Standard Lower Receiver", meshName: "Lower_Receiver", price: 20000, isDefault: true },
+                    { id: "lower_receiver2", name: "LED Lower Receiver", meshName: "Lower_Receiver001", price: 25000, isDefault: false },
+                    { id: "lower_receiver3", name: "Custom Lower Receiver", meshName: "Lower_Receiver002", price: 30000, isDefault: false },
+                    { id: "lower_receiver4", name: "Custom Lower Receiver", meshName: "Lower_Receiver003", price: 30000, isDefault: false }
                 ]
             },
             {
                 id: 3,
                 name: "Scope",
-                description: "Scope Options",
                 category: "scopes",
                 options: [
-                    {
-                        id: "scope1",
-                        name: "Standard Scope",
-                        meshName: "Scope",
-                        price: 20000,
-                        thumbnail: null,
-                        isDefault: true
-                    },
-                    {
-                        id: "scope2",
-                        name: "Sport Scope",
-                        meshName: "Scope.001",
-                        price: 25000,
-                        thumbnail: null,
-                        isDefault: false
-                    },
-                    {
-                        id: "scope3",
-                        name: "Tactical Scope",
-                        meshName: "Scope.002",
-                        price: 30000,
-                        thumbnail: null,
-                        isDefault: false
-                    },
-                    {
-                        id: "scope4",
-                        name: "Long Range Scope",
-                        meshName: "Scope.003",
-                        price: 35000,
-                        thumbnail: null,
-                        isDefault: false
-                    },
-                    {
-                        id: "scope5",
-                        name: "No Scope",
-                        meshName: "",
-                        thumbnail: null,
-                        isDefault: false
-                    }
+                    { id: "scope1", name: "Standard Scope", meshName: "Scope", price: 20000, isDefault: true },
+                    { id: "scope0", name: "Standard Scope", meshName: "Scope001", price: 20000, isDefault: false },
+                    { id: "scope2", name: "Sport Scope", meshName: "Scope002", price: 25000, isDefault: false },
+                    { id: "scope4", name: "Sport Scope", meshName: "Scope003", price: 25000, isDefault: false },
+                    { id: "scope3", name: "No Scope", meshName: "", isDefault: false }
                 ]
             },
             {
                 id: 4,
                 name: "Suppressor",
-                description: "Suppressor Options",
                 category: "suppressors",
                 options: [
-                    {
-                        id: "suppressor1",
-                        name: "Standard Suppressor",
-                        meshName: "Suppressor",
-                        price: 20000,
-                        thumbnail: null,
-                        isDefault: true
-                    },
-                    {
-                        id: "suppressor2",
-                        name: "Sport Suppressor",
-                        meshName: "Suppressor.001",
-                        price: 25000,
-                        thumbnail: null,
-                        isDefault: false
-                    },
-                    {
-                        id: "suppressor3",
-                        name: "Tactical Suppressor",
-                        meshName: "Suppressor.002",
-                        price: 30000,
-                        thumbnail: null,
-                        isDefault: false
-                    },
-                    {
-                        id: "suppressor4",
-                        name: "Long Range Suppressor",
-                        meshName: "Suppressor.003",
-                        price: 35000,
-                        thumbnail: null,
-                        isDefault: false
-                    }
+                    { id: "suppressor1", name: "Standard Suppressor", meshName: "Supressor", price: 20000, isDefault: true },
+                    { id: "suppressor2", name: "Sport Suppressor", meshName: "Supressor001", price: 25000, isDefault: false },
+                    { id: "suppressor3", name: "Tactical Suppressor", meshName: "Supressor002", price: 30000, isDefault: false },
+                    { id: "suppressor4", name: "Long Range Suppressor", meshName: "Supressor003", price: 35000, isDefault: false },
+                    { id: "suppressor5", name: "No Suppressor", meshName: "", price: 0, isDefault: false }
                 ]
             },
-        ],
+            {
+                id: 5,
+                name: "Camouflage",
+                category: "camouflage",
+                options: [
+                    { id: "camouflage1", name: "Without Camouflage", meshName: "", price: 0, isDefault: true },
+                    { id: "camouflage2", name: "Army Camouflage", meshName: "Gun_Comuflauge", price: 25000, isDefault: false }
+                ]
+            }
+        ]
+        ,
     },
     {
         ProductType: "3d",
@@ -891,6 +782,7 @@ export const backendProducts = [
         customizerImage: "https://res.cloudinary.com/dgif730br/image/upload/v1755068550/customizer-images/eiyrawqmqhntvzvjznjx.png",
         modelFile: "/models/car.glb",
         designName: null,
+        modelSize: 0.5,
         variants: [
             {
                 id: 1,

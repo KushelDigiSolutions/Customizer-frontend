@@ -334,22 +334,29 @@ const ModelViewer = ({ modelUrl }) => {
     scene
   ]);
 
-  // Save base colors once
   useEffect(() => {
+    if (!threeDselectedPart || !threeDcolor) return;
+
     scene.traverse((child) => {
-      if (child.isMesh) {
-        const baseColor = `#${child.material.color.getHexString()}`;
+      if (child.isMesh && child.name === threeDselectedPart) {
+        // Update customizationData only for changed part
         setCustomizationData(prev => ({
           ...prev,
-          baseColors: { ...(prev?.baseColors || {}), [child.name]: baseColor }
+          parts: {
+            ...prev.parts,
+            [threeDselectedPart]: {
+              ...(prev.parts?.[threeDselectedPart] || {}),
+              color: threeDcolor
+            }
+          }
         }));
       }
     });
-  }, [scene, setCustomizationData]);
+  }, [threeDcolor, threeDselectedPart, scene, setCustomizationData]);
 
   return (
     <Center>
-      <primitive object={scene} scale={0.5} position={[0, 0, 0]} />
+      <primitive object={scene} scale={selectedProduct?.modelSize || 0.5} position={[0, 0, 0]} />
     </Center>
   );
 };
