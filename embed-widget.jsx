@@ -18,6 +18,7 @@ window.mountProductCustomizer = function (selector = '#customizer-root', props =
     //const product={}
     //initialProduct={product}
     //if (!product) { container.innerHTML = '<div>Product not found</div>'; return }
+    
 
     root.render(
       <TwoDProvider>
