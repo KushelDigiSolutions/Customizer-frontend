@@ -244,10 +244,8 @@ const Topbar = ({
           )}
 
           {is3D && isDesignSaved && showAddToCart && (
-            <button
-              className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin"
-              title={`Add design to cart - Total: ${formatPrice(totalPrice)}`}
-            >
+            <button className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin kr-addtocart-custom"
+              title={`Add design to cart - Total: ${formatPrice(totalPrice)}`} kr-addtocart-handel>
               <span className="kr-reset">Add to Cart</span>
             </button>
           )}
@@ -268,9 +266,8 @@ const Topbar = ({
 
           {is2D && isDesignSaved2D && showAddToCart2D && (
             <button
-              className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin"
-              title={`Add design to cart - Total: ${formatPrice(totalPrice)}`}
-            >
+              className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin kr-addtocart-custom"
+              title={`Add design to cart - Total: ${formatPrice(totalPrice)}`} kr-addtocart-handel>
               <span className="kr-reset">Add to Cart</span>
             </button>
           )}

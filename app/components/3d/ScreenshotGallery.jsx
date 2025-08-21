@@ -72,10 +72,7 @@ const ScreenshotGallery = ({ screenshots, onClose, onDownloadAll }) => {
 
         {/* Action buttons */}
         <div className="kr-gallery-actions">
-          <button
-            className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin"
-            title="Add design to cart"
-          >
+          <button className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin kr-addtocart-custom" title="Add design to cart" kr-addtocart-handel>
             <span className="kr-reset">Add to Cart</span>
           </button>
           <button
