@@ -15,21 +15,24 @@ window.mountProductCustomizer = function (selector = '#customizer-root', props =
 
     // const idFromPath = 6;
     // const product = backendProducts.find(p => String(p.id) === String(idFromPath))
-    const product={}
-
-    if (!product) {
-      container.innerHTML = '<div>Product not found</div>'
-      return
-    }
+    //const product={}
+    //initialProduct={product}
+    //if (!product) { container.innerHTML = '<div>Product not found</div>'; return }
 
     
     root.render(
       <TwoDProvider>
         <ThreeDProvider>
-          <CustomizerLayout {...props} initialProduct={product} />
+          <CustomizerLayout {...props}  />
         </ThreeDProvider>
       </TwoDProvider>
-    )
+    );
+
+    //expose global method to update loading later
+    window.setCustomizerLoading = (loading) => {
+      root.render(<CustomizerLayout {...props} pageLoading={loading} />);
+    };
+
   } else {
     console.warn('No mount target found for ProductCustomizer')
   }
