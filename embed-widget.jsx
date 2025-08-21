@@ -28,7 +28,6 @@ window.mountProductCustomizer = function (selector = '#customizer-root', props =
       </TwoDProvider>
     );
     
-
     //expose global method to update loading later
     window.setCustomizerLoading = (loading) => {
       root.render(<CustomizerLayout {...props} pageLoading={loading} />);
