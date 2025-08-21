@@ -27,6 +27,7 @@ window.mountProductCustomizer = function (selector = '#customizer-root', props =
         </ThreeDProvider>
       </TwoDProvider>
     );
+    
 
     //expose global method to update loading later
     window.setCustomizerLoading = (loading) => {
