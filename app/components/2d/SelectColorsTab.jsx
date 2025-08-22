@@ -171,7 +171,7 @@ const SelectColorsTab = ({
   const hasGradientColors = selectedProduct?.colors?.topColor || selectedProduct?.colors?.bottomColor;
 
   return (
-    <div className="kr-container kr-reset-margin-padding">
+    <div className="kr-editor-container kr-reset-margin-padding">
       <div className='kr-header kr-reset-margin'>
         <div className='kr-header-left kr-reset-margin-padding'>
           <h3 className='kr-title kr-reset-margin-padding'>Select Colors</h3>

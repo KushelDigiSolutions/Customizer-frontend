@@ -4,22 +4,14 @@
   background-color: white;
   border-radius: 0.5rem;
   border: 1px solid #D3DBDF;
-  width: 20rem; /* w-80 = 20rem */
+  width: 100%; /* w-80 = 20rem */
   height: fit-content;
 }
 
 /* Responsive container */
-@media (max-width: 768px) {
+@media (min-width: 640px) {
   .kr-container {
-    width: 100%;
-    max-width: 20rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .kr-container {
-    width: 100%;
-    max-width: 18rem;
+    width: 20rem; /* w-80 */
   }
 }
 

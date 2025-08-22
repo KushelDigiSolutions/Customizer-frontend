@@ -336,7 +336,7 @@
     flex-wrap: wrap;
     gap: 0.25rem;
     padding: 0.5rem;
-    width: 80%;
+    width: fit-content;
   }
 
   .kr-controls-divider {

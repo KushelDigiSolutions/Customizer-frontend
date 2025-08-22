@@ -349,7 +349,17 @@
   }
   
   .kr-3d-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .kr-3d-image {
+    height: 4rem;
+  }
+  .kr-3d-name {
+    font-size: 0.85rem;
+  }
+  .kr-3d-price {
+    font-size: 0.75rem;
   }
 }
 

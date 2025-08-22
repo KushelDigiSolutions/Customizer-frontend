@@ -478,7 +478,7 @@ const DynamicClipartTab = ({
   };
 
   return (
-    <div className="kr-clipart-container kr-reset-margin-padding">
+    <div className="kr-editor-container kr-reset-margin-padding">
       <div className='kr-clipart-header kr-reset-margin'>
         <h3 className='kr-clipart-title kr-reset-margin-padding'>
           {getHeaderTitle()}

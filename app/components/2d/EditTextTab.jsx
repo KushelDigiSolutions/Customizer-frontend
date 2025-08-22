@@ -375,7 +375,7 @@ const EditTextTab = ({ editor, layerManager }) => {
   return (
     <>
       {shouldShowEditText && (
-        <div className="kr-edit-text-container kr-reset-margin-padding">
+        <div className="kr-edit-container kr-reset-margin-padding">
           <div className="kr-edit-text-header kr-reset-margin">
             <div className="kr-edit-text-title-section kr-reset-margin-padding">
               <h3 className="kr-edit-text-title kr-reset-margin-padding">

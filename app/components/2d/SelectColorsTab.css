@@ -11,17 +11,9 @@
 }
 
 /* Responsive container */
-@media (max-width: 768px) {
+@media (min-width: 640px) {
   .kr-container {
-    width: 100%;
-    max-width: 18rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .kr-container {
-    width: 100%;
-    max-width: 16rem;
+    width: 20rem; /* w-80 */
   }
 }
 

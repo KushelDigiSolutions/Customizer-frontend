@@ -184,8 +184,8 @@ const CustomizerLayout = (props) => {
     threeDtextFontStyle,
   ]);
 
-  // console.log("productId", props.productId);
-  // console.log("storeHash", props.storeHash);
+  console.log("productId", props.productId);
+  console.log("storeHash", props.storeHash);
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);

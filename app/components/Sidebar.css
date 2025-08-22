@@ -71,6 +71,7 @@
 
   .kr-sidebar-menu {
     padding: 0.75rem;
+    gap: unset;
   }
 
   .kr-sidebar {
