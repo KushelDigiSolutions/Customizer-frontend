@@ -356,7 +356,7 @@ const ModelViewer = ({ modelUrl }) => {
 
   return (
     <Center>
-      <primitive object={scene} scale={selectedProduct?.modelSize || 0.5} position={[0, 0, 0]} />
+      <primitive object={scene} scale={Number(selectedProduct?.modelSize) || 0.5} position={[0, 0, 0]} />
     </Center>
   );
 };
