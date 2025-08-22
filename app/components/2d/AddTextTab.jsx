@@ -14,7 +14,7 @@ const AddTextTab = ({ handleAddCustomText, update3DText }) => {
                 <div className='kr-header-left kr-reset-margin-padding'>
                     <h3 className='kr-title kr-reset-margin-padding'>Add text</h3>
                 </div>
-                <div className="kr-close-button kr-reset-margin-padding" onClick={() => setShowAddModal(false)}>
+                <div className=" kr-reset-margin-padding" onClick={() => setShowAddModal(false)}>
                     <img src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749341803/Vector_hm0yzo.png" alt="Close" />
                 </div>
             </div>

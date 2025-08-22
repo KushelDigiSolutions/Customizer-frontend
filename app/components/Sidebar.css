@@ -67,7 +67,7 @@
 }
 
 /* Small screens: consider wider sidebar for usability */
-@media (max-width: 480px) {
+@media (max-width: 640px) {
 
   .kr-sidebar-menu {
     padding: 0.75rem;
@@ -77,7 +77,8 @@
   .kr-sidebar {
     left: 1rem;
     width: calc(100% - 2rem);
-    top: 5rem;
+    top: 4rem;
+    gap: 1rem; 
   }
 
   .kr-tab {

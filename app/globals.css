@@ -161,6 +161,10 @@ canvas {
   border-radius: 0
 }
 
+.definitionList .definitionList-value {
+  word-break: break-word;
+}
+
 @media (max-width: 601px) {
   .kr-alert-box {
     width: calc(100% - 10px);
