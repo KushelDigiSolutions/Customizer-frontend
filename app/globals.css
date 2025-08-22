@@ -119,3 +119,51 @@ canvas {
   -webkit-user-select: none;
   user-select: none;
 }
+
+.kr-alert-box {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  border-radius: 5px;
+  background: #e6f4ff;
+  border: 1px solid #91caff;
+  padding: 10px 42px 10px 15px;
+  z-index: 99999999;
+  width: 320px
+}
+
+.kr-alert-box--error {
+  background: #fff1f0;
+  border-color: #ffa39e
+}
+
+.kr-alert-box p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 20px
+}
+
+.kr-alert-box button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  background: #fff;
+  border: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  font-size: 18px;
+  line-height: 18px;
+  border-radius: 0
+}
+
+@media (max-width: 601px) {
+  .kr-alert-box {
+    width: calc(100% - 10px);
+    right: 5px;
+  }
+}
