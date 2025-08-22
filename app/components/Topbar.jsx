@@ -11,7 +11,8 @@ const Topbar = ({
   isSaving,
   selectedProduct,
   productPrice, // Base product price from props
-  currencyCode = '$' // Currency symbol
+  currencyCode = '$', // Currency symbol
+  productQuantity = 1
 }) => {
   const {
     handleScreenshot,
@@ -273,12 +274,30 @@ const Topbar = ({
           )}
 
           <div className="kr-total-price kr-reset-margin">
-            {formatPrice(totalPrice)}
+            {totalPrice > 0 && (
+              <>
+                {productQuantity} <span>x</span>{" "}
+              </>
+            )}
+            {formatPrice(totalPrice * productQuantity)}
           </div>
 
+          <button
+            className="kr-close-button kr-reset-margin kr-close-handle"
+            data-kr-close-handle
+          >
+            <svg
+              className="kr-close-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

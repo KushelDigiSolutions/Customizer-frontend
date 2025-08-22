@@ -26,6 +26,16 @@ const DynamicClipartTab = ({
 
   const is3DProduct = selectedProduct?.ProductType === '3d';
 
+  // Convert item name into a safe CSS class
+  const makeSafeClassName = (name) => {
+    if (!name) return '';
+    return 'kr-' + name
+      .toLowerCase()               // lowercase
+      .replace(/[^a-z0-9]+/g, '-') // non-alphanumeric -> "-"
+      .replace(/^-+|-+$/g, '');    // trim "-" from start & end
+  };
+
+
   // ✅ Get first layer key dynamically (since it may not always be "Designs")
   const layerDesignKey = selectedProduct?.layerDesign && typeof selectedProduct.layerDesign === 'object'
     ? Object.keys(selectedProduct.layerDesign)[0]
@@ -43,9 +53,9 @@ const DynamicClipartTab = ({
       alert("Please select a part to apply the texture.");
       return;
     }
-    
+
     console.log(`🎨 Applying 3D Design: ${designUrl} with price: ${price}`);
-    
+
     const image = new window.Image();
     image.crossOrigin = "anonymous";
     image.src = designUrl;
@@ -80,7 +90,7 @@ const DynamicClipartTab = ({
           }
         };
       });
-      
+
       console.log('✅ 3D Design applied with price tracking');
     };
   };
@@ -276,30 +286,36 @@ const DynamicClipartTab = ({
       {/* Show 3D Designs for 3D products */}
       {is3DProduct && shirtDesigns.length > 0 && (
         <div className="kr-3d-section">
-          <h4 className="kr-section-title kr-reset kr-reset-margin-padding">3D Designs</h4>
+          {/* <h4 className="kr-section-title kr-reset kr-reset-margin-padding">3D Designs</h4> */}
           <div className="kr-3d-grid">
-            {shirtDesigns.map((design, idx) => (
-              <div
-                key={idx}
-                className="kr-3d-item"
-                onClick={() => handleApply3DDesign(design.files?.[0], design.price)}
-              >
-                <img
-                  src={design.files?.[0]}
-                  alt={design.title}
-                  className="kr-3d-image"
-                />
-                <div className="kr-3d-info">
-                  <div className="kr-3d-name">{design.title}</div>
-                  <div className="kr-3d-price">
-                    {currencyCode}{Number(design?.price).toFixed(2)}
+            {shirtDesigns.map((design, idx) => {
+              const isActive =
+                customizationData?.parts?.[threeDselectedPart]?.image?.url === design.files?.[0];
+
+              return (
+                <div
+                  key={idx}
+                  className={`kr-3d-item ${makeSafeClassName(design.title)} ${isActive ? "kr-3d-active" : ""}`}
+                  onClick={() => handleApply3DDesign(design.files?.[0], design.price)}
+                >
+                  <img
+                    src={design.files?.[0]}
+                    alt={design.title}
+                    className="kr-3d-image"
+                  />
+                  <div className="kr-3d-info">
+                    <div className="kr-3d-name">{design.title}</div>
+                    <div className="kr-3d-price">
+                      {currencyCode}{Number(design?.price).toFixed(2)}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
+
 
       {/* Show all available categories (both layer designs and variants) */}
       {availableCategories.length > 0 && (
@@ -356,7 +372,7 @@ const DynamicClipartTab = ({
           // Grid layout for designs and patterns
           <div className={currentCategory.key === 'designs' ? 'kr-design-grid-3 kr-reset-margin-padding' : 'kr-design-grid-2 kr-reset-margin-padding'}>
             {currentCategory.items.map((item, index) => (
-              <div key={item.id || index} className="kr-design-item kr-reset-margin-padding">
+              <div key={item.id || index} className={`kr-design-item ${makeSafeClassName(item.name)} kr-reset-margin-padding`}>
                 {currentCategory.key === 'patterns' ? (
                   // Special layout for patterns
                   <div className="kr-pattern-container kr-reset-margin">
@@ -406,10 +422,10 @@ const DynamicClipartTab = ({
               <div
                 key={item.id || index}
                 onClick={() => handleItemSelect(item, currentCategory)}
-                className={`kr-shoe-item kr-reset-margin ${isVariantCategory && activeVariants?.[currentCategory.key] === item.id ? 'kr-active' : ''
+                className={`kr-variant-item ${makeSafeClassName(item.name)} kr-reset-margin ${isVariantCategory && activeVariants?.[currentCategory.key] === item.id ? 'kr-variant-active' : ''
                   }`}
               >
-                <div className="kr-shoe-thumbnail kr-reset-margin-padding">
+                <div className="kr-variant-thumbnail kr-reset-margin-padding">
                   {(item.url || item.thumbnail) && (
                     <img
                       src={item.url || item.thumbnail}
@@ -417,29 +433,29 @@ const DynamicClipartTab = ({
                     />
                   )}
                 </div>
-                <div className="kr-shoe-info kr-reset-margin-padding">
-                  <h4 className="kr-shoe-name kr-reset-margin-padding">{item.name}</h4>
+                <div className="kr-variant-info kr-reset-margin-padding">
+                  <h4 className="kr-variant-name kr-reset-margin-padding">{item.name}</h4>
                   {item.color && (
-                    <p className="kr-shoe-detail kr-reset-margin-padding">Color: {item.color}</p>
+                    <p className="kr-variant-detail kr-reset-margin-padding">Color: {item.color}</p>
                   )}
                   {item.description && (
-                    <p className="kr-shoe-detail kr-reset-margin-padding">{item.description}</p>
+                    <p className="kr-variant-detail kr-reset-margin-padding">{item.description}</p>
                   )}
                   {item.meshName && (
-                    <p className="kr-shoe-detail kr-reset-margin-padding">Mesh: {item.meshName}</p>
+                    <p className="kr-variant-detail kr-reset-margin-padding">Mesh: {item.meshName}</p>
                   )}
                   {item.price && (
-                    <p className="kr-shoe-price kr-reset-margin-padding">
+                    <p className="kr-variant-price kr-reset-margin-padding">
                       Price: {currencyCode}{Number(item.price).toFixed(2)}
                     </p>
                   )}
                   {isVariantCategory && activeVariants?.[currentCategory.key] === item.id && (
-                    <p className="kr-shoe-detail kr-reset-margin-padding" style={{ color: '#007bff', fontWeight: 'bold' }}>
+                    <p className="kr-variant-detail kr-reset-margin-padding" style={{ color: '#007bff', fontWeight: 'bold' }}>
                       ✓ Selected
                     </p>
                   )}
                 </div>
-                <div className="kr-shoe-arrow kr-reset-margin-padding">
+                <div className="kr-variant-arrow kr-reset-margin-padding">
                   <svg fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>

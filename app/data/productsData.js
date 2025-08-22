@@ -859,4 +859,82 @@ export const backendProducts = [
         ],
     },
 
+
+
+    {
+        id: 13,
+        image: "", // Full product shadow image
+        size: "42",
+        color: "Sky Blue",
+        width: 300,
+        height: 380,
+        description: "Printed Shirt",
+        textTopRatio: 2.8,
+        type: "Shirt",
+        ProductType: "2d",
+        tabSettings: {
+            aiEditor: false,
+            imageEdit: false,
+            textEdit: false,
+            colors: false,
+            clipart: true
+        },
+
+        defaultLayers: {
+            mid: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840744/Main_pArt_v5x8n0.png", // z-index 0
+            sleeves: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840730/left_right_Sleeve_1_rbmilw.png",
+        },
+
+        layers: {
+            BASE_COLOR: 0,
+            MID: 1,
+            SLEEVES: 2,
+            TEXT: 3
+        },
+
+        layersDesigns: {
+            mid: [
+                {
+                    id: 1,
+                    name: "Design 1",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840735/Main_Part_Without_Button_a1vrcx.png",
+                    // color: "White"
+                },
+                {
+                    id: 2,
+                    name: "Design 2",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840738/Main_pArt_1_xogaku.png",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 3,
+                    name: "Design 3",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840744/Main_pArt_v5x8n0.png",
+                    // color: "Green"
+                }
+            ],
+            sleeves: [
+                {
+                    id: 1,
+                    name: "Design 1",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840730/left_right_Sleeve_3_hzaeto.png",
+                    // color: "White"
+                },
+                {
+                    id: 2,
+                    name: "Design 2",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840729/left_right_Sleeve_2_voywkp.png",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 3,
+                    name: "Design 3",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840730/left_right_Sleeve_1_rbmilw.png",
+                    // color: "Green"
+                }
+            ],
+        }
+
+    }
+
 ];

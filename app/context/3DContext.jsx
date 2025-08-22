@@ -116,6 +116,7 @@ export const ThreeDProvider = ({ children }) => {
   const handleScreenshot = async () => {
     if (screenshotRef.current) {
       setthreeDLoading(true);
+      
 
       try {
         const capturedImages = await screenshotRef.current.captureAll();

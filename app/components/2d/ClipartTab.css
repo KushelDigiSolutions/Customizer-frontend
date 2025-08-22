@@ -163,6 +163,10 @@
   border-color: #3b82f6; /* hover:border-blue-500 */
 }
 
+.kr-3d-active {
+  border-color: #3b82f6; /* hover:border-blue-500 */
+}
+
 .kr-3d-image {
   width: 100%;
   height: 6rem; /* h-24 */
@@ -260,7 +264,7 @@
   object-fit: contain;
 }
 
-.kr-shoe-item {
+.kr-variant-item {
   display: flex;
   align-items: center;
   gap: 0.75rem; /* gap-3 */
@@ -271,12 +275,17 @@
   transition: all 0.2s; /* transition-all duration-200 */
 }
 
-.kr-shoe-item:hover {
+.kr-variant-item:hover {
   border-color: #3b82f6; /* hover:border-blue-500 */
   background-color: #eff6ff; /* hover:bg-blue-50 */
 }
 
-.kr-shoe-thumbnail {
+.kr-variant-active {
+  border-color: #3b82f6; /* hover:border-blue-500 */
+  background-color: #eff6ff; /* hover:bg-blue-50 */
+}
+
+.kr-variant-thumbnail {
   width: 3rem; /* w-12 */
   height: 3rem; /* h-12 */
   border: 1px solid #d1d5db; /* border border-gray-300 */
@@ -284,27 +293,27 @@
   overflow: hidden;
 }
 
-.kr-shoe-thumbnail img {
+.kr-variant-thumbnail img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.kr-shoe-info {
+.kr-variant-info {
   flex: 1;
 }
 
-.kr-shoe-name {
+.kr-variant-name {
   font-weight: 600; /* font-semibold */
   font-size: 0.875rem; /* text-sm */
 }
 
-.kr-shoe-detail {
+.kr-variant-detail {
   font-size: 0.75rem; /* text-xs */
   color: #6b7280; /* text-gray-500 */
 }
 
-.kr-shoe-arrow {
+.kr-variant-arrow {
   width: 1.5rem; /* w-6 */
   height: 1.5rem; /* h-6 */
   background-color: #3b82f6; /* bg-blue-500 */
@@ -314,7 +323,7 @@
   justify-content: center;
 }
 
-.kr-shoe-arrow svg {
+.kr-variant-arrow svg {
   width: 0.75rem; /* w-3 */
   height: 0.75rem; /* h-3 */
   color: white;

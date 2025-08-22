@@ -18,6 +18,8 @@ const CustomizerLayout = (props) => {
   console.log(props);
   console.log(props?.productPrice);
   console.log(props?.pageLoading);
+  console.log(props?.productQuantity);
+  
   // Get all 2d context state and setters
   const {
     customText,
@@ -1352,6 +1354,7 @@ const CustomizerLayout = (props) => {
 
     if (selectedProduct.ProductType === "3d") {
       setIsSaving(true);
+      setPageLoading(true);
 
       try {
         // Upload screenshots to Cloudinary
@@ -1400,21 +1403,11 @@ const CustomizerLayout = (props) => {
         const { screenshots: _, ...customizationsWithoutScreenshots } = customizationData;
 
         const saveData = {
-          timestamp: new Date().toISOString(),
-          product: {
-            productId: selectedProduct.id,
-            storeHash: selectedProduct.storeHash,
-            image: selectedProduct.image,
-            description: selectedProduct.description,
-            size: selectedProduct.size,
-            type: selectedProduct.type,
-            color: selectedProduct.color,
-            model3D: selectedProduct.model3D,
-          },
+          storeHash: selectedProduct.storeHash,
           customizations: {
             ...customizationsWithoutScreenshots,
             appliedImageCloudUrl,
-            krCustomizedPrice, // <-- Only this price now
+            krCustomizedPrice, 
             selectedVariants: selectedVariantsData
           },
           screenshots: cloudinaryScreenshots,
@@ -1489,9 +1482,11 @@ const CustomizerLayout = (props) => {
         return { success: false, error: error.message };
       } finally {
         setIsSaving(false);
+        setPageLoading(false);
       }
     } else if (selectedProduct.ProductType === "2d") {
       setIsSaving(true);
+      setPageLoading(true);
 
       try {
         // Take screenshot of canvas
@@ -1638,6 +1633,7 @@ const CustomizerLayout = (props) => {
         return { success: false, error: error.message };
       } finally {
         setIsSaving(false);
+        setPageLoading(false)
       }
     }
   };
@@ -1672,6 +1668,7 @@ const CustomizerLayout = (props) => {
         selectedProduct={selectedProduct}
         productPrice={props?.productPrice || 0}
         currencyCode={props?.currencyCode || '$'}
+        productQuantity={props?.productQuantity || 1}
       />
 
       {showSidebar && selectedProduct && (
