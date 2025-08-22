@@ -1403,7 +1403,7 @@ const CustomizerLayout = (props) => {
         const { screenshots: _, ...customizationsWithoutScreenshots } = customizationData;
 
         const saveData = {
-          storeHash: selectedProduct.storeHash,
+          storeHash: selectedProduct.storeHash || '1234',
           customizations: {
             ...customizationsWithoutScreenshots,
             appliedImageCloudUrl,
@@ -1524,16 +1524,7 @@ const CustomizerLayout = (props) => {
         // Prepare save payload for 2D
         const saveData = {
           timestamp: new Date().toISOString(),
-          product: {
-            // id: selectedProduct.id,
-            productId: selectedProduct.id,
-            storeHash: selectedProduct.storeHash,
-            image: selectedProduct.image,
-            description: selectedProduct.description,
-            size: selectedProduct.size,
-            type: selectedProduct.type,
-            color: selectedProduct.color,
-          },
+          storeHash: selectedProduct.storeHash || '1234',
           customizations: current2DData,
           canvas: editor.canvas.toJSON(),
           ProductType: "2d",
