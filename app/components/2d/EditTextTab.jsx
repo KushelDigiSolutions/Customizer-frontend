@@ -128,9 +128,9 @@ const EditTextTab = ({ editor, layerManager }) => {
       }
 
       setActiveTextObject(newTextObj);
-      console.log(
-        "✅ New text object created with proper layering (zIndex: 5)"
-      );
+      // console.log(
+      //   "✅ New text object created with proper layering (zIndex: 5)"
+      // );
 
       return newTextObj;
     });
@@ -166,7 +166,7 @@ const EditTextTab = ({ editor, layerManager }) => {
         setTextFlipY(targetTextObj.flipY || false);
         setTextColor(targetTextObj.fill || "#000000");
 
-        console.log("🔄 Synced with existing text object:", targetTextObj.text);
+        // console.log("🔄 Synced with existing text object:", targetTextObj.text);
       }
     };
 

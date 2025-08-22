@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './ScreenshotGallery.css';
 
-const ScreenshotGallery = ({ screenshots, onClose, onDownloadAll }) => {
+const ScreenshotGallery = ({ screenshots, onClose, onDownloadAll,totalPrice, productQuantity }) => {
   if (!screenshots || screenshots.length === 0) return null;
 
   const [selected, setSelected] = useState(screenshots[0]);
@@ -21,6 +21,8 @@ const ScreenshotGallery = ({ screenshots, onClose, onDownloadAll }) => {
     });
     if (onDownloadAll) onDownloadAll();
   };
+
+  const formatPrice = (price) => `$${Number(price).toFixed(2)}`;
 
   return (
     <div className="kr-gallery-overlay">
@@ -72,6 +74,16 @@ const ScreenshotGallery = ({ screenshots, onClose, onDownloadAll }) => {
 
         {/* Action buttons */}
         <div className="kr-gallery-actions">
+
+          <div className="kr-total-price kr-reset-margin">
+            {totalPrice > 0 && (
+              <>
+                {productQuantity} <span>x</span>{" "}
+              </>
+            )}
+            {formatPrice(totalPrice * productQuantity)}
+          </div>
+
           <button className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin kr-addtocart-custom" title="Add design to cart" data-kr-addtocart-handel>
             <span className="kr-reset">Add to Cart</span>
           </button>

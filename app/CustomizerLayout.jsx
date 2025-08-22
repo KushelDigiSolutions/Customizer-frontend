@@ -15,10 +15,10 @@ import { backendProducts } from "./data/productsData";
 
 const CustomizerLayout = (props) => {
   console.log("props V1");
-  console.log(props);
-  console.log(props?.productPrice);
-  console.log(props?.pageLoading);
-  console.log(props?.productQuantity);
+  // console.log(props);
+  // console.log(props?.productPrice);
+  // console.log(props?.pageLoading);
+  // console.log(props?.productQuantity);
   
   // Get all 2d context state and setters
   const {
@@ -184,8 +184,8 @@ const CustomizerLayout = (props) => {
     threeDtextFontStyle,
   ]);
 
-  console.log("productId", props.productId);
-  console.log("storeHash", props.storeHash);
+  // console.log("productId", props.productId);
+  // console.log("storeHash", props.storeHash);
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -201,7 +201,7 @@ const CustomizerLayout = (props) => {
       .then(data => {
         setProduct(data?.data || null);
         setSelectedProduct(data?.data || null);
-        console.log("Selected Product:", data?.data);
+        // console.log("Selected Product:", data?.data);
         setLoading(false);
       })
       .catch(() => {
@@ -219,6 +219,7 @@ const CustomizerLayout = (props) => {
   // }
 
   const parts = selectedProduct?.parts || [];
+  const [totalPrice, setTotalPrice] = useState(0);
 
   class SimpleLayerManager {
     constructor(canvas, layerOrder) {
@@ -285,10 +286,10 @@ const CustomizerLayout = (props) => {
       }
 
       obj.zIndex = zIndex;
-      console.log(
-        `✅ Object assigned layer: ${obj.type} -> zIndex: ${zIndex}${obj.layerType ? ` (${obj.layerType})` : ""
-        }${obj.isRightSideImage ? " (Right Side Image)" : ""}`
-      );
+      // console.log(
+      //   `✅ Object assigned layer: ${obj.type} -> zIndex: ${zIndex}${obj.layerType ? ` (${obj.layerType})` : ""
+      //   }${obj.isRightSideImage ? " (Right Side Image)" : ""}`
+      // );
     }
 
     arrangeCanvasLayers() {
@@ -308,9 +309,9 @@ const CustomizerLayout = (props) => {
       });
 
       this.canvas.renderAll();
-      console.log(
-        "✅ Layer arrangement complete - Updated with dynamic layers support"
-      );
+      // console.log(
+      //   "✅ Layer arrangement complete - Updated with dynamic layers support"
+      // );
     }
   }
 
@@ -348,7 +349,7 @@ const CustomizerLayout = (props) => {
         selectedProduct.layers
       );
       setLayerManager(manager);
-      console.log("🎯 Layer Manager initialized with dynamic layers system");
+      // console.log("🎯 Layer Manager initialized with dynamic layers system");
     }
   }, [editor?.canvas, selectedProduct?.layers]);
 
@@ -398,7 +399,7 @@ const CustomizerLayout = (props) => {
 
   // NEW: Handle dynamic layer changes for shoes
   const handleDynamicLayerChange = (layerType, item) => {
-    console.log(`🔄 Changing layer: ${layerType} to ${item.name}`);
+    // console.log(`🔄 Changing layer: ${layerType} to ${item.name}`);
 
     // Update selected layers state
     setSelectedLayers((prev) => ({
@@ -417,13 +418,13 @@ const CustomizerLayout = (props) => {
       return;
     }
 
-    console.log("🎨 Changing canvas background color to:", color);
+    // console.log("🎨 Changing canvas background color to:", color);
 
     const canvas = editor.canvas;
 
     canvas.setBackgroundColor(color, () => {
       canvas.renderAll();
-      console.log("✅ Canvas background color changed to:", color);
+      // console.log("✅ Canvas background color changed to:", color);
     });
   };
 
@@ -1660,6 +1661,8 @@ const CustomizerLayout = (props) => {
         productPrice={props?.productPrice || 0}
         currencyCode={props?.currencyCode || '$'}
         productQuantity={props?.productQuantity || 1}
+        onTotalPriceChange={setTotalPrice}
+        totalPrice={totalPrice}
       />
 
       {showSidebar && selectedProduct && (
@@ -1740,6 +1743,8 @@ const CustomizerLayout = (props) => {
         showScreenshotsModal && (
           <ScreenshotGallery
             screenshots={threeDscreenshots}
+            totalPrice={totalPrice}
+            productQuantity={props?.productQuantity || 1}
             onClose={() => setthreeDScreenshots([])}
             onDownloadAll={() => console.log("All downloaded")}
           />

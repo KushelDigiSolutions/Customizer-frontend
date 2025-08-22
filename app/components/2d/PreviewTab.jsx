@@ -97,13 +97,13 @@ const PreviewTab = ({
             // 🔥 IMPORTANT: Apply clipping mask after alignment
             if (applyClippingToObject && typeof applyClippingToObject === 'function') {
                 applyClippingToObject(designObj, productImage);
-                console.log('✂️ Clipping mask applied after alignment');
+                // console.log('✂️ Clipping mask applied after alignment');
             }
 
             designObj.setCoords();
             canvas.renderAll();
             
-            console.log(`✅ Design aligned to ${alignment} with clipping mask`);
+            // console.log(`✅ Design aligned to ${alignment} with clipping mask`);
         } catch (error) {
             console.error("Error aligning design:", error);
         }
@@ -307,7 +307,7 @@ const PreviewTab = ({
                         if (productImage && applyClippingToObject) {
                             setTimeout(() => {
                                 applyClippingToObject(newFabricImg, productImage);
-                                console.log('✂️ Clipping applied to background-removed image');
+                                // console.log('✂️ Clipping applied to background-removed image');
                             }, 100);
                         }
 
@@ -326,7 +326,7 @@ const PreviewTab = ({
     }, [canvas, getActiveDesignObject, isCanvasReady, applyClippingToObject]);
 
     const handleUpscale = useCallback(() => {
-        console.log("Upscale design clicked");
+        // console.log("Upscale design clicked");
     }, []);
 
     return (

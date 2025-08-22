@@ -116,7 +116,7 @@ const ScreenshotManager = forwardRef((props, ref) => {
         camera.rotation.copy(originalRotation);
         camera.updateProjectionMatrix();
 
-        console.log("Captured Screenshots:", capturedImages);
+        // console.log("Captured Screenshots:", capturedImages);
         return capturedImages;
       } catch (error) {
         console.error("Error capturing screenshots:", error);

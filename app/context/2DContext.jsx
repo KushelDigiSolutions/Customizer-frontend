@@ -89,7 +89,7 @@ export const TwoDProvider = ({ children }) => {
     const handleDesignModification = () => {
         // Only hide Add to Cart if design was saved and has actually changed
         if (isDesignSaved && hasDesignChanged()) {
-            console.log('🔄 Design modified after save, hiding Add to Cart button');
+            // console.log('🔄 Design modified after save, hiding Add to Cart button');
             setIsDesignSaved(false);
             setShowAddToCart(false);
             savedDesignSnapshot.current = null; // Clear the snapshot
@@ -98,7 +98,7 @@ export const TwoDProvider = ({ children }) => {
 
     // Function to call when design is successfully saved
     const handleDesignSaved = (designData) => {
-        console.log('💾 Design saved successfully, showing Add to Cart button');
+        // console.log('💾 Design saved successfully, showing Add to Cart button');
         
         // Take a snapshot of current state
         savedDesignSnapshot.current = getCurrentDesignState();

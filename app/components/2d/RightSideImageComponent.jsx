@@ -105,7 +105,7 @@ const RightSideImageUpload = ({
           layerManager.arrangeCanvasLayers();
         }
 
-        console.log('✅ Right side image added with proper clipping to right 50% (top layer)');
+        // console.log('✅ Right side image added with proper clipping to right 50% (top layer)');
       };
     });
   };

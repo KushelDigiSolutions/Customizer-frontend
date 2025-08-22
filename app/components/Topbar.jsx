@@ -12,7 +12,9 @@ const Topbar = ({
   selectedProduct,
   productPrice, // Base product price from props
   currencyCode = '$', // Currency symbol
-  productQuantity = 1
+  productQuantity = 1,
+  onTotalPriceChange,
+  totalPrice,
 }) => {
   const {
     handleScreenshot,
@@ -29,7 +31,7 @@ const Topbar = ({
     selectedLayers
   } = use2D();
 
-  const [totalPrice, setTotalPrice] = useState(0);
+  // const [totalPrice, setTotalPrice] = useState(0);
   const [priceBreakdown, setPriceBreakdown] = useState({
     basePrice: 0,
     designPrice: 0,
@@ -126,15 +128,7 @@ const Topbar = ({
     }
 
     setPriceBreakdown(breakdown);
-    setTotalPrice(breakdown.totalPrice);
-
-    console.log('💰 Price Update:', {
-      productType: selectedProduct?.ProductType,
-      breakdown,
-      activeVariants,
-      customizationData: customizationData?.parts
-    });
-
+    onTotalPriceChange(breakdown.totalPrice);
   }, [
     productPrice,
     customizationData,
@@ -219,6 +213,14 @@ const Topbar = ({
 
         {/* Right Section - Action Buttons */}
         <div className="kr-right-section kr-reset-margin-padding">
+          <div className="kr-total-price kr-reset-margin">
+            {totalPrice > 0 && (
+              <>
+                {productQuantity} <span>x</span>{" "}
+              </>
+            )}
+            {formatPrice(totalPrice * productQuantity)}
+          </div>
 
           {selectedProduct?.ProductType === "3d" && (
             <button
@@ -273,14 +275,7 @@ const Topbar = ({
             </button>
           )}
 
-          <div className="kr-total-price kr-reset-margin">
-            {totalPrice > 0 && (
-              <>
-                {productQuantity} <span>x</span>{" "}
-              </>
-            )}
-            {formatPrice(totalPrice * productQuantity)}
-          </div>
+          
 
           <button
             className="kr-close-button kr-reset-margin kr-close-handle"
