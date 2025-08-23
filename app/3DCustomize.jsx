@@ -112,7 +112,11 @@ export default function ThreeDCustomize() {
           <ModelViewer modelUrl={modelUrl} selectedPart={threeDselectedPart} />
 
           <ScreenshotManager ref={screenshotRef} />
-          <OrbitControls />
+          <OrbitControls
+            enableZoom={true}
+            maxDistance={5}
+            enablePan={true}
+          />
         </Canvas>
       </div>
 

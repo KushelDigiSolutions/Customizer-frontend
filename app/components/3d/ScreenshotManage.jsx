@@ -64,6 +64,28 @@ import { useThree } from '@react-three/fiber';
 import { useImperativeHandle, forwardRef } from 'react';
 import * as THREE from 'three';
 
+function cropImage(base64Image, cropX, cropY, cropWidth, cropHeight) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.src = base64Image;
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = cropWidth;
+      canvas.height = cropHeight;
+
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(
+        img,
+        cropX, cropY, cropWidth, cropHeight, // source rect
+        0, 0, cropWidth, cropHeight          // dest rect
+      );
+
+      resolve(canvas.toDataURL("image/png"));
+    };
+  });
+}
+
+
 const ScreenshotManager = forwardRef((props, ref) => {
   const { gl, camera, scene } = useThree();
 
@@ -108,7 +130,14 @@ const ScreenshotManager = forwardRef((props, ref) => {
           await new Promise(resolve => setTimeout(resolve, 100));
 
           const dataUrl = gl.domElement.toDataURL('image/png');
-          capturedImages.push({ angle: view.name, image: dataUrl });
+
+          const cropX = 250;  // left margin
+          const cropY = 100;  // top margin
+          const cropWidth = gl.domElement.width - 500;   // remove left+right
+          const cropHeight = gl.domElement.height - 200; // remove top+bottom
+
+          const croppedUrl = await cropImage(dataUrl, cropX, cropY, cropWidth, cropHeight);
+          capturedImages.push({ angle: view.name, image: croppedUrl });
         }
 
         // Reset camera back
