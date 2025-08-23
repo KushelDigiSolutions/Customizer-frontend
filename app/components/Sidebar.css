@@ -4,7 +4,7 @@
   position: absolute;
   top: 6rem; 
   left: 1.75rem; 
-  width: 450px;
+  /* width: 450px; */
   display: flex;
   gap: 1.25rem; 
   z-index: 40; 
