@@ -7,7 +7,7 @@ const PreviewTab = ({
     updateArrange,
     setShowImageEditModal,
     constrainObjectToProduct,
-    applyClippingToObject, 
+    applyClippingToObject,
     editor
 }) => {
 
@@ -58,7 +58,7 @@ const PreviewTab = ({
             }
 
             const productBounds = productImage.getBoundingRect();
-            const padding = 10; 
+            const padding = 10;
 
             const productLeft = productBounds.left + padding;
             const productRight = productBounds.left + productBounds.width - padding;
@@ -102,7 +102,7 @@ const PreviewTab = ({
 
             designObj.setCoords();
             canvas.renderAll();
-            
+
             // console.log(`✅ Design aligned to ${alignment} with clipping mask`);
         } catch (error) {
             console.error("Error aligning design:", error);
@@ -161,6 +161,26 @@ const PreviewTab = ({
 
         try {
             const rotationValue = parseInt(value) || 0;
+
+            // Get the current center point of the object
+            const rect = designObj.getBoundingRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            // Set the object to rotate around its center
+            designObj.set({
+                originX: 'center',
+                originY: 'center'
+            });
+
+            // Position the object so its center is at the calculated center point
+            designObj.setPositionByOrigin(
+                { x: centerX, y: centerY },
+                'center',
+                'center'
+            );
+
+            // Now apply the rotation
             designObj.set('angle', rotationValue);
 
             // Apply clipping after rotation
@@ -329,6 +349,66 @@ const PreviewTab = ({
         // console.log("Upscale design clicked");
     }, []);
 
+    const handleMoveX = useCallback((value) => {
+        if (!isCanvasReady()) return;
+        const designObj = getActiveDesignObject();
+        if (!designObj) return;
+
+        try {
+            designObj.set({ left: value });
+            const productImage = canvas.getObjects().find(obj => obj.isTshirtBase);
+            if (productImage && applyClippingToObject) {
+                applyClippingToObject(designObj, productImage); // 🔥 clipping apply
+            }
+            designObj.setCoords();
+            canvas.renderAll();
+        } catch (error) {
+            console.error("Error moving X:", error);
+        }
+    }, [canvas, getActiveDesignObject, isCanvasReady, applyClippingToObject]);
+
+
+    const handleMoveY = useCallback((value) => {
+        if (!isCanvasReady()) return;
+        const designObj = getActiveDesignObject();
+        if (!designObj) return;
+
+        try {
+            designObj.set({ top: value });
+            const productImage = canvas.getObjects().find(obj => obj.isTshirtBase);
+            if (productImage && applyClippingToObject) {
+                applyClippingToObject(designObj, productImage); // 🔥 clipping apply
+            }
+            designObj.setCoords();
+            canvas.renderAll();
+        } catch (error) {
+            console.error("Error moving Y:", error);
+        }
+    }, [canvas, getActiveDesignObject, isCanvasReady, applyClippingToObject]);
+
+
+    const handleZoom = useCallback((value) => {
+        if (!isCanvasReady()) return;
+        const designObj = getActiveDesignObject();
+        if (!designObj) return;
+
+        try {
+            const scaleValue = value / 100; // range → 0-200 (100 = normal)
+            designObj.scale(scaleValue);
+
+            const productImage = canvas.getObjects().find(obj => obj.isTshirtBase);
+            if (productImage && applyClippingToObject) {
+                applyClippingToObject(designObj, productImage); // 🔥 clipping apply
+            }
+            designObj.setCoords();
+            canvas.renderAll();
+        } catch (error) {
+            console.error("Error zooming:", error);
+        }
+    }, [canvas, getActiveDesignObject, isCanvasReady, applyClippingToObject]);
+
+
+
     return (
         <div className="kr-preview-container kr-reset-margin-padding">
             <div className='kr-preview-header kr-reset-margin'>
@@ -401,7 +481,7 @@ const PreviewTab = ({
                     </div>
                     <hr className="kr-preview-divider kr-reset-margin-padding" />
 
-                    <div className='kr-preview-alignment-section kr-reset-margin'>
+                    {/* <div className='kr-preview-alignment-section kr-reset-margin'>
                         <h3 className='kr-preview-alignment-title kr-reset-margin-padding'>Alignment</h3>
                         <div className="kr-preview-alignment-grid">
                             <button onClick={() => handleAlign("left")} className='kr-preview-alignment-button'>
@@ -424,7 +504,7 @@ const PreviewTab = ({
                             </button>
                         </div>
                     </div>
-                    <hr className="kr-preview-divider kr-reset-margin-padding" />
+                    <hr className="kr-preview-divider kr-reset-margin-padding" /> */}
 
                     <div className='kr-preview-control-section kr-reset-margin'>
                         <label className="kr-preview-control-label kr-reset-padding">Opacity</label>
@@ -466,9 +546,71 @@ const PreviewTab = ({
                             </span>
                         </div>
                     </div>
-                    <hr className="kr-preview-divider kr-reset-margin-padding" />
 
-                    <div className='kr-preview-arrange-section kr-reset-margin'>
+                    <div className='kr-preview-control-section kr-reset-margin'>
+                        <label className="kr-preview-control-label kr-reset-padding">Move Left/Right</label>
+                        <div className='kr-preview-control-input-group kr-reset-margin-padding'>
+                            <input
+                                type="range"
+                            min="300"
+                            max="500"
+                            value={designProps?.left || 0}
+                            onChange={(e) => handleMoveX(parseInt(e.target.value))}
+                            className="kr-preview-slider "
+                            style={{
+                                background: `linear-gradient(to right, #3559C7 0%, #3559C7 ${((designProps?.left || 0) / 500) * 100}%, #e5e7eb ${((designProps?.left || 0) / 500) * 100}%, #e5e7eb 100%)`
+                            }}
+                            />
+                            <span className='kr-preview-value-display'>
+                                {designProps?.left || 0}°
+                            </span>
+                        </div>
+                    </div>
+
+                    <div className='kr-preview-control-section kr-reset-margin'>
+                        <label className="kr-preview-control-label kr-reset-padding">Move Top/Bottom</label>
+                        <div className='kr-preview-control-input-group kr-reset-margin-padding'>
+                            <input
+                                type="range"
+                            min="0"
+                            max="500"
+                            value={designProps?.top || 0}
+                            onChange={(e) => handleMoveY(parseInt(e.target.value))}
+                            className="kr-preview-slider "
+                            style={{
+                                background: `linear-gradient(to right, #3559C7 0%, #3559C7 ${((designProps?.top || 0) / 500) * 100}%, #e5e7eb ${((designProps?.top || 0) / 500) * 100}%, #e5e7eb 100%)`
+                            }}
+                            />
+                            <span className='kr-preview-value-display'>
+                                {designProps?.top || 0}°
+                            </span>
+                        </div>
+                    </div>
+
+                    <div className='kr-preview-control-section kr-reset-margin'>
+                        <label className="kr-preview-control-label kr-reset-padding">Zoom</label>
+                        <div className='kr-preview-control-input-group kr-reset-margin-padding'>
+                            <input
+                              type="range"
+                            min="10"
+                            max="50"
+                            value={designProps?.scale || 100}
+                            onChange={(e) => handleZoom(parseInt(e.target.value))}
+                            className="kr-preview-slider "
+                            style={{
+                                background: `linear-gradient(to right, #3559C7 0%, #3559C7 ${((designProps?.scale || 100) / 200) * 100}%, #e5e7eb ${((designProps?.scale || 100) / 200) * 100}%, #e5e7eb 100%)`
+                            }}
+                            />
+                            <span className='kr-preview-value-display'>
+                                {designProps?.scale || 100}%
+                            </span>
+                        </div>
+                    </div>
+
+
+                    {/* <hr className="kr-preview-divider kr-reset-margin-padding" /> */}
+
+                    {/* <div className='kr-preview-arrange-section kr-reset-margin'>
                         <h3 className='kr-preview-arrange-title kr-reset-margin-padding'>Arrange</h3>
                         <div className="kr-preview-arrange-buttons kr-reset-margin-padding">
                             <button onClick={() => handleArrange("bringForward")} className='kr-preview-arrange-button kr-reset-margin-padding'>
@@ -485,9 +627,9 @@ const PreviewTab = ({
                             </button>
                         </div>
                     </div>
-                    <hr className="kr-preview-divider kr-reset-margin-padding" />
+                    <hr className="kr-preview-divider kr-reset-margin-padding" /> */}
 
-                    <div className='kr-preview-tools-section kr-reset-margin'>
+                    {/* <div className='kr-preview-tools-section kr-reset-margin'>
                         <h3 className='kr-preview-tools-title kr-reset-margin-padding'>Tools</h3>
 
                         <button
@@ -508,7 +650,7 @@ const PreviewTab = ({
                             <img className="kr-preview-tool-icon" src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508617/move-resize-variant_karpuj.png" alt="" />
                             <span className='kr-preview-tool-text'>Upscale</span>
                         </button>
-                    </div>
+                    </div> */}
                 </>
             ) : (
                 <div className="kr-preview-empty-state">

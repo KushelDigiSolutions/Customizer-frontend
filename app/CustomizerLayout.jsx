@@ -19,7 +19,7 @@ const CustomizerLayout = (props) => {
   // console.log(props?.productPrice);
   // console.log(props?.pageLoading);
   // console.log(props?.productQuantity);
-  
+
   // Get all 2d context state and setters
   const {
     customText,
@@ -240,7 +240,14 @@ const CustomizerLayout = (props) => {
         this.layerOrder.RIGHT_SIDE_IMAGE !== undefined
       ) {
         zIndex = this.layerOrder.RIGHT_SIDE_IMAGE;
-      } else if (obj.type === "i-text" && this.layerOrder.TEXT !== undefined) {
+      } else if (
+        (obj.layerType === "image" || obj.name === "design-image") &&
+        this.layerOrder.IMAGE !== undefined
+      ) {
+        // Handle uploaded images for the IMAGE layer
+        zIndex = this.layerOrder.IMAGE;
+      }
+      else if (obj.type === "i-text" && this.layerOrder.TEXT !== undefined) {
         zIndex = this.layerOrder.TEXT;
       } else if (
         obj.type === "image" &&
@@ -875,6 +882,74 @@ const CustomizerLayout = (props) => {
   };
 
   // Design function - Perfect merge with equal dimensions
+  // const handleAddDesignToCanvas = (
+  //   url,
+  //   position = "center",
+  //   offsetX = 0,
+  //   offsetY = 0
+  // ) => {
+  //   if (!editor || !url) return;
+
+  //   import("fabric").then((fabric) => {
+  //     const canvas = editor.canvas;
+  //     const productImage = canvas.getObjects().find((obj) => obj.isTshirtBase);
+  //     if (!productImage) return;
+
+  //     const imgElement = new Image();
+  //     imgElement.crossOrigin = "anonymous";
+  //     imgElement.src = url;
+
+  //     imgElement.onload = () => {
+  //       // Get product dimensions for perfect matching
+  //       const productBounds = productImage.getBoundingRect();
+
+  //       // Remove existing design before adding new one
+  //       const existingDesign = canvas
+  //         .getObjects()
+  //         .find((obj) => obj.name === "design-image");
+  //       if (existingDesign) {
+  //         canvas.remove(existingDesign);
+  //       }
+
+  //       // Create design with EXACT same dimensions as product for perfect merge
+  //       const imgInstance = new fabric.Image(imgElement, {
+  //         left: productBounds.left,
+  //         top: productBounds.top,
+  //         originX: "left",
+  //         originY: "top",
+  //         // Scale to match product dimensions EXACTLY
+  //         scaleX: productBounds.width / imgElement.width,
+  //         scaleY: productBounds.height / imgElement.height,
+  //         name: "design-image",
+  //         selectable: false,
+  //         evented: false,
+  //         hasControls: false,
+  //         hasBorders: false,
+  //         moveCursor: "default",
+  //         lockMovementX: true,
+  //         lockMovementY: true,
+  //         lockScalingX: true,
+  //         lockScalingY: true,
+  //         lockRotation: true,
+  //       });
+
+  //       canvas.add(imgInstance);
+
+  //       // Apply layer management - IMMEDIATE arrangement
+  //       if (layerManager) {
+  //         layerManager.setObjectLayer(imgInstance);
+  //         layerManager.arrangeCanvasLayers();
+  //       }
+
+  //       console.log(
+  //         "✅ Design added with perfect merge dimensions (zIndex: 4) - Non-moveable"
+  //       );
+  //     };
+  //   });
+  // };
+
+  // Updated handleAddDesignToCanvas function for layer-based image placement
+  // Updated handleAddDesignToCanvas function for layer-based image placement
   const handleAddDesignToCanvas = (
     url,
     position = "center",
@@ -896,15 +971,16 @@ const CustomizerLayout = (props) => {
         // Get product dimensions for perfect matching
         const productBounds = productImage.getBoundingRect();
 
-        // Remove existing design before adding new one
-        const existingDesign = canvas
+        // Remove existing design images from IMAGE layer before adding new one
+        const existingDesignImages = canvas
           .getObjects()
-          .find((obj) => obj.name === "design-image");
-        if (existingDesign) {
-          canvas.remove(existingDesign);
-        }
+          .filter((obj) =>
+            (obj.layerType === "image" && obj.name === "design-image") ||
+            (obj.name === "design-image" && !obj.isTshirtBase)
+          );
+        existingDesignImages.forEach((obj) => canvas.remove(obj));
 
-        // Create design with EXACT same dimensions as product for perfect merge
+        // Create design image with EXACT same dimensions as product for perfect merge
         const imgInstance = new fabric.Image(imgElement, {
           left: productBounds.left,
           top: productBounds.top,
@@ -914,6 +990,7 @@ const CustomizerLayout = (props) => {
           scaleX: productBounds.width / imgElement.width,
           scaleY: productBounds.height / imgElement.height,
           name: "design-image",
+          layerType: "image", // Set layer type as "image" for IMAGE layer (z-index 2)
           selectable: false,
           evented: false,
           hasControls: false,
@@ -935,8 +1012,12 @@ const CustomizerLayout = (props) => {
         }
 
         console.log(
-          "✅ Design added with perfect merge dimensions (zIndex: 4) - Non-moveable"
+          "✅ Design image added to IMAGE layer (z-index: 2) - Non-moveable"
         );
+      };
+
+      imgElement.onerror = () => {
+        console.error("Failed to load design image:", url);
       };
     });
   };
@@ -1408,7 +1489,7 @@ const CustomizerLayout = (props) => {
           customizations: {
             ...customizationsWithoutScreenshots,
             appliedImageCloudUrl,
-            krCustomizedPrice, 
+            krCustomizedPrice,
             selectedVariants: selectedVariantsData
           },
           screenshots: cloudinaryScreenshots,
@@ -1531,7 +1612,7 @@ const CustomizerLayout = (props) => {
           ProductType: "2d",
           screenshots: [
             {
-              angle: "finalProduct", 
+              angle: "finalProduct",
               url: cloudinaryResponse.url,
             },
           ],
