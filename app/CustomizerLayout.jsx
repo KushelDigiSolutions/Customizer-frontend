@@ -1808,7 +1808,7 @@ const CustomizerLayout = (props) => {
         />
       )}
 
-      {selectedProduct?.ProductType === "3d" && <ThreeDCustomize />}
+      {selectedProduct?.ProductType === "3d" && <ThreeDCustomize setPageLoading={setPageLoading}/>}
 
       {selectedProduct?.ProductType === "3d" && threeDloading && (
         <div className="kr-loading-overlay kr-reset-margin-padding">

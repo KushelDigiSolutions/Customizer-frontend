@@ -193,7 +193,7 @@ function setGroupVisibility(scene, group, meshNameToShow) {
   }
 }
 
-const ModelViewer = ({ modelUrl }) => {
+const ModelViewer = ({ modelUrl, setPageLoading }) => {
   const {
     threeDcolor,
     threeDtexture,
@@ -211,6 +211,13 @@ const ModelViewer = ({ modelUrl }) => {
   } = use3D();
 
   const { scene } = useGLTF(modelUrl);
+
+  // Hide loader when model is loaded
+  useEffect(() => {
+    if (scene && setPageLoading) {
+      setPageLoading(false);
+    }
+  }, [scene, setPageLoading]);
 
   // 1) On load → apply default visibility per group
   useLayoutEffect(() => {

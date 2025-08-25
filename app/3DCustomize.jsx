@@ -10,7 +10,7 @@ import { use3D } from './context/3DContext';
 import './3DCustomize.css';
 import ScreenshotManager from './components/3d/ScreenshotManage';
 
-export default function ThreeDCustomize() {
+export default function ThreeDCustomize({ setPageLoading }) {
   const {
     threeDselectedPart,
     threeDtext,
@@ -97,6 +97,10 @@ export default function ThreeDCustomize() {
 
   const modelUrl = selectedProduct?.modelFile || '/models/brand1.glb';
 
+  useEffect(() => {
+    if (setPageLoading) setPageLoading(true);
+  }, [modelUrl, setPageLoading]);
+
   return (
     <main className="kds-main">
       <div className="kds-canvas-container">
@@ -109,7 +113,7 @@ export default function ThreeDCustomize() {
             <Environment preset="city" />
           </Suspense>
 
-          <ModelViewer modelUrl={modelUrl} selectedPart={threeDselectedPart} />
+          <ModelViewer modelUrl={modelUrl} selectedPart={threeDselectedPart} setPageLoading={setPageLoading} />
 
           <ScreenshotManager ref={screenshotRef} />
           <OrbitControls
