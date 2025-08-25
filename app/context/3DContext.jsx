@@ -9,7 +9,7 @@ export const ThreeDProvider = ({ children }) => {
   const [showScreenshotsModal, setShowScreenshotsModal] = useState(false);
   const [threeDcolor, setthreeDColor] = useState("#ffffff");
   const [threeDtexture, setthreeDTexture] = useState(null);
-  const [threeDselectedPart, setthreeDSelectedPart] = useState("Front");
+  const [threeDselectedPart, setthreeDSelectedPart] = useState('');
 
   const [threeDtextFontFamily, setthreeDTextFontFamily] = useState("Arial");
 

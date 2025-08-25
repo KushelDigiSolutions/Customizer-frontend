@@ -509,8 +509,8 @@ const CustomizerLayout = (props) => {
     Object.keys(defaultLayers).forEach((layerType) => {
       const url = defaultLayers[layerType];
       if (url) {
-        // Find the corresponding item in layersDesigns
-        const layerDesigns = selectedProduct.layersDesigns?.[layerType];
+        // Find the corresponding item in layerDesign
+        const layerDesigns = selectedProduct.layerDesign?.[layerType];
         if (layerDesigns) {
           const defaultItem =
             layerDesigns.find((item) => item.url === url) || layerDesigns[0]; // Fallback to first item

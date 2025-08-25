@@ -114,7 +114,7 @@ export default function ThreeDCustomize() {
           <ScreenshotManager ref={screenshotRef} />
           <OrbitControls
             enableZoom={true}
-            maxDistance={5}
+            maxDistance={4}
             enablePan={true}
           />
         </Canvas>

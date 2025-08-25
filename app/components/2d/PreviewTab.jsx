@@ -2,6 +2,7 @@
 
 import React, { useEffect, useCallback } from 'react'
 import './PreviewTab.css'
+import { FaArrowsAlt, FaSearchPlus, FaSearchMinus, FaArrowUp, FaArrowDown, FaArrowLeft, FaArrowRight, FaTimes } from 'react-icons/fa';
 
 const PreviewTab = ({
     updateArrange,
@@ -15,6 +16,8 @@ const PreviewTab = ({
     const canvas = editor?.canvas;
 
     const [isRemovingBg, setIsRemovingBg] = React.useState(false);
+    const [designPosition, setDesignPosition] = React.useState({ x: 0, y: 0 });
+    const [designScale, setDesignScale] = React.useState(1);
 
     const isCanvasReady = useCallback(() => {
         return canvas && canvas._objects !== undefined && editor && editor.canvas;
@@ -409,6 +412,164 @@ const PreviewTab = ({
 
 
 
+    const moveDesign = (direction, amount = 10) => {
+        if (!isCanvasReady()) return;
+        const designObj = getActiveDesignObject();
+        if (!designObj) return;
+
+        let newPos = { ...designPosition };
+        switch (direction) {
+            case 'up': newPos.y -= amount; break;
+            case 'down': newPos.y += amount; break;
+            case 'left': newPos.x -= amount; break;
+            case 'right': newPos.x += amount; break;
+        }
+        setDesignPosition(newPos);
+        updateDesignOnCanvas({ position: newPos });
+    };
+
+    const zoomDesign = (zoomIn) => {
+        let newScale = designScale + (zoomIn ? 0.1 : -0.1);
+        newScale = Math.max(0.2, Math.min(3, newScale));
+        setDesignScale(newScale);
+        updateDesignOnCanvas({ scale: newScale });
+    };
+
+    const updateDesignOnCanvas = ({ scale, position }) => {
+        if (!isCanvasReady()) return;
+        const designObj = getActiveDesignObject();
+        if (!designObj) return;
+        const productImage = canvas.getObjects().find(obj => obj.isTshirtBase);
+        if (!productImage) return;
+        const productBounds = productImage.getBoundingRect();
+
+        // Update scale
+        if (scale !== undefined) {
+            designObj.set({
+                scaleX: scale,
+                scaleY: scale
+            });
+        }
+        // Update position
+        if (position !== undefined) {
+            designObj.set({
+                left: productBounds.left + productBounds.width / 2 + position.x,
+                top: productBounds.top + productBounds.height / 2 + position.y
+            });
+        }
+
+        // Always apply the clipPath to prevent overflow
+        applyClipPathToDesign();
+        designObj.setCoords();
+        canvas.renderAll();
+    };
+
+
+    // --- NEW: UI Controls for Move/Zoom (like RightSideImageComponent) ---
+    // Move design by direction
+    const handlePositionChange = (direction, amount = 10) => {
+        if (!isCanvasReady()) return;
+        const designObj = getActiveDesignObject();
+        if (!designObj) return;
+
+        // Get product bounds
+        const productImage = canvas.getObjects().find(obj => obj.isTshirtBase);
+        if (!productImage) return;
+        const productBounds = productImage.getBoundingRect();
+
+        // Calculate new position
+        let left = designObj.left ?? (productBounds.left + productBounds.width / 2);
+        let top = designObj.top ?? (productBounds.top + productBounds.height / 2);
+
+        switch (direction) {
+            case 'up': top -= amount; break;
+            case 'down': top += amount; break;
+            case 'left': left -= amount; break;
+            case 'right': left += amount; break;
+        }
+
+        designObj.set({ left, top });
+        // Apply clipping to keep inside product
+        if (applyClippingToObject) applyClippingToObject(designObj, productImage);
+        designObj.setCoords();
+        canvas.renderAll();
+    };
+
+    // Zoom in/out
+    const handleScaleChange = (newScale) => {
+        if (!isCanvasReady()) return;
+        const designObj = getActiveDesignObject();
+        if (!designObj) return;
+
+        designObj.set({
+            scaleX: newScale,
+            scaleY: newScale
+        });
+
+        applyClipPathToDesign();
+        designObj.setCoords();
+        canvas.renderAll();
+    };
+
+    // Fine position X/Y
+    const handleFinePositionChange = (axis, value) => {
+        if (!isCanvasReady()) return;
+        const designObj = getActiveDesignObject();
+        if (!designObj) return;
+
+        let left = designObj.left;
+        let top = designObj.top;
+        if (axis === "x") left = value;
+        if (axis === "y") top = value;
+
+        designObj.set({ left, top });
+        applyClipPathToDesign();
+        designObj.setCoords();
+        canvas.renderAll();
+    };
+
+    // --- END NEW ---
+
+    // Helper: Apply a rectangular clipPath to the design image so it can't overflow the product area
+    const applyClipPathToDesign = useCallback(() => {
+        if (!isCanvasReady()) return;
+        const designObj = getActiveDesignObject();
+        if (!designObj) return;
+        const productImage = canvas.getObjects().find(obj => obj.isTshirtBase);
+        if (!productImage) return;
+        const productBounds = productImage.getBoundingRect();
+
+        import('fabric').then(({ Rect }) => {
+            // Remove any previous clipPath
+            if (designObj.clipPath) {
+                designObj.clipPath = null;
+            }
+            // Create a new rectangular clipPath matching the product area
+            const clipPath = new Rect({
+                left: productBounds.left,
+                top: productBounds.top,
+                width: productBounds.width,
+                height: productBounds.height,
+                absolutePositioned: true
+            });
+            designObj.clipPath = clipPath;
+            designObj.setCoords();
+            canvas.renderAll();
+        });
+    }, [canvas, getActiveDesignObject, isCanvasReady]);
+
+    // Call this after every move/scale/flip/align/rotate
+    const refreshDesign = useCallback(() => {
+        if (!isCanvasReady()) return;
+        const designObj = getActiveDesignObject();
+        if (!designObj) return;
+
+        // Always apply the clipPath to prevent overflow
+        applyClipPathToDesign();
+        designObj.setCoords();
+        canvas.renderAll();
+    }, [canvas, getActiveDesignObject, isCanvasReady, applyClipPathToDesign]);
+
     return (
         <div className="kr-preview-container kr-reset-margin-padding">
             <div className='kr-preview-header kr-reset-margin'>
@@ -527,7 +688,7 @@ const PreviewTab = ({
                     </div>
                     <hr className="kr-preview-divider kr-reset-margin-padding" />
 
-                    <div className='kr-preview-control-section kr-reset-margin'>
+                    {/* <div className='kr-preview-control-section kr-reset-margin'>
                         <label className="kr-preview-control-label kr-reset-padding">Rotate</label>
                         <div className='kr-preview-control-input-group kr-reset-margin-padding'>
                             <input
@@ -545,9 +706,9 @@ const PreviewTab = ({
                                 {designProps?.rotation || 0}°
                             </span>
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className='kr-preview-control-section kr-reset-margin'>
+                    {/* <div className='kr-preview-control-section kr-reset-margin'>
                         <label className="kr-preview-control-label kr-reset-padding">Move Left/Right</label>
                         <div className='kr-preview-control-input-group kr-reset-margin-padding'>
                             <input
@@ -565,9 +726,9 @@ const PreviewTab = ({
                                 {designProps?.left || 0}°
                             </span>
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className='kr-preview-control-section kr-reset-margin'>
+                    {/* <div className='kr-preview-control-section kr-reset-margin'>
                         <label className="kr-preview-control-label kr-reset-padding">Move Top/Bottom</label>
                         <div className='kr-preview-control-input-group kr-reset-margin-padding'>
                             <input
@@ -585,9 +746,9 @@ const PreviewTab = ({
                                 {designProps?.top || 0}°
                             </span>
                         </div>
-                    </div>
+                    </div> */}
 
-                    <div className='kr-preview-control-section kr-reset-margin'>
+                    {/* <div className='kr-preview-control-section kr-reset-margin'>
                         <label className="kr-preview-control-label kr-reset-padding">Zoom</label>
                         <div className='kr-preview-control-input-group kr-reset-margin-padding'>
                             <input
@@ -605,7 +766,7 @@ const PreviewTab = ({
                                 {designProps?.scale || 100}%
                             </span>
                         </div>
-                    </div>
+                    </div> */}
 
 
                     {/* <hr className="kr-preview-divider kr-reset-margin-padding" /> */}
@@ -651,6 +812,111 @@ const PreviewTab = ({
                             <span className='kr-preview-tool-text'>Upscale</span>
                         </button>
                     </div> */}
+
+                    {/* --- NEW: Controls UI (Move/Zoom/Position) --- */}
+                    <div className="kr-controls">
+                        {/* Scale Controls */}
+                        <div className="kr-scale-section">
+                            <label className="kr-scale-label">
+                                Size: {Math.round((getActiveDesignObject()?.scaleX || 1) * 100)}%
+                            </label>
+                            <div className="kr-scale-controls">
+                                <button
+                                    onClick={() => handleScaleChange(Math.max(0.2, (getActiveDesignObject()?.scaleX || 1) - 0.1))}
+                                    className="kr-scale-button"
+                                >
+                                    <FaSearchMinus className="kr-icon" />
+                                </button>
+                                <input
+                                    type="range"
+                                    min="0.2"
+                                    max="3"
+                                    step="0.1"
+                                    value={getActiveDesignObject()?.scaleX || 1}
+                                    onChange={(e) => handleScaleChange(parseFloat(e.target.value))}
+                                    className="kr-scale-slider"
+                                />
+                                <button
+                                    onClick={() => handleScaleChange(Math.min(3, (getActiveDesignObject()?.scaleX || 1) + 0.1))}
+                                    className="kr-scale-button"
+                                >
+                                    <FaSearchPlus className="kr-icon" />
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Position Controls */}
+                        <div className="kr-position-section">
+                            <label className="kr-position-label">
+                                Position Controls
+                            </label>
+                            <div className="kr-position-grid">
+                                <div></div>
+                                <button
+                                    onClick={() => handlePositionChange('up')}
+                                    className="kr-position-button"
+                                >
+                                    <FaArrowUp className="kr-icon" />
+                                </button>
+                                <div></div>
+
+                                <button
+                                    onClick={() => handlePositionChange('left')}
+                                    className="kr-position-button"
+                                >
+                                    <FaArrowLeft className="kr-icon" />
+                                </button>
+                                <div className="kr-position-center">
+                                    <FaArrowsAlt className="kr-center-icon" />
+                                </div>
+                                <button
+                                    onClick={() => handlePositionChange('right')}
+                                    className="kr-position-button"
+                                >
+                                    <FaArrowRight className="kr-icon" />
+                                </button>
+
+                                <div></div>
+                                <button
+                                    onClick={() => handlePositionChange('down')}
+                                    className="kr-position-button"
+                                >
+                                    <FaArrowDown className="kr-icon" />
+                                </button>
+                                <div></div>
+                            </div>
+                        </div>
+
+                        {/* Fine Position Controls */}
+                        <div className="kr-fine-position">
+                            <div className="kr-fine-position-item">
+                                <label className="kr-fine-position-label">X: {Math.round(getActiveDesignObject()?.left || 0)}</label>
+                                <input
+                                    type="range"
+                                    min="0"
+                                    max={canvas ? canvas.getWidth() : 600}
+                                    value={getActiveDesignObject()?.left || 0}
+                                    onChange={(e) => handleFinePositionChange("x", parseInt(e.target.value))}
+                                    className="kr-fine-position-slider"
+                                />
+                            </div>
+                            <div className="kr-fine-position-item">
+                                <label className="kr-fine-position-label">Y: {Math.round(getActiveDesignObject()?.top || 0)}</label>
+                                <input
+                                    type="range"
+                                    min="0"
+                                    max={canvas ? canvas.getHeight() : 600}
+                                    value={getActiveDesignObject()?.top || 0}
+                                    onChange={(e) => handleFinePositionChange("y", parseInt(e.target.value))}
+                                    className="kr-fine-position-slider"
+                                />
+                            </div>
+                        </div>
+                        <div className="kr-info">
+                            💡 Image will not overflow outside the product area.
+                        </div>
+                    </div>
+                    {/* --- END NEW --- */}
                 </>
             ) : (
                 <div className="kr-preview-empty-state">

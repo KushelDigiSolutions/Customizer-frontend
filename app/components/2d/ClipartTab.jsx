@@ -101,14 +101,14 @@ const DynamicClipartTab = ({
 
     const categories = [];
 
-    // Check layersDesigns (for 2D products)
-    if (selectedProduct.layersDesigns) {
-      Object.keys(selectedProduct.layersDesigns).forEach(category => {
-        if (selectedProduct.layersDesigns[category] && selectedProduct.layersDesigns[category].length > 0) {
+    // Check layerDesign (for 2D products)
+    if (selectedProduct.layerDesign) {
+      Object.keys(selectedProduct.layerDesign).forEach(category => {
+        if (selectedProduct.layerDesign[category] && selectedProduct.layerDesign[category].length > 0) {
           categories.push({
             key: category,
             name: getCategoryDisplayName(category),
-            items: selectedProduct.layersDesigns[category],
+            items: selectedProduct.layerDesign[category],
             type: 'layer'
           });
         }
@@ -222,7 +222,7 @@ const DynamicClipartTab = ({
       // Handle layer design selection
       switch (category.key) {
         case 'designs':
-          handleAddDesignToCanvas(item.url, item.position, item.offsetX, item.offsetY);
+          handleAddDesignToCanvas(item.files?.[0] || item.url, item.position, item.offsetX, item.offsetY);
           // If design has a price, we might want to track it too
           if (item.price) {
             console.log('💰 Design applied with price:', item.price);
@@ -230,7 +230,7 @@ const DynamicClipartTab = ({
           break;
 
         case 'patterns':
-          handleAddPatternToCanvas(item.url);
+          handleAddPatternToCanvas(item.files?.[0] || item.url);
           // If pattern has a price, we might want to track it too
           if (item.price) {
             console.log('💰 Pattern applied with price:', item.price);
@@ -265,9 +265,9 @@ const DynamicClipartTab = ({
 
   // Check if there are any customization options available
   const hasAnyCustomizations = () => {
-    const hasLayerDesigns = selectedProduct?.layersDesigns &&
-      Object.keys(selectedProduct.layersDesigns).some(key =>
-        selectedProduct.layersDesigns[key] && selectedProduct.layersDesigns[key].length > 0
+    const hasLayerDesigns = selectedProduct?.layerDesign &&
+      Object.keys(selectedProduct.layerDesign).some(key =>
+        selectedProduct.layerDesign[key] && selectedProduct.layerDesign[key].length > 0
       );
 
     const hasVariants = selectedProduct?.variants &&
@@ -372,13 +372,13 @@ const DynamicClipartTab = ({
           // Grid layout for designs and patterns
           <div className={currentCategory.key === 'designs' ? 'kr-design-grid-3 kr-reset-margin-padding' : 'kr-design-grid-2 kr-reset-margin-padding'}>
             {currentCategory.items.map((item, index) => (
-              <div key={item.id || index} className={`kr-design-item ${makeSafeClassName(item.name)} kr-reset-margin-padding`}>
+              <div key={item.id || index} className={`kr-design-item ${makeSafeClassName(item.title || item.name)} kr-reset-margin-padding`}>
                 {currentCategory.key === 'patterns' ? (
                   // Special layout for patterns
                   <div className="kr-pattern-container kr-reset-margin">
                     <img
-                      src={item.url}
-                      alt={item.name}
+                      src={item.files?.[0] || item.url}
+                      alt={item.title || item.name}
                       className="kr-pattern-image kr-reset-padding"
                     />
                     <button
@@ -392,7 +392,7 @@ const DynamicClipartTab = ({
                         </span>
                       )}
                     </button>
-                    <p className="kr-pattern-name kr-reset-padding">{item.name}</p>
+                    <p className="kr-pattern-name kr-reset-padding">{item.title || item.name}</p>
                   </div>
                 ) : (
                   // Simple grid for designs
@@ -401,8 +401,8 @@ const DynamicClipartTab = ({
                     className="kr-design-simple kr-reset-margin"
                   >
                     <img
-                      src={item.url}
-                      alt={item.name}
+                      src={item.files?.[0] || item.url}
+                      alt={item.title || item.name}
                       className="kr-design-image kr-reset-margin-padding"
                     />
                     {item.price && (
@@ -422,21 +422,24 @@ const DynamicClipartTab = ({
               <div
                 key={item.id || index}
                 onClick={() => handleItemSelect(item, currentCategory)}
-                className={`kr-variant-item ${makeSafeClassName(item.name)} kr-reset-margin ${isVariantCategory && activeVariants?.[currentCategory.key] === item.id ? 'kr-variant-active' : ''
+                className={`kr-variant-item ${makeSafeClassName(item.title || item.name)} kr-reset-margin ${isVariantCategory && activeVariants?.[currentCategory.key] === item.id ? 'kr-variant-active' : ''
                   }`}
               >
                 <div className="kr-variant-thumbnail kr-reset-margin-padding">
-                  {(item.url || item.thumbnail) && (
+                  {(item.files?.[0] || item.url || item.thumbnail) && (
                     <img
-                      src={item.url || item.thumbnail}
-                      alt={item.name}
+                      src={item.files?.[0] || item.url || item.thumbnail}
+                      alt={item.title || item.name}
                     />
                   )}
                 </div>
                 <div className="kr-variant-info kr-reset-margin-padding">
-                  <h4 className="kr-variant-name kr-reset-margin-padding">{item.name}</h4>
+                  <h4 className="kr-variant-name kr-reset-margin-padding">{item.title || item.name}</h4>
                   {item.color && (
                     <p className="kr-variant-detail kr-reset-margin-padding">Color: {item.color}</p>
+                  )}
+                  {item.shortDescription && (
+                    <p className="kr-variant-detail kr-reset-margin-padding">{item.shortDescription}</p>
                   )}
                   {item.description && (
                     <p className="kr-variant-detail kr-reset-margin-padding">{item.description}</p>

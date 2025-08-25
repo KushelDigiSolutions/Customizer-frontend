@@ -6,7 +6,7 @@
   border: 1px solid #D3DBDF;
   width: 20rem; /* w-80 */
   height: fit-content; /* h-fit */
-  max-height: 600px; /* max-h-[600px] */
+  max-height: 450px; /* max-h-[600px] */
   overflow-y: auto; /* overflow-y-auto */
 }
 

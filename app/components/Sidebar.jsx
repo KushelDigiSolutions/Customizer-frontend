@@ -120,7 +120,7 @@ const Sidebar = ({
         iconInactive: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1749641805/heart-multiple-outline_rjqkb7.svg",
         enabled: tabSettings.clipart,
         fallbackKey: "clipart"
-      },
+      }
     ];
 
     return allTabs.filter(tab => tab.enabled === true);

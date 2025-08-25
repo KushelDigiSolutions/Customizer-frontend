@@ -86,6 +86,7 @@ const EditTab = ({
           />
         </div>
       </div>
+
       <hr className="kr-edit-divider kr-reset-margin-padding" />
 
       {selectedProduct?.ProductType === "2d" && (
