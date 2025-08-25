@@ -331,7 +331,7 @@ const DynamicClipartTab = ({
                   {category.items.length}
                 </div>
                 <div className="kr-category-info">
-                  <h4 className="kr-reset kr-reset-margin-padding">{category.name}</h4>
+                  <h4 className="kr-reset kr-variant-name kr-reset-margin-padding">{category.name}</h4>
                   <p className="kr-reset kr-reset-margin-padding">
                     {category.items.length} options available
                     {category.type === 'variant' && ' (Variant)'}
@@ -444,9 +444,9 @@ const DynamicClipartTab = ({
                   {item.description && (
                     <p className="kr-variant-detail kr-reset-margin-padding">{item.description}</p>
                   )}
-                  {item.meshName && (
+                  {/* {item.meshName && (
                     <p className="kr-variant-detail kr-reset-margin-padding">Mesh: {item.meshName}</p>
-                  )}
+                  )} */}
                   {item.price && (
                     <p className="kr-variant-price kr-reset-margin-padding">
                       Price: {currencyCode}{Number(item.price).toFixed(2)}
