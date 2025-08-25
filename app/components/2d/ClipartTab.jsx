@@ -184,7 +184,7 @@ const DynamicClipartTab = ({
 
   // Enhanced item selection with proper price tracking
   const handleItemSelect = (item, category) => {
-    console.log(`🎨 Selected item from ${category.key}:`, item.name, 'Price:', item.price);
+    console.log(`🎨 Selected item from ${category.key}:`, item.title, 'Price:', item.price);
 
     if (category.type === 'variant') {
       // Handle variant selection with price tracking
@@ -206,7 +206,7 @@ const DynamicClipartTab = ({
             ...(prev.selectedVariants || {}),
             [category.key]: {
               id: item.id,
-              name: item.name,
+              name: item.name || item.title,
               price: Number(item.price) || 0, // Ensure price is stored as number
               image: item.thumbnail || item.url || null
             }

@@ -415,7 +415,7 @@ const CustomizerLayout = (props) => {
     }));
 
     // Add the layer to canvas
-    handleAddDynamicLayerToCanvas(layerType, item.url);
+    handleAddDynamicLayerToCanvas(layerType, item.url || item.files?.[0]);
   };
 
   // Canvas background color change
