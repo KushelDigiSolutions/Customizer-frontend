@@ -70,6 +70,16 @@
   background-color: #20a04f;
 }
 
+.kr-rotate-btn {
+  background-color: #f3f4f6;
+  color: #111827;
+  border: 1px solid #d1d5db;
+}
+
+.kr-rotate-btn:hover {
+  background-color: #e5e7eb;
+}
+
 .kr-danger-button {
   background-color: #e9dddd;
   color: #d34f4f;

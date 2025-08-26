@@ -226,7 +226,7 @@ const Topbar = ({
 
           {
             selectedProduct?.ProductType === "3d" && (
-              <button onClick={toggleRotation} className="kr-navbar-button">
+              <button onClick={toggleRotation} className="kr-navbar-button kr-rotate-btn">
                   {isRotating ? "Stop Rotation" : "Start Rotation"}
                 </button>
             )
