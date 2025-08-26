@@ -193,7 +193,6 @@ const DynamicClipartTab = ({
           ...prev,
           [category.key]: item.id
         };
-        console.log('🔧 Updated activeVariants:', updated);
         return updated;
       });
 

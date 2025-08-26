@@ -24,7 +24,8 @@ const Topbar = ({
     customizationData,
     activeVariants,
     toggleRotation,
-    isRotating
+    isRotating,
+    toggleExplode, isExploded
   } = use3D();
 
   const {
@@ -141,17 +142,6 @@ const Topbar = ({
     is2D
   ]);
 
-  // Debug logging
-  useEffect(() => {
-    console.log('Topbar state debug:', new Date(), {
-      is3D,
-      showAddToCart,
-      isDesignSaved,
-      selectedProduct: selectedProduct?.ProductType,
-      totalPrice,
-      priceBreakdown
-    });
-  }, [showAddToCart, isDesignSaved, totalPrice]);
 
   // Handle save for both 2d and 3d
   const handleSave = async () => {
@@ -168,10 +158,10 @@ const Topbar = ({
         // Pass screenshots to save logic
         if (onSave) {
           const result = await onSave(screenshots);
-          console.log('3D Save result:', result);
+          // console.log('3D Save result:', result);
           if (result && result.success) {
             console.log('3D Design saved, showing Add to Cart button');
-            console.log('Saved data:', result.savedData);
+            // console.log('Saved data:', result.savedData);
           }
         }
       } else {
@@ -180,7 +170,7 @@ const Topbar = ({
           console.log('2D Save result:', result);
           if (result && result.success) {
             console.log('2D Design saved, showing Add to Cart button');
-            console.log('Saved data:', result.savedData);
+            // console.log('Saved data:', result.savedData);
           }
         }
       }
@@ -226,13 +216,19 @@ const Topbar = ({
 
           {
             selectedProduct?.ProductType === "3d" && (
-              <button onClick={toggleRotation} className="kr-navbar-button kr-rotate-btn">
+              <>
+                <button onClick={toggleExplode} className="kr-navbar-button kr-rotate-btn">
+                  {isExploded ? "Reset Model" : "Explode Model"}
+                </button>
+
+                <button onClick={toggleRotation} className="kr-navbar-button kr-rotate-btn">
                   {isRotating ? "Stop Rotation" : "Start Rotation"}
                 </button>
+              </>
             )
           }
 
-          {selectedProduct?.ProductType === "3d" && (
+          {selectedProduct?.ProductType === "3d" && selectedProduct?.parts?.length > 0 && (
             <button
               className="kr-navbar-button kr-danger-button kr-reset-margin"
               onClick={handleClearSelectedPart}

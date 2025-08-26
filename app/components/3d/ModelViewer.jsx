@@ -208,6 +208,7 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
     setCustomizationData,
     selectedProduct,
     activeVariants,
+    registerModel 
   } = use3D();
 
   const { scene } = useGLTF(modelUrl);
@@ -215,6 +216,7 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
   // Hide loader when model is loaded
   useEffect(() => {
     if (scene && setPageLoading) {
+      registerModel(scene);
       setPageLoading(false);
     }
   }, [scene, setPageLoading]);

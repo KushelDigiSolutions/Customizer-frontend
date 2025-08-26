@@ -1711,10 +1711,6 @@ const CustomizerLayout = (props) => {
     }
   };
 
-  console.log("🔍 Debug threeDselectedPart:", threeDselectedPart);
-  console.log("🔍 Debug activeVariants:", activeVariants);
-  console.log("🔍 Debug prev.parts:", parts);
-
   const getTotalPatternPrice = () => {
     if (!customizationData?.parts) return 0;
     let total = 0;

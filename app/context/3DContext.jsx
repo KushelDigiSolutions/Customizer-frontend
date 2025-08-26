@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
+import * as THREE from "three";
 
 const threeDcontext = createContext();
 
@@ -181,9 +182,73 @@ export const ThreeDProvider = ({ children }) => {
     if (savedDesignData) {
       setIsDesignSaved(true);
       setShowAddToCart(true);
-      setShowScreenshotsModal(true); // Show screenshots modal after save
+      setShowScreenshotsModal(true);
     }
   }, [savedDesignData]);
+
+  const modelRef = useRef(null);
+  const originalPositions = useRef(new Map());
+  const [isExploded, setIsExploded] = useState(false);
+
+  const registerModel = (model) => {
+    modelRef.current = model;
+
+    model.traverse((child) => {
+      if (child.isMesh && !originalPositions.current.has(child.uuid)) {
+        originalPositions.current.set(child.uuid, child.position.clone());
+      }
+    });
+  };
+
+  const directionVectors = {
+    top: new THREE.Vector3(0, 1, 0),
+    bottom: new THREE.Vector3(0, -1, 0),
+    left: new THREE.Vector3(-1, 0, 0),
+    right: new THREE.Vector3(1, 0, 0),
+  };
+
+  const explodeDistance = 0.8;
+
+  function getDirectionForMesh(meshName, selectedProduct) {
+    const explodeConfig = selectedProduct?.explodeConfig;
+    if (!selectedProduct?.variants || !explodeConfig) return null;
+    for (const [dir, categories] of Object.entries(explodeConfig)) {
+      for (const cat of categories) {
+        const variant = selectedProduct.variants.find(v => v.category === cat);
+        if (variant) {
+          if (variant.options.some(opt => meshName.includes(opt.meshName) && opt.meshName)) {
+            return dir;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  const toggleExplode = () => {
+    if (!modelRef.current) return;
+
+    setIsExploded((prev) => {
+      const newState = !prev;
+
+      modelRef.current.traverse((child) => {
+        if (child.isMesh && selectedProduct?.variants) {
+          const dir = getDirectionForMesh(child.name, selectedProduct);
+          if (dir && directionVectors[dir]) {
+            if (newState) {
+              console.log(`Moving mesh ${child.name} to ${dir}`);
+              child.position.add(directionVectors[dir].clone().multiplyScalar(explodeDistance));
+            } else {
+              const original = originalPositions.current.get(child.uuid);
+              if (original) child.position.copy(original);
+            }
+          }
+        }
+      });
+
+      return newState;
+    });
+  };
 
   return (
     <threeDcontext.Provider
@@ -254,7 +319,10 @@ export const ThreeDProvider = ({ children }) => {
         setActiveVariants,
         controlsRef,
         isRotating, setIsRotating,
-        toggleRotation
+        toggleRotation,
+        registerModel,
+        toggleExplode,
+        isExploded,
       }}
     >
       {children}

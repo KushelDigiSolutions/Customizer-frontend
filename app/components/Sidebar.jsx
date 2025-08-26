@@ -306,10 +306,6 @@ const Sidebar = ({
     setTextFontFamily(font);
   }, [editor?.canvas, setTextFontFamily]);
 
-  console.log("Active Tab:", activeTab);
-  console.log("showImageEditModal", showImageEditModal);
-  console.log("Has Uploaded Image:", hasUploadedImage);
-
   // Show message if no tabs are enabled
   if (visibleTabs.length === 0) {
     return (
