@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import gsap from "gsap";
 
 const threeDcontext = createContext();
 
@@ -235,12 +236,29 @@ export const ThreeDProvider = ({ children }) => {
         if (child.isMesh && selectedProduct?.variants) {
           const dir = getDirectionForMesh(child.name, selectedProduct);
           if (dir && directionVectors[dir]) {
+            const targetPos = child.position.clone();
             if (newState) {
-              console.log(`Moving mesh ${child.name} to ${dir}`);
-              child.position.add(directionVectors[dir].clone().multiplyScalar(explodeDistance));
+              // Animate to exploded position
+              const explodeVec = directionVectors[dir].clone().multiplyScalar(explodeDistance);
+              gsap.to(child.position, {
+                x: targetPos.x + explodeVec.x,
+                y: targetPos.y + explodeVec.y,
+                z: targetPos.z + explodeVec.z,
+                duration: 0.7,
+                ease: "power2.out"
+              });
             } else {
+              // Animate back to original position
               const original = originalPositions.current.get(child.uuid);
-              if (original) child.position.copy(original);
+              if (original) {
+                gsap.to(child.position, {
+                  x: original.x,
+                  y: original.y,
+                  z: original.z,
+                  duration: 0.7,
+                  ease: "power2.inOut"
+                });
+              }
             }
           }
         }
@@ -249,6 +267,20 @@ export const ThreeDProvider = ({ children }) => {
       return newState;
     });
   };
+
+  useEffect(() => {
+    if (selectedProduct?.parts && Array.isArray(selectedProduct.parts) && selectedProduct.parts.length > 0) {
+      setthreeDSelectedPart(selectedProduct.parts[0]);
+    }
+    if (selectedProduct?.variants) {
+      const defaults = {};
+      selectedProduct.variants.forEach(group => {
+        const def = group.options.find(o => o.isDefault) || group.options[0];
+        defaults[group.category] = def.id;
+      });
+      setActiveVariants(defaults);
+    }
+  }, [selectedProduct]);
 
   return (
     <threeDcontext.Provider

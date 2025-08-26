@@ -185,6 +185,12 @@ const Topbar = ({
     return `${currencyCode}${Number(price).toFixed(2)}`;
   };
 
+  const hasValidExplodeConfig = (explodeConfig) => {
+    if (!explodeConfig || typeof explodeConfig !== 'object') return false;
+    return Object.values(explodeConfig).some(
+      arr => Array.isArray(arr) && arr.some(cat => cat && cat.trim() !== "")
+    );
+  };
 
   return (
     <div className="kr-topbar kr-reset-margin-padding">
@@ -215,16 +221,19 @@ const Topbar = ({
           </div>
 
           {
-            selectedProduct?.ProductType === "3d" && (
-              <>
-                <button onClick={toggleExplode} className="kr-navbar-button kr-rotate-btn">
-                  {isExploded ? "Reset Model" : "Explode Model"}
-                </button>
+            selectedProduct?.ProductType === "3d" &&
+            hasValidExplodeConfig(selectedProduct?.explodeConfig) && (
+              <button onClick={toggleExplode} className="kr-navbar-button kr-rotate-btn">
+                {isExploded ? "Reset Model" : "Explode Model"}
+              </button>
+            )
+          }
 
-                <button onClick={toggleRotation} className="kr-navbar-button kr-rotate-btn">
-                  {isRotating ? "Stop Rotation" : "Start Rotation"}
-                </button>
-              </>
+          {
+            selectedProduct?.ProductType === "3d" && (
+              <button onClick={toggleRotation} className="kr-navbar-button kr-rotate-btn">
+                {isRotating ? "Stop Rotation" : "Start Rotation"}
+              </button>
             )
           }
 
