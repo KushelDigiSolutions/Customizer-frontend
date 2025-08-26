@@ -65,6 +65,18 @@ export const ThreeDProvider = ({ children }) => {
 
   const screenshotRef = useRef();
 
+  const controlsRef = useRef();          // OrbitControls ref
+  const [isRotating, setIsRotating] = useState(false); // rotation state
+
+  // Toggle rotation
+  const toggleRotation = () => {
+    if (controlsRef.current) {
+      const newState = !isRotating;
+      controlsRef.current.autoRotate = newState;
+      setIsRotating(newState);
+    }
+  };
+
   // Function to check if design has been modified after save
   const checkDesignModification = () => {
     if (!isDesignSaved) return false;
@@ -116,7 +128,7 @@ export const ThreeDProvider = ({ children }) => {
   const handleScreenshot = async () => {
     if (screenshotRef.current) {
       setthreeDLoading(true);
-      
+
 
       try {
         const capturedImages = await screenshotRef.current.captureAll();
@@ -239,7 +251,10 @@ export const ThreeDProvider = ({ children }) => {
         selectedFile, setSelectedFile,
         showScreenshotsModal, setShowScreenshotsModal,
         activeVariants,
-        setActiveVariants
+        setActiveVariants,
+        controlsRef,
+        isRotating, setIsRotating,
+        toggleRotation
       }}
     >
       {children}

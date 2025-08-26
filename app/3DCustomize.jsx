@@ -3,7 +3,7 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment } from '@react-three/drei';
 import ModelViewer from './components/3d/ModelViewer';
-import { Suspense, useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 // import TextureControlsPanel from './components/3d/TextureControlsPanel';
 import { createTextTexture } from './utility/createTextTexture';
 import { use3D } from './context/3DContext';
@@ -29,6 +29,8 @@ export default function ThreeDCustomize({ setPageLoading }) {
     threeDtextFontFamily, // ADD THIS
     threeDtextFontStyle,
     threeDtextFontWeight,
+    controlsRef,
+    isRotating,
     activeVariants,
     setActiveVariants,
   } = use3D();
@@ -117,9 +119,12 @@ export default function ThreeDCustomize({ setPageLoading }) {
 
           <ScreenshotManager ref={screenshotRef} />
           <OrbitControls
+            ref={controlsRef}
             enableZoom={true}
             maxDistance={4}
             enablePan={true}
+            autoRotate={isRotating}     
+            autoRotateSpeed={2}
           />
         </Canvas>
       </div>

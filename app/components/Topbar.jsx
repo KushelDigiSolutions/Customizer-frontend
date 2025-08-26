@@ -22,7 +22,9 @@ const Topbar = ({
     isDesignSaved,
     showAddToCart,
     customizationData,
-    activeVariants
+    activeVariants,
+    toggleRotation,
+    isRotating
   } = use3D();
 
   const {
@@ -222,6 +224,14 @@ const Topbar = ({
             {formatPrice(totalPrice * productQuantity)}
           </div>
 
+          {
+            selectedProduct?.ProductType === "3d" && (
+              <button onClick={toggleRotation} className="kr-navbar-button">
+                  {isRotating ? "Stop Rotation" : "Start Rotation"}
+                </button>
+            )
+          }
+
           {selectedProduct?.ProductType === "3d" && (
             <button
               className="kr-navbar-button kr-danger-button kr-reset-margin"
@@ -275,7 +285,7 @@ const Topbar = ({
             </button>
           )}
 
-          
+
 
           <button
             className="kr-close-button kr-reset-margin kr-close-handle"
