@@ -224,7 +224,7 @@ const Topbar = ({
             selectedProduct?.ProductType === "3d" &&
             hasValidExplodeConfig(selectedProduct?.explodeConfig) && (
               <button onClick={toggleExplode} className="kr-navbar-button kr-rotate-btn">
-                {isExploded ? "Reset Model" : "Explode Model"}
+                {isExploded ? "Reset" : "Explode"}
               </button>
             )
           }

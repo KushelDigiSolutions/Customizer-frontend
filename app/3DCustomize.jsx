@@ -121,7 +121,7 @@ export default function ThreeDCustomize({ setPageLoading }) {
           <OrbitControls
             ref={controlsRef}
             enableZoom={true}
-            maxDistance={4}
+            maxDistance={5}
             enablePan={true}
             autoRotate={isRotating}     
             autoRotateSpeed={2}

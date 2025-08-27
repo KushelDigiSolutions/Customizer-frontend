@@ -286,6 +286,16 @@
     padding: 0.5rem;
   }
 
+  .kr-canvas-container {
+    width: 100vw !important;
+    height: 100vh !important;
+  }
+
+  .canvas-container {
+    width: 100% !important; 
+    height: 100% !important;
+  }
+
   .kr-controls-zoom {
     gap: 0.5rem;
   }
