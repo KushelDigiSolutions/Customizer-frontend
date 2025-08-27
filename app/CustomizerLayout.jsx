@@ -195,7 +195,7 @@ const CustomizerLayout = (props) => {
 
     setLoading(true);
     fetch(
-      `https://customise.shikharjobs.com/api/developer/product?productId=${props.productId}&storeHash=${props.storeHash}`
+      `https://backend.krcustomizer.com/api/developer/product?productId=${props.productId}&storeHash=${props.storeHash}`
     )
       .then(res => res.json())
       .then(data => {
@@ -1502,7 +1502,7 @@ const CustomizerLayout = (props) => {
         try {
           // Save to backend
           const response = await fetch(
-            "https://customise.shikharjobs.com/api/save-product",
+            "https://backend.krcustomizer.com/api/save-product",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -1624,7 +1624,7 @@ const CustomizerLayout = (props) => {
         try {
           // Save to backend
           const response = await fetch(
-            "https://customise.shikharjobs.com/api/save-product",
+            "https://backend.krcustomizer.com/api/save-product",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" },

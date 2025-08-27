@@ -4,7 +4,7 @@ export async function getProductByIdAndStore(productId, storeHash) {
     throw new Error('Both productId and storeHash are required');
   }
   const response = await fetch(
-    `https://customise.shikharjobs.com/api/developer/product?productId=${productId}&storeHash=${storeHash}`,
+    `https://backend.krcustomizer.com/api/developer/product?productId=${productId}&storeHash=${storeHash}`,
     {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
