@@ -218,7 +218,7 @@ const Topbar = ({
           {skeletonLoading ? (
             <>
               <Skeleton width={80} height={32} style={{ marginRight: 8 }} />
-              <Skeleton width={120} height={32} style={{ marginRight: 8 }} />
+              {/* <Skeleton width={120} height={32} style={{ marginRight: 8 }} /> */}
               <Skeleton width={120} height={32} style={{ marginRight: 8 }} />
               <Skeleton width={40} height={40} circle />
             </>
@@ -233,14 +233,14 @@ const Topbar = ({
                 {formatPrice(totalPrice * productQuantity)}
               </div>
 
-              {
+              {/* {
                 selectedProduct?.ProductType === "3d" &&
                 hasValidExplodeConfig(selectedProduct?.explodeConfig) && (
                   <button onClick={toggleExplode} className="kr-navbar-button kr-rotate-btn">
                     {isExploded ? "Reset" : "Explode"}
                   </button>
                 )
-              }
+              } */}
 
               {
                 selectedProduct?.ProductType === "3d" && (
