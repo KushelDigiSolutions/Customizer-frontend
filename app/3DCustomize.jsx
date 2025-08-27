@@ -9,6 +9,8 @@ import { createTextTexture } from './utility/createTextTexture';
 import { use3D } from './context/3DContext';
 import './3DCustomize.css';
 import ScreenshotManager from './components/3d/ScreenshotManage';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 export default function ThreeDCustomize({ setPageLoading }) {
   const {
@@ -33,6 +35,9 @@ export default function ThreeDCustomize({ setPageLoading }) {
     isRotating,
     activeVariants,
     setActiveVariants,
+    threeDloading,
+    setthreeDLoading,
+    skeletonLoading, setSkeletonLoading
   } = use3D();
 
   // const screenshotRef = useRef();
@@ -100,12 +105,29 @@ export default function ThreeDCustomize({ setPageLoading }) {
   const modelUrl = selectedProduct?.modelFile || '/models/brand1.glb';
 
   useEffect(() => {
-    if (setPageLoading) setPageLoading(true);
+    if (setPageLoading) {
+      setPageLoading(true);
+      setSkeletonLoading(true);
+    }
   }, [modelUrl, setPageLoading]);
 
   return (
     <main className="kds-main">
-      <div className="kds-canvas-container">
+      <div className="kds-canvas-container" style={{ position: 'relative' }}>
+        {skeletonLoading && (
+          <div style={{
+            position: 'absolute',
+            zIndex: 10,
+            width: '100%',
+            height: '100%',
+            background: 'rgba(255,255,255,0.7)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <Skeleton width="100%" height="100%" />
+          </div>
+        )}
         <Canvas
           gl={{ preserveDrawingBuffer: true }}
           camera={{ position: [0, 0.5, 2.5], fov: 80 }}

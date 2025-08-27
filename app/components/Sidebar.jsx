@@ -10,6 +10,8 @@ import DynamicClipartTab from "./2d/ClipartTab";
 import RightSideImageUpload from "./2d/RightSideImageComponent";
 import "./Sidebar.css";
 import { use3D } from '@/app/context/3DContext';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const Sidebar = ({
   editor,
@@ -54,7 +56,8 @@ const Sidebar = ({
   handleDynamicLayerChange,
   selectedLayers,
   handleDynamicColorChange,
-  currencyCode
+  currencyCode,
+  setPageLoading
 }) => {
   const [activeTab, setActiveTab] = useState("editor");
   const [showClipartTab, setShowClipartTab] = useState(false);
@@ -65,7 +68,7 @@ const Sidebar = ({
 
   const [hasUploadedImage, setHasUploadedImage] = useState(false);
   const [hasAddedText, setHasAddedText] = useState(false);
-  const { threeDtext } = use3D();
+  const { threeDtext, threeDloading ,skeletonLoading} = use3D(); // <-- Add threeDloading
 
   // Memoize tab settings to prevent recreation on every render
   const tabSettings = useMemo(() => {
@@ -312,6 +315,18 @@ const Sidebar = ({
       <div className="kr-sidebar kr-reset-margin-padding">
         <div className="kr-sidebar-empty kr-reset-margin">
           <p className="kr-reset-margin-padding">No customization options available for this product.</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (skeletonLoading) {
+    return (
+      <div className="kr-sidebar kr-reset-margin-padding">
+        <div style={{ padding: 16 }}>
+          <Skeleton height={40} style={{ marginBottom: 16 }} />
+          <Skeleton count={5} height={32} style={{ marginBottom: 12 }} />
+          <Skeleton height={300} />
         </div>
       </div>
     );

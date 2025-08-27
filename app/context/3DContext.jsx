@@ -30,6 +30,7 @@ export const ThreeDProvider = ({ children }) => {
 
   const [threeDscreenshots, setthreeDScreenshots] = useState([]);
   const [threeDloading, setthreeDLoading] = useState(false);
+  const [skeletonLoading, setSkeletonLoading] = useState(false);
 
   const [threeDtextureMode, setthreeDTextureMode] = useState("full");
   const [threeDlogoScale, setthreeDLogoScale] = useState(0.5);
@@ -355,6 +356,7 @@ export const ThreeDProvider = ({ children }) => {
         registerModel,
         toggleExplode,
         isExploded,
+        skeletonLoading, setSkeletonLoading
       }}
     >
       {children}

@@ -208,7 +208,9 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
     setCustomizationData,
     selectedProduct,
     activeVariants,
-    registerModel 
+    registerModel ,
+    setthreeDloading,
+    setSkeletonLoading
   } = use3D();
 
   const { scene } = useGLTF(modelUrl);
@@ -218,6 +220,7 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
     if (scene && setPageLoading) {
       registerModel(scene);
       setPageLoading(false);
+      setSkeletonLoading(false);
     }
   }, [scene, setPageLoading]);
 

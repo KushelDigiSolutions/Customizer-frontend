@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { use3D } from '../context/3DContext';
 import { use2D } from '../context/2DContext';
 import './Topbar.css';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const Topbar = ({
   setShowSidebar,
@@ -15,6 +17,7 @@ const Topbar = ({
   productQuantity = 1,
   onTotalPriceChange,
   totalPrice,
+  setPageLoading
 }) => {
   const {
     handleScreenshot,
@@ -25,7 +28,8 @@ const Topbar = ({
     activeVariants,
     toggleRotation,
     isRotating,
-    toggleExplode, isExploded
+    toggleExplode, isExploded,
+    skeletonLoading // <-- Add this
   } = use3D();
 
   const {
@@ -195,116 +199,127 @@ const Topbar = ({
   return (
     <div className="kr-topbar kr-reset-margin-padding">
       <div className="kr-topbar-container">
-
         <div className="kr-logo-section kr-reset-margin-padding">
-          <button
-            onClick={() => setShowSidebar(prev => !prev)}
-            className="kr-menu-button kr-reset-margin"
-            aria-label="Toggle Sidebar"
-          >
-            <svg className="kr-menu-icon kr-reset-margin-padding" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+          {skeletonLoading ? (
+            <Skeleton width={40} height={40} circle />
+          ) : (
+            <button
+              onClick={() => setShowSidebar(prev => !prev)}
+              className="kr-menu-button kr-reset-margin"
+              aria-label="Toggle Sidebar"
+            >
+              <svg className="kr-menu-icon kr-reset-margin-padding" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          )}
         </div>
-
-
-        {/* Right Section - Action Buttons */}
         <div className="kr-right-section kr-reset-margin-padding">
-          <div className="kr-total-price kr-reset-margin">
-            {totalPrice > 0 && (
-              <>
-                {productQuantity} <span>x</span>{" "}
-              </>
-            )}
-            {formatPrice(totalPrice * productQuantity)}
-          </div>
+          {skeletonLoading ? (
+            <>
+              <Skeleton width={80} height={32} style={{ marginRight: 8 }} />
+              <Skeleton width={120} height={32} style={{ marginRight: 8 }} />
+              <Skeleton width={120} height={32} style={{ marginRight: 8 }} />
+              <Skeleton width={40} height={40} circle />
+            </>
+          ) : (
+            <>
+              <div className="kr-total-price kr-reset-margin">
+                {totalPrice > 0 && (
+                  <>
+                    {productQuantity} <span>x</span>{" "}
+                  </>
+                )}
+                {formatPrice(totalPrice * productQuantity)}
+              </div>
 
-          {
-            selectedProduct?.ProductType === "3d" &&
-            hasValidExplodeConfig(selectedProduct?.explodeConfig) && (
-              <button onClick={toggleExplode} className="kr-navbar-button kr-rotate-btn">
-                {isExploded ? "Reset" : "Explode"}
-              </button>
-            )
-          }
+              {
+                selectedProduct?.ProductType === "3d" &&
+                hasValidExplodeConfig(selectedProduct?.explodeConfig) && (
+                  <button onClick={toggleExplode} className="kr-navbar-button kr-rotate-btn">
+                    {isExploded ? "Reset" : "Explode"}
+                  </button>
+                )
+              }
 
-          {
-            selectedProduct?.ProductType === "3d" && (
-              <button onClick={toggleRotation} className="kr-navbar-button kr-rotate-btn">
-                {isRotating ? "Stop Rotation" : "Start Rotation"}
-              </button>
-            )
-          }
+              {
+                selectedProduct?.ProductType === "3d" && (
+                  <button onClick={toggleRotation} className="kr-navbar-button kr-rotate-btn">
+                    {isRotating ? "Stop Rotation" : "Start Rotation"}
+                  </button>
+                )
+              }
 
-          {selectedProduct?.ProductType === "3d" && selectedProduct?.parts?.length > 0 && (
-            <button
-              className="kr-navbar-button kr-danger-button kr-reset-margin"
-              onClick={handleClearSelectedPart}
-            >
-              Clear Part
-            </button>
-          )}
-
-          {/* Save & Review / Add to Cart buttons */}
-          {is3D && !isDesignSaved && (
-            <button
-              onClick={handleSave}
-              disabled={isSaving}
-              className="kr-navbar-button kr-success-button kr-reset-margin"
-            >
-              {isSaving ? (
-                <span className="kr-reset">Saving...</span>
-              ) : (
-                <span className="kr-reset">Save & Review</span>
+              {selectedProduct?.ProductType === "3d" && selectedProduct?.parts?.length > 0 && (
+                <button
+                  className="kr-navbar-button kr-danger-button kr-reset-margin"
+                  onClick={handleClearSelectedPart}
+                >
+                  Clear Part
+                </button>
               )}
-            </button>
-          )}
 
-          {is3D && isDesignSaved && showAddToCart && (
-            <button className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin kr-addtocart-custom"
-              title={`Add design to cart - Total: ${formatPrice(totalPrice)}`} data-kr-addtocart-handel>
-              <span className="kr-reset">Add to Cart</span>
-            </button>
-          )}
-
-          {is2D && !isDesignSaved2D && (
-            <button
-              onClick={handleSave}
-              disabled={isSaving}
-              className="kr-navbar-button kr-success-button kr-reset-margin"
-            >
-              {isSaving ? (
-                <span className="kr-reset">Saving...</span>
-              ) : (
-                <span className="kr-reset">Save & Review</span>
+              {/* Save & Review / Add to Cart buttons */}
+              {is3D && !isDesignSaved && (
+                <button
+                  onClick={handleSave}
+                  disabled={isSaving}
+                  className="kr-navbar-button kr-success-button kr-reset-margin"
+                >
+                  {isSaving ? (
+                    <span className="kr-reset">Saving...</span>
+                  ) : (
+                    <span className="kr-reset">Save & Review</span>
+                  )}
+                </button>
               )}
-            </button>
+
+              {is3D && isDesignSaved && showAddToCart && (
+                <button className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin kr-addtocart-custom"
+                  title={`Add design to cart - Total: ${formatPrice(totalPrice)}`} data-kr-addtocart-handel>
+                  <span className="kr-reset">Add to Cart</span>
+                </button>
+              )}
+
+              {is2D && !isDesignSaved2D && (
+                <button
+                  onClick={handleSave}
+                  disabled={isSaving}
+                  className="kr-navbar-button kr-success-button kr-reset-margin"
+                >
+                  {isSaving ? (
+                    <span className="kr-reset">Saving...</span>
+                  ) : (
+                    <span className="kr-reset">Save & Review</span>
+                  )}
+                </button>
+              )}
+
+              {is2D && isDesignSaved2D && showAddToCart2D && (
+                <button
+                  className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin kr-addtocart-custom"
+                  title={`Add design to cart - Total: ${formatPrice(totalPrice)}`} data-kr-addtocart-handel>
+                  <span className="kr-reset">Add to Cart</span>
+                </button>
+              )}
+
+
+
+              <button
+                className="kr-close-button kr-reset-margin kr-close-handle"
+                data-kr-close-handle
+              >
+                <svg
+                  className="kr-close-icon"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </>
           )}
-
-          {is2D && isDesignSaved2D && showAddToCart2D && (
-            <button
-              className="kr-navbar-button kr-addtocart-handel kr-info-button kr-reset-margin kr-addtocart-custom"
-              title={`Add design to cart - Total: ${formatPrice(totalPrice)}`} data-kr-addtocart-handel>
-              <span className="kr-reset">Add to Cart</span>
-            </button>
-          )}
-
-
-
-          <button
-            className="kr-close-button kr-reset-margin kr-close-handle"
-            data-kr-close-handle
-          >
-            <svg
-              className="kr-close-icon"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
         </div>
       </div>
     </div >
