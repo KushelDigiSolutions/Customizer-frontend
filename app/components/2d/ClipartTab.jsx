@@ -333,7 +333,7 @@ const DynamicClipartTab = ({
                   <h4 className="kr-reset kr-variant-name kr-reset-margin-padding">{category.name}</h4>
                   <p className="kr-reset kr-reset-margin-padding">
                     {category.items.length} options available
-                    {category.type === 'variant' && ' (Variant)'}
+                    {/* {category.type === 'variant' && ' (Variant)'} */}
                   </p>
                 </div>
               </div>

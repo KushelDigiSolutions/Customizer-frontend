@@ -912,9 +912,9 @@ const PreviewTab = ({
                                 />
                             </div>
                         </div>
-                        <div className="kr-info">
+                        {/* <div className="kr-info">
                             💡 Image will not overflow outside the product area.
-                        </div>
+                        </div> */}
                     </div>
                     {/* --- END NEW --- */}
                 </>

@@ -381,7 +381,7 @@ const EditTextTab = ({ editor, layerManager }) => {
               <h3 className="kr-edit-text-title kr-reset-margin-padding">
                 Edit text
               </h3>
-              {activeTextObject && (
+              {/* {activeTextObject && (
                 <span className="kr-edit-text-status kr-detected kr-reset-margin-padding">
                   ● Auto-detected ({textObjectsCount} text
                   {textObjectsCount !== 1 ? "s" : ""})
@@ -391,7 +391,7 @@ const EditTextTab = ({ editor, layerManager }) => {
                 <span className="kr-edit-text-status kr-ready kr-reset-margin-padding">
                   ● Ready to create
                 </span>
-              )}
+              )} */}
             </div>
             <div
               className="kr-edit-text-close kr-reset-margin-padding"
@@ -424,11 +424,11 @@ const EditTextTab = ({ editor, layerManager }) => {
                 className="kr-edit-text-input kr-reset-margin"
               />
             )}
-            {!activeTextObject && (
+            {/* {!activeTextObject && (
               <p className="kr-edit-text-hint kr-reset-margin-padding">
                 💡 Type text above to automatically create a text object
               </p>
-            )}
+            )} */}
           </div>
 
           {selectedProduct.ProductType === "2d" && (
@@ -505,82 +505,90 @@ const EditTextTab = ({ editor, layerManager }) => {
 
           <hr className="kr-edit-text-divider kr-reset-margin-padding" />
 
-          <div className="kr-edit-text-3d-section kr-reset-margin">
-            <div className="kr-edit-text-3d-controls kr-reset-margin-padding">
-              <div className="kr-edit-text-3d-control kr-reset-margin-padding">
-                <label className="kr-edit-text-3d-label kr-reset-margin-padding">
-                  3d Text Scale: {threeDtextScale.toFixed(2)}
-                </label>
-                <input
-                  type="range"
-                  min="0.2"
-                  max="2"
-                  step="0.05"
-                  value={threeDtextScale}
-                  onChange={(e) =>
-                    setthreeDTextScale(parseFloat(e.target.value))
-                  }
-                  className="kr-edit-text-3d-range"
-                />
+          {
+            selectedProduct.ProductType === "3d" && (
+              <div className="kr-edit-text-3d-section kr-reset-margin">
+                <div className="kr-edit-text-3d-controls kr-reset-margin-padding">
+                  <div className="kr-edit-text-3d-control kr-reset-margin-padding">
+                    <label className="kr-edit-text-3d-label kr-reset-margin-padding">
+                      3d Text Scale: {threeDtextScale.toFixed(2)}
+                    </label>
+                    <input
+                      type="range"
+                      min="0.2"
+                      max="2"
+                      step="0.05"
+                      value={threeDtextScale}
+                      onChange={(e) =>
+                        setthreeDTextScale(parseFloat(e.target.value))
+                      }
+                      className="kr-edit-text-3d-range"
+                    />
+                  </div>
+                  <div className="kr-edit-text-3d-control kr-reset-margin-padding">
+                    <label className="kr-edit-text-3d-label kr-reset-margin-padding">
+                      3d Text Position X: {threeDtextPosX.toFixed(2)}
+                    </label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.01"
+                      value={threeDtextPosX}
+                      onChange={(e) =>
+                        setthreeDTextPosX(parseFloat(e.target.value))
+                      }
+                      className="kr-edit-text-3d-range"
+                    />
+                  </div>
+                  <div className="kr-edit-text-3d-control kr-reset-margin-padding">
+                    <label className="kr-edit-text-3d-label kr-reset-margin-padding">
+                      3d Text Position Y: {threeDtextPosY.toFixed(2)}
+                    </label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="1"
+                      step="0.01"
+                      value={threeDtextPosY}
+                      onChange={(e) =>
+                        setthreeDTextPosY(parseFloat(e.target.value))
+                      }
+                      className="kr-edit-text-3d-range"
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="kr-edit-text-3d-control kr-reset-margin-padding">
-                <label className="kr-edit-text-3d-label kr-reset-margin-padding">
-                  3d Text Position X: {threeDtextPosX.toFixed(2)}
-                </label>
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.01"
-                  value={threeDtextPosX}
-                  onChange={(e) =>
-                    setthreeDTextPosX(parseFloat(e.target.value))
-                  }
-                  className="kr-edit-text-3d-range"
-                />
-              </div>
-              <div className="kr-edit-text-3d-control kr-reset-margin-padding">
-                <label className="kr-edit-text-3d-label kr-reset-margin-padding">
-                  3d Text Position Y: {threeDtextPosY.toFixed(2)}
-                </label>
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.01"
-                  value={threeDtextPosY}
-                  onChange={(e) =>
-                    setthreeDTextPosY(parseFloat(e.target.value))
-                  }
-                  className="kr-edit-text-3d-range"
-                />
-              </div>
-            </div>
-          </div>
+            )
+          }
 
-          <div className="kr-edit-text-3d-color-section kr-reset-margin">
-            <div className="kr-edit-text-3d-color-controls kr-reset-margin-padding">
-              <label className="kr-edit-text-3d-color-label kr-reset-margin-padding">
-                Text Color:
-              </label>
-              <input
-                type="color"
-                value={threeDtextColor}
-                onChange={(e) => setthreeDTextColor(e.target.value)}
-                className="kr-edit-text-3d-color-input kr-reset-margin-padding"
-              />
+          {
+            selectedProduct.ProductType === "3d" && (
+              <div className="kr-edit-text-3d-color-section kr-reset-margin">
+                <div className="kr-edit-text-3d-color-controls kr-reset-margin-padding">
+                  <label className="kr-edit-text-3d-color-label kr-reset-margin-padding">
+                    Text Color:
+                  </label>
+                  <input
+                    type="color"
+                    value={threeDtextColor}
+                    onChange={(e) => setthreeDTextColor(e.target.value)}
+                    className="kr-edit-text-3d-color-input kr-reset-margin-padding"
+                  />
 
-              <label className="kr-edit-text-3d-color-label kr-reset-margin-padding">
-                Outline Color:
-              </label>
-              <input
-                type="color"
-                value={threeDoutlineColor}
-                onChange={(e) => setthreeDOutlineColor(e.target.value)}
-                className="kr-edit-text-3d-color-input kr-reset-margin-padding"
-              />
-            </div>
-          </div>
+                  <label className="kr-edit-text-3d-color-label kr-reset-margin-padding">
+                    Outline Color:
+                  </label>
+                  <input
+                    type="color"
+                    value={threeDoutlineColor}
+                    onChange={(e) => setthreeDOutlineColor(e.target.value)}
+                    className="kr-edit-text-3d-color-input kr-reset-margin-padding"
+                  />
+                </div>
+              </div>
+            )
+          }
 
           {selectedProduct.ProductType === "2d" && (
             <>
@@ -591,7 +599,7 @@ const EditTextTab = ({ editor, layerManager }) => {
                 <input
                   type="range"
                   min={23}
-                  max={40}
+                  max={80}
                   value={textSize}
                   onChange={handleSizeChange}
                   className="kr-edit-text-slider kr-reset-margin-padding"
@@ -610,7 +618,7 @@ const EditTextTab = ({ editor, layerManager }) => {
                 />
               </div>
 
-              <hr className="kr-edit-text-divider kr-reset-margin-padding" />
+              {/* <hr className="kr-edit-text-divider kr-reset-margin-padding" />
 
               <div className="kr-edit-text-arrange kr-reset-margin">
                 <h3 className="kr-edit-text-arrange-title kr-reset-margin-padding">
@@ -646,7 +654,7 @@ const EditTextTab = ({ editor, layerManager }) => {
                     title="Send to Back"
                   />
                 </div>
-              </div>
+              </div> */}
             </>
           )}
         </div>

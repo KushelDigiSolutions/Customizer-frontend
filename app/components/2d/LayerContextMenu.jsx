@@ -96,7 +96,7 @@ const LayerContextMenu = ({
                     Delete
                 </div>
 
-                <div 
+                {/* <div 
                     className="kds-layer-menu-item"
                     onClick={() => handleAction('lock')}
                 >
@@ -115,7 +115,7 @@ const LayerContextMenu = ({
                             Lock
                         </>
                     )}
-                </div>
+                </div> */}
 
                 <hr className="kds-layer-divider" />
 
@@ -135,7 +135,7 @@ const LayerContextMenu = ({
                     Flip Vertical
                 </div>
 
-                <hr className="kds-layer-divider" />
+                {/* <hr className="kds-layer-divider" />
 
                 <div 
                     className="kds-layer-menu-item"
@@ -167,7 +167,7 @@ const LayerContextMenu = ({
                 >
                     <img className="kds-layer-icon" src="https://res.cloudinary.com/dd9tagtiw/image/upload/v1749508121/arrange-send-to-back_bcyzlu.png" alt="" />
                     Send to back
-                </div>
+                </div> */}
             </div>
         </>
     );
