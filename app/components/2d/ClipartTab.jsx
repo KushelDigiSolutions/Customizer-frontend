@@ -425,12 +425,16 @@ const DynamicClipartTab = ({
                   }`}
               >
                 <div className="kr-variant-thumbnail kr-reset-margin-padding">
-                  {(item.files?.[0] || item.url || item.thumbnail) && (
+                  {(item.previewFile && item.previewFile !== "") || item.files?.[0] || item.url || item.thumbnail ? (
                     <img
-                      src={item.files?.[0] || item.url || item.thumbnail}
+                      src={
+                        item.previewFile && item.previewFile !== ""
+                          ? item.previewFile
+                          : item.files?.[0] || item.url || item.thumbnail
+                      }
                       alt={item.title || item.name}
                     />
-                  )}
+                  ) : null}
                 </div>
                 <div className="kr-variant-info kr-reset-margin-padding">
                   <h4 className="kr-variant-name kr-reset-margin-padding">{item.title || item.name}</h4>
