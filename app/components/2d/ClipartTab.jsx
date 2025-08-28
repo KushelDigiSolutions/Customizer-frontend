@@ -20,9 +20,9 @@ const DynamicClipartTab = ({
   const [availableCategories, setAvailableCategories] = useState([]);
   const [selectedVariantGroup, setSelectedVariantGroup] = useState(null);
 
-  useEffect(() => {
-    console.log("🛠 selectedProduct:", selectedProduct);
-  }, [selectedProduct]);
+  // useEffect(() => {
+  //   console.log("🛠 selectedProduct:", selectedProduct);
+  // }, [selectedProduct]);
 
   const is3DProduct = selectedProduct?.ProductType === '3d';
 
@@ -54,7 +54,7 @@ const DynamicClipartTab = ({
       return;
     }
 
-    console.log(`🎨 Applying 3D Design: ${designUrl} with price: ${price}`);
+    // console.log(`🎨 Applying 3D Design: ${designUrl} with price: ${price}`);
 
     const image = new window.Image();
     image.crossOrigin = "anonymous";
@@ -74,7 +74,7 @@ const DynamicClipartTab = ({
 
       // Update customization data with proper price tracking
       setCustomizationData(prev => {
-        console.log('💰 Updating customizationData with design price:', price);
+        // console.log('💰 Updating customizationData with design price:', price);
         return {
           ...prev,
           parts: {
@@ -91,7 +91,7 @@ const DynamicClipartTab = ({
         };
       });
 
-      console.log('✅ 3D Design applied with price tracking');
+      // console.log('✅ 3D Design applied with price tracking');
     };
   };
 
@@ -131,7 +131,7 @@ const DynamicClipartTab = ({
     }
 
     setAvailableCategories(categories);
-    console.log('📦 Available categories from product:', categories.map(c => c.name));
+    // console.log('📦 Available categories from product:', categories.map(c => c.name));
   }, [selectedProduct]);
 
   // Convert category keys to display names
@@ -184,7 +184,7 @@ const DynamicClipartTab = ({
 
   // Enhanced item selection with proper price tracking
   const handleItemSelect = (item, category) => {
-    console.log(`🎨 Selected item from ${category.key}:`, item.title, 'Price:', item.price);
+    // console.log(`🎨 Selected item from ${category.key}:`, item.title, 'Price:', item.price);
 
     if (category.type === 'variant') {
       // Handle variant selection with price tracking
@@ -198,7 +198,7 @@ const DynamicClipartTab = ({
 
       // Update customizationData with selected variant info including price
       setCustomizationData(prev => {
-        console.log('💰 Updating variant price:', category.key, '→', item.price);
+        // console.log('💰 Updating variant price:', category.key, '→', item.price);
         return {
           ...prev,
           selectedVariants: {
@@ -216,7 +216,7 @@ const DynamicClipartTab = ({
       if (item.meshName) {
         setthreeDselectedPart(item.meshName);
       }
-      console.log('✅ Updated variant with price tracking:', category.key, '→', item.id, 'Price:', item.price);
+      // console.log('✅ Updated variant with price tracking:', category.key, '→', item.id, 'Price:', item.price);
     } else {
       // Handle layer design selection
       switch (category.key) {
@@ -224,7 +224,7 @@ const DynamicClipartTab = ({
           handleAddDesignToCanvas(item.files?.[0] || item.url, item.position, item.offsetX, item.offsetY);
           // If design has a price, we might want to track it too
           if (item.price) {
-            console.log('💰 Design applied with price:', item.price);
+            // console.log('💰 Design applied with price:', item.price);
           }
           break;
 
@@ -232,7 +232,7 @@ const DynamicClipartTab = ({
           handleAddPatternToCanvas(item.files?.[0] || item.url);
           // If pattern has a price, we might want to track it too
           if (item.price) {
-            console.log('💰 Pattern applied with price:', item.price);
+            // console.log('💰 Pattern applied with price:', item.price);
           }
           break;
 
@@ -243,7 +243,7 @@ const DynamicClipartTab = ({
         case 'lace':
           handleDynamicLayerChange && handleDynamicLayerChange(category.key, item);
           if (item.price) {
-            console.log('💰 Layer applied with price:', item.price);
+            // console.log('💰 Layer applied with price:', item.price);
           }
           break;
 
@@ -252,10 +252,10 @@ const DynamicClipartTab = ({
           if (handleDynamicLayerChange) {
             handleDynamicLayerChange(category.key, item);
           } else {
-            console.log(`No handler for category: ${category.key}`);
+            // console.log(`No handler for category: ${category.key}`);
           }
           if (item.price) {
-            console.log('💰 Custom layer applied with price:', item.price);
+            // console.log('💰 Custom layer applied with price:', item.price);
           }
           break;
       }

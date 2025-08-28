@@ -184,8 +184,8 @@ const CustomizerLayout = (props) => {
     threeDtextFontStyle,
   ]);
 
-  console.log("productId", props.productId);
-  console.log("storeHash", props.storeHash);
+  // console.log("productId", props.productId);
+  // console.log("storeHash", props.storeHash);
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -491,9 +491,9 @@ const CustomizerLayout = (props) => {
           layerManager.arrangeCanvasLayers();
         }
 
-        console.log(`✅ ${layerType} layer added - Dynamic layer system`);
+        // console.log(`✅ ${layerType} layer added - Dynamic layer system`);
       };
-      console.log("🎨 Image element created:", imgElement);
+      // console.log("🎨 Image element created:", imgElement);
     });
   };
 
@@ -501,7 +501,7 @@ const CustomizerLayout = (props) => {
   const loadDefaultLayers = () => {
     if (!selectedProduct?.defaultLayers || !editor?.canvas) return;
 
-    console.log("🔧 Loading default layers for product:", selectedProduct.id);
+    // console.log("🔧 Loading default layers for product:", selectedProduct.id);
 
     const defaultLayers = selectedProduct.defaultLayers;
     const initialLayers = {};
@@ -524,7 +524,7 @@ const CustomizerLayout = (props) => {
     });
 
     setSelectedLayers(initialLayers);
-    console.log("✅ Default layers loaded:", Object.keys(initialLayers));
+    // console.log("✅ Default layers loaded:", Object.keys(initialLayers));
   };
 
   // NEW: Add bottom gradient function - FIXED
@@ -633,9 +633,9 @@ const CustomizerLayout = (props) => {
           layerManager.arrangeCanvasLayers();
         }
 
-        console.log(
-          "✅ Bottom gradient added - Only covers bottom 50% with fade effect, top 50% remains transparent"
-        );
+        // console.log(
+        //   "✅ Bottom gradient added - Only covers bottom 50% with fade effect, top 50% remains transparent"
+        // );
       };
     });
   };
@@ -697,7 +697,7 @@ const CustomizerLayout = (props) => {
           layerManager.arrangeCanvasLayers();
         }
 
-        console.log("✅ Top gradient added (zIndex: 2) - Top color applied");
+        // console.log("✅ Top gradient added (zIndex: 2) - Top color applied");
       };
     });
   };
@@ -705,7 +705,7 @@ const CustomizerLayout = (props) => {
   const handleAddCustomText = () => {
     if (!editor || !customText.trim()) return;
 
-    console.log("🔤 Adding custom text:", customText);
+    // console.log("🔤 Adding custom text:", customText);
 
     import("fabric").then((fabric) => {
       const canvas = editor.canvas;
@@ -726,11 +726,14 @@ const CustomizerLayout = (props) => {
       }
 
       const imageBounds = imageObj.getBoundingRect();
-      const topRatio = selectedProduct?.textTopRatio || 3.5;
+
+      // Center position
+      const centerLeft = imageBounds.left + imageBounds.width / 2;
+      const centerTop = imageBounds.top + imageBounds.height / 2;
 
       const textObject = new fabric.IText(customText.slice(0, 9), {
-        left: imageBounds.left + imageBounds.width * 0.25,
-        top: imageBounds.top + imageBounds.height / topRatio,
+        left: centerLeft,
+        top: centerTop,
         originX: "center",
         originY: "center",
         fontSize: textSize,
@@ -739,9 +742,9 @@ const CustomizerLayout = (props) => {
         fontStyle: fontStyle,
         selectable: true,
         evented: true,
-        moveCursor: "move",
         hasControls: true,
         hasBorders: true,
+        // Make moveable and resizable
         lockMovementX: false,
         lockMovementY: false,
         lockScalingX: false,
@@ -750,7 +753,7 @@ const CustomizerLayout = (props) => {
         editable: true,
       });
 
-      console.log("✅ Text object created:", textObject);
+      // console.log("✅ Text object created:", textObject);
 
       canvas.add(textObject);
 
@@ -760,7 +763,11 @@ const CustomizerLayout = (props) => {
         layerManager.arrangeCanvasLayers();
       }
 
-      console.log("✅ Text added with proper layer (zIndex: 5) - Non-moveable");
+      // Optionally set as active object so user sees controls immediately
+      canvas.setActiveObject(textObject);
+      canvas.renderAll();
+
+      // console.log("✅ Text added with proper layer");
 
       setCustomText("");
       setShowAddModal(false);
@@ -875,9 +882,9 @@ const CustomizerLayout = (props) => {
         layerManager.arrangeCanvasLayers();
       }
 
-      console.log(
-        "✅ Emoji added with proper layer (zIndex: 5) - Non-moveable"
-      );
+      // console.log(
+      //   "✅ Emoji added with proper layer (zIndex: 5) - Non-moveable"
+      // );
     });
   };
 
@@ -1011,9 +1018,9 @@ const CustomizerLayout = (props) => {
           layerManager.arrangeCanvasLayers();
         }
 
-        console.log(
-          "✅ Design image added to IMAGE layer (z-index: 2) - Non-moveable"
-        );
+        // console.log(
+        //   "✅ Design image added to IMAGE layer (z-index: 2) - Non-moveable"
+        // );
       };
 
       imgElement.onerror = () => {
@@ -1081,9 +1088,9 @@ const CustomizerLayout = (props) => {
           layerManager.arrangeCanvasLayers();
         }
 
-        console.log(
-          "✅ Pattern added with perfect merge dimensions (zIndex: 3) - Non-moveable"
-        );
+        // console.log(
+        //   "✅ Pattern added with perfect merge dimensions (zIndex: 3) - Non-moveable"
+        // );
       };
     });
   };
@@ -1140,9 +1147,9 @@ const CustomizerLayout = (props) => {
             layerManager.arrangeCanvasLayers();
           }
 
-          console.log(
-            "✅ Icon added with proper layer (zIndex: 4) - Non-moveable"
-          );
+          // console.log(
+          //   "✅ Icon added with proper layer (zIndex: 4) - Non-moveable"
+          // );
 
           URL.revokeObjectURL(svgUrl);
         });
@@ -1155,7 +1162,7 @@ const CustomizerLayout = (props) => {
   const applySelectedDesign = (designData) => {
     if (!designData || !editor?.canvas) return;
 
-    console.log("🎨 Applying user-selected design:", designData.name);
+    // console.log("🎨 Applying user-selected design:", designData.name);
 
     handleAddDesignToCanvas(
       designData.url,
@@ -1169,9 +1176,9 @@ const CustomizerLayout = (props) => {
   useEffect(() => {
     if (!selectedProduct || !editor?.canvas) return;
 
-    console.log(
-      `🆕 Initializing canvas for product ${selectedProduct.id} (${selectedProduct.type})`
-    );
+    // console.log(
+    //   `🆕 Initializing canvas for product ${selectedProduct.id} (${selectedProduct.type})`
+    // );
 
     const initializeCanvas = () => {
       import("fabric").then(({ Image }) => {
@@ -1225,9 +1232,9 @@ const CustomizerLayout = (props) => {
 
             fabricImg.setCoords();
             editor.canvas.renderAll();
-            console.log(
-              `✅ Product loaded with dimensions: ${targetWidth}x${targetHeight}`
-            );
+            // console.log(
+            //   `✅ Product loaded with dimensions: ${targetWidth}x${targetHeight}`
+            // );
           };
 
           img.onerror = () => {
@@ -1273,9 +1280,9 @@ const CustomizerLayout = (props) => {
               layerManager.arrangeCanvasLayers();
             }
 
-            console.log(
-              `✅ Invisible base created for layered product: ${targetWidth}x${targetHeight}`
-            );
+            // console.log(
+            //   `✅ Invisible base created for layered product: ${targetWidth}x${targetHeight}`
+            // );
 
             // Load default layers after base is created
             setTimeout(() => {
@@ -1290,48 +1297,50 @@ const CustomizerLayout = (props) => {
     return () => clearTimeout(timeoutId);
   }, [selectedProduct?.id, editor, layerManager]);
 
-  // Setup canvas event handlers - No selection allowed
+  // Setup canvas event handlers - Allow text move/resize/select, block only base image
   useEffect(() => {
     if (!editor || !editor.canvas) return;
 
     const canvas = editor.canvas;
 
-    // Disable selection completely
-    canvas.selection = false;
-    canvas.hoverCursor = "default";
+    // Allow selection
+    canvas.selection = true;
+    canvas.hoverCursor = "move";
     canvas.defaultCursor = "default";
 
+    // Only block movement for base image
     const handleObjectMoving = (e) => {
-      // Product should stay in center
       if (e.target.isTshirtBase) {
         e.target.set({
           left: canvas.getWidth() / 2,
           top: canvas.getHeight() / 2,
         });
         e.target.setCoords();
-        return;
+        return false;
       }
-
-      // Prevent any object from moving
-      e.preventDefault();
-      return false;
+      // Allow movement for other objects
+      return true;
     };
 
+    // Only block modifications for base image
     const handleObjectModified = (e) => {
-      // Prevent any modifications
-      e.preventDefault();
-      return false;
+      if (e.target.isTshirtBase) {
+        e.preventDefault();
+        return false;
+      }
+      return true;
     };
 
+    // Allow selection for all except base image
     const handleSelectionCreated = (e) => {
-      // Prevent any selections
-      canvas.discardActiveObject();
-      canvas.renderAll();
+      if (e.selected && e.selected.length === 1 && e.selected[0].isTshirtBase) {
+        canvas.discardActiveObject();
+        canvas.renderAll();
+      }
     };
 
-    // Prevent canvas click from affecting layers
+    // Maintain layer order after any interaction
     const handleCanvasClick = (e) => {
-      // Maintain layer order after any interaction
       if (layerManager) {
         setTimeout(() => {
           layerManager.arrangeCanvasLayers();
@@ -1677,7 +1686,7 @@ const CustomizerLayout = (props) => {
 
           // Even if API fails, store in localStorage with local ID
           const localId = `local_${Date.now()}`;
-          console.log("2D API failed, using local ID:", localId);
+          // console.log("2D API failed, using local ID:", localId);
           savedData = {
             krDesignId: localId, // Use local ID when API fails
             krImageURL: [cloudinaryResponse.url], // Store as array for consistency
