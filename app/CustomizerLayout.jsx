@@ -360,126 +360,6 @@ const CustomizerLayout = (props) => {
     }
   }, [editor?.canvas, selectedProduct?.layers]);
 
-
-  const createCompositeFromDefaultLayers = async (defaultLayers, width, height) => {
-    const layerUrls = Object.values(defaultLayers); // mid, mid1, sleeves etc.
-    const tempCanvas = document.createElement('canvas');
-    const tempCtx = tempCanvas.getContext('2d');
-
-    tempCanvas.width = width;
-    tempCanvas.height = height;
-
-    for (let url of layerUrls) {
-      if (!url) continue;
-
-      await new Promise((resolve) => {
-        const img = new window.Image();
-        img.crossOrigin = "Anonymous";
-        img.onload = () => {
-          tempCtx.drawImage(img, 0, 0, width, height);
-          resolve();
-        };
-        img.src = url;
-      });
-    }
-
-    return tempCanvas;
-  };
-
-  const createTshirtMask = async (defaultLayers, width, height, callback) => {
-    const tempCanvas = await createCompositeFromDefaultLayers(defaultLayers, width, height);
-    const tempCtx = tempCanvas.getContext('2d');
-
-    const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
-    const data = imageData.data;
-
-    let minX = tempCanvas.width, minY = tempCanvas.height;
-    let maxX = 0, maxY = 0;
-
-    for (let y = 0; y < tempCanvas.height; y++) {
-      for (let x = 0; x < tempCanvas.width; x++) {
-        const alpha = data[(y * tempCanvas.width + x) * 4 + 3];
-        if (alpha > 0) {
-          minX = Math.min(minX, x);
-          minY = Math.min(minY, y);
-          maxX = Math.max(maxX, x);
-          maxY = Math.max(maxY, y);
-        }
-      }
-    }
-
-    const maskCanvas = document.createElement('canvas');
-    const maskCtx = maskCanvas.getContext('2d');
-    maskCanvas.width = tempCanvas.width;
-    maskCanvas.height = tempCanvas.height;
-
-    maskCtx.fillStyle = 'white';
-    for (let y = 0; y < tempCanvas.height; y++) {
-      for (let x = 0; x < tempCanvas.width; x++) {
-        const alpha = data[(y * tempCanvas.width + x) * 4 + 3];
-        if (alpha > 0) {
-          maskCtx.fillRect(x, y, 1, 1);
-        }
-      }
-    }
-
-    callback(maskCanvas.toDataURL(), {
-      minX, minY, maxX, maxY,
-      width: maxX - minX,
-      height: maxY - minY
-    });
-  };
-
-  const applyClippingToObject = (obj, productConfig) => {
-    if (!obj || !productConfig?.defaultLayers) return;
-
-    import("fabric").then(({ Image }) => {
-      createTshirtMask(
-        productConfig.defaultLayers,
-        productConfig.width,
-        productConfig.height,
-        (maskDataUrl, bounds) => {
-          const maskImg = new window.Image();
-          maskImg.onload = () => {
-            // Find the t-shirt base object
-            const canvas = editor?.canvas;
-            const baseObj = canvas?.getObjects().find(o => o.isTshirtBase);
-            if (!baseObj) return;
-
-            // Get base object's absolute position and scale
-            const baseRect = baseObj.getBoundingRect();
-            const scaleX = baseRect.width / maskImg.width;
-            const scaleY = baseRect.height / maskImg.height;
-
-            const maskFabricImg = new Image(maskImg, {
-              left: baseRect.left,
-              top: baseRect.top,
-              originX: 'left',
-              originY: 'top',
-              scaleX,
-              scaleY,
-              absolutePositioned: true 
-            });
-
-            obj.clipPath = maskFabricImg;
-            obj.dirty = true;
-            editor.canvas.requestRenderAll();
-          };
-          maskImg.src = maskDataUrl;
-        }
-      );
-    });
-  };
-
-  // Step 4: Update clipping
-  const updateClippingForObject = (obj, productConfig) => {
-    const canvas = editor?.canvas;
-    if (!canvas || !obj || obj.isTshirtBase) return;
-
-    applyClippingToObject(obj, productConfig);
-  };
-
-
   // Helper function to get current product data with customizations
   const getCurrentProductData = () => {
     if (!selectedProduct) return null;
@@ -881,10 +761,6 @@ const CustomizerLayout = (props) => {
       if (layerManager) {
         layerManager.setObjectLayer(textObject);
         layerManager.arrangeCanvasLayers();
-      }
-
-      if (selectedProduct?.defaultLayers) {
-        updateClippingForObject(textObject, selectedProduct);
       }
 
       // Optionally set as active object so user sees controls immediately
@@ -1421,55 +1297,6 @@ const CustomizerLayout = (props) => {
     return () => clearTimeout(timeoutId);
   }, [selectedProduct?.id, editor, layerManager]);
 
-  useEffect(() => {
-    if (!editor || !editor.canvas || !selectedProduct?.defaultLayers) return;
-
-    const canvas = editor.canvas;
-
-    // Handler to re-apply mask when text moves/scales/rotates
-    const handleTextChange = (e) => {
-      const obj = e.target;
-      if (obj && obj.type === "i-text") {
-        updateClippingForObject(obj, selectedProduct);
-      }
-    };
-
-    canvas.on("object:moving", handleTextChange);
-    canvas.on("object:scaling", handleTextChange);
-    canvas.on("object:rotating", handleTextChange);
-
-    return () => {
-      canvas.off("object:moving", handleTextChange);
-      canvas.off("object:scaling", handleTextChange);
-      canvas.off("object:rotating", handleTextChange);
-    };
-  }, [editor, selectedProduct]);
-
-  useEffect(() => {
-    if (!editor || !editor.canvas || !layerManager) return;
-
-    const canvas = editor.canvas;
-
-    // Always arrange layers after any selection or mouse interaction
-    const arrangeLayers = () => {
-      layerManager.arrangeCanvasLayers();
-    };
-
-    canvas.on("selection:created", arrangeLayers);
-    canvas.on("selection:updated", arrangeLayers);
-    canvas.on("selection:cleared", arrangeLayers);
-    canvas.on("mouse:down", arrangeLayers);
-    canvas.on("object:added", arrangeLayers);
-
-    return () => {
-      canvas.off("selection:created", arrangeLayers);
-      canvas.off("selection:updated", arrangeLayers);
-      canvas.off("selection:cleared", arrangeLayers);
-      canvas.off("mouse:down", arrangeLayers);
-      canvas.off("object:added", arrangeLayers);
-    };
-  }, [editor, layerManager]);
-
   // Setup canvas event handlers - Allow text move/resize/select, block only base image
   useEffect(() => {
     if (!editor || !editor.canvas) return;
@@ -1503,8 +1330,6 @@ const CustomizerLayout = (props) => {
       }
       return true;
     };
-
-
 
     // Allow selection for all except base image
     const handleSelectionCreated = (e) => {
@@ -1988,7 +1813,7 @@ const CustomizerLayout = (props) => {
         />
       )}
 
-      {selectedProduct?.ProductType === "3d" && <ThreeDCustomize setPageLoading={setPageLoading} />}
+      {selectedProduct?.ProductType === "3d" && <ThreeDCustomize setPageLoading={setPageLoading}/>}
 
       {selectedProduct?.ProductType === "3d" && threeDloading && (
         <div className="kr-loading-overlay kr-reset-margin-padding">
