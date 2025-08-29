@@ -49,7 +49,7 @@ const TextureUploader = () => {
     reader.onload = () => {
       setPreviewUrl(reader.result);
       setIsUploading(false);
-      
+
       // Get image dimensions
       const img = new Image();
       img.onload = () => {
@@ -98,7 +98,7 @@ const TextureUploader = () => {
         const scaledSize = size * threeDzoom;
         const offsetXPx = size * threeDoffsetX;
         const offsetYPx = size * threeDoffsetY;
-        
+
         ctx.drawImage(image, offsetXPx, offsetYPx, scaledSize, scaledSize);
       } else if (threeDtextureMode === "logo") {
         const logoSize = size * threeDlogoScale;
@@ -111,24 +111,47 @@ const TextureUploader = () => {
       finalTexture.needsUpdate = true;
       setthreeDTexture(finalTexture);
 
+      // setCustomizationData((prev) => ({
+      //   ...prev,
+      //   parts: {
+      //     ...prev.parts,
+      //     [threeDselectedPart]: {
+      //       ...prev.parts[threeDselectedPart],
+      //       image: {
+      //         mode: threeDtextureMode,
+      //         url: previewUrl,
+      //         position: { x: threeDlogoPosX, y: threeDlogoPosY },
+      //         scale: threeDlogoScale,
+      //         zoom: threeDzoom,
+      //         offsetX: threeDoffsetX,
+      //         offsetY: threeDoffsetY,
+      //       },
+      //     },
+      //   },
+      // }));
       setCustomizationData((prev) => ({
         ...prev,
         parts: {
-          ...prev.parts,
-          [threeDselectedPart]: {
-            ...prev.parts[threeDselectedPart],
-            image: {
-              mode: threeDtextureMode,
-              url: previewUrl,
-              position: { x: threeDlogoPosX, y: threeDlogoPosY },
-              scale: threeDlogoScale,
-              zoom: threeDzoom,
-              offsetX: threeDoffsetX,
-              offsetY: threeDoffsetY,
-            },
-          },
+          ...(prev.parts || {}), // ensure parts object exists
+          ...(threeDselectedPart
+            ? {
+              [threeDselectedPart]: {
+                ...(prev.parts?.[threeDselectedPart] || {}), // ensure object exists
+                image: {
+                  mode: threeDtextureMode,
+                  url: previewUrl,
+                  position: { x: threeDlogoPosX, y: threeDlogoPosY },
+                  scale: threeDlogoScale,
+                  zoom: threeDzoom,
+                  offsetX: threeDoffsetX,
+                  offsetY: threeDoffsetY,
+                },
+              },
+            }
+            : {}), // if no part selected, don’t write
         },
       }));
+
     };
   }, [
     previewUrl,
@@ -183,11 +206,10 @@ const TextureUploader = () => {
           <button
             onClick={handleUploadDesign}
             disabled={!selectedFile || isUploading}
-            className={`kr-texture-submit-btn ${
-              selectedFile && !isUploading
+            className={`kr-texture-submit-btn ${selectedFile && !isUploading
                 ? "kr-texture-submit-btn-enabled"
                 : "kr-texture-submit-btn-disabled"
-            }`}
+              }`}
           >
             {isUploading ? "Uploading..." : "Upload"}
           </button>
@@ -246,7 +268,7 @@ const TextureUploader = () => {
         {threeDtextureMode === "logo" && (
           <div className="kr-texture-logo-controls">
             {/* <h3 className='kr-preview-section-title kr-reset-margin-padding'>Logo Controls</h3> */}
-            
+
             <div className="kr-texture-control-group">
               <label className="kr-texture-logo-label">Logo Scale: {threeDlogoScale.toFixed(2)}</label>
               <div className='kr-preview-control-input-group kr-reset-margin-padding'>
@@ -320,7 +342,7 @@ const TextureUploader = () => {
         {threeDtextureMode === "full" && (
           <div className="kr-texture-controls-panel">
             {/* <h3 className='kr-preview-section-title kr-reset-margin-padding'>Full Texture Controls</h3> */}
-            
+
             <div className="kr-texture-control-group">
               <label className="kr-texture-control-label">
                 Zoom (Repeat): {threeDzoom.toFixed(2)}

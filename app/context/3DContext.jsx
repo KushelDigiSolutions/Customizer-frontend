@@ -180,6 +180,24 @@ export const ThreeDProvider = ({ children }) => {
     setSelectedFile(null);
   };
 
+  const handleClearAll = () => {
+    setCustomizationData({
+      parts: {},       
+      baseColors: {},  
+    });
+
+    setthreeDColor("#ffffff");     
+    setthreeDTexture(null);
+    setthreeDText("");
+    setthreeDTextTexture(null);
+    setthreeDTextColor("#000000");
+    setthreeDOutlineColor("#ffffff");
+    setPreviewUrl(null);
+    setSelectedFile(null);
+    setthreeDSelectedPart(null);    
+  };
+
+
   React.useEffect(() => {
     if (savedDesignData) {
       setIsDesignSaved(true);
@@ -356,7 +374,8 @@ export const ThreeDProvider = ({ children }) => {
         registerModel,
         toggleExplode,
         isExploded,
-        skeletonLoading, setSkeletonLoading
+        skeletonLoading, setSkeletonLoading,
+        handleClearAll
       }}
     >
       {children}

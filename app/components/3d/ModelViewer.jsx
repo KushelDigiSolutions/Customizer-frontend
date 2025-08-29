@@ -39,7 +39,7 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
     setCustomizationData,
     selectedProduct,
     activeVariants,
-    registerModel ,
+    registerModel,
     setthreeDloading,
     setSkeletonLoading
   } = use3D();
@@ -96,70 +96,164 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
   // }, [threeDcolor, selectedPart, setCustomizationData]);
 
   // --- Your existing material / texture logic (kept intact) ---
+  // useEffect(() => {
+  //   scene.traverse((child) => {
+  //     if (child.isMesh && child.name === threeDselectedPart) {
+  //       child.material.color.set(threeDcolor || '#ffffff');
+  //       child.material.needsUpdate = true;
+  //     }
+  //   });
+  // }, [threeDcolor, threeDselectedPart, scene]);
+
   useEffect(() => {
+    if (!scene) return;
+
     scene.traverse((child) => {
-      if (child.isMesh && child.name === threeDselectedPart) {
-        child.material.color.set(threeDcolor || '#ffffff');
-        child.material.needsUpdate = true;
+      if (child.isMesh) {
+        if (!threeDselectedPart || child.name === threeDselectedPart) {
+          // If no part selected → apply to ALL meshes
+          child.material.color.set(threeDcolor || '#ffffff');
+          child.material.needsUpdate = true;
+        }
       }
     });
   }, [threeDcolor, threeDselectedPart, scene]);
 
+  // useEffect(() => {
+  //   scene.traverse((child) => {
+  //     if (child.isMesh && child.name === threeDselectedPart) {
+  //       const originalColor = child.material.color;
+  //       const currentColorHex = `#${originalColor.getHexString()}`;
+
+  //       if (threeDcolor && threeDcolor !== '#ffffff') {
+  //         child.material.color.set(threeDcolor);
+  //       } else {
+  //         child.material.color.set(currentColorHex);
+  //       }
+
+  //       if (threeDtexture || threeDtextTexture) {
+  //         const canvas = document.createElement('canvas');
+  //         canvas.width = canvas.height = 1024;
+  //         const ctx = canvas.getContext('2d');
+
+  //         ctx.fillStyle = threeDcolor && threeDcolor !== '#ffffff' ? threeDcolor : currentColorHex;
+  //         ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  //         if (threeDtexture?.image) {
+  //           const repeat = threeDzoom || 1;
+  //           const offsetXPx = (threeDoffsetX || 0) * canvas.width;
+  //           const offsetYPx = (threeDoffsetY || 0) * canvas.height;
+  //           const drawWidth = canvas.width / repeat;
+  //           const drawHeight = canvas.height / repeat;
+
+  //           ctx.save();
+  //           ctx.translate(offsetXPx, offsetYPx);
+  //           for (let x = 0; x < canvas.width; x += drawWidth) {
+  //             for (let y = 0; y < canvas.height; y += drawHeight) {
+  //               ctx.drawImage(threeDtexture.image, x, y, drawWidth, drawHeight);
+  //             }
+  //           }
+  //           ctx.restore();
+  //         }
+
+  //         if (threeDtextTexture?.image) {
+  //           ctx.drawImage(threeDtextTexture.image, 0, 0, canvas.width, canvas.height);
+  //         }
+
+  //         const combinedTexture = new THREE.CanvasTexture(canvas);
+  //         combinedTexture.needsUpdate = true;
+  //         combinedTexture.wrapS = combinedTexture.wrapT = THREE.RepeatWrapping;
+  //         combinedTexture.repeat.set(1, 1);
+  //         combinedTexture.offset.set(0, 0);
+  //         combinedTexture.center.set(0.5, 0.5);
+
+  //         child.material.map = combinedTexture;
+  //         child.material.transparent = false;
+  //         child.material.needsUpdate = true;
+  //       } else {
+  //         child.material.map = null;
+  //         child.material.transparent = false;
+  //         child.material.needsUpdate = true;
+  //       }
+  //     }
+  //   });
+  // }, [
+  //   threeDcolor,
+  //   threeDtexture,
+  //   threeDtextTexture,
+  //   threeDselectedPart,
+  //   threeDzoom,
+  //   threeDoffsetX,
+  //   threeDoffsetY,
+  //   threeDtextScale,
+  //   threeDtextPosX,
+  //   threeDtextPosY,
+  //   scene
+  // ]);
+
   useEffect(() => {
+    if (!scene) return;
+
     scene.traverse((child) => {
-      if (child.isMesh && child.name === threeDselectedPart) {
-        const originalColor = child.material.color;
-        const currentColorHex = `#${originalColor.getHexString()}`;
+      if (child.isMesh) {
+        if (!threeDselectedPart || child.name === threeDselectedPart) {
+          // Build a canvas to merge color + texture + text
+          const originalColor = child.material.color;
+          const currentColorHex = `#${originalColor.getHexString()}`;
 
-        if (threeDcolor && threeDcolor !== '#ffffff') {
-          child.material.color.set(threeDcolor);
-        } else {
-          child.material.color.set(currentColorHex);
-        }
+          if (threeDcolor && threeDcolor !== '#ffffff') {
+            child.material.color.set(threeDcolor);
+          } else {
+            child.material.color.set(currentColorHex);
+          }
 
-        if (threeDtexture || threeDtextTexture) {
-          const canvas = document.createElement('canvas');
-          canvas.width = canvas.height = 1024;
-          const ctx = canvas.getContext('2d');
+          if (threeDtexture || threeDtextTexture) {
+            const canvas = document.createElement('canvas');
+            canvas.width = canvas.height = 1024;
+            const ctx = canvas.getContext('2d');
 
-          ctx.fillStyle = threeDcolor && threeDcolor !== '#ffffff' ? threeDcolor : currentColorHex;
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // background fill
+            ctx.fillStyle = threeDcolor && threeDcolor !== '#ffffff' ? threeDcolor : currentColorHex;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-          if (threeDtexture?.image) {
-            const repeat = threeDzoom || 1;
-            const offsetXPx = (threeDoffsetX || 0) * canvas.width;
-            const offsetYPx = (threeDoffsetY || 0) * canvas.height;
-            const drawWidth = canvas.width / repeat;
-            const drawHeight = canvas.height / repeat;
+            // texture
+            if (threeDtexture?.image) {
+              const repeat = threeDzoom || 1;
+              const offsetXPx = (threeDoffsetX || 0) * canvas.width;
+              const offsetYPx = (threeDoffsetY || 0) * canvas.height;
+              const drawWidth = canvas.width / repeat;
+              const drawHeight = canvas.height / repeat;
 
-            ctx.save();
-            ctx.translate(offsetXPx, offsetYPx);
-            for (let x = 0; x < canvas.width; x += drawWidth) {
-              for (let y = 0; y < canvas.height; y += drawHeight) {
-                ctx.drawImage(threeDtexture.image, x, y, drawWidth, drawHeight);
+              ctx.save();
+              ctx.translate(offsetXPx, offsetYPx);
+              for (let x = 0; x < canvas.width; x += drawWidth) {
+                for (let y = 0; y < canvas.height; y += drawHeight) {
+                  ctx.drawImage(threeDtexture.image, x, y, drawWidth, drawHeight);
+                }
               }
+              ctx.restore();
             }
-            ctx.restore();
+
+            // text overlay
+            if (threeDtextTexture?.image) {
+              ctx.drawImage(threeDtextTexture.image, 0, 0, canvas.width, canvas.height);
+            }
+
+            const combinedTexture = new THREE.CanvasTexture(canvas);
+            combinedTexture.needsUpdate = true;
+            combinedTexture.wrapS = combinedTexture.wrapT = THREE.RepeatWrapping;
+            combinedTexture.repeat.set(1, 1);
+            combinedTexture.offset.set(0, 0);
+            combinedTexture.center.set(0.5, 0.5);
+
+            child.material.map = combinedTexture;
+            child.material.transparent = false;
+            child.material.needsUpdate = true;
+          } else {
+            child.material.map = null;
+            child.material.transparent = false;
+            child.material.needsUpdate = true;
           }
-
-          if (threeDtextTexture?.image) {
-            ctx.drawImage(threeDtextTexture.image, 0, 0, canvas.width, canvas.height);
-          }
-
-          const combinedTexture = new THREE.CanvasTexture(canvas);
-          combinedTexture.needsUpdate = true;
-          combinedTexture.wrapS = combinedTexture.wrapT = THREE.RepeatWrapping;
-          combinedTexture.repeat.set(1, 1);
-          combinedTexture.offset.set(0, 0);
-          combinedTexture.center.set(0.5, 0.5);
-
-          child.material.map = combinedTexture;
-          child.material.transparent = false;
-          child.material.needsUpdate = true;
-        } else {
-          child.material.map = null;
-          child.material.transparent = false;
-          child.material.needsUpdate = true;
         }
       }
     });

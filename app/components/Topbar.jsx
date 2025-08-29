@@ -30,6 +30,7 @@ const Topbar = ({
     isRotating,
     toggleExplode, isExploded,
     skeletonLoading // <-- Add this
+    ,handleClearAll 
   } = use3D();
 
   const {
@@ -256,6 +257,15 @@ const Topbar = ({
                   onClick={handleClearSelectedPart}
                 >
                   Clear Part
+                </button>
+              )}
+
+              {selectedProduct?.ProductType === "3d" && (
+                <button
+                  className="kr-navbar-button kr-danger-button kr-reset-margin"
+                  onClick={handleClearAll}
+                >
+                  Clear All
                 </button>
               )}
 
