@@ -264,7 +264,7 @@ const Topbar = ({
                 <button
                   onClick={handleSave}
                   disabled={isSaving}
-                  className="kr-navbar-button kr-success-button kr-reset-margin"
+                  className="kr-navbar-button kr-success-button kr-reset-margin kr-savebtn-handel"
                 >
                   {isSaving ? (
                     <span className="kr-reset">Saving...</span>
@@ -285,7 +285,7 @@ const Topbar = ({
                 <button
                   onClick={handleSave}
                   disabled={isSaving}
-                  className="kr-navbar-button kr-success-button kr-reset-margin"
+                  className="kr-navbar-button kr-success-button kr-reset-margin kr-savebtn-handel"
                 >
                   {isSaving ? (
                     <span className="kr-reset">Saving...</span>

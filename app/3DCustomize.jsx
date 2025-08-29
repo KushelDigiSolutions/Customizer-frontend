@@ -130,6 +130,7 @@ export default function ThreeDCustomize({ setPageLoading }) {
         )}
         <Canvas
           gl={{ preserveDrawingBuffer: true }}
+          shadows
           camera={{ position: [0, 0.5, 2.5], fov: 80 }}
         >
           <ambientLight intensity={1} />
@@ -145,37 +146,11 @@ export default function ThreeDCustomize({ setPageLoading }) {
             enableZoom={true}
             maxDistance={5}
             enablePan={true}
-            autoRotate={isRotating}     
+            autoRotate={isRotating}
             autoRotateSpeed={2}
           />
         </Canvas>
       </div>
-
-      {/* <div className="kds-controls-container">
-        {selectedProduct?.variants?.map(group => (
-          <div key={group.id} className="kds-variant-group">
-            <h3 className="kds-variant-title">{group.name}</h3>
-            <div className="kds-variant-options">
-              {group.options.map(opt => (
-                <button
-                  key={opt.id}
-                  className={
-                    activeVariants?.[group.category] === opt.id
-                      ? 'kds-variant-btn kds-active'
-                      : 'kds-variant-btn'
-                  }
-                  onClick={() =>
-                    setActiveVariants(prev => ({ ...prev, [group.category]: opt.id }))
-                  }
-                >
-                  {opt.name}
-                </button>
-              ))}
-            </div>
-          </div>
-        ))}
-
-      </div> */}
     </main>
   );
 }
