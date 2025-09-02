@@ -7,9 +7,9 @@ import gsap from "gsap";
 const threeDcontext = createContext();
 
 export const ThreeDProvider = ({ children }) => {
-  // State to control screenshots modal
+
   const [showScreenshotsModal, setShowScreenshotsModal] = useState(false);
-  const [threeDcolor, setthreeDColor] = useState("#ffffff");
+  const [threeDcolor, setthreeDColor] = useState(null);
   const [threeDtexture, setthreeDTexture] = useState(null);
   const [threeDselectedPart, setthreeDSelectedPart] = useState('');
 
@@ -46,14 +46,12 @@ export const ThreeDProvider = ({ children }) => {
   const [previewUrl, setPreviewUrl] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
 
-  // New state for add to cart functionality
   const [showAddToCart, setShowAddToCart] = useState(false);
   const [isDesignSaved, setIsDesignSaved] = useState(false);
   const [savedDesignData, setSavedDesignData] = useState(null);
 
   const [activeVariants, setActiveVariants] = useState({});
 
-  // Initialize from selectedProduct defaults whenever product changes
   useEffect(() => {
     if (selectedProduct?.variants) {
       const defaults = {};
@@ -68,10 +66,10 @@ export const ThreeDProvider = ({ children }) => {
 
   const screenshotRef = useRef();
 
-  const controlsRef = useRef();          // OrbitControls ref
-  const [isRotating, setIsRotating] = useState(false); // rotation state
+  const controlsRef = useRef();
+  const [isRotating, setIsRotating] = useState(false);
+  const originalColors = useRef({});
 
-  // Toggle rotation
   const toggleRotation = () => {
     if (controlsRef.current) {
       const newState = !isRotating;
@@ -80,18 +78,15 @@ export const ThreeDProvider = ({ children }) => {
     }
   };
 
-  // Function to check if design has been modified after save
   const checkDesignModification = () => {
     if (!isDesignSaved) return false;
 
-    // Compare current customization data with saved data
     const currentData = JSON.stringify(customizationData);
     const savedData = JSON.stringify(savedDesignData?.customizationData);
 
     return currentData !== savedData;
   };
 
-  // Function to handle design modifications
   const handleDesignModification = () => {
     if (isDesignSaved && checkDesignModification()) {
       setIsDesignSaved(false);
@@ -99,8 +94,6 @@ export const ThreeDProvider = ({ children }) => {
     }
   };
 
-  // Watch for changes in customization data
-  // Temporarily disabled to fix Add to Cart button issue
   React.useEffect(() => {
     handleDesignModification();
   }, [
@@ -156,30 +149,6 @@ export const ThreeDProvider = ({ children }) => {
     return [];
   };
 
-  const handleClearSelectedPart = () => {
-    setCustomizationData((prev) => {
-      const newParts = { ...prev.parts };
-      delete newParts[threeDselectedPart];
-      return {
-        ...prev,
-        parts: newParts,
-      };
-    });
-
-    // Get base color for selected part from customizationData
-    const baseColor =
-      customizationData?.baseColors?.[threeDselectedPart] || "#ffffff";
-    setthreeDColor(baseColor);
-
-    setthreeDTexture(null);
-    setthreeDText("");
-    setthreeDTextTexture(null);
-    setthreeDTextColor("#000000");
-    setthreeDOutlineColor("#ffffff");
-    setPreviewUrl(null);
-    setSelectedFile(null);
-  };
-
   React.useEffect(() => {
     if (savedDesignData) {
       setIsDesignSaved(true);
@@ -196,11 +165,60 @@ export const ThreeDProvider = ({ children }) => {
     modelRef.current = model;
 
     model.traverse((child) => {
-      if (child.isMesh && !originalPositions.current.has(child.uuid)) {
-        originalPositions.current.set(child.uuid, child.position.clone());
+      if (child.isMesh) {
+        if (!originalPositions.current.has(child.uuid)) {
+          originalPositions.current.set(child.uuid, child.position.clone());
+        }
       }
     });
+
+    const colors = {};
+    model.traverse((child) => {
+      if (child.isMesh) {
+        colors[child.name] = {
+          color: child.material.color.clone(),
+          map: child.material.map || null,
+        };
+      }
+    });
+    originalColors.current = colors;
   };
+
+
+  const handleClearSelectedPart = () => {
+    setCustomizationData((prev) => {
+      const newParts = { ...prev.parts };
+      delete newParts[threeDselectedPart];
+      return {
+        ...prev,
+        parts: newParts,
+      };
+    });
+
+    if (modelRef.current && threeDselectedPart) {
+      modelRef.current.traverse((child) => {
+        if (child.isMesh && child.name === threeDselectedPart) {
+          const original = originalColors.current[child.name];
+          if (original) {
+            child.material.color.copy(original.color);
+            child.material.map = original.map;
+            child.material.needsUpdate = true;
+          }
+        }
+      });
+    }
+
+    setthreeDColor(null);
+    setthreeDTexture(null);
+    setthreeDText("");
+    setthreeDTextTexture(null);
+    setthreeDTextColor("#000000");
+    setthreeDOutlineColor("#ffffff");
+    setPreviewUrl(null);
+    setSelectedFile(null);
+  };
+
+
 
   const directionVectors = {
     top: new THREE.Vector3(0, 1, 0),
@@ -239,7 +257,6 @@ export const ThreeDProvider = ({ children }) => {
           if (dir && directionVectors[dir]) {
             const targetPos = child.position.clone();
             if (newState) {
-              // Animate to exploded position
               const explodeVec = directionVectors[dir].clone().multiplyScalar(explodeDistance);
               gsap.to(child.position, {
                 x: targetPos.x + explodeVec.x,
@@ -249,7 +266,6 @@ export const ThreeDProvider = ({ children }) => {
                 ease: "power2.out"
               });
             } else {
-              // Animate back to original position
               const original = originalPositions.current.get(child.uuid);
               if (original) {
                 gsap.to(child.position, {
@@ -337,7 +353,6 @@ export const ThreeDProvider = ({ children }) => {
         threeDtextFontStyle,
         setthreeDTextFontStyle,
         setthreeDTextFontFamily,
-        // New state for add to cart functionality
         showAddToCart,
         setShowAddToCart,
         isDesignSaved,
@@ -356,7 +371,8 @@ export const ThreeDProvider = ({ children }) => {
         registerModel,
         toggleExplode,
         isExploded,
-        skeletonLoading, setSkeletonLoading
+        skeletonLoading, setSkeletonLoading,
+        originalColors
       }}
     >
       {children}

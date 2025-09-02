@@ -5,19 +5,15 @@ import { useEffect, useLayoutEffect } from 'react';
 import * as THREE from 'three';
 import { use3D } from '../../context/3DContext';
 
-// Helper to hide/show meshes in a group
 function setGroupVisibility(scene, group, meshNameToShow) {
-  // Hide ALL meshes in this group
   const names = group.options.map(o => o.meshName).filter(name => name !== undefined);
   names.forEach(name => {
-    // Hide all meshes, including those with empty meshName
     if (name !== "") {
       const obj = scene.getObjectByName(name);
       if (obj) obj.visible = false;
     }
   });
 
-  // Show only the selected mesh (unless meshNameToShow is empty string)
   if (meshNameToShow && meshNameToShow !== "") {
     const obj = scene.getObjectByName(meshNameToShow);
     if (obj) obj.visible = true;
@@ -39,14 +35,14 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
     setCustomizationData,
     selectedProduct,
     activeVariants,
-    registerModel ,
+    registerModel,
     setthreeDloading,
-    setSkeletonLoading
+    setSkeletonLoading,
+    originalColors
   } = use3D();
 
   const { scene } = useGLTF(modelUrl);
 
-  // Hide loader when model is loaded
   useEffect(() => {
     if (scene && setPageLoading) {
       registerModel(scene);
@@ -55,18 +51,17 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
     }
   }, [scene, setPageLoading]);
 
-  // 1) On load → apply default visibility per group
+
   useLayoutEffect(() => {
     if (!scene || !selectedProduct?.variants) return;
 
     selectedProduct.variants.forEach(group => {
       const def = group.options.find(o => o.isDefault) || group.options[0];
-      const showName = def?.meshName ?? ""; // empty = hide whole group
+      const showName = def?.meshName ?? "";
       setGroupVisibility(scene, group, showName);
     });
   }, [scene, selectedProduct]);
 
-  // 2) When user changes a variant → update only that group's visibility
   useLayoutEffect(() => {
     if (!scene || !selectedProduct?.variants || !activeVariants) return;
 
@@ -77,33 +72,34 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
         group.options.find(o => o.isDefault) ||
         group.options[0];
 
-      const showName = selected?.meshName ?? ""; // empty = "No X"
+      const showName = selected?.meshName ?? "";
       setGroupVisibility(scene, group, showName);
     });
   }, [activeVariants, scene, selectedProduct]);
 
-  // useEffect(() => {
-  //   setCustomizationData(prev => ({
-  //     ...prev,
-  //     parts: {
-  //       ...prev.parts,
-  //       [selectedPart]: {
-  //         ...prev.parts?.[selectedPart],
-  //         color: threeDcolor
-  //       }
-  //     }
-  //   }));
-  // }, [threeDcolor, selectedPart, setCustomizationData]);
-
-  // --- Your existing material / texture logic (kept intact) ---
   useEffect(() => {
+    if (!scene) return;
+
     scene.traverse((child) => {
       if (child.isMesh && child.name === threeDselectedPart) {
-        child.material.color.set(threeDcolor || '#ffffff');
+        if (threeDcolor) {
+          child.material.color.set(threeDcolor);
+          child.material.map = null; 
+        } else {
+
+          const original = originalColors.current[child.name];
+          if (original) {
+            child.material.color.copy(original.color);
+            child.material.map = original.map || null;
+          }
+        }
+
         child.material.needsUpdate = true;
       }
     });
-  }, [threeDcolor, threeDselectedPart, scene]);
+  }, [threeDcolor, threeDselectedPart, scene, originalColors]);
+
+
 
   useEffect(() => {
     scene.traverse((child) => {
@@ -111,18 +107,32 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
         const originalColor = child.material.color;
         const currentColorHex = `#${originalColor.getHexString()}`;
 
-        if (threeDcolor && threeDcolor !== '#ffffff') {
+        if (threeDcolor) {
           child.material.color.set(threeDcolor);
         } else {
-          child.material.color.set(currentColorHex);
+          const original = originalColors.current[child.name];
+          if (original) {
+            child.material.color.copy(original.color);
+            child.material.map = original.map;
+          }
         }
+
+
 
         if (threeDtexture || threeDtextTexture) {
           const canvas = document.createElement('canvas');
           canvas.width = canvas.height = 1024;
           const ctx = canvas.getContext('2d');
 
-          ctx.fillStyle = threeDcolor && threeDcolor !== '#ffffff' ? threeDcolor : currentColorHex;
+          const baseColor = threeDcolor
+            ? threeDcolor
+            : (originalColors.current[child.name]
+              ? `#${originalColors.current[child.name].color.getHexString()}`
+              : currentColorHex);
+
+          ctx.fillStyle = baseColor;
+
+
           ctx.fillRect(0, 0, canvas.width, canvas.height);
 
           if (threeDtexture?.image) {
@@ -182,7 +192,6 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
 
     scene.traverse((child) => {
       if (child.isMesh && child.name === threeDselectedPart) {
-        // Update customizationData only for changed part
         setCustomizationData(prev => ({
           ...prev,
           parts: {
