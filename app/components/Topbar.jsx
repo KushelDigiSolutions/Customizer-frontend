@@ -12,8 +12,8 @@ const Topbar = ({
   onSave,
   isSaving,
   selectedProduct,
-  productPrice, // Base product price from props
-  currencyCode = '$', // Currency symbol
+  productPrice, 
+  currencyCode = '$', 
   productQuantity = 1,
   onTotalPriceChange,
   totalPrice,
@@ -151,21 +151,16 @@ const Topbar = ({
   const handleSave = async () => {
     try {
       if (selectedProduct?.ProductType === "3d") {
-        // Wait for screenshots to finish
         const screenshots = await handleScreenshot();
 
         if (!screenshots || screenshots.length === 0) {
           alert("Screenshots not ready yet. Please try again.");
           return;
         }
-
-        // Pass screenshots to save logic
         if (onSave) {
           const result = await onSave(screenshots);
-          // console.log('3D Save result:', result);
           if (result && result.success) {
             console.log('3D Design saved, showing Add to Cart button');
-            // console.log('Saved data:', result.savedData);
           }
         }
       } else {
@@ -174,7 +169,6 @@ const Topbar = ({
           console.log('2D Save result:', result);
           if (result && result.success) {
             console.log('2D Design saved, showing Add to Cart button');
-            // console.log('Saved data:', result.savedData);
           }
         }
       }

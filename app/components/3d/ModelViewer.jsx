@@ -5,6 +5,7 @@ import { useEffect, useLayoutEffect } from 'react';
 import * as THREE from 'three';
 import { use3D } from '../../context/3DContext';
 
+// Sets visibility for a group of meshes in the scene based on the selected mesh name.
 function setGroupVisibility(scene, group, meshNameToShow) {
   const names = group.options.map(o => o.meshName).filter(name => name !== undefined);
   names.forEach(name => {
@@ -20,6 +21,7 @@ function setGroupVisibility(scene, group, meshNameToShow) {
   }
 }
 
+// Renders and manages the 3D product model, applying color, texture, and text customizations.
 const ModelViewer = ({ modelUrl, setPageLoading }) => {
   const {
     threeDcolor,
@@ -43,6 +45,7 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
 
   const { scene } = useGLTF(modelUrl);
 
+  // Registers the loaded model and disables loading states.
   useEffect(() => {
     if (scene && setPageLoading) {
       registerModel(scene);
@@ -51,7 +54,7 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
     }
   }, [scene, setPageLoading]);
 
-
+  // Sets default mesh visibility for each variant group on initial load.
   useLayoutEffect(() => {
     if (!scene || !selectedProduct?.variants) return;
 
@@ -62,6 +65,7 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
     });
   }, [scene, selectedProduct]);
 
+  // Updates mesh visibility based on activeVariants selection.
   useLayoutEffect(() => {
     if (!scene || !selectedProduct?.variants || !activeVariants) return;
 
@@ -77,6 +81,7 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
     });
   }, [activeVariants, scene, selectedProduct]);
 
+  // Applies color or restores original color/map to the selected mesh part.
   useEffect(() => {
     if (!scene) return;
 
@@ -86,21 +91,18 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
           child.material.color.set(threeDcolor);
           child.material.map = null; 
         } else {
-
           const original = originalColors.current[child.name];
           if (original) {
             child.material.color.copy(original.color);
             child.material.map = original.map || null;
           }
         }
-
         child.material.needsUpdate = true;
       }
     });
   }, [threeDcolor, threeDselectedPart, scene, originalColors]);
 
-
-
+  // Applies color, texture, and text texture to the selected mesh part.
   useEffect(() => {
     scene.traverse((child) => {
       if (child.isMesh && child.name === threeDselectedPart) {
@@ -117,8 +119,6 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
           }
         }
 
-
-
         if (threeDtexture || threeDtextTexture) {
           const canvas = document.createElement('canvas');
           canvas.width = canvas.height = 1024;
@@ -131,8 +131,6 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
               : currentColorHex);
 
           ctx.fillStyle = baseColor;
-
-
           ctx.fillRect(0, 0, canvas.width, canvas.height);
 
           if (threeDtexture?.image) {
@@ -187,6 +185,7 @@ const ModelViewer = ({ modelUrl, setPageLoading }) => {
     scene
   ]);
 
+  // Updates customizationData state when the selected part's color changes.
   useEffect(() => {
     if (!threeDselectedPart || !threeDcolor) return;
 

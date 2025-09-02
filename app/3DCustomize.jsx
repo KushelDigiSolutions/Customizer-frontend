@@ -28,7 +28,7 @@ export default function ThreeDCustomize({ setPageLoading }) {
     setCustomizationData,
     screenshotRef,
     selectedProduct,
-    threeDtextFontFamily, // ADD THIS
+    threeDtextFontFamily, 
     threeDtextFontStyle,
     threeDtextFontWeight,
     controlsRef,
@@ -42,15 +42,6 @@ export default function ThreeDCustomize({ setPageLoading }) {
 
   // const screenshotRef = useRef();
 
-  // Reset text position to center when text changes or part changes
-  const handleTextChange = (newText) => {
-    setthreeDText(newText);
-    if (newText.trim() && !threeDtext.trim()) {
-      setthreeDTextPosX(0.5);
-      setthreeDTextPosY(0.5);
-    }
-  };
-
   useEffect(() => {
     if (threeDtext.trim()) {
       const texture = createTextTexture({
@@ -63,7 +54,7 @@ export default function ThreeDCustomize({ setPageLoading }) {
         textPosY: threeDtextPosY,
         fontWeight: threeDtextFontWeight,
         fontStyle: threeDtextFontStyle,
-        fontFamily: threeDtextFontFamily || 'Arial', // PASS FONT FAMILY
+        fontFamily: threeDtextFontFamily || 'Arial',
       });
       setthreeDTextTexture(texture);
 
@@ -79,8 +70,8 @@ export default function ThreeDCustomize({ setPageLoading }) {
               outline: threeDoutlineColor,
               scale: threeDtextScale,
               position: { x: threeDtextPosX, y: threeDtextPosY },
-              fontFamily: threeDtextFontFamily || 'Arial', // SAVE FONT FAMILY
-              fontWeight: threeDtextFontWeight,    // <-- Save fontWeight
+              fontFamily: threeDtextFontFamily || 'Arial', 
+              fontWeight: threeDtextFontWeight,    
               fontStyle: threeDtextFontStyle,
             },
           },

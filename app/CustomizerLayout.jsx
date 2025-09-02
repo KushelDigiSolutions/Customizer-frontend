@@ -203,11 +203,6 @@ const CustomizerLayout = (props) => {
       if (obj.isTshirtBase && this.layerOrder.PRODUCT !== undefined) {
         zIndex = this.layerOrder.PRODUCT;
       } else if (
-        obj.isRightSideImage &&
-        this.layerOrder.RIGHT_SIDE_IMAGE !== undefined
-      ) {
-        zIndex = this.layerOrder.RIGHT_SIDE_IMAGE;
-      } else if (
         (obj.layerType === "image" || obj.name === "design-image") &&
         this.layerOrder.IMAGE !== undefined
       ) {
@@ -215,29 +210,12 @@ const CustomizerLayout = (props) => {
       }
       else if (obj.type === "i-text" && this.layerOrder.TEXT !== undefined) {
         zIndex = this.layerOrder.TEXT;
-      } else if (
-        obj.type === "image" &&
-        obj.isTopGradient &&
-        this.layerOrder.TOP_GRADIENT !== undefined
-      ) {
-        zIndex = this.layerOrder.TOP_GRADIENT;
-      } else if (
+      }  else if (
         obj.type === "image" &&
         obj.isPattern &&
         this.layerOrder.PATTERN !== undefined
       ) {
         zIndex = this.layerOrder.PATTERN;
-      } else if (
-        obj.type === "image" &&
-        obj.isBottomGradient &&
-        this.layerOrder.BOTTOM_GRADIENT !== undefined
-      ) {
-        zIndex = this.layerOrder.BOTTOM_GRADIENT;
-      } else if (
-        (obj.isBottomGradientFade || obj.isBottomGradientTopTransparent) &&
-        this.layerOrder.BOTTOM_GRADIENT !== undefined
-      ) {
-        zIndex = this.layerOrder.BOTTOM_GRADIENT + 0.1;
       } else if (
         obj.type === "image" &&
         obj.layerType &&
@@ -437,22 +415,9 @@ const CustomizerLayout = (props) => {
 
   const handleColorChange = (colorObj) => {
     setSelectedColor(colorObj);
-    updateCanvasColor(colorObj.color);
   };
 
-  // NEW: Handle top gradient color - FIXED
-  const handleTopColorChange = (colorObj) => {
-    setSelectedTopColor(colorObj);
-    handleAddTopGradientToCanvas(colorObj.url);
-  };
-
-  // NEW: Handle bottom gradient color - FIXED
-  const handleBottomColorChange = (colorObj) => {
-    setSelectedBottomColor(colorObj);
-    handleAddBottomGradientToCanvas(colorObj.url);
-  };
-
-  // NEW: Handle dynamic layer changes for shoes
+  // NEW: Handle dynamic layer changes for any product
   const handleDynamicLayerChange = (layerType, item) => {
     // console.log(`🔄 Changing layer: ${layerType} to ${item.name}`);
 
@@ -466,24 +431,7 @@ const CustomizerLayout = (props) => {
     handleAddDynamicLayerToCanvas(layerType, item.url || item.files?.[0]);
   };
 
-  // Canvas background color change
-  const updateCanvasColor = (color) => {
-    if (!editor?.canvas) {
-      console.error("❌ Canvas not available for color change");
-      return;
-    }
-
-    // console.log("🎨 Changing canvas background color to:", color);
-
-    const canvas = editor.canvas;
-
-    canvas.setBackgroundColor(color, () => {
-      canvas.renderAll();
-      // console.log("✅ Canvas background color changed to:", color);
-    });
-  };
-
-  // NEW: Add dynamic layer function for shoes
+  // NEW: Add dynamic layer function for any product
   const handleAddDynamicLayerToCanvas = (layerType, url) => {
     if (!editor?.canvas || !url) return;
 
@@ -575,181 +523,6 @@ const CustomizerLayout = (props) => {
     // console.log("✅ Default layers loaded:", Object.keys(initialLayers));
   };
 
-  // NEW: Add bottom gradient function - FIXED
-  const handleAddBottomGradientToCanvas = (url) => {
-    if (!editor?.canvas || !url) return;
-
-    const canvas = editor.canvas;
-
-    import("fabric").then((fabric) => {
-      const imgElement = new Image();
-      imgElement.crossOrigin = "anonymous";
-      imgElement.src = url;
-
-      imgElement.onload = () => {
-        const productImage = canvas
-          .getObjects()
-          .find((obj) => obj.isTshirtBase);
-        if (!productImage) return;
-
-        const productBounds = productImage.getBoundingRect();
-
-        // Remove existing bottom gradient and all its overlays
-        const existingBottomElements = canvas
-          .getObjects()
-          .filter(
-            (obj) =>
-              obj.isBottomGradient === true ||
-              obj.isBottomGradientFade === true ||
-              obj.isBottomGradientTopTransparent === true
-          );
-        existingBottomElements.forEach((element) => {
-          canvas.remove(element);
-        });
-
-        // Create bottom gradient image that only covers the BOTTOM 50% with fade effect
-        const imgInstance = new fabric.Image(imgElement, {
-          left: productBounds.left,
-          top: productBounds.top + productBounds.height * 0.5, // Start from 50% height
-          originX: "left",
-          originY: "top",
-          opacity: 0.5,
-          scaleX: productBounds.width / imgElement.width,
-          scaleY: (productBounds.height * 0.5) / imgElement.height, // Only cover bottom 50%
-          name: "bottom-gradient-image",
-          isBottomGradient: true,
-          selectable: false,
-          evented: false,
-          hasControls: false,
-          hasBorders: false,
-          moveCursor: "default",
-          lockMovementX: true,
-          lockMovementY: true,
-          lockScalingX: true,
-          lockScalingY: true,
-          lockRotation: true,
-        });
-
-        // Add the image to canvas first
-        canvas.add(imgInstance);
-
-        // Create fade effect overlay that makes the top part of bottom gradient transparent
-        const fadeOverlay = new fabric.Rect({
-          left: productBounds.left,
-          top: productBounds.top + productBounds.height * 0.5, // Start from 50% height
-          width: productBounds.width,
-          height: productBounds.height * 0.5, // Bottom 50%
-          originX: "left",
-          originY: "top",
-          fill: new fabric.Gradient({
-            type: "linear",
-            gradientUnits: "pixels",
-            coords: {
-              x1: 0,
-              y1: 0,
-              x2: 0,
-              y2: productBounds.height * 0.5, // Gradient in bottom 50%
-            },
-            colorStops: [
-              { offset: 0, color: "rgba(0,0,0,1)" }, // Fully opaque at 50% mark (hides image)
-              { offset: 0.3, color: "rgba(0,0,0,0.7)" }, // Quick fade transition
-              { offset: 1, color: "rgba(0,0,0,0)" }, // Fully transparent at bottom (shows image)
-            ],
-          }),
-          name: "bottom-gradient-fade-overlay",
-          isBottomGradientFade: true,
-          selectable: false,
-          evented: false,
-          hasControls: false,
-          hasBorders: false,
-          moveCursor: "default",
-          lockMovementX: true,
-          lockMovementY: true,
-          lockScalingX: true,
-          lockScalingY: true,
-          lockRotation: true,
-          globalCompositeOperation: "destination-out", // This removes parts of the bottom gradient
-        });
-
-        // Add the fade overlay
-        canvas.add(fadeOverlay);
-
-        // Apply layer management for all elements
-        if (layerManager) {
-          layerManager.setObjectLayer(imgInstance);
-          layerManager.setObjectLayer(fadeOverlay);
-          layerManager.arrangeCanvasLayers();
-        }
-
-        // console.log(
-        //   "✅ Bottom gradient added - Only covers bottom 50% with fade effect, top 50% remains transparent"
-        // );
-      };
-    });
-  };
-
-  // NEW: Add top gradient function - FIXED
-  const handleAddTopGradientToCanvas = (url) => {
-    if (!editor?.canvas || !url) return;
-
-    const canvas = editor.canvas;
-
-    import("fabric").then((fabric) => {
-      const imgElement = new Image();
-      imgElement.crossOrigin = "anonymous";
-      imgElement.src = url;
-
-      imgElement.onload = () => {
-        const productImage = canvas
-          .getObjects()
-          .find((obj) => obj.isTshirtBase);
-        if (!productImage) return;
-
-        const productBounds = productImage.getBoundingRect();
-
-        // Remove existing top gradient
-        const existingTopGradient = canvas
-          .getObjects()
-          .filter((obj) => obj.isTopGradient === true);
-        existingTopGradient.forEach((gradient) => {
-          canvas.remove(gradient);
-        });
-
-        // Create top gradient with EXACT same dimensions as product
-        const imgInstance = new fabric.Image(imgElement, {
-          left: productBounds.left,
-          top: productBounds.top,
-          originX: "left",
-          originY: "top",
-          scaleX: productBounds.width / imgElement.width,
-          scaleY: productBounds.height / imgElement.height,
-          name: "top-gradient-image",
-          isTopGradient: true,
-          selectable: false,
-          evented: false,
-          hasControls: false,
-          hasBorders: false,
-          moveCursor: "default",
-          lockMovementX: true,
-          lockMovementY: true,
-          lockScalingX: true,
-          lockScalingY: true,
-          lockRotation: true,
-        });
-
-        canvas.add(imgInstance);
-
-        // Apply layer management
-        if (layerManager) {
-          layerManager.setObjectLayer(imgInstance);
-          layerManager.arrangeCanvasLayers();
-        }
-
-        // console.log("✅ Top gradient added (zIndex: 2) - Top color applied");
-      };
-    });
-  };
-
   const handleAddCustomText = () => {
     if (!editor || !customText.trim()) return;
 
@@ -827,40 +600,6 @@ const CustomizerLayout = (props) => {
     });
   };
 
-  const alignFabricObject = (_, canvas, alignment) => {
-    const obj = canvas.getActiveObject();
-    if (!obj) return;
-
-    const canvasWidth = canvas.getWidth();
-    const canvasHeight = canvas.getHeight();
-    const objWidth = obj.width * obj.scaleX;
-    const objHeight = obj.height * obj.scaleY;
-
-    switch (alignment) {
-      case "left":
-        obj.set({ left: objWidth / 2 });
-        break;
-      case "center":
-        obj.set({ left: canvasWidth / 2 });
-        break;
-      case "right":
-        obj.set({ left: canvasWidth - objWidth / 2 });
-        break;
-      case "top":
-        obj.set({ top: objHeight / 2 });
-        break;
-      case "middle":
-        obj.set({ top: canvasHeight / 2 });
-        break;
-      case "bottom":
-        obj.set({ top: canvasHeight - objHeight / 2 });
-        break;
-    }
-
-    obj.setCoords();
-    canvas.renderAll();
-  };
-
   const updateArrange = (action) => {
     if (!editor || !editor.canvas) return;
 
@@ -887,127 +626,6 @@ const CustomizerLayout = (props) => {
     canvas.renderAll();
   };
 
-  const addEmojiTextToCanvas = (emojiChar) => {
-    if (!editor || !editor.canvas) return;
-
-    import("fabric").then(({ IText }) => {
-      const canvas = editor.canvas;
-      const productImage = canvas.getObjects().find((obj) => obj.isTshirtBase);
-      if (!productImage) return;
-
-      const existingEmoji = canvas
-        .getObjects()
-        .find((obj) => obj.isEmoji === true);
-      if (existingEmoji) {
-        canvas.remove(existingEmoji);
-      }
-
-      const productBounds = productImage.getBoundingRect();
-
-      const emojiText = new IText(emojiChar, {
-        left: productBounds.left + productBounds.width / 2,
-        top: productBounds.top + productBounds.height / 2,
-        originX: "center",
-        originY: "center",
-        fontSize: 48,
-        fill: "#000",
-        selectable: false,
-        evented: false,
-        hasBorders: false,
-        hasControls: false,
-        moveCursor: "default",
-        lockMovementX: true,
-        lockMovementY: true,
-        lockScalingX: true,
-        lockScalingY: true,
-        lockRotation: true,
-        editable: false,
-      });
-
-      emojiText.isEmoji = true;
-
-      canvas.add(emojiText);
-
-      // Apply layer management - IMMEDIATE arrangement
-      if (layerManager) {
-        layerManager.setObjectLayer(emojiText);
-        layerManager.arrangeCanvasLayers();
-      }
-
-      // console.log(
-      //   "✅ Emoji added with proper layer (zIndex: 5) - Non-moveable"
-      // );
-    });
-  };
-
-  // Design function - Perfect merge with equal dimensions
-  // const handleAddDesignToCanvas = (
-  //   url,
-  //   position = "center",
-  //   offsetX = 0,
-  //   offsetY = 0
-  // ) => {
-  //   if (!editor || !url) return;
-
-  //   import("fabric").then((fabric) => {
-  //     const canvas = editor.canvas;
-  //     const productImage = canvas.getObjects().find((obj) => obj.isTshirtBase);
-  //     if (!productImage) return;
-
-  //     const imgElement = new Image();
-  //     imgElement.crossOrigin = "anonymous";
-  //     imgElement.src = url;
-
-  //     imgElement.onload = () => {
-  //       // Get product dimensions for perfect matching
-  //       const productBounds = productImage.getBoundingRect();
-
-  //       // Remove existing design before adding new one
-  //       const existingDesign = canvas
-  //         .getObjects()
-  //         .find((obj) => obj.name === "design-image");
-  //       if (existingDesign) {
-  //         canvas.remove(existingDesign);
-  //       }
-
-  //       // Create design with EXACT same dimensions as product for perfect merge
-  //       const imgInstance = new fabric.Image(imgElement, {
-  //         left: productBounds.left,
-  //         top: productBounds.top,
-  //         originX: "left",
-  //         originY: "top",
-  //         // Scale to match product dimensions EXACTLY
-  //         scaleX: productBounds.width / imgElement.width,
-  //         scaleY: productBounds.height / imgElement.height,
-  //         name: "design-image",
-  //         selectable: false,
-  //         evented: false,
-  //         hasControls: false,
-  //         hasBorders: false,
-  //         moveCursor: "default",
-  //         lockMovementX: true,
-  //         lockMovementY: true,
-  //         lockScalingX: true,
-  //         lockScalingY: true,
-  //         lockRotation: true,
-  //       });
-
-  //       canvas.add(imgInstance);
-
-  //       // Apply layer management - IMMEDIATE arrangement
-  //       if (layerManager) {
-  //         layerManager.setObjectLayer(imgInstance);
-  //         layerManager.arrangeCanvasLayers();
-  //       }
-
-  //       console.log(
-  //         "✅ Design added with perfect merge dimensions (zIndex: 4) - Non-moveable"
-  //       );
-  //     };
-  //   });
-  // };
-
-  // Updated handleAddDesignToCanvas function for layer-based image placement
   // Updated handleAddDesignToCanvas function for layer-based image placement
   const handleAddDesignToCanvas = (
     url,
@@ -1145,83 +763,6 @@ const CustomizerLayout = (props) => {
         // );
       };
     });
-  };
-
-  const addIconToCanvas = async (iconData) => {
-    if (!editor || !editor.canvas) return;
-
-    try {
-      const response = await fetch(
-        `https://api.iconify.design/${iconData.name}.svg?color=%23000000&width=64&height=64`
-      );
-      const svgText = await response.text();
-      const svgBlob = new Blob([svgText], { type: "image/svg+xml" });
-      const svgUrl = URL.createObjectURL(svgBlob);
-
-      import("fabric").then(({ Image }) => {
-        const canvas = editor.canvas;
-        const productImage = canvas
-          .getObjects()
-          .find((obj) => obj.isTshirtBase);
-        if (!productImage) return;
-
-        const productBounds = productImage.getBoundingRect();
-
-        Image.fromURL(svgUrl, (img) => {
-          img.set({
-            left: productBounds.left + productBounds.width / 2,
-            top: productBounds.top + productBounds.height / 2,
-            originX: "center",
-            originY: "center",
-            scaleX: 0.8,
-            scaleY: 0.8,
-            selectable: false,
-            evented: false,
-            hasControls: false,
-            hasBorders: false,
-            moveCursor: "default",
-            lockMovementX: true,
-            lockMovementY: true,
-            lockScalingX: true,
-            lockScalingY: true,
-            lockRotation: true,
-          });
-
-          img.isIcon = true;
-          img.iconData = iconData;
-          img.name = "icon-image";
-
-          canvas.add(img);
-
-          // Apply layer management - IMMEDIATE arrangement
-          if (layerManager) {
-            layerManager.setObjectLayer(img);
-            layerManager.arrangeCanvasLayers();
-          }
-
-          // console.log(
-          //   "✅ Icon added with proper layer (zIndex: 4) - Non-moveable"
-          // );
-
-          URL.revokeObjectURL(svgUrl);
-        });
-      });
-    } catch (error) {
-      console.error("Failed to load icon:", error);
-    }
-  };
-
-  const applySelectedDesign = (designData) => {
-    if (!designData || !editor?.canvas) return;
-
-    // console.log("🎨 Applying user-selected design:", designData.name);
-
-    handleAddDesignToCanvas(
-      designData.url,
-      designData.position,
-      designData.offsetX,
-      designData.offsetY
-    );
   };
 
   // Initialize canvas with product - UPDATED for default layers
@@ -1883,22 +1424,16 @@ const CustomizerLayout = (props) => {
           handleColorChange={handleColorChange}
           selectedColor={selectedColor}
           setSelectedColor={setSelectedColor}
-          addEmojiTextToCanvas={addEmojiTextToCanvas}
           updateArrange={updateArrange}
           setChangeTextColor={setTextColor}
           setChangeFontFamily={setFontFamily}
           setChangeFontStyle={setFontStyle}
           setChangeFlipX={setFlipX}
           setChangeFlipy={setFlipY}
-          alignFabricObject={alignFabricObject}
           setChangeTextFlipX={setTextFlipX}
           setChangeTextFlipY={setTextFlipY}
           handleAddDesignToCanvas={handleAddDesignToCanvas}
-          addIconToCanvas={addIconToCanvas}
           handleAddPatternToCanvas={handleAddPatternToCanvas}
-          applySelectedDesign={applySelectedDesign}
-          handleTopColorChange={handleTopColorChange}
-          handleBottomColorChange={handleBottomColorChange}
           selectedTopColor={selectedTopColor}
           selectedBottomColor={selectedBottomColor}
           handleDynamicLayerChange={handleDynamicLayerChange}

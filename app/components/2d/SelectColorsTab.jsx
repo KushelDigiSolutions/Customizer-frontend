@@ -7,8 +7,6 @@ const SelectColorsTab = ({
   handleColorChange,
   selectedColor,
   setShowBgColorsModal,
-  handleTopColorChange,
-  handleBottomColorChange,
   selectedTopColor,
   selectedBottomColor,
   handleDynamicColorChange,
@@ -38,7 +36,7 @@ const SelectColorsTab = ({
     'RightSleeve',
   ];
 
-  const [activeTab, setActiveTab] = useState('background'); // 'background', 'topColor', 'bottomColor'
+  const [activeTab, setActiveTab] = useState('background'); 
 
   // Fallback colors if product doesn't have color arrays
   const defaultColorOptions = [
@@ -167,8 +165,6 @@ const SelectColorsTab = ({
   const currentColors = getColorsForTab(activeTab);
   const currentSelected = getCurrentSelectedColor(activeTab);
 
-  // Check if gradient tabs should be shown
-  const hasGradientColors = selectedProduct?.colors?.topColor || selectedProduct?.colors?.bottomColor;
 
   return (
     <div className="kr-editor-container kr-reset-margin-padding">
@@ -199,37 +195,9 @@ const SelectColorsTab = ({
         )
       }
 
-      {/* Tab Navigation - Only show if there are gradient colors */}
       {
         selectedProduct?.ProductType === '2d' && (
           <>
-            {/* <div className="kr-tab-navigation kr-reset-margin-padding">
-              <button
-                onClick={() => setActiveTab('background')}
-                className={`kr-tab-button kr-reset-margin ${activeTab === 'background' ? 'active background' : ''}`}
-              >
-                Background
-              </button>
-
-              {selectedProduct?.colors?.topColor && (
-                <button
-                  onClick={() => setActiveTab('topColor')}
-                  className={`kr-tab-button ${activeTab === 'topColor' ? 'active topColor' : ''}`}
-                >
-                  Top Color
-                </button>
-              )}
-
-              {selectedProduct?.colors?.bottomColor && (
-                <button
-                  onClick={() => setActiveTab('bottomColor')}
-                  className={`kr-tab-button ${activeTab === 'bottomColor' ? 'active bottomColor' : ''}`}
-                >
-                  Bottom Color
-                </button>
-              )}
-            </div> */}
-
             {/* Color Grid */}
             <div className='kr-colors-container kr-reset-margin-padding'>
               <div className='kr-colors-list kr-reset-margin'>
@@ -267,13 +235,6 @@ const SelectColorsTab = ({
               </div>
             </div>
 
-            {/* Info Footer */}
-            <div className="kr-info-footer">
-              {activeTab === 'background' && "Background colors change the base canvas color"}
-              {activeTab === 'topColor' && "Top colors create gradient effects on the upper part"}
-              {activeTab === 'bottomColor' && "Bottom colors create gradient effects on the lower part"}
-              {!hasGradientColors && activeTab === 'background' && " • This product doesn't support gradient colors"}
-            </div>
           </>
         )
       }

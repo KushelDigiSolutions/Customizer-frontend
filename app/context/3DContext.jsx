@@ -70,6 +70,8 @@ export const ThreeDProvider = ({ children }) => {
   const [isRotating, setIsRotating] = useState(false);
   const originalColors = useRef({});
 
+
+  //  * Toggles auto-rotation of the 3D model using the controlsRef.
   const toggleRotation = () => {
     if (controlsRef.current) {
       const newState = !isRotating;
@@ -78,6 +80,7 @@ export const ThreeDProvider = ({ children }) => {
     }
   };
 
+  // Checks if the current design has been modified compared to the last saved design.
   const checkDesignModification = () => {
     if (!isDesignSaved) return false;
 
@@ -87,6 +90,7 @@ export const ThreeDProvider = ({ children }) => {
     return currentData !== savedData;
   };
 
+  // Handles design modification state and updates save/add-to-cart status.
   const handleDesignModification = () => {
     if (isDesignSaved && checkDesignModification()) {
       setIsDesignSaved(false);
@@ -121,10 +125,10 @@ export const ThreeDProvider = ({ children }) => {
     threeDtextFontStyle,
   ]);
 
+  // Captures screenshots of the 3D model from all angles and updates state.
   const handleScreenshot = async () => {
     if (screenshotRef.current) {
       setthreeDLoading(true);
-
 
       try {
         const capturedImages = await screenshotRef.current.captureAll();
@@ -161,6 +165,7 @@ export const ThreeDProvider = ({ children }) => {
   const originalPositions = useRef(new Map());
   const [isExploded, setIsExploded] = useState(false);
 
+  /* Registers the loaded 3D model, storing references to the model, original mesh positions, and original mesh colors and textures. */
   const registerModel = (model) => {
     modelRef.current = model;
 
@@ -184,7 +189,7 @@ export const ThreeDProvider = ({ children }) => {
     originalColors.current = colors;
   };
 
-
+  /* Clears the customization for the currently selected part, restoring its original color and texture. */
   const handleClearSelectedPart = () => {
     setCustomizationData((prev) => {
       const newParts = { ...prev.parts };
@@ -229,6 +234,7 @@ export const ThreeDProvider = ({ children }) => {
 
   const explodeDistance = 0.8;
 
+  /* Returns the explode direction vector for a mesh based on the selected product's explodeConfig. */
   function getDirectionForMesh(meshName, selectedProduct) {
     const explodeConfig = selectedProduct?.explodeConfig;
     if (!selectedProduct?.variants || !explodeConfig) return null;
@@ -245,6 +251,9 @@ export const ThreeDProvider = ({ children }) => {
     return null;
   }
 
+  /**
+   * Toggles the exploded view of the 3D model, animating mesh positions outward or restoring them.
+   */
   const toggleExplode = () => {
     if (!modelRef.current) return;
 

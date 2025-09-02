@@ -7,7 +7,6 @@ import AddTextTab from "./2d/AddTextTab";
 import EditTextTab from "./2d/EditTextTab";
 import SelectColorsTab from "./2d/SelectColorsTab";
 import DynamicClipartTab from "./2d/ClipartTab";
-import RightSideImageUpload from "./2d/RightSideImageComponent";
 import "./Sidebar.css";
 import { use3D } from '@/app/context/3DContext';
 import Skeleton from 'react-loading-skeleton';
@@ -32,23 +31,18 @@ const Sidebar = ({
   handleColorChange,
   selectedColor,
   setSelectedColor,
-  addEmojiTextToCanvas,
   updateArrange,
   setTextColor,
   setTextFontFamily,
   setFontStyle,
-  alignFabricObject,
   bringForward,
   handleAddDesignToCanvas,
   constrainObjectToProduct,
-  addIconToCanvas,
   handleAddPatternToCanvas,
   applyClippingToObject,
   setFlipX,
   setFlipY,
   layerManager,
-  handleTopColorChange,
-  handleBottomColorChange,
   selectedTopColor,
   selectedBottomColor,
   setTextFlipX,
@@ -420,8 +414,6 @@ const Sidebar = ({
           handleColorChange={handleColorChange}
           selectedColor={selectedColor}
           setShowBgColorsModal={setShowBgColorsModal}
-          handleTopColorChange={handleTopColorChange}
-          handleBottomColorChange={handleBottomColorChange}
           selectedTopColor={selectedTopColor}
           selectedBottomColor={selectedBottomColor}
           selectedProduct={selectedProduct}
@@ -434,11 +426,9 @@ const Sidebar = ({
 
       {activeTab === "clipart" && tabSettings.clipart && showClipartTab && (
         <DynamicClipartTab
-          addEmojiTextToCanvas={addEmojiTextToCanvas}
           setShowClipartTab={setShowClipartTab}
           selectedProduct={selectedProduct}
           handleAddDesignToCanvas={handleAddDesignToCanvas}
-          addIconToCanvas={addIconToCanvas}
           editor={editor}
           handleAddPatternToCanvas={handleAddPatternToCanvas}
           handleDynamicLayerChange={handleDynamicLayerChange}
@@ -447,15 +437,6 @@ const Sidebar = ({
         />
       )}
 
-      {/* Uncomment if you want to use rightImage tab */}
-      {/* {activeTab === "rightImage" && showrightImage && (
-        <RightSideImageUpload
-          editor={editor}
-          selectedProduct={selectedProduct}
-          layerManager={layerManager}
-          setShowrightImage={setShowrightImage}
-        />
-      )} */}
     </div>
   );
 };
