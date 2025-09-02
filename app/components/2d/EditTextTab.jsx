@@ -435,7 +435,7 @@ const EditTextTab = ({ editor, layerManager }) => {
             <>
               <hr className="kr-edit-text-divider kr-reset-margin-padding" />
 
-              <div className="kr-edit-text-section kr-reset-margin-padding">
+              <div className="kr-edit-text-section kr-reset-margin">
                 <div className="kr-edit-text-title-section kr-reset-margin-padding">
                   <h3 className="kr-edit-text-section-title kr-reset-margin-padding">
                     Flip
