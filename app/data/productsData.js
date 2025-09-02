@@ -1,482 +1,481 @@
 export const backendProducts = [
-    {
-        id: 5,
-        image: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440017/toplayer_ttxecz.png",
-        size: "L",
-        color: "White",
-        width: 300,
-        description: "Front/Back Sando",
-        textTopRatio: 2.8,
-        type: "sando",
-        ProductType: "2d",
+    // {
+    //     id: 5,
+    //     image: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440017/toplayer_ttxecz.png",
+    //     size: "L",
+    //     color: "White",
+    //     width: 300,
+    //     description: "Front/Back Sando",
+    //     textTopRatio: 2.8,
+    //     type: "sando",
+    //     ProductType: "2d",
 
-        layers: {
-            BASE_COLOR: 0,
-            TOP_GRADIENT: 1,
-            PATTERN: 2,
-            BOTTOM_GRADIENT: 3,
-            DESIGN: 4,
-            TEXT: 5,
-            RIGHT_SIDE_IMAGE: 6,
-            PRODUCT: 7
-        },
+    //     layers: {
+    //         BASE_COLOR: 0,
+    //         TOP_GRADIENT: 1,
+    //         PATTERN: 2,
+    //         BOTTOM_GRADIENT: 3,
+    //         DESIGN: 4,
+    //         TEXT: 5,
+    //         RIGHT_SIDE_IMAGE: 6,
+    //         PRODUCT: 7
+    //     },
 
-        layersDesigns: {
-            designs: [
-                {
-                    id: 1,
-                    name: "Angry Doberman",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440608/art1_pv4dwv.png"
-                },
-                {
-                    id: 2,
-                    name: "Bulldog Growl",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440608/art4_nmtuii.png"
-                },
-                {
-                    id: 3,
-                    name: "Spiked Bulldog",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440609/art3_iloyql.png"
-                },
-                {
-                    id: 4,
-                    name: "Roaring Wolf",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440609/art5_cgafaq.png"
-                },
-                {
-                    id: 5,
-                    name: "Fighter",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440610/art10_hwkter.png"
-                },
-                {
-                    id: 6,
-                    name: "Husky Dog",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440609/art2_c4jjdq.png"
-                },
-                {
-                    id: 7,
-                    name: "Bird",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440611/art8_owfxwr.png"
-                },
-                {
-                    id: 8,
-                    name: "Devil",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440612/art9_tnurnb.png"
-                },
-                {
-                    id: 9,
-                    name: "Roaring Tiger",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440614/art7_gwljvh.png"
-                },
-                {
-                    id: 10,
-                    name: "Tiger",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440609/art6_d2kvkv.png"
-                },
-                {
-                    id: 11,
-                    name: "Bee",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440611/art13_euz0ym.png"
-                },
-                {
-                    id: 12,
-                    name: "Dragon",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440611/art12_qdjmqt.png"
-                },
-                {
-                    id: 13,
-                    name: "Pirate Face",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440611/art11_illjvy.png"
-                }
-            ],
-            patterns: [
-                {
-                    id: 1,
-                    name: "Pattern 1",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440623/fade-bottom14_kglgyi.png"
-                },
-                {
-                    id: 2,
-                    name: "Pattern 2",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440621/fade-bottom9_l6yx3e.png"
-                },
-                {
-                    id: 3,
-                    name: "Pattern 3",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440621/fade-bottom13_jntfpl.png"
-                },
-                {
-                    id: 4,
-                    name: "Pattern 4",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440619/fade-bottom6_ul94yk.png"
-                },
-                {
-                    id: 5,
-                    name: "Pattern 5",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440619/fade-bottom12_dziteg.png"
-                },
-                {
-                    id: 6,
-                    name: "Pattern 6",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440619/fade-bottom11_qkxqa8.png"
-                },
-                {
-                    id: 7,
-                    name: "Pattern 7",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440612/fade-bottom1_kfewad.png"
-                },
-                {
-                    id: 8,
-                    name: "Pattern 8",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440613/fade-bottom2_qbg5zn.png"
-                },
-                {
-                    id: 9,
-                    name: "Pattern 9",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440613/fade-bottom3_m5d7kv.png"
-                },
-                {
-                    id: 10,
-                    name: "Pattern 10",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440613/fade-bottom4_nmvuod.png"
-                },
-                {
-                    id: 11,
-                    name: "Pattern 11",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440614/fade-bottom7_ebhlzo.png"
-                },
-                {
-                    id: 12,
-                    name: "Pattern 12",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440618/fade-bottom10_fpmy5o.png"
-                },
-                {
-                    id: 13,
-                    name: "Pattern 13",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440618/fade-bottom8_q4dyqw.png"
-                },
-                {
-                    id: 14,
-                    name: "Pattern 14",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440619/fade-bottom5_ocvdzu.png"
-                },
-                {
-                    id: 15,
-                    name: "Pattern 15",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440619/fade-bottom11_qkxqa8.png"
-                }
-            ],
-        },
+    //     layerDesign: {
+    //         designs: [
+    //             {
+    //                 id: 1,
+    //                 name: "Angry Doberman",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440608/art1_pv4dwv.png"
+    //             },
+    //             {
+    //                 id: 2,
+    //                 name: "Bulldog Growl",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440608/art4_nmtuii.png"
+    //             },
+    //             {
+    //                 id: 3,
+    //                 name: "Spiked Bulldog",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440609/art3_iloyql.png"
+    //             },
+    //             {
+    //                 id: 4,
+    //                 name: "Roaring Wolf",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440609/art5_cgafaq.png"
+    //             },
+    //             {
+    //                 id: 5,
+    //                 name: "Fighter",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440610/art10_hwkter.png"
+    //             },
+    //             {
+    //                 id: 6,
+    //                 name: "Husky Dog",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440609/art2_c4jjdq.png"
+    //             },
+    //             {
+    //                 id: 7,
+    //                 name: "Bird",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440611/art8_owfxwr.png"
+    //             },
+    //             {
+    //                 id: 8,
+    //                 name: "Devil",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440612/art9_tnurnb.png"
+    //             },
+    //             {
+    //                 id: 9,
+    //                 name: "Roaring Tiger",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440614/art7_gwljvh.png"
+    //             },
+    //             {
+    //                 id: 10,
+    //                 name: "Tiger",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440609/art6_d2kvkv.png"
+    //             },
+    //             {
+    //                 id: 11,
+    //                 name: "Bee",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440611/art13_euz0ym.png"
+    //             },
+    //             {
+    //                 id: 12,
+    //                 name: "Dragon",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440611/art12_qdjmqt.png"
+    //             },
+    //             {
+    //                 id: 13,
+    //                 name: "Pirate Face",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440611/art11_illjvy.png"
+    //             }
+    //         ],
+    //         patterns: [
+    //             {
+    //                 id: 1,
+    //                 name: "Pattern 1",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440623/fade-bottom14_kglgyi.png"
+    //             },
+    //             {
+    //                 id: 2,
+    //                 name: "Pattern 2",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440621/fade-bottom9_l6yx3e.png"
+    //             },
+    //             {
+    //                 id: 3,
+    //                 name: "Pattern 3",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440621/fade-bottom13_jntfpl.png"
+    //             },
+    //             {
+    //                 id: 4,
+    //                 name: "Pattern 4",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440619/fade-bottom6_ul94yk.png"
+    //             },
+    //             {
+    //                 id: 5,
+    //                 name: "Pattern 5",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440619/fade-bottom12_dziteg.png"
+    //             },
+    //             {
+    //                 id: 6,
+    //                 name: "Pattern 6",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440619/fade-bottom11_qkxqa8.png"
+    //             },
+    //             {
+    //                 id: 7,
+    //                 name: "Pattern 7",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440612/fade-bottom1_kfewad.png"
+    //             },
+    //             {
+    //                 id: 8,
+    //                 name: "Pattern 8",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440613/fade-bottom2_qbg5zn.png"
+    //             },
+    //             {
+    //                 id: 9,
+    //                 name: "Pattern 9",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440613/fade-bottom3_m5d7kv.png"
+    //             },
+    //             {
+    //                 id: 10,
+    //                 name: "Pattern 10",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440613/fade-bottom4_nmvuod.png"
+    //             },
+    //             {
+    //                 id: 11,
+    //                 name: "Pattern 11",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440614/fade-bottom7_ebhlzo.png"
+    //             },
+    //             {
+    //                 id: 12,
+    //                 name: "Pattern 12",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440618/fade-bottom10_fpmy5o.png"
+    //             },
+    //             {
+    //                 id: 13,
+    //                 name: "Pattern 13",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440618/fade-bottom8_q4dyqw.png"
+    //             },
+    //             {
+    //                 id: 14,
+    //                 name: "Pattern 14",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440619/fade-bottom5_ocvdzu.png"
+    //             },
+    //             {
+    //                 id: 15,
+    //                 name: "Pattern 15",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753440619/fade-bottom11_qkxqa8.png"
+    //             }
+    //         ],
+    //     },
 
-        colors: {
-            topColor: [
-                {
-                    id: 1,
-                    name: "Color 1",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color1_b9nl0k.png"
-                },
-                {
-                    id: 2,
-                    name: "Color 2",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color3_xvg4ah.png"
-                },
-                {
-                    id: 3,
-                    name: "Color 3",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color4_fh2pg0.png"
-                },
-                {
-                    id: 4,
-                    name: "Color 4",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color2_a4teq2.png"
-                },
-                {
-                    id: 5,
-                    name: "Color 5",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color5_iyfuwb.png"
-                },
-                {
-                    id: 6,
-                    name: "Color 6",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color6_fophq5.png"
-                },
-                {
-                    id: 7,
-                    name: "Color 7",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color8_j9kpin.png"
-                },
-                {
-                    id: 8,
-                    name: "Color 8",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color9_jfj6hk.png"
-                },
-                {
-                    id: 9,
-                    name: "Color 9",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color7_yizc6p.png"
-                },
-                {
-                    id: 10,
-                    name: "Color 10",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color11_eh5h8r.png"
-                },
-                {
-                    id: 11,
-                    name: "Color 11",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color10_lerdoi.png"
-                },
-                {
-                    id: 12,
-                    name: "Color 12",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color12_iaj43h.png"
-                },
-                {
-                    id: 13,
-                    name: "Color 13",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color13_nw7pt0.png"
-                }
-            ],
-            bottomColor: [
-                {
-                    id: 1,
-                    name: "Color 1",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color1_b9nl0k.png"
-                },
-                {
-                    id: 2,
-                    name: "Color 2",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color3_xvg4ah.png"
-                },
-                {
-                    id: 3,
-                    name: "Color 3",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color4_fh2pg0.png"
-                },
-                {
-                    id: 4,
-                    name: "Color 4",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color2_a4teq2.png"
-                },
-                {
-                    id: 5,
-                    name: "Color 5",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color5_iyfuwb.png"
-                },
-                {
-                    id: 6,
-                    name: "Color 6",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color6_fophq5.png"
-                },
-                {
-                    id: 7,
-                    name: "Color 7",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color8_j9kpin.png"
-                },
-                {
-                    id: 8,
-                    name: "Color 8",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color9_jfj6hk.png"
-                },
-                {
-                    id: 9,
-                    name: "Color 9",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color7_yizc6p.png"
-                },
-                {
-                    id: 10,
-                    name: "Color 10",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color11_eh5h8r.png"
-                },
-                {
-                    id: 11,
-                    name: "Color 11",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color10_lerdoi.png"
-                },
-                {
-                    id: 12,
-                    name: "Color 12",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color12_iaj43h.png"
-                },
-                {
-                    id: 13,
-                    name: "Color 13",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color13_nw7pt0.png"
-                }
-            ]
-        }
-    },
-    {
-        id: 6,
-        image: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753680511/shadow_qpfqm4.png", // Full product shadow image
-        size: "42",
-        color: "White",
-        width: 300,
-        description: "Formal Shoe",
-        type: "shoe",
-        ProductType: "2d",
-        textTab: false,
-        colorsTab: false,
-        uploadDesignTab: false,
+    //     colors: {
+    //         topColor: [
+    //             {
+    //                 id: 1,
+    //                 name: "Color 1",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color1_b9nl0k.png"
+    //             },
+    //             {
+    //                 id: 2,
+    //                 name: "Color 2",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color3_xvg4ah.png"
+    //             },
+    //             {
+    //                 id: 3,
+    //                 name: "Color 3",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color4_fh2pg0.png"
+    //             },
+    //             {
+    //                 id: 4,
+    //                 name: "Color 4",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color2_a4teq2.png"
+    //             },
+    //             {
+    //                 id: 5,
+    //                 name: "Color 5",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color5_iyfuwb.png"
+    //             },
+    //             {
+    //                 id: 6,
+    //                 name: "Color 6",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color6_fophq5.png"
+    //             },
+    //             {
+    //                 id: 7,
+    //                 name: "Color 7",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color8_j9kpin.png"
+    //             },
+    //             {
+    //                 id: 8,
+    //                 name: "Color 8",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color9_jfj6hk.png"
+    //             },
+    //             {
+    //                 id: 9,
+    //                 name: "Color 9",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color7_yizc6p.png"
+    //             },
+    //             {
+    //                 id: 10,
+    //                 name: "Color 10",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color11_eh5h8r.png"
+    //             },
+    //             {
+    //                 id: 11,
+    //                 name: "Color 11",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color10_lerdoi.png"
+    //             },
+    //             {
+    //                 id: 12,
+    //                 name: "Color 12",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color12_iaj43h.png"
+    //             },
+    //             {
+    //                 id: 13,
+    //                 name: "Color 13",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color13_nw7pt0.png"
+    //             }
+    //         ],
+    //         bottomColor: [
+    //             {
+    //                 id: 1,
+    //                 name: "Color 1",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color1_b9nl0k.png"
+    //             },
+    //             {
+    //                 id: 2,
+    //                 name: "Color 2",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color3_xvg4ah.png"
+    //             },
+    //             {
+    //                 id: 3,
+    //                 name: "Color 3",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color4_fh2pg0.png"
+    //             },
+    //             {
+    //                 id: 4,
+    //                 name: "Color 4",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color2_a4teq2.png"
+    //             },
+    //             {
+    //                 id: 5,
+    //                 name: "Color 5",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color5_iyfuwb.png"
+    //             },
+    //             {
+    //                 id: 6,
+    //                 name: "Color 6",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color6_fophq5.png"
+    //             },
+    //             {
+    //                 id: 7,
+    //                 name: "Color 7",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506570/color8_j9kpin.png"
+    //             },
+    //             {
+    //                 id: 8,
+    //                 name: "Color 8",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color9_jfj6hk.png"
+    //             },
+    //             {
+    //                 id: 9,
+    //                 name: "Color 9",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color7_yizc6p.png"
+    //             },
+    //             {
+    //                 id: 10,
+    //                 name: "Color 10",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color11_eh5h8r.png"
+    //             },
+    //             {
+    //                 id: 11,
+    //                 name: "Color 11",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color10_lerdoi.png"
+    //             },
+    //             {
+    //                 id: 12,
+    //                 name: "Color 12",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color12_iaj43h.png"
+    //             },
+    //             {
+    //                 id: 13,
+    //                 name: "Color 13",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753506571/color13_nw7pt0.png"
+    //             }
+    //         ]
+    //     }
+    // },
+    // {
+    //     id: 6,
+    //     image: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753680511/shadow_qpfqm4.png", // Full product shadow image
+    //     size: "42",
+    //     color: "White",
+    //     width: 300,
+    //     description: "Formal Shoe",
+    //     type: "shoe",
+    //     ProductType: "2d",
+    //     textTab: false,
+    //     colorsTab: false,
+    //     uploadDesignTab: false,
 
-        defaultLayers: {
-            sole: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534528/sole-brown_dzgwxt.png", // z-index 0
-            surface: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534540/surface-white_jpjzme.png", // z-index 1
-            middle: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/middle-red_phcknz.png", // z-index 2
-            lace: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/lace-white_di72es.png" // z-index 3
-        },
+    //     defaultLayers: {
+    //         sole: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534528/sole-brown_dzgwxt.png", // z-index 0
+    //         surface: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534540/surface-white_jpjzme.png", // z-index 1
+    //         middle: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/middle-red_phcknz.png", // z-index 2
+    //         lace: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/lace-white_di72es.png" // z-index 3
+    //     },
 
-        layers: {
-            BASE_COLOR: 0,
-            SOLE: 1,
-            SURFACE: 2,
-            MIDDLE: 3,
-            LACE: 4,
-        },
+    //     layers: {
+    //         BASE_COLOR: 0,
+    //         SOLE: 1,
+    //         SURFACE: 2,
+    //         MIDDLE: 3,
+    //         LACE: 4,
+    //     },
 
-        layersDesigns: {
-            sole: [
-                {
-                    id: 1,
-                    name: "Brown Sole",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534528/sole-brown_dzgwxt.png",
-                    color: "Brown"
-                },
-                {
-                    id: 2,
-                    name: "Black Sole",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/sole-black_v8dekw.png",
-                    color: "Black"
-                }
-            ],
-            surface: [
-                {
-                    id: 1,
-                    name: "White Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534540/surface-white_jpjzme.png",
-                    color: "White"
-                },
-                {
-                    id: 2,
-                    name: "Mehroon Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534540/surface-red_ltdkea.png",
-                    color: "Mehroon"
-                },
-                {
-                    id: 3,
-                    name: "Green Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534540/surface-darkgreen_z6vbsv.png",
-                    color: "Green"
-                },
-                {
-                    id: 4,
-                    name: "Dark Blue Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534539/surface-darkblue_ebpn98.png",
-                    color: "Dark Blue"
-                },
-                {
-                    id: 5,
-                    name: "Blue Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534528/surface-blue_ug0cip.png",
-                    color: "Blue"
-                },
-                {
-                    id: 6,
-                    name: "Black Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/surface-black_qczd7c.png",
-                    color: "Black"
-                },
-            ],
-            middle: [
-                {
-                    id: 1,
-                    name: "White Middle",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/middle-white_aqyb6l.png",
-                    color: "White"
-                },
-                {
-                    id: 2,
-                    name: "Mehroon Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/middle-red_phcknz.png",
-                    color: "Mehroon"
-                },
-                {
-                    id: 3,
-                    name: "Green Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/middle-darkgreen_g6bfl9.png",
-                    color: "Green"
-                },
-                {
-                    id: 4,
-                    name: "Dark Blue Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/middle-darkblue_brvegt.png",
-                    color: "Dark Blue"
-                },
-                {
-                    id: 5,
-                    name: "Blue Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/middle-blue_qdxgd1.png",
-                    color: "Blue"
-                },
-                {
-                    id: 6,
-                    name: "Black Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/middle-black_rd2onn.png",
-                    color: "Black"
-                },
-                {
-                    id: 7,
-                    name: "Brown Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/middle-brown_m5vj3p.png",
-                    color: "Brown"
-                },
-            ],
-            lace: [
-                {
-                    id: 1,
-                    name: "White Lace",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/lace-white_di72es.png",
-                    color: "White"
-                },
-                {
-                    id: 2,
-                    name: "Mehroon Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/lace-red_gppv2i.png",
-                    color: "Mehroon"
-                },
-                {
-                    id: 3,
-                    name: "Green Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/lace-darkgreen_iqx3ud.png",
-                    color: "Green"
-                },
-                {
-                    id: 4,
-                    name: "Dark Blue Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534525/lace-darkblue_hoogyr.png",
-                    color: "Dark Blue"
-                },
-                {
-                    id: 5,
-                    name: "Blue Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534525/lace-blue_hglfvj.png",
-                    color: "Blue"
-                },
-                {
-                    id: 6,
-                    name: "Black Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534525/lace-black_tndqjk.png",
-                    color: "Black"
-                },
-                {
-                    id: 7,
-                    name: "Brown Surface",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534525/lace-brown_giecdz.png",
-                    color: "Brown"
-                },
-            ]
-        }
-
-    },
+    //     layerDesign: {
+    //         sole: [
+    //             {
+    //                 id: 1,
+    //                 name: "Brown Sole",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534528/sole-brown_dzgwxt.png",
+    //                 color: "Brown"
+    //             },
+    //             {
+    //                 id: 2,
+    //                 name: "Black Sole",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/sole-black_v8dekw.png",
+    //                 color: "Black"
+    //             }
+    //         ],
+    //         surface: [
+    //             {
+    //                 id: 1,
+    //                 name: "White Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534540/surface-white_jpjzme.png",
+    //                 color: "White"
+    //             },
+    //             {
+    //                 id: 2,
+    //                 name: "Mehroon Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534540/surface-red_ltdkea.png",
+    //                 color: "Mehroon"
+    //             },
+    //             {
+    //                 id: 3,
+    //                 name: "Green Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534540/surface-darkgreen_z6vbsv.png",
+    //                 color: "Green"
+    //             },
+    //             {
+    //                 id: 4,
+    //                 name: "Dark Blue Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534539/surface-darkblue_ebpn98.png",
+    //                 color: "Dark Blue"
+    //             },
+    //             {
+    //                 id: 5,
+    //                 name: "Blue Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534528/surface-blue_ug0cip.png",
+    //                 color: "Blue"
+    //             },
+    //             {
+    //                 id: 6,
+    //                 name: "Black Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/surface-black_qczd7c.png",
+    //                 color: "Black"
+    //             },
+    //         ],
+    //         middle: [
+    //             {
+    //                 id: 1,
+    //                 name: "White Middle",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/middle-white_aqyb6l.png",
+    //                 color: "White"
+    //             },
+    //             {
+    //                 id: 2,
+    //                 name: "Mehroon Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/middle-red_phcknz.png",
+    //                 color: "Mehroon"
+    //             },
+    //             {
+    //                 id: 3,
+    //                 name: "Green Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/middle-darkgreen_g6bfl9.png",
+    //                 color: "Green"
+    //             },
+    //             {
+    //                 id: 4,
+    //                 name: "Dark Blue Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/middle-darkblue_brvegt.png",
+    //                 color: "Dark Blue"
+    //             },
+    //             {
+    //                 id: 5,
+    //                 name: "Blue Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/middle-blue_qdxgd1.png",
+    //                 color: "Blue"
+    //             },
+    //             {
+    //                 id: 6,
+    //                 name: "Black Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/middle-black_rd2onn.png",
+    //                 color: "Black"
+    //             },
+    //             {
+    //                 id: 7,
+    //                 name: "Brown Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/middle-brown_m5vj3p.png",
+    //                 color: "Brown"
+    //             },
+    //         ],
+    //         lace: [
+    //             {
+    //                 id: 1,
+    //                 name: "White Lace",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/lace-white_di72es.png",
+    //                 color: "White"
+    //             },
+    //             {
+    //                 id: 2,
+    //                 name: "Mehroon Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534526/lace-red_gppv2i.png",
+    //                 color: "Mehroon"
+    //             },
+    //             {
+    //                 id: 3,
+    //                 name: "Green Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534527/lace-darkgreen_iqx3ud.png",
+    //                 color: "Green"
+    //             },
+    //             {
+    //                 id: 4,
+    //                 name: "Dark Blue Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534525/lace-darkblue_hoogyr.png",
+    //                 color: "Dark Blue"
+    //             },
+    //             {
+    //                 id: 5,
+    //                 name: "Blue Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534525/lace-blue_hglfvj.png",
+    //                 color: "Blue"
+    //             },
+    //             {
+    //                 id: 6,
+    //                 name: "Black Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534525/lace-black_tndqjk.png",
+    //                 color: "Black"
+    //             },
+    //             {
+    //                 id: 7,
+    //                 name: "Brown Surface",
+    //                 url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1753534525/lace-brown_giecdz.png",
+    //                 color: "Brown"
+    //             },
+    //         ]
+    //     }
+    // },
     {
         id: 8,
         image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSS3208-01-M26.jpg?v=1730282151&quality=20", // Full product shadow image
@@ -487,6 +486,7 @@ export const backendProducts = [
         ProductType: "3d",
         modelSize: 0.03,
         parts: [
+            '',
             'Front',
             'Back',
             'LeftSleeve',
@@ -542,7 +542,7 @@ export const backendProducts = [
         width: 300,
         height: 380,
         description: "Printed T-Shirt",
-        textTopRatio: 2.8,
+        // textTopRatio: 2.8,
         type: "t-Shirt",
         ProductType: "2d",
 
@@ -555,10 +555,11 @@ export const backendProducts = [
             BASE_COLOR: 0,
             MID: 1,
             SLEEVES: 2,
-            TEXT: 3
+            IMAGE: 3,
+            TEXT: 4
         },
 
-        layersDesigns: {
+        layerDesign: {
             mid: [
                 {
                     id: 1,
@@ -709,6 +710,12 @@ export const backendProducts = [
         modelFile: "/models/GUN.glb",
         designName: null,
         modelSize: 0.3,
+        explodeConfig: {
+            top: ['scopes', 'suppressors'],
+            bottom: ['grip'],
+            left: ['lower_receiver'],
+            right: ['']
+        },
         variants: [
             {
                 id: 1,
@@ -737,8 +744,8 @@ export const backendProducts = [
                 name: "Scope",
                 category: "scopes",
                 options: [
-                    { id: "scope1", name: "Standard Scope", meshName: "Scope", price: 20000, isDefault: true },
-                    { id: "scope0", name: "Standard Scope", meshName: "Scope001", price: 20000, isDefault: false },
+                    { id: "scope1", name: "Standard Scope", meshName: "Scope", price: 20000, isDefault: false },
+                    { id: "scope0", name: "Standard Scope", meshName: "Scope001", price: 20000, isDefault: true },
                     { id: "scope2", name: "Sport Scope", meshName: "Scope002", price: 25000, isDefault: false },
                     { id: "scope4", name: "Sport Scope", meshName: "Scope003", price: 25000, isDefault: false },
                     { id: "scope3", name: "No Scope", meshName: "", isDefault: false }
@@ -892,49 +899,623 @@ export const backendProducts = [
             TEXT: 3
         },
 
-        layersDesigns: {
+        layerDesign: {
             mid: [
                 {
                     id: 1,
-                    name: "Design 1",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840735/Main_Part_Without_Button_a1vrcx.png",
+                    title: "Design 1",
+                    files: ["https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840735/Main_Part_Without_Button_a1vrcx.png"],
                     // color: "White"
                 },
                 {
                     id: 2,
-                    name: "Design 2",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840738/Main_pArt_1_xogaku.png",
+                    title: "Design 2",
+                    files: ["https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840738/Main_pArt_1_xogaku.png"],
                     // color: "Mehroon"
                 },
                 {
                     id: 3,
-                    name: "Design 3",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840744/Main_pArt_v5x8n0.png",
+                    title: "Design 3",
+                    files: ["https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840744/Main_pArt_v5x8n0.png"],
                     // color: "Green"
                 }
             ],
             sleeves: [
                 {
                     id: 1,
-                    name: "Design 1",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840730/left_right_Sleeve_3_hzaeto.png",
+                    title: "Design 1",
+                    files: ["https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840730/left_right_Sleeve_3_hzaeto.png"],
                     // color: "White"
                 },
                 {
                     id: 2,
-                    name: "Design 2",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840729/left_right_Sleeve_2_voywkp.png",
+                    title: "Design 2",
+                    files: ["https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840729/left_right_Sleeve_2_voywkp.png"],
                     // color: "Mehroon"
                 },
                 {
                     id: 3,
-                    name: "Design 3",
-                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840730/left_right_Sleeve_1_rbmilw.png",
+                    title: "Design 3",
+                    files: ["https://res.cloudinary.com/dd9tagtiw/image/upload/v1755840730/left_right_Sleeve_1_rbmilw.png"],
                     // color: "Green"
                 }
             ],
         }
 
-    }
+    },
+
+
+    {
+        id: 14,
+        image: "", // Full product shadow image
+        size: "42",
+        color: "Cap",
+        width: 450,
+        height: 300,
+        description: "Cap",
+        textTopRatio: 2.8,
+        type: "Cap",
+        ProductType: "2d",
+        tabSettings: {
+            aiEditor: false,
+            imageEdit: false,
+            textEdit: false,
+            colors: false,
+            clipart: true
+        },
+
+        defaultLayers: {
+            mid: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755930408/Cap-Middle-5_uxzf9z.png", // z-index 0
+        },
+
+        layers: {
+            BASE_COLOR: 0,
+            MID: 1,
+            SLEEVES: 2
+        },
+
+        layerDesign: {
+            mid: [
+                {
+                    id: 1,
+                    name: "Design 1",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755930408/Cap-Main-1_bozade.png",
+                    // color: "White"
+                },
+                {
+                    id: 2,
+                    name: "Design 2",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755930401/Cap-Middle-3_d5hbd2.png",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 3,
+                    name: "Design 3",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755930401/Cap-Middle-4_snemel.png",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 4,
+                    name: "Design 4",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755930398/Cap_Middle_2_wf8rfw.png",
+                    // color: "Mehroon"
+                },
+            ],
+            sleeves: [
+                {
+                    id: 1,
+                    name: "Design 1",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755930393/Cap-Middle-2_jskatj.png",
+                    // color: "White"
+                },
+                {
+                    id: 2,
+                    name: "Design 2",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755930393/Cap-Main-0_kks0t3.png",
+                    // color: "Mehroon"
+                },
+            ],
+        }
+
+    },
+
+
+    {
+        id: 15,
+        image: "", // Full product shadow image
+        size: "42",
+        color: "Laptop",
+        width: 300,
+        height: 200,
+        description: "Laptop",
+        textTopRatio: 2.8,
+        type: "Laptop",
+        ProductType: "2d",
+        tabSettings: {
+            aiEditor: false,
+            imageEdit: false,
+            textEdit: false,
+            colors: false,
+            clipart: true
+        },
+
+        defaultLayers: {
+            mid: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755932312/Laptop-1_rzmkpa.png", // z-index 0
+        },
+
+        layers: {
+            BASE_COLOR: 0,
+            MID: 1,
+            SLEEVES: 2,
+            ZIP: 3
+        },
+
+        layerDesign: {
+            mid: [
+                {
+                    id: 1,
+                    name: "Design 1",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755932322/Main_Bag_2_bmmj70.png",
+                    // color: "White"
+                },
+                {
+                    id: 2,
+                    name: "Design 2",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755932316/Main-Bag-1_w4fihw.png",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 3,
+                    name: "Design 3",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755932314/Main_Bag_4_b93fvu.png",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 4,
+                    name: "Design 4",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755932314/Main-Bag-3_j7lafk.png",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 5,
+                    name: "Design 5",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755932312/Laptop-1_rzmkpa.png",
+                    // color: "Mehroon"
+                },
+            ],
+            sleeves: [
+                {
+                    id: 1,
+                    name: "Design 1",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755932315/Main-Sticker-3_uypufc.png",
+                    // color: "White"
+                },
+                {
+                    id: 2,
+                    name: "Design 2",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755932315/Main-Sticker-1_uabv6d.png",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 3,
+                    name: "Design 3",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755932311/Main_Sticker_2_jvtns1.png",
+                    // color: "Mehroon"
+                },
+            ],
+            zip: [
+                {
+                    id: 1,
+                    name: "Design 1",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755932314/MainChain-3_hpxdkz.png",
+                    // color: "White"
+                },
+                {
+                    id: 2,
+                    name: "Design 2",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755932314/Main-Chain-4_yoecfu.png",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 3,
+                    name: "Design 3",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755932311/Main_Chain_2_b6zpd7.png",
+                    // color: "Mehroon"
+                },
+            ],
+
+        }
+
+    },
+
+
+    {
+        id: 16,
+        image: "", // Full product shadow image
+        size: "42",
+        color: "Shirt",
+        width: 300,
+        height: 450,
+        description: "Shirt",
+        textTopRatio: 2.8,
+        type: "Shirt",
+        ProductType: "2d",
+        tabSettings: {
+            aiEditor: false,
+            imageEdit: false,
+            textEdit: false,
+            colors: false,
+            clipart: true
+        },
+
+        defaultLayers: {
+            mid: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755934247/Shirt-3_wt7x5w.png", // z-index 0
+            mid1: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755934245/Shirt_3_buttin_lczybm.png", // z-index 0
+            sleeves: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755934246/Sleeve_3_nc4bpz.png", // z-index 0
+        },
+
+        layers: {
+            BASE_COLOR: 0,
+            MID: 1,
+            MID1: 2,
+            SLEEVES: 3,
+        },
+
+        layerDesign: {
+            mid: [
+                {
+                    id: 1,
+                    name: "Design 1",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755934248/Shirt-Button-1_svdsxa.png",
+                    // color: "White"
+                },
+                {
+                    id: 2,
+                    name: "Design 2",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755934246/Shirt-2_vo4ft1.png",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 3,
+                    name: "Design 3",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755934245/Shirt_3_buttin_copy_qzwvvl.png",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 4,
+                    name: "Design 4",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755934247/Shirt-3_wt7x5w.png",
+                    // color: "Mehroon"
+                },
+            ],
+            mid1: [
+                {
+                    id: 1,
+                    name: "Design 1",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755934248/Shirt-WIrhout-Button_c5a94g.png",
+                    // color: "White"
+                },
+                {
+                    id: 2,
+                    name: "Design 2",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755934249/SHirt-without-button_jhve2r.png",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 3,
+                    name: "Design 3",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755934245/Shirt_3_buttin_lczybm.png",
+                    // color: "Mehroon"
+                },
+            ],
+            sleeves: [
+                {
+                    id: 1,
+                    name: "Design 1",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755934245/Shirt-Sleeve-1_ul7p68.png",
+                    // color: "White"
+                },
+                {
+                    id: 2,
+                    name: "Design 2",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755934247/Sleeve-2_euwcma.png",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 3,
+                    name: "Design 3",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755934246/Sleeve_3_nc4bpz.png",
+                    // color: "Mehroon"
+                },
+            ],
+
+        }
+
+    },
+
+
+    {
+        id: 17,
+        image: "", // Full product shadow image
+        size: "42",
+        color: "Pillow",
+        width: 450,
+        height: 400,
+        description: "Pillow",
+        textTopRatio: 2.8,
+        type: "Pillow",
+        ProductType: "2d",
+        tabSettings: {
+            aiEditor: false,
+            imageEdit: false,
+            textEdit: false,
+            colors: false,
+            clipart: true
+        },
+
+        defaultLayers: {
+            mid: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755935477/Pillow_1_jkkw3o.png", // z-index 0// z-index 0
+        },
+
+        layers: {
+            BASE_COLOR: 0,
+            MID: 1
+        },
+
+        layerDesign: {
+            mid: [
+                {
+                    id: 1,
+                    name: "Design 1",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755935479/Pillow_4_vl3q0e.png",
+                    // color: "White"
+                },
+                {
+                    id: 2,
+                    name: "Design 2",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755935479/pillow_r94nl0.png",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 3,
+                    name: "Design 3",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755935478/Pillow_3_jssr9p.png",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 4,
+                    name: "Design 4",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755935477/Pillow_1_jkkw3o.png",
+                    // color: "Mehroon"
+                },
+                {
+                    id: 5,
+                    name: "Design 5",
+                    url: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755935477/Pillow_2_oeowuu.png",
+                    // color: "Mehroon"
+                },
+            ],
+
+        }
+
+    },
+
+
+    {
+        id: 18,
+        image: "", // Full product shadow image
+        size: "42",
+        color: "Mug",
+        width: 400,
+        height: 400,
+        description: "Mug",
+        textTopRatio: 2.8,
+        type: "Mug",
+        ProductType: "2d",
+        tabSettings: {
+            aiEditor: false,
+            imageEdit: true,
+            textEdit: true,
+            colors: false,
+            clipart: true
+        },
+
+        defaultLayers: {
+            mid: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755935836/MUG-4m_xrnq2v.png",
+            top: "https://res.cloudinary.com/dd9tagtiw/image/upload/v1755947530/MUG_1_eurmwg.png" // z-index 0// z-index 0
+        },
+
+        layers: {
+            BASE_COLOR: 0,
+            MID: 1,
+            IMAGE: 2,
+            TOP: 3
+        },
+
+        layerDesign: {
+            mid: [
+                {
+                    id: 1,
+                    title: "Design 1",
+                    files: ["https://res.cloudinary.com/dd9tagtiw/image/upload/v1755935834/MUG_3_mmm_oud7y1.png"],
+                    // color: "White"
+                },
+                {
+                    id: 2,
+                    title: "Design 2",
+                    files: ["https://res.cloudinary.com/dd9tagtiw/image/upload/v1755935834/MUG-1m_ab1yqp.png"],
+                    // color: "Mehroon"
+                },
+                {
+                    id: 3,
+                    title: "Design 3",
+                    files: ["https://res.cloudinary.com/dd9tagtiw/image/upload/v1755935835/MUG-2_qkmrsm.png"],
+                    // color: "Mehroon"
+                },
+                {
+                    id: 4,
+                    title: "Design 4",
+                    files: ["https://res.cloudinary.com/dd9tagtiw/image/upload/v1755935835/MUG-5-mm_wtn7ms.png"],
+                    // color: "Mehroon"
+                },
+                {
+                    id: 5,
+                    title: "Design 5",
+                    files: ["https://res.cloudinary.com/dd9tagtiw/image/upload/v1755935836/MUG-4m_xrnq2v.png"],
+                    // color: "Mehroon"
+                },
+            ],
+            top: [
+                {
+                    id: 1,
+                    title: "Design 1",
+                    files: ["https://res.cloudinary.com/dd9tagtiw/image/upload/v1755947530/MUG_4_copy_t9qjzf.png"],
+                    // color: "White"
+                },
+                {
+                    id: 2,
+                    title: "Design 2",
+                    files: ["https://res.cloudinary.com/dd9tagtiw/image/upload/v1755947530/MUG_1_eurmwg.png"],
+                    // color: "Mehroon"
+                },
+                {
+                    id: 3,
+                    title: "Design 3",
+                    files: ["https://res.cloudinary.com/dd9tagtiw/image/upload/v1755947530/MUG-3_rgtp89.png"],
+                    // color: "Mehroon"
+                },
+                {
+                    id: 4,
+                    title: "Design 4",
+                    files: ["https://res.cloudinary.com/dd9tagtiw/image/upload/v1755947530/MUG_2_uo6uvs.png"],
+                    // color: "Mehroon"
+                },
+                {
+                    id: 5,
+                    title: "Design 5",
+                    files: ["https://res.cloudinary.com/dd9tagtiw/image/upload/v1755947530/MUG-White_odwstp.png"],
+                    // color: "Mehroon"
+                },
+            ],
+
+        }
+
+    },
+
+    {
+        id: 19,
+        image: "https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSS3208-01-M26.jpg?v=1730282151&quality=20", // Full product shadow image
+        color: "White",
+        size: "M",
+        description: "t-shirt",
+        type: "t-shirt",
+        ProductType: "3d",
+        modelSize: 0.03,
+        parts: [
+            'border',
+            'body',
+        ],
+        modelFile: "/models/sportstshirt.glb",
+        layerDesign: {
+            Designs: [
+                {
+                    id: 1,
+                    title: "Design 1",
+                    shortDescription: "Shirt Design 1",
+                    price: 23.88,
+                    files: [
+                        "https://res.cloudinary.com/dgif730br/image/upload/v1755068265/customizer/qfm7hdwzefyvtq4bdjul.webp"
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "Design 2",
+                    shortDescription: "Shirt Design 2",
+                    price: 19.66,
+                    files: [
+                        "https://res.cloudinary.com/dgif730br/image/upload/v1755068290/customizer/o6218jgziz4yonthsbup.webp"
+                    ]
+                },
+                {
+                    id: 3,
+                    title: "Design 3",
+                    shortDescription: "Shirt Design 3",
+                    price: 21.4,
+                    files: [
+                        "https://res.cloudinary.com/dgif730br/image/upload/v1755068385/customizer/vsxvvcaqfuf84yapnae9.webp"
+                    ]
+                },
+                {
+                    id: 4,
+                    title: "Design 4",
+                    shortDescription: "Shirt Design 4",
+                    price: 25,
+                    files: [
+                        "https://res.cloudinary.com/dgif730br/image/upload/v1755068437/customizer/vbngf2pbv35hwrqzzmnq.webp"
+                    ]
+                }
+            ]
+        }
+    },
+
+    {
+        ProductType: "3d",
+        id: 20,
+        storeHash: "vl5e5n6g4x",
+        tabSettings: {
+            aiEditor: false,
+            imageEdit: false,
+            textEdit: false,
+            colors: false,
+            clipart: true
+        },
+        customizableData: [],
+        customizerImage: "https://res.cloudinary.com/dgif730br/image/upload/v1755068550/customizer-images/eiyrawqmqhntvzvjznjx.png",
+        modelFile: "/models/silvarado.glb",
+        designName: null,
+        modelSize: 5,
+        variants: [
+            {
+                id: 1,
+                name: "Body",
+                category: "body",
+                options: [
+                    { id: "body1", name: "Color", meshName: "body", price: 20000, isDefault: true },
+                    { id: "body0", name: "Body", meshName: "body1", price: 20000, isDefault: false },
+                    { id: "body2", name: "Color 3", meshName: "whitecolor", price: 30000, isDefault: false },
+
+                ]
+            },
+            {
+                id: 2,
+                name: "Wheel",
+                category: "wheels",
+                options: [
+                    { id: "wheel1", name: "Standard Wheel", meshName: "wheel1", price: 20000, isDefault: true },
+                    { id: "wheel2", name: "LED Wheel", meshName: "wheel2", price: 25000, isDefault: false },
+                    { id: "wheel3", name: "Custom Wheel", meshName: "wheel3", price: 30000, isDefault: false }
+                ]
+            }
+        ]
+        ,
+    },
+    {
+        ProductType: "3d",
+        id: 21,
+        storeHash: "vl5e5n6g4x",
+        tabSettings: {
+            aiEditor: false,
+            imageEdit: true,
+            textEdit: true,
+            colors: true,
+            clipart: true
+        },
+        customizableData: [],
+        customizerImage: "https://res.cloudinary.com/dgif730br/image/upload/v1755068550/customizer-images/eiyrawqmqhntvzvjznjx.png",
+        modelFile: "/models/full_sleeve_t-shirt.glb",
+        designName: null,
+        modelSize: 2.5
+    },
+
 
 ];
