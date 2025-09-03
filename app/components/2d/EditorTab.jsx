@@ -166,10 +166,7 @@ const EditorTab = ({ setShowEditorModal }) => {
     ]);
 
     useEffect(() => {
-        console.log(
-            "EditorTab mounted",
-            apiKey === undefined || apiKey === ""
-        );
+        console.log("EditorTab mounted", apiKey);
     }, [])
 
     return (
