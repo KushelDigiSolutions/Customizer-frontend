@@ -199,6 +199,27 @@
   cursor: not-allowed;
 }
 
+.kr-editor-preview-container {
+  position: relative;
+}
+
+.kr-editor-remove-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  cursor: pointer;
+}
+
+.kr-editor-preview-img {
+  width: 100%;
+  max-height: 270px;
+  object-fit: cover;
+}
+
+.kr-editor-preview-btn {
+  width: 100%;
+}
+
 /* Responsive Design */
 @media (max-width: 640px) {
   .kr-editor-container {

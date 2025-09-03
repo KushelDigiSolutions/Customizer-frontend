@@ -12,6 +12,7 @@ export const ThreeDProvider = ({ children }) => {
   const [threeDcolor, setthreeDColor] = useState(null);
   const [threeDtexture, setthreeDTexture] = useState(null);
   const [threeDselectedPart, setthreeDSelectedPart] = useState('');
+  const [threeDmode, setThreeDMode] = useState("full");
 
   const [threeDtextFontFamily, setthreeDTextFontFamily] = useState("Arial");
 
@@ -381,7 +382,8 @@ export const ThreeDProvider = ({ children }) => {
         toggleExplode,
         isExploded,
         skeletonLoading, setSkeletonLoading,
-        originalColors
+        originalColors,
+        threeDmode, setThreeDMode
       }}
     >
       {children}

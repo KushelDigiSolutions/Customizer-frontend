@@ -49,7 +49,6 @@ const TextureUploader = () => {
     reader.onload = () => {
       setPreviewUrl(reader.result);
       setIsUploading(false);
-      
       // Get image dimensions
       const img = new Image();
       img.onload = () => {
@@ -87,6 +86,7 @@ const TextureUploader = () => {
       const canvas = document.createElement("canvas");
       canvas.width = canvas.height = size;
       const ctx = canvas?.getContext("2d");
+      if (!ctx) return;
 
       // Fill base color
       ctx.fillStyle = threeDcolor || "#fff";
