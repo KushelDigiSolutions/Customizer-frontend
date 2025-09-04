@@ -34,36 +34,59 @@ const EditorTab = ({ setShowEditorModal }) => {
         setPreviewUrl,
     } = use3D();
 
-    const apiKey = process.env.CLIENT_API_KEY;
+    // const generateImage = async () => {
+    //     if (!prompt.trim() || !apiKey) return;
+    //     setLoading(true);
 
-    // Generate AI image -> only set local draftUrl
+    //     const payload = { prompt, output_format: "jpeg" };
+    //     const formData = new FormData();
+    //     for (const key in payload) formData.append(key, payload[key]);
+
+    //     try {
+    //         const response = await fetch(
+    //             "https://api.stability.ai/v2beta/stable-image/generate/ultra",
+    //             {
+    //                 method: "POST",
+    //                 headers: {
+    //                     Authorization: `Bearer ${apiKey}`,
+    //                     Accept: "image/*",
+    //                 },
+    //                 body: formData,
+    //             }
+    //         );
+
+    //         if (response.ok) {
+    //             const blob = await response.blob();
+    //             const imageUrl = URL.createObjectURL(blob);
+    //             setDraftUrl(imageUrl); // only local preview
+    //         } else {
+    //             console.error("Error:", await response.text());
+    //         }
+    //     } catch (err) {
+    //         console.error("Error:", err);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
+
+
     const generateImage = async () => {
-        if (!prompt.trim() || !apiKey) return;
+        if (!prompt.trim()) return;
         setLoading(true);
 
-        const payload = { prompt, output_format: "jpeg" };
-        const formData = new FormData();
-        for (const key in payload) formData.append(key, payload[key]);
-
         try {
-            const response = await fetch(
-                "https://api.stability.ai/v2beta/stable-image/generate/ultra",
-                {
-                    method: "POST",
-                    headers: {
-                        Authorization: `Bearer ${apiKey}`,
-                        Accept: "image/*",
-                    },
-                    body: formData,
-                }
-            );
+            const response = await fetch("/api/generate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt }),
+            });
 
-            if (response.ok) {
-                const blob = await response.blob();
-                const imageUrl = URL.createObjectURL(blob);
-                setDraftUrl(imageUrl); // only local preview
+            const data = await response.json();
+
+            if (response.ok && data.image) {
+                setDraftUrl(data.image); 
             } else {
-                console.error("Error:", await response.text());
+                console.error("Error:", data.error);
             }
         } catch (err) {
             console.error("Error:", err);
@@ -71,6 +94,7 @@ const EditorTab = ({ setShowEditorModal }) => {
             setLoading(false);
         }
     };
+
 
     // Remove local draft only (doesn't touch applied 3D texture)
     const removeDraft = () => {
@@ -164,10 +188,6 @@ const EditorTab = ({ setShowEditorModal }) => {
         setCustomizationData,
         threeDselectedPart,
     ]);
-
-    useEffect(() => {
-        console.log("EditorTab mounted", apiKey);
-    }, [])
 
     return (
         <div className="kr-editor-container kr-reset-margin-padding">
