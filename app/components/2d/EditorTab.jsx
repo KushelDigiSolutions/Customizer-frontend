@@ -34,7 +34,7 @@ const EditorTab = ({ setShowEditorModal }) => {
         setPreviewUrl,
     } = use3D();
 
-    const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+    const apiKey = process.env.CLIENT_API_KEY;
 
     // Generate AI image -> only set local draftUrl
     const generateImage = async () => {
