@@ -74,8 +74,10 @@ const EditorTab = ({ setShowEditorModal }) => {
         if (!prompt.trim()) return;
         setLoading(true);
 
+        const apiEndpoint = process.env.NEXT_PUBLIC_APP_DOMAIN;
+
         try {
-            const response = await fetch("/api/generate", {
+            const response = await fetch(`${apiEndpoint}api/generate`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ prompt }),

@@ -12,9 +12,6 @@ export async function POST(req) {
         formData.append("prompt", prompt);
         formData.append("output_format", "jpeg");
 
-        const apiKey = process.env.CLIENT_API_KEY;
-        console.log("CLIENT_API_KEY loaded?", apiKey ? `Yes (${apiKey.slice(0, 6)}****)` : "No");
-
         const response = await fetch(
             "https://api.stability.ai/v2beta/stable-image/generate/ultra",
             {
